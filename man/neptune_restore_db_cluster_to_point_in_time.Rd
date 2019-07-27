@@ -7,7 +7,8 @@
 neptune_restore_db_cluster_to_point_in_time(DBClusterIdentifier,
   RestoreType, SourceDBClusterIdentifier, RestoreToTime,
   UseLatestRestorableTime, Port, DBSubnetGroupName, OptionGroupName,
-  VpcSecurityGroupIds, Tags, KmsKeyId, EnableIAMDatabaseAuthentication)
+  VpcSecurityGroupIds, Tags, KmsKeyId, EnableIAMDatabaseAuthentication,
+  EnableCloudwatchLogsExports, DBClusterParameterGroupName)
 }
 \arguments{
 \item{DBClusterIdentifier}{[required] The name of the new DB cluster to be created.
@@ -27,9 +28,6 @@ source DB cluster.
 \item \code{copy-on-write} - The new DB cluster is restored as a clone of the
 source DB cluster.
 }
-
-Constraints: You can't specify \code{copy-on-write} if the engine version of
-the source DB cluster is earlier than 1.11.
 
 If you don't specify a \code{RestoreType} value, then the new DB cluster is
 restored as a full copy of the source DB cluster.}
@@ -82,7 +80,7 @@ Example: \code{mySubnetgroup}}
 
 \item{VpcSecurityGroupIds}{A list of VPC security groups that the new DB cluster belongs to.}
 
-\item{Tags}{}
+\item{Tags}{The tags to be applied to the restored DB cluster.}
 
 \item{KmsKeyId}{The AWS KMS key identifier to use when restoring an encrypted DB cluster
 from an encrypted DB cluster.
@@ -115,6 +113,18 @@ then the restore request is rejected.}
 accounts to database accounts, and otherwise false.
 
 Default: \code{false}}
+
+\item{EnableCloudwatchLogsExports}{The list of logs that the restored DB cluster is to export to CloudWatch
+Logs.}
+
+\item{DBClusterParameterGroupName}{The name of the DB cluster parameter group to associate with the new DB
+cluster.
+
+Constraints:
+\itemize{
+\item If supplied, must match the name of an existing
+DBClusterParameterGroup.
+}}
 }
 \description{
 Restores a DB cluster to an arbitrary point in time. Users can restore
@@ -154,7 +164,11 @@ completed and the DB cluster is available.
     )
   ),
   KmsKeyId = "string",
-  EnableIAMDatabaseAuthentication = TRUE|FALSE
+  EnableIAMDatabaseAuthentication = TRUE|FALSE,
+  EnableCloudwatchLogsExports = list(
+    "string"
+  ),
+  DBClusterParameterGroupName = "string"
 )
 }
 }

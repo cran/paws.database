@@ -24,7 +24,7 @@ index.
 \itemize{
 \item \code{ALL_ATTRIBUTES} - Returns all of the item attributes from the
 specified table or index. If you query a local secondary index, then
-for each matching item in the index DynamoDB will fetch the entire
+for each matching item in the index, DynamoDB fetches the entire
 item from the parent table. If the index is configured to project
 all item attributes, then all of the data can be obtained from the
 local secondary index, and no fetching is required.
@@ -42,7 +42,7 @@ If you query or scan a local secondary index and request only
 attributes that are projected into that index, the operation will
 read only the index and not the table. If any of the requested
 attributes are not projected into the local secondary index,
-DynamoDB will fetch each of these attributes from the parent table.
+DynamoDB fetches each of these attributes from the parent table.
 This extra fetching incurs additional throughput cost and latency.
 
 If you query or scan a global secondary index, you can only request
@@ -63,7 +63,7 @@ will return an error.}
 
 \item{AttributesToGet}{This is a legacy parameter. Use \code{ProjectionExpression} instead. For more
 information, see
-\href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html}{AttributesToGet}
+\href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html}{AttributesToGet}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{Limit}{The maximum number of items to evaluate (not necessarily the number of
@@ -71,11 +71,11 @@ matching items). If DynamoDB processes the number of items up to the
 limit while processing the results, it stops the operation and returns
 the matching values up to that point, and a key in \code{LastEvaluatedKey} to
 apply in a subsequent operation, so that you can pick up where you left
-off. Also, if the processed data set size exceeds 1 MB before DynamoDB
+off. Also, if the processed dataset size exceeds 1 MB before DynamoDB
 reaches this limit, it stops the operation and returns the matching
 values up to the limit, and a key in \code{LastEvaluatedKey} to apply in a
 subsequent operation to continue the operation. For more information,
-see \href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html}{Query and Scan}
+see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html}{Query and Scan}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{ConsistentRead}{Determines the read consistency model: If set to \code{true}, then the
@@ -88,17 +88,17 @@ If you query a global secondary index with \code{ConsistentRead} set to
 
 \item{KeyConditions}{This is a legacy parameter. Use \code{KeyConditionExpression} instead. For
 more information, see
-\href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.KeyConditions.html}{KeyConditions}
+\href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.KeyConditions.html}{KeyConditions}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{QueryFilter}{This is a legacy parameter. Use \code{FilterExpression} instead. For more
 information, see
-\href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.QueryFilter.html}{QueryFilter}
+\href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.QueryFilter.html}{QueryFilter}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{ConditionalOperator}{This is a legacy parameter. Use \code{FilterExpression} instead. For more
 information, see
-\href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html}{ConditionalOperator}
+\href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html}{ConditionalOperator}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{ScanIndexForward}{Specifies the order for index traversal: If \code{true} (default), the
@@ -121,7 +121,7 @@ client.}
 the value that was returned for \code{LastEvaluatedKey} in the previous
 operation.
 
-The data type for \code{ExclusiveStartKey} must be String, Number or Binary.
+The data type for \code{ExclusiveStartKey} must be String, Number, or Binary.
 No set data types are allowed.}
 
 \item{ReturnConsumedCapacity}{}
@@ -134,7 +134,7 @@ If no attribute names are specified, then all attributes will be
 returned. If any of the requested attributes are not found, they will
 not appear in the result.
 
-For more information, see \href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html}{Accessing Item Attributes}
+For more information, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html}{Accessing Item Attributes}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{FilterExpression}{A string that contains conditions that DynamoDB applies after the
@@ -148,11 +148,11 @@ A \code{FilterExpression} is applied after the items have already been read;
 the process of filtering does not consume any additional read capacity
 units.
 
-For more information, see \href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults}{Filter Expressions}
+For more information, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults}{Filter Expressions}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
-\item{KeyConditionExpression}{The condition that specifies the key value(s) for items to be retrieved
-by the \code{Query} action.
+\item{KeyConditionExpression}{The condition that specifies the key values for items to be retrieved by
+the \code{Query} action.
 
 The condition must perform an equality test on a single partition key
 value.
@@ -214,11 +214,11 @@ attribute name \emph{Size}. \code{KeyConditionExpression} then is as follows:
 \item \code{#S = :myval}
 }
 
-For a list of reserved words, see \href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html}{Reserved Words}
+For a list of reserved words, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html}{Reserved Words}
 in the \emph{Amazon DynamoDB Developer Guide}.
 
 For more information on \code{ExpressionAttributeNames} and
-\code{ExpressionAttributeValues}, see \href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html}{Using Placeholders for Attribute Names and Values}
+\code{ExpressionAttributeValues}, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html}{Using Placeholders for Attribute Names and Values}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{ExpressionAttributeNames}{One or more substitution tokens for attribute names in an expression.
@@ -240,7 +240,7 @@ name. For example, consider the following attribute name:
 
 The name of this attribute conflicts with a reserved word, so it cannot
 be used directly in an expression. (For the complete list of reserved
-words, see \href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html}{Reserved Words}
+words, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html}{Reserved Words}
 in the \emph{Amazon DynamoDB Developer Guide}). To work around this, you
 could specify the following for \code{ExpressionAttributeNames}:
 \itemize{
@@ -256,7 +256,7 @@ example:
 Tokens that begin with the \strong{:} character are \emph{expression attribute
 values}, which are placeholders for the actual value at runtime.
 
-For more information on expression attribute names, see \href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html}{Accessing Item Attributes}
+For more information on expression attribute names, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html}{Specifying Item Attributes}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{ExpressionAttributeValues}{One or more values that can be substituted in an expression.
@@ -275,7 +275,7 @@ You could then use these values in an expression, such as this:
 
 \code{ProductStatus IN (:avail, :back, :disc)}
 
-For more information on expression attribute values, see \href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html}{Specifying Conditions}
+For more information on expression attribute values, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html}{Specifying Conditions}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 }
 \description{
@@ -316,7 +316,7 @@ A single \code{Query} operation will read up to the maximum number of items
 set (if using the \code{Limit} parameter) or a maximum of 1 MB of data and
 then apply any filtering to the results using \code{FilterExpression}. If
 \code{LastEvaluatedKey} is present in the response, you will need to paginate
-the result set. For more information, see \href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html#Query.Pagination}{Paginating the Results}
+the result set. For more information, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html#Query.Pagination}{Paginating the Results}
 in the \emph{Amazon DynamoDB Developer Guide}.
 
 \code{FilterExpression} is applied after a \code{Query} finishes, but before the

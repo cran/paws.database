@@ -63,17 +63,7 @@ Note that when a DB instance is in a failure state and has a status of
 \code{failed}, \code{incompatible-restore}, or \code{incompatible-network}, you can
 only delete it when the \code{SkipFinalSnapshot} parameter is set to \code{true}.
 
-If the specified DB instance is part of a DB cluster, you can't delete
-the DB instance if both of the following conditions are true:
-\itemize{
-\item The DB cluster is a Read Replica of another DB cluster.
-\item The DB instance is the only instance in the DB cluster.
-}
-
-To delete a DB instance in this case, first call the
-PromoteReadReplicaDBCluster API action to promote the DB cluster so
-it's no longer a Read Replica. After the promotion completes, then call
-the \code{DeleteDBInstance} API action to delete the final instance in the DB
+You can't delete a DB instance if it is the only instance in the DB
 cluster.
 }
 \section{Request syntax}{

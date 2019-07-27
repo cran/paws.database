@@ -41,14 +41,14 @@ global secondary index.
 \item \code{Delete} - remove a global secondary index from the table.
 }
 
-For more information, see \href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html}{Managing Global Secondary Indexes}
+For more information, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html}{Managing Global Secondary Indexes}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{StreamSpecification}{Represents the DynamoDB Streams configuration for the table.
 
-You will receive a \code{ResourceInUseException} if you attempt to enable a
-stream on a table that already has a stream, or if you attempt to
-disable a stream on a table which does not have a stream.}
+You receive a \code{ResourceInUseException} if you try to enable a stream on
+a table that already has a stream, or if you try to disable a stream on
+a table that doesn't have a stream.}
 
 \item{SSESpecification}{The new server-side encryption settings for the specified table.}
 }
@@ -60,9 +60,9 @@ or DynamoDB Streams settings for a given table.
 You can only perform one of the following operations at once:
 \itemize{
 \item Modify the provisioned throughput settings of the table.
-\item Enable or disable Streams on the table.
+\item Enable or disable DynamoDB Streams on the table.
 \item Remove a global secondary index from the table.
-\item Create a new global secondary index on the table. Once the index
+\item Create a new global secondary index on the table. After the index
 begins backfilling, you can use \code{UpdateTable} to perform other
 operations.
 }

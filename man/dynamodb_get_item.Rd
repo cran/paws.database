@@ -21,7 +21,7 @@ for both the partition key and the sort key.}
 
 \item{AttributesToGet}{This is a legacy parameter. Use \code{ProjectionExpression} instead. For more
 information, see
-\href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html}{AttributesToGet}
+\href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html}{AttributesToGet}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{ConsistentRead}{Determines the read consistency model: If set to \code{true}, then the
@@ -34,11 +34,11 @@ eventually consistent reads.}
 table. These attributes can include scalars, sets, or elements of a JSON
 document. The attributes in the expression must be separated by commas.
 
-If no attribute names are specified, then all attributes will be
-returned. If any of the requested attributes are not found, they will
-not appear in the result.
+If no attribute names are specified, then all attributes are returned.
+If any of the requested attributes are not found, they do not appear in
+the result.
 
-For more information, see \href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html}{Accessing Item Attributes}
+For more information, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html}{Specifying Item Attributes}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{ExpressionAttributeNames}{One or more substitution tokens for attribute names in an expression.
@@ -60,7 +60,7 @@ name. For example, consider the following attribute name:
 
 The name of this attribute conflicts with a reserved word, so it cannot
 be used directly in an expression. (For the complete list of reserved
-words, see \href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html}{Reserved Words}
+words, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html}{Reserved Words}
 in the \emph{Amazon DynamoDB Developer Guide}). To work around this, you
 could specify the following for \code{ExpressionAttributeNames}:
 \itemize{
@@ -76,7 +76,7 @@ example:
 Tokens that begin with the \strong{:} character are \emph{expression attribute
 values}, which are placeholders for the actual value at runtime.
 
-For more information on expression attribute names, see \href{http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html}{Accessing Item Attributes}
+For more information on expression attribute names, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html}{Specifying Item Attributes}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 }
 \description{
