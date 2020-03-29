@@ -1235,7 +1235,7 @@ rds_create_custom_availability_zone <- function(CustomAvailabilityZoneName, Exis
 #' 
 #' -   Can\'t be a reserved word for the chosen database engine.
 #' @param MasterUserPassword The password for the master database user. This password can contain any
-#' printable ASCII character except \"/\", \"\"\", or \"@\".
+#' printable ASCII character except \"/\", \"\"\", or \"@@\".
 #' 
 #' Constraints: Must contain from 8 to 41 characters.
 #' @param OptionGroupName A value that indicates that the DB cluster should be associated with the
@@ -2012,7 +2012,7 @@ rds_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCluste
 #' 
 #' -   Can\'t be a reserved word for the chosen database engine.
 #' @param MasterUserPassword The password for the master user. The password can include any printable
-#' ASCII character except \"/\", \"\"\", or \"@\".
+#' ASCII character except \"/\", \"\"\", or \"@@\".
 #' 
 #' **Amazon Aurora**
 #' 
@@ -7713,7 +7713,7 @@ rds_modify_current_db_cluster_capacity <- function(DBClusterIdentifier, Capacity
 #' 
 #' Default: The same port as the original DB cluster.
 #' @param MasterUserPassword The new password for the master database user. This password can contain
-#' any printable ASCII character except \"/\", \"\"\", or \"@\".
+#' any printable ASCII character except \"/\", \"\"\", or \"@@\".
 #' 
 #' Constraints: Must contain from 8 to 41 characters.
 #' @param OptionGroupName A value that indicates that the DB cluster should be associated with the
@@ -8161,9 +8161,9 @@ rds_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdentifier
 #' instance.
 #' 
 #' For MariaDB, MySQL, Oracle, and PostgreSQL, the value supplied must be
-#' at least 10\% greater than the current value. Values that are not at
-#' least 10\% greater than the existing value are rounded up so that they
-#' are 10\% greater than the current value.
+#' at least 10% greater than the current value. Values that are not at
+#' least 10% greater than the existing value are rounded up so that they
+#' are 10% greater than the current value.
 #' 
 #' For the valid values for allocated storage for each engine, see
 #' `CreateDBInstance`.
@@ -8226,7 +8226,7 @@ rds_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdentifier
 #' disabling `ApplyImmediately` for each modified parameter and to
 #' determine when the changes are applied.
 #' @param MasterUserPassword The new password for the master user. The password can include any
-#' printable ASCII character except \"/\", \"\"\", or \"@\".
+#' printable ASCII character except \"/\", \"\"\", or \"@@\".
 #' 
 #' Changing this parameter doesn\'t result in an outage and the change is
 #' asynchronously applied as soon as possible. Between the time of the
@@ -8402,9 +8402,9 @@ rds_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdentifier
 #' creating a DB snapshot of the instance.
 #' 
 #' Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL, the value
-#' supplied must be at least 10\% greater than the current value. Values
-#' that are not at least 10\% greater than the existing value are rounded up
-#' so that they are 10\% greater than the current value.
+#' supplied must be at least 10% greater than the current value. Values
+#' that are not at least 10% greater than the existing value are rounded up
+#' so that they are 10% greater than the current value.
 #' 
 #' Default: Uses existing setting
 #' @param OptionGroupName Indicates that the DB instance should be associated with the specified
@@ -10183,7 +10183,7 @@ rds_reset_db_parameter_group <- function(DBParameterGroupName, ResetAllParameter
 #' 
 #' -   Can\'t be a reserved word for the chosen database engine.
 #' @param MasterUserPassword &#91;required&#93; The password for the master database user. This password can contain any
-#' printable ASCII character except \"/\", \"\"\", or \"@\".
+#' printable ASCII character except \"/\", \"\"\", or \"@@\".
 #' 
 #' Constraints: Must contain from 8 to 41 characters.
 #' @param OptionGroupName A value that indicates that the restored DB cluster should be associated
@@ -11171,7 +11171,7 @@ rds_restore_db_instance_from_db_snapshot <- function(DBInstanceIdentifier, DBSna
 #' 
 #' -   Can\'t be a reserved word for the chosen database engine.
 #' @param MasterUserPassword The password for the master user. The password can include any printable
-#' ASCII character except \"/\", \"\"\", or \"@\".
+#' ASCII character except \"/\", \"\"\", or \"@@\".
 #' 
 #' Constraints: Must contain from 8 to 41 characters.
 #' @param DBSecurityGroups A list of DB security groups to associate with this DB instance.

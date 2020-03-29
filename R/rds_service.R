@@ -79,7 +79,7 @@ NULL
 #' ```
 #'
 #' @examples
-#' \donttest{svc <- rds()
+#' \dontrun{svc <- rds()
 #' svc$add_role_to_db_cluster(
 #'   Foo = 123
 #' )}
@@ -239,8 +239,7 @@ rds <- function(config = list()) {
   target_prefix = ""
 )
 
-.rds$handlers <- new_handlers("query", "v4")
-
 .rds$service <- function(config = list()) {
-  new_service(.rds$metadata, .rds$handlers, config)
+  handlers <- new_handlers("query", "v4")
+  new_service(.rds$metadata, handlers, config)
 }

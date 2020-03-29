@@ -50,7 +50,7 @@ NULL
 #' ```
 #'
 #' @examples
-#' \donttest{svc <- neptune()
+#' \dontrun{svc <- neptune()
 #' svc$add_role_to_db_cluster(
 #'   Foo = 123
 #' )}
@@ -139,8 +139,7 @@ neptune <- function(config = list()) {
   target_prefix = ""
 )
 
-.neptune$handlers <- new_handlers("query", "v4")
-
 .neptune$service <- function(config = list()) {
-  new_service(.neptune$metadata, .neptune$handlers, config)
+  handlers <- new_handlers("query", "v4")
+  new_service(.neptune$metadata, handlers, config)
 }

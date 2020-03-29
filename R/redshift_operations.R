@@ -137,7 +137,7 @@ redshift_authorize_cluster_security_group_ingress <- function(ClusterSecurityGro
 #' @param SnapshotIdentifier &#91;required&#93; The identifier of the snapshot the account is authorized to restore.
 #' @param SnapshotClusterIdentifier The identifier of the cluster the snapshot was created from. This
 #' parameter is required if your IAM user has a policy containing a
-#' snapshot resource element that specifies anything other than \* for the
+#' snapshot resource element that specifies anything other than * for the
 #' cluster name.
 #' @param AccountWithRestoreAccess &#91;required&#93; The identifier of the AWS customer account authorized to restore the
 #' specified snapshot.
@@ -335,7 +335,7 @@ redshift_cancel_resize <- function(ClusterIdentifier) {
 #'     `available`.
 #' @param SourceSnapshotClusterIdentifier The identifier of the cluster the source snapshot was created from. This
 #' parameter is required if your IAM user has a policy containing a
-#' snapshot resource element that specifies anything other than \* for the
+#' snapshot resource element that specifies anything other than * for the
 #' cluster name.
 #' 
 #' Constraints:
@@ -495,7 +495,7 @@ redshift_copy_cluster_snapshot <- function(SourceSnapshotIdentifier, SourceSnaps
 #' -   Must contain one number.
 #' 
 #' -   Can be any printable ASCII character (ASCII code 33 to 126) except
-#'     \' (single quote), \" (double quote), \\, /, @, or space.
+#'     \' (single quote), \" (double quote), \\, /, @@, or space.
 #' @param ClusterSecurityGroups A list of security groups to be associated with this cluster.
 #' 
 #' Default: The default cluster security group for Amazon Redshift.
@@ -1396,7 +1396,7 @@ redshift_create_snapshot_copy_grant <- function(SnapshotCopyGrantName, KmsKeyId 
 #'   ScheduleIdentifier, ScheduleDescription, Tags, DryRun, NextInvocations)
 #'
 #' @param ScheduleDefinitions The definition of the snapshot schedule. The definition is made up of
-#' schedule expressions, for example \"cron(30 12 \*)\" or \"rate(12
+#' schedule expressions, for example \"cron(30 12 *)\" or \"rate(12
 #' hours)\".
 #' @param ScheduleIdentifier A unique identifier for a snapshot schedule. Only alphanumeric
 #' characters are allowed for the identifier.
@@ -1705,7 +1705,7 @@ redshift_delete_cluster_security_group <- function(ClusterSecurityGroupName) {
 #' `available`, `failed`, or `cancelled` state.
 #' @param SnapshotClusterIdentifier The unique identifier of the cluster the snapshot was created from. This
 #' parameter is required if your IAM user has a policy containing a
-#' snapshot resource element that specifies anything other than \* for the
+#' snapshot resource element that specifies anything other than * for the
 #' cluster name.
 #' 
 #' Constraints: Must be the name of valid cluster.
@@ -4412,7 +4412,7 @@ redshift_enable_snapshot_copy <- function(ClusterIdentifier, DestinationRegion, 
 #'     can\'t be `PUBLIC`.
 #' 
 #' -   Must contain only lowercase letters, numbers, underscore, plus sign,
-#'     period (dot), at symbol (@), or hyphen.
+#'     period (dot), at symbol (@@), or hyphen.
 #' 
 #' -   First character must be a letter.
 #' 
@@ -4430,7 +4430,7 @@ redshift_enable_snapshot_copy <- function(ClusterIdentifier, DestinationRegion, 
 #' -   Must be 1 to 64 alphanumeric characters or hyphens
 #' 
 #' -   Must contain only lowercase letters, numbers, underscore, plus sign,
-#'     period (dot), at symbol (@), or hyphen.
+#'     period (dot), at symbol (@@), or hyphen.
 #' 
 #' -   First character must be a letter.
 #' 
@@ -4459,7 +4459,7 @@ redshift_enable_snapshot_copy <- function(ClusterIdentifier, DestinationRegion, 
 #' -   Must be 1 to 64 alphanumeric characters or hyphens
 #' 
 #' -   Must contain only lowercase letters, numbers, underscore, plus sign,
-#'     period (dot), at symbol (@), or hyphen.
+#'     period (dot), at symbol (@@), or hyphen.
 #' 
 #' -   First character must be a letter.
 #' 
@@ -4654,7 +4654,7 @@ redshift_get_reserved_node_exchange_offerings <- function(ReservedNodeId, MaxRec
 #' -   Must contain one number.
 #' 
 #' -   Can be any printable ASCII character (ASCII code 33 to 126) except
-#'     \' (single quote), \" (double quote), \\, /, @, or space.
+#'     \' (single quote), \" (double quote), \\, /, @@, or space.
 #' @param ClusterParameterGroupName The name of the cluster parameter group to apply to this cluster. This
 #' change is applied only after the cluster is rebooted. To reboot a
 #' cluster use RebootCluster.
@@ -5410,7 +5410,7 @@ redshift_modify_snapshot_copy_retention_period <- function(ClusterIdentifier, Re
 #'
 #' @param ScheduleIdentifier &#91;required&#93; A unique alphanumeric identifier of the schedule to modify.
 #' @param ScheduleDefinitions &#91;required&#93; An updated list of schedule definitions. A schedule definition is made
-#' up of schedule expressions, for example, \"cron(30 12 \*)\" or \"rate(12
+#' up of schedule expressions, for example, \"cron(30 12 *)\" or \"rate(12
 #' hours)\".
 #'
 #' @section Request syntax:
@@ -5724,7 +5724,7 @@ redshift_resize_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeT
 #' Example: `my-snapshot-id`
 #' @param SnapshotClusterIdentifier The name of the cluster the source snapshot was created from. This
 #' parameter is required if your IAM user has a policy containing a
-#' snapshot resource element that specifies anything other than \* for the
+#' snapshot resource element that specifies anything other than * for the
 #' cluster name.
 #' @param Port The port number on which the cluster accepts connections.
 #' 
@@ -6056,7 +6056,7 @@ redshift_revoke_cluster_security_group_ingress <- function(ClusterSecurityGroupN
 #' @param SnapshotIdentifier &#91;required&#93; The identifier of the snapshot that the account can no longer access.
 #' @param SnapshotClusterIdentifier The identifier of the cluster the snapshot was created from. This
 #' parameter is required if your IAM user has a policy containing a
-#' snapshot resource element that specifies anything other than \* for the
+#' snapshot resource element that specifies anything other than * for the
 #' cluster name.
 #' @param AccountWithRestoreAccess &#91;required&#93; The identifier of the AWS customer account that can no longer restore
 #' the specified snapshot.

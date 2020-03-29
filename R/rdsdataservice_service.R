@@ -17,7 +17,7 @@ NULL
 #' in the *Amazon Aurora User Guide*.
 #' 
 #' If you have questions or comments related to the Data API, send email to
-#' <Rds-data-api-feedback@amazon.com>.
+#' <Rds-data-api-feedback@@amazon.com>.
 #'
 #' @param
 #' config
@@ -42,7 +42,7 @@ NULL
 #' ```
 #'
 #' @examples
-#' \donttest{svc <- rdsdataservice()
+#' \dontrun{svc <- rdsdataservice()
 #' svc$batch_execute_statement(
 #'   Foo = 123
 #' )}
@@ -80,8 +80,7 @@ rdsdataservice <- function(config = list()) {
   target_prefix = ""
 )
 
-.rdsdataservice$handlers <- new_handlers("restjson", "v4")
-
 .rdsdataservice$service <- function(config = list()) {
-  new_service(.rdsdataservice$metadata, .rdsdataservice$handlers, config)
+  handlers <- new_handlers("restjson", "v4")
+  new_service(.rdsdataservice$metadata, handlers, config)
 }

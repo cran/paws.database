@@ -30,7 +30,7 @@ NULL
 #' ```
 #'
 #' @examples
-#' \donttest{svc <- simpledb()
+#' \dontrun{svc <- simpledb()
 #' svc$batch_delete_attributes(
 #'   Foo = 123
 #' )}
@@ -72,8 +72,7 @@ simpledb <- function(config = list()) {
   target_prefix = ""
 )
 
-.simpledb$handlers <- new_handlers("query", "v2")
-
 .simpledb$service <- function(config = list()) {
-  new_service(.simpledb$metadata, .simpledb$handlers, config)
+  handlers <- new_handlers("query", "v2")
+  new_service(.simpledb$metadata, handlers, config)
 }

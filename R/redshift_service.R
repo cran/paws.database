@@ -57,7 +57,7 @@ NULL
 #' ```
 #'
 #' @examples
-#' \donttest{svc <- redshift()
+#' \dontrun{svc <- redshift()
 #' svc$accept_reserved_node_exchange(
 #'   Foo = 123
 #' )}
@@ -175,8 +175,7 @@ redshift <- function(config = list()) {
   target_prefix = ""
 )
 
-.redshift$handlers <- new_handlers("query", "v4")
-
 .redshift$service <- function(config = list()) {
-  new_service(.redshift$metadata, .redshift$handlers, config)
+  handlers <- new_handlers("query", "v4")
+  new_service(.redshift$metadata, handlers, config)
 }
