@@ -36,7 +36,7 @@ are rejected with a \code{ValidationException} exception.
 
 If you specify any attributes that are part of an index key,
 then the data types for those attributes must match those of the
-schema in the table\'s attribute definition.
+schema in the table's attribute definition.
 }
 }}
 
@@ -52,14 +52,13 @@ The \code{BatchWriteItem} operation puts or deletes multiple items in one or
 more tables. A single call to \code{BatchWriteItem} can write up to 16 MB of
 data, which can comprise as many as 25 put or delete requests.
 Individual items to be written can be as large as 400 KB.
-}
-\details{
+
 \code{BatchWriteItem} cannot update items. To update items, use the
 \code{UpdateItem} action.
 
 The individual \code{PutItem} and \code{DeleteItem} operations specified in
 \code{BatchWriteItem} are atomic; however \code{BatchWriteItem} as a whole is not.
-If any requested operations fail because the table\'s provisioned
+If any requested operations fail because the table's provisioned
 throughput is exceeded or an internal processing failure occurs, the
 failed operations are returned in the \code{UnprocessedItems} response
 parameter. You can investigate and optionally resend the requests.
@@ -80,7 +79,7 @@ throttling on the individual tables. If you delay the batch operation
 using exponential backoff, the individual requests in the batch are much
 more likely to succeed.
 
-For more information, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#Programming.Errors.BatchOperations}{Batch Operations and Error Handling}
+For more information, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.BatchOperations}{Batch Operations and Error Handling}
 in the \emph{Amazon DynamoDB Developer Guide}.
 
 With \code{BatchWriteItem}, you can efficiently write or delete large amounts
@@ -93,12 +92,11 @@ cannot specify conditions on individual put and delete requests, and
 
 If you use a programming language that supports concurrency, you can use
 threads to write items in parallel. Your application must include the
-necessary logic to manage the threads. With languages that don\'t
-support threading, you must update or delete the specified items one at
-a time. In both situations, \code{BatchWriteItem} performs the specified put
-and delete operations in parallel, giving you the power of the thread
-pool approach without having to introduce complexity into your
-application.
+necessary logic to manage the threads. With languages that don't support
+threading, you must update or delete the specified items one at a time.
+In both situations, \code{BatchWriteItem} performs the specified put and
+delete operations in parallel, giving you the power of the thread pool
+approach without having to introduce complexity into your application.
 
 Parallel processing reduces latency, but each specified put and delete
 request consumes the same number of write capacity units whether it is
@@ -111,7 +109,7 @@ batch write operation:
 \item One or more tables specified in the \code{BatchWriteItem} request does
 not exist.
 \item Primary key attributes specified on an item in the request do not
-match those in the corresponding table\'s primary key schema.
+match those in the corresponding table's primary key schema.
 \item You try to perform multiple operations on the same item in the same
 \code{BatchWriteItem} request. For example, you cannot put and delete the
 same item in the same \code{BatchWriteItem} request.

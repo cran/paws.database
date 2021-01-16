@@ -12,13 +12,12 @@ Resource Name (ARN). For information about creating an ARN, see
 \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing}{Constructing an ARN for Amazon RDS}
 in the \emph{Amazon RDS User Guide}.}
 
-\item{Filters}{This parameter isn\'t currently supported.}
+\item{Filters}{This parameter isn't currently supported.}
 }
 \description{
 Lists all tags on an Amazon RDS resource.
-}
-\details{
-For an overview on tagging an Amazon RDS resource, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html}{Tagging Amazon RDS Resources}
+
+For an overview on tagging an Amazon RDS resource, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html}{Tagging Amazon RDS Resources}
 in the \emph{Amazon RDS User Guide}.
 }
 \section{Request syntax}{

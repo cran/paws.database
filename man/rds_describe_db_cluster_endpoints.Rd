@@ -24,7 +24,7 @@ output. The filters are specified as name-value pairs, in the format
 \code{writer}, \code{custom}. \code{Values} for the \code{db-cluster-endpoint-custom-type}
 filter can be one or more of: \code{reader}, \code{any}. \code{Values} for the
 \code{db-cluster-endpoint-status} filter can be one or more of: \code{available},
-\code{creating}, \code{deleting}, \code{modifying}.}
+\code{creating}, \code{deleting}, \code{inactive}, \code{modifying}.}
 
 \item{MaxRecords}{The maximum number of records to include in the response. If more
 records exist than the specified \code{MaxRecords} value, a pagination token
@@ -42,8 +42,7 @@ specified by \code{MaxRecords}.}
 }
 \description{
 Returns information about endpoints for an Amazon Aurora DB cluster.
-}
-\details{
+
 This action only applies to Aurora DB clusters.
 }
 \section{Request syntax}{

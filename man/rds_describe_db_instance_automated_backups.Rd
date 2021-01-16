@@ -5,16 +5,17 @@
 \title{Displays backups for both current and deleted instances}
 \usage{
 rds_describe_db_instance_automated_backups(DbiResourceId,
-  DBInstanceIdentifier, Filters, MaxRecords, Marker)
+  DBInstanceIdentifier, Filters, MaxRecords, Marker,
+  DBInstanceAutomatedBackupsArn)
 }
 \arguments{
 \item{DbiResourceId}{The resource ID of the DB instance that is the source of the automated
-backup. This parameter isn\'t case-sensitive.}
+backup. This parameter isn't case-sensitive.}
 
 \item{DBInstanceIdentifier}{(Optional) The user-supplied instance identifier. If this parameter is
 specified, it must match the identifier of an existing DB instance. It
-returns information from the specific DB instance\' automated backup.
-This parameter isn\'t case-sensitive.}
+returns information from the specific DB instance' automated backup.
+This parameter isn't case-sensitive.}
 
 \item{Filters}{A filter that specifies which resources to return based on status.
 
@@ -23,18 +24,17 @@ Supported filters are the following:
 \item \code{status}
 \itemize{
 \item \code{active} - automated backups for current instances
-\item \code{retained} - automated backups for deleted instances
+\item \code{retained} - automated backups for deleted instances and after
+backup replication is stopped
 \item \code{creating} - automated backups that are waiting for the first
 automated snapshot to be available
 }
 \item \code{db-instance-id} - Accepts DB instance identifiers and Amazon
-Resource Names (ARNs) for DB instances. The results list includes
-only information about the DB instance automated backupss identified
-by these ARNs.
-\item \code{dbi-resource-id} - Accepts DB instance resource identifiers and DB
-Amazon Resource Names (ARNs) for DB instances. The results list
-includes only information about the DB instance resources identified
-by these ARNs.
+Resource Names (ARNs). The results list includes only information
+about the DB instance automated backups identified by these ARNs.
+\item \code{dbi-resource-id} - Accepts DB resource identifiers and Amazon
+Resource Names (ARNs). The results list includes only information
+about the DB instance resources identified by these ARNs.
 }
 
 Returns all resources by default. The status for each resource is
@@ -48,6 +48,10 @@ remaining results.}
 \item{Marker}{The pagination token provided in the previous request. If this parameter
 is specified the response includes only records beyond the marker, up to
 \code{MaxRecords}.}
+
+\item{DBInstanceAutomatedBackupsArn}{The Amazon Resource Name (ARN) of the replicated automated backups, for
+example,
+\code{arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE}.}
 }
 \description{
 Displays backups for both current and deleted instances. For example,
@@ -56,8 +60,7 @@ previously deleted instances. Current instances with retention periods
 greater than zero (0) are returned for both the
 \code{DescribeDBInstanceAutomatedBackups} and \code{DescribeDBInstances}
 operations.
-}
-\details{
+
 All parameters are optional.
 }
 \section{Request syntax}{
@@ -73,7 +76,8 @@ All parameters are optional.
     )
   ),
   MaxRecords = 123,
-  Marker = "string"
+  Marker = "string",
+  DBInstanceAutomatedBackupsArn = "string"
 )
 }
 }

@@ -29,7 +29,7 @@ list of all the parameter groups that are owned by your AWS account,
 including the default parameter groups for each Amazon Redshift engine
 version. The parameter group family names associated with the default
 parameter groups provide you the valid values. For example, a valid
-family name is \"redshift-1.0\".}
+family name is "redshift-1.0".}
 
 \item{Description}{[required] A description of the parameter group.}
 
@@ -37,8 +37,7 @@ family name is \"redshift-1.0\".}
 }
 \description{
 Creates an Amazon Redshift parameter group.
-}
-\details{
+
 Creating parameter groups is independent of creating clusters. You can
 associate a cluster with a parameter group when you create the cluster.
 You can also associate an existing cluster with a parameter group after

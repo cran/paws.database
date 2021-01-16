@@ -16,7 +16,7 @@ indexes.}
 
 \item{KeySchema}{[required] Specifies the attributes that make up the primary key for a table or an
 index. The attributes in \code{KeySchema} must also be defined in the
-\code{AttributeDefinitions} array. For more information, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html}{Data Model}
+\code{AttributeDefinitions} array. For more information, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.html}{Data Model}
 in the \emph{Amazon DynamoDB Developer Guide}.
 
 Each \code{KeySchemaElement} in the array is composed of:
@@ -30,12 +30,12 @@ Each \code{KeySchemaElement} in the array is composed of:
 }
 
 The partition key of an item is also known as its \emph{hash attribute}. The
-term \"hash attribute\" derives from the DynamoDB usage of an internal
+term "hash attribute" derives from the DynamoDB usage of an internal
 hash function to evenly distribute data items across partitions, based
 on their partition key values.
 
 The sort key of an item is also known as its \emph{range attribute}. The term
-\"range attribute\" derives from the way DynamoDB stores items with the
+"range attribute" derives from the way DynamoDB stores items with the
 same partition key physically close together, in sorted order by the
 sort key value.
 
@@ -139,7 +139,7 @@ If you set BillingMode as \code{PAY_PER_REQUEST}, you cannot specify this
 property.
 
 For current minimum and maximum provisioned throughput values, see
-\href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html}{Limits}
+\href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html}{Service, Account, and Table Quotas}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{StreamSpecification}{The settings for DynamoDB Streams on the table. These settings consist
@@ -149,7 +149,7 @@ of:
 enabled (true) or disabled (false).
 \item \code{StreamViewType} - When an item in the table is modified,
 \code{StreamViewType} determines what information is written to the
-table\'s stream. Valid values for \code{StreamViewType} are:
+table's stream. Valid values for \code{StreamViewType} are:
 \itemize{
 \item \code{KEYS_ONLY} - Only the key attributes of the modified item are
 written to the stream.
@@ -172,8 +172,7 @@ The \code{CreateTable} operation adds a new table to your account. In an AWS
 account, table names must be unique within each Region. That is, you can
 have two tables with same name if you create the tables in different
 Regions.
-}
-\details{
+
 \code{CreateTable} is an asynchronous operation. Upon receiving a
 \code{CreateTable} request, DynamoDB immediately returns a response with a
 \code{TableStatus} of \code{CREATING}. After the table is created, DynamoDB sets

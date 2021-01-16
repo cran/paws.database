@@ -22,8 +22,7 @@ The client may specify new attributes using a combination of the
 specifies the first attribute by the parameters \code{Attribute.0.Name} and
 \code{Attribute.0.Value}, the second attribute by the parameters
 \code{Attribute.1.Name} and \code{Attribute.1.Value}, and so on.
-}
-\details{
+
 Attributes are uniquely identified in an item by their name/value
 combination. For example, a single item can have the attributes
 \verb{\\\{ "first_name", "first_value" \\\}} and
@@ -38,8 +37,8 @@ if an item has the attributes \verb{\\\{ 'a', '1' \\\}}, \verb{\\\{ 'b', '2'\\\}
 \verb{\\\{ 'b', '3' \\\}} and the requestor calls \code{PutAttributes} using the
 attributes \verb{\\\{ 'b', '4' \\\}} with the \code{Replace} parameter set to true, the
 final attributes of the item are changed to \verb{\\\{ 'a', '1' \\\}} and
-\verb{\\\{ 'b', '4' \\\}}, which replaces the previous values of the \'b\'
-attribute with the new value.
+\verb{\\\{ 'b', '4' \\\}}, which replaces the previous values of the 'b' attribute
+with the new value.
 
 Using \code{PutAttributes} to replace attribute values that do not exist will
 not result in an error response.

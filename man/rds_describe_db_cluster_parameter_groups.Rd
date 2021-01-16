@@ -16,7 +16,7 @@ Constraints:
 DBClusterParameterGroup.
 }}
 
-\item{Filters}{This parameter isn\'t currently supported.}
+\item{Filters}{This parameter isn't currently supported.}
 
 \item{MaxRecords}{The maximum number of records to include in the response. If more
 records exist than the specified \code{MaxRecords} value, a pagination token
@@ -37,8 +37,7 @@ Returns a list of \code{DBClusterParameterGroup} descriptions. If a
 \code{DBClusterParameterGroupName} parameter is specified, the list will
 contain only the description of the specified DB cluster parameter
 group.
-}
-\details{
+
 For more information on Amazon Aurora, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html}{What Is Amazon Aurora?}
 in the \emph{Amazon Aurora User Guide.}
 

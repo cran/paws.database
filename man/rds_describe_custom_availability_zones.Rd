@@ -29,12 +29,11 @@ the value specified by \code{MaxRecords}.}
 }
 \description{
 Returns information about custom Availability Zones (AZs).
-}
-\details{
+
 A custom AZ is an on-premises AZ that is integrated with a VMware
 vSphere cluster.
 
-For more information about RDS on VMware, see the \href{https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html}{\emph{RDS on VMware User Guide.}}
+For more information about RDS on VMware, see the \href{https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html}{RDS on VMware User Guide.}
 }
 \section{Request syntax}{
 \preformatted{svc$describe_custom_availability_zones(

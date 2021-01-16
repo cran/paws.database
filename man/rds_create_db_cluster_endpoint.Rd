@@ -21,7 +21,7 @@ a lowercase string.}
 \item{StaticMembers}{List of DB instance identifiers that are part of the custom endpoint
 group.}
 
-\item{ExcludedMembers}{List of DB instance identifiers that aren\'t part of the custom endpoint
+\item{ExcludedMembers}{List of DB instance identifiers that aren't part of the custom endpoint
 group. All other eligible instances are reachable through the custom
 endpoint. Only relevant if the list of static members is empty.}
 
@@ -30,8 +30,7 @@ endpoint. Only relevant if the list of static members is empty.}
 \description{
 Creates a new custom endpoint and associates it with an Amazon Aurora DB
 cluster.
-}
-\details{
+
 This action only applies to Aurora DB clusters.
 }
 \section{Request syntax}{

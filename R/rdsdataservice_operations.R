@@ -5,6 +5,7 @@ NULL
 
 #' Runs a batch SQL statement over an array of data
 #'
+#' @description
 #' Runs a batch SQL statement over an array of data.
 #' 
 #' You can run bulk update and insert operations for multiple records using
@@ -12,7 +13,7 @@ NULL
 #' provide a significant performance improvement over individual insert and
 #' update operations.
 #' 
-#' If a call isn\'t part of a transaction because it doesn\'t include the
+#' If a call isn't part of a transaction because it doesn't include the
 #' `transactionID` parameter, changes that result from the call are
 #' committed automatically.
 #'
@@ -41,7 +42,7 @@ NULL
 #' `BeginTransaction` operation. Specify the transaction ID of the
 #' transaction that you want to include the SQL statement in.
 #' 
-#' If the SQL statement is not part of a transaction, don\'t set this
+#' If the SQL statement is not part of a transaction, don't set this
 #' parameter.
 #'
 #' @section Request syntax:
@@ -111,6 +112,7 @@ rdsdataservice_batch_execute_statement <- function(database = NULL, parameterSet
 
 #' Starts a SQL transaction
 #'
+#' @description
 #' Starts a SQL transaction.
 #' 
 #'      &lt;important&gt; &lt;p&gt;A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24 hours.&lt;/p&gt; &lt;p&gt;A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's committed, it's rolled back automatically.&lt;/p&gt; &lt;p&gt;DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate &lt;code&gt;ExecuteStatement&lt;/code&gt; call with &lt;code&gt;continueAfterTimeout&lt;/code&gt; enabled.&lt;/p&gt; &lt;/important&gt; 
@@ -157,6 +159,7 @@ rdsdataservice_begin_transaction <- function(database = NULL, resourceArn, schem
 #' Ends a SQL transaction started with the BeginTransaction operation and
 #' commits the changes
 #'
+#' @description
 #' Ends a SQL transaction started with the `BeginTransaction` operation and
 #' commits the changes.
 #'
@@ -198,6 +201,7 @@ rdsdataservice_commit_transaction <- function(resourceArn, secretArn, transactio
 
 #' Runs one or more SQL statements
 #'
+#' @description
 #' Runs one or more SQL statements.
 #' 
 #' This operation is deprecated. Use the `BatchExecuteStatement` or
@@ -251,9 +255,10 @@ rdsdataservice_execute_sql <- function(awsSecretStoreArn, database = NULL, dbClu
 
 #' Runs a SQL statement against a database
 #'
+#' @description
 #' Runs a SQL statement against a database.
 #' 
-#' If a call isn\'t part of a transaction because it doesn\'t include the
+#' If a call isn't part of a transaction because it doesn't include the
 #' `transactionID` parameter, changes that result from the call are
 #' committed automatically.
 #' 
@@ -287,7 +292,7 @@ rdsdataservice_execute_sql <- function(awsSecretStoreArn, database = NULL, dbClu
 #' `BeginTransaction` operation. Specify the transaction ID of the
 #' transaction that you want to include the SQL statement in.
 #' 
-#' If the SQL statement is not part of a transaction, don\'t set this
+#' If the SQL statement is not part of a transaction, don't set this
 #' parameter.
 #'
 #' @section Request syntax:
@@ -360,6 +365,7 @@ rdsdataservice_execute_statement <- function(continueAfterTimeout = NULL, databa
 
 #' Performs a rollback of a transaction
 #'
+#' @description
 #' Performs a rollback of a transaction. Rolling back a transaction cancels
 #' its changes.
 #'

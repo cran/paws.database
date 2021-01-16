@@ -38,7 +38,7 @@ If no attribute names are specified, then all attributes are returned.
 If any of the requested attributes are not found, they do not appear in
 the result.
 
-For more information, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html}{Specifying Item Attributes}
+For more information, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html}{Specifying Item Attributes}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{ExpressionAttributeNames}{One or more substitution tokens for attribute names in an expression.
@@ -76,15 +76,14 @@ example:
 Tokens that begin with the \strong{:} character are \emph{expression attribute
 values}, which are placeholders for the actual value at runtime.
 
-For more information on expression attribute names, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html}{Specifying Item Attributes}
+For more information on expression attribute names, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html}{Specifying Item Attributes}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 }
 \description{
 The \code{GetItem} operation returns a set of attributes for the item with
 the given primary key. If there is no matching item, \code{GetItem} does not
 return any data and there will be no \code{Item} element in the response.
-}
-\details{
+
 \code{GetItem} provides an eventually consistent read by default. If your
 application requires a strongly consistent read, set \code{ConsistentRead} to
 \code{true}. Although a strongly consistent read might take more time than an

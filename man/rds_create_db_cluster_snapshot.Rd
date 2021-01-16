@@ -15,13 +15,13 @@ Constraints:
 \itemize{
 \item Must contain from 1 to 63 letters, numbers, or hyphens.
 \item First character must be a letter.
-\item Can\'t end with a hyphen or contain two consecutive hyphens.
+\item Can't end with a hyphen or contain two consecutive hyphens.
 }
 
 Example: \code{my-cluster1-snapshot1}}
 
 \item{DBClusterIdentifier}{[required] The identifier of the DB cluster to create a snapshot for. This
-parameter isn\'t case-sensitive.
+parameter isn't case-sensitive.
 
 Constraints:
 \itemize{
@@ -36,8 +36,7 @@ Example: \code{my-cluster1}}
 Creates a snapshot of a DB cluster. For more information on Amazon
 Aurora, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html}{What Is Amazon Aurora?}
 in the \emph{Amazon Aurora User Guide.}
-}
-\details{
+
 This action only applies to Aurora DB clusters.
 }
 \section{Request syntax}{

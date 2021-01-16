@@ -14,7 +14,7 @@ docdb_restore_db_cluster_from_snapshot(AvailabilityZones,
 restored DB cluster can be created in.}
 
 \item{DBClusterIdentifier}{[required] The name of the cluster to create from the snapshot or cluster snapshot.
-This parameter isn\'t case sensitive.
+This parameter isn't case sensitive.
 
 Constraints:
 \itemize{
@@ -91,8 +91,7 @@ from being accidentally deleted.}
 }
 \description{
 Creates a new cluster from a snapshot or cluster snapshot.
-}
-\details{
+
 If a snapshot is specified, the target cluster is created from the
 source DB snapshot with a default configuration and default security
 group.

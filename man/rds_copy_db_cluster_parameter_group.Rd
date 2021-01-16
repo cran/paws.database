@@ -31,10 +31,10 @@ example
 
 Constraints:
 \itemize{
-\item Can\'t be null, empty, or blank
+\item Can't be null, empty, or blank
 \item Must contain from 1 to 255 letters, numbers, or hyphens
 \item First character must be a letter
-\item Can\'t end with a hyphen or contain two consecutive hyphens
+\item Can't end with a hyphen or contain two consecutive hyphens
 }
 
 Example: \code{my-cluster-param-group1}}
@@ -45,8 +45,7 @@ Example: \code{my-cluster-param-group1}}
 }
 \description{
 Copies the specified DB cluster parameter group.
-}
-\details{
+
 This action only applies to Aurora DB clusters.
 }
 \section{Request syntax}{

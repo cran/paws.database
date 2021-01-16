@@ -30,12 +30,11 @@ version compatible with that DB parameter group family.}
 }
 \description{
 Creates a new DB parameter group.
-}
-\details{
+
 A DB parameter group is initially created with the default parameters
 for the database engine used by the DB instance. To provide custom
 values for any of the parameters, you must modify the group after
-creating it using \emph{ModifyDBParameterGroup}. Once you\'ve created a DB
+creating it using \emph{ModifyDBParameterGroup}. Once you've created a DB
 parameter group, you need to associate it with your DB instance using
 \emph{ModifyDBInstance}. When you associate a new DB parameter group with a
 running DB instance, you need to reboot the DB instance without failover

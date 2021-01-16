@@ -9,7 +9,7 @@ rds_modify_current_db_cluster_capacity(DBClusterIdentifier, Capacity,
 }
 \arguments{
 \item{DBClusterIdentifier}{[required] The DB cluster identifier for the cluster being modified. This parameter
-isn\'t case-sensitive.
+isn't case-sensitive.
 
 Constraints:
 \itemize{
@@ -43,12 +43,11 @@ action. The default is 300.
 specified value as soon as possible.
 
 \code{RollbackCapacityChange} ignores the capacity change if a scaling point
-isn\'t found in the timeout period.}
+isn't found in the timeout period.}
 }
 \description{
 Set the capacity of an Aurora Serverless DB cluster to a specific value.
-}
-\details{
+
 Aurora Serverless scales seamlessly based on the workload on the DB
 cluster. In some cases, the capacity might not scale fast enough to meet
 a sudden change in workload, such as a large number of new transactions.

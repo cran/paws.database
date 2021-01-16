@@ -13,7 +13,8 @@ rds_restore_db_instance_to_point_in_time(SourceDBInstanceIdentifier,
   DomainIAMRoleName, EnableIAMDatabaseAuthentication,
   EnableCloudwatchLogsExports, ProcessorFeatures,
   UseDefaultProcessorFeatures, DBParameterGroupName, DeletionProtection,
-  SourceDbiResourceId)
+  SourceDbiResourceId, MaxAllocatedStorage,
+  SourceDBInstanceAutomatedBackupsArn, EnableCustomerOwnedIp)
 }
 \arguments{
 \item{SourceDBInstanceIdentifier}{The identifier of the source DB instance from which to restore.
@@ -29,7 +30,7 @@ Constraints:
 \itemize{
 \item Must contain from 1 to 63 letters, numbers, or hyphens
 \item First character must be a letter
-\item Can\'t end with a hyphen or contain two consecutive hyphens
+\item Can't end with a hyphen or contain two consecutive hyphens
 }}
 
 \item{RestoreTime}{The date and time to restore from.
@@ -40,17 +41,17 @@ format
 Constraints:
 \itemize{
 \item Must be before the latest restorable time for the DB instance
-\item Can\'t be specified if the \code{UseLatestRestorableTime} parameter is
+\item Can't be specified if the \code{UseLatestRestorableTime} parameter is
 enabled
 }
 
 Example: \verb{2009-09-07T23:45:00Z}}
 
 \item{UseLatestRestorableTime}{A value that indicates whether the DB instance is restored from the
-latest backup time. By default, the DB instance isn\'t restored from the
+latest backup time. By default, the DB instance isn't restored from the
 latest backup time.
 
-Constraints: Can\'t be specified if the \code{RestoreTime} parameter is
+Constraints: Can't be specified if the \code{RestoreTime} parameter is
 provided.}
 
 \item{DBInstanceClass}{The compute and memory capacity of the Amazon RDS DB instance, for
@@ -71,8 +72,8 @@ Default: The same port as the original DB instance.}
 
 Default: A random, system-chosen Availability Zone.
 
-Constraint: You can\'t specify the \code{AvailabilityZone} parameter if the
-DB instance is a Multi-AZ deployment.
+Constraint: You can't specify the \code{AvailabilityZone} parameter if the DB
+instance is a Multi-AZ deployment.
 
 Example: \verb{us-east-1a}}
 
@@ -85,19 +86,19 @@ Example: \code{mySubnetgroup}}
 
 \item{MultiAZ}{A value that indicates whether the DB instance is a Multi-AZ deployment.
 
-Constraint: You can\'t specify the \code{AvailabilityZone} parameter if the
-DB instance is a Multi-AZ deployment.}
+Constraint: You can't specify the \code{AvailabilityZone} parameter if the DB
+instance is a Multi-AZ deployment.}
 
 \item{PubliclyAccessible}{A value that indicates whether the DB instance is publicly accessible.
 
 When the DB instance is publicly accessible, its DNS endpoint resolves
-to the private IP address from within the DB instance\'s VPC, and to the
-public IP address from outside of the DB instance\'s VPC. Access to the
+to the private IP address from within the DB instance's VPC, and to the
+public IP address from outside of the DB instance's VPC. Access to the
 DB instance is ultimately controlled by the security group it uses, and
 that public access is not permitted if the security group assigned to
-the DB instance doesn\'t permit it.
+the DB instance doesn't permit it.
 
-When the DB instance isn\'t publicly accessible, it is an internal DB
+When the DB instance isn't publicly accessible, it is an internal DB
 instance with a DNS name that resolves to a private IP address.
 
 For more information, see CreateDBInstance.}
@@ -109,12 +110,12 @@ automatically to the DB instance during the maintenance window.}
 
 Default: Same as source.
 
-Valid values: \code{license-included} \\| \code{bring-your-own-license} \\|
+Valid values: \code{license-included} | \code{bring-your-own-license} |
 \code{general-public-license}}
 
 \item{DBName}{The database name for the restored DB instance.
 
-This parameter isn\'t used for the MySQL or MariaDB engines.}
+This parameter isn't used for the MySQL or MariaDB engines.}
 
 \item{Engine}{The database engine to use for the new instance.
 
@@ -144,15 +145,14 @@ Constraints: Must be an integer greater than 1000.
 
 \strong{SQL Server}
 
-Setting the IOPS value for the SQL Server database engine isn\'t
+Setting the IOPS value for the SQL Server database engine isn't
 supported.}
 
 \item{OptionGroupName}{The name of the option group to be used for the restored DB instance.
 
 Permanent options, such as the TDE option for Oracle Advanced Security
-TDE, can\'t be removed from an option group, and that option group
-can\'t be removed from a DB instance once it is associated with a DB
-instance}
+TDE, can't be removed from an option group, and that option group can't
+be removed from a DB instance once it is associated with a DB instance}
 
 \item{CopyTagsToSnapshot}{A value that indicates whether to copy all tags from the restored DB
 instance to snapshots of the DB instance. By default, tags are not
@@ -177,22 +177,15 @@ device.}
 
 \item{VpcSecurityGroupIds}{A list of EC2 VPC security groups to associate with this DB instance.
 
-Default: The default EC2 VPC security group for the DB subnet group\'s
+Default: The default EC2 VPC security group for the DB subnet group's
 VPC.}
 
 \item{Domain}{Specify the Active Directory directory ID to restore the DB instance in.
 The domain must be created prior to this operation. Currently, only
-Microsoft SQL Server and Oracle DB instances can be created in an Active
-Directory Domain.
+MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances can be
+created in an Active Directory Domain.
 
-For Microsoft SQL Server DB instances, Amazon RDS can use Windows
-Authentication to authenticate users that connect to the DB instance.
-For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html}{Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server}
-in the \emph{Amazon RDS User Guide}.
-
-For Oracle DB instances, Amazon RDS can use Kerberos authentication to
-authenticate users that connect to the DB instance. For more
-information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html}{Using Kerberos Authentication with Amazon RDS for Oracle}
+For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/database-authentication.html}{Kerberos Authentication}
 in the \emph{Amazon RDS User Guide}.}
 
 \item{DomainIAMRoleName}{Specify the name of the IAM role to be used when making API calls to the
@@ -200,8 +193,7 @@ Directory Service.}
 
 \item{EnableIAMDatabaseAuthentication}{A value that indicates whether to enable mapping of AWS Identity and
 Access Management (IAM) accounts to database accounts. By default,
-mapping is disabled. For information about the supported DB engines, see
-CreateDBInstance.
+mapping is disabled.
 
 For more information about IAM database authentication, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html}{IAM Database Authentication for MySQL and PostgreSQL}
 in the \emph{Amazon RDS User Guide.}}
@@ -227,23 +219,43 @@ Constraints:
 \item If supplied, must match the name of an existing DBParameterGroup.
 \item Must be 1 to 255 letters, numbers, or hyphens.
 \item First character must be a letter.
-\item Can\'t end with a hyphen or contain two consecutive hyphens.
+\item Can't end with a hyphen or contain two consecutive hyphens.
 }}
 
 \item{DeletionProtection}{A value that indicates whether the DB instance has deletion protection
-enabled. The database can\'t be deleted when deletion protection is
+enabled. The database can't be deleted when deletion protection is
 enabled. By default, deletion protection is disabled. For more
 information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html}{Deleting a DB Instance}.}
 
 \item{SourceDbiResourceId}{The resource ID of the source DB instance from which to restore.}
+
+\item{MaxAllocatedStorage}{The upper limit to which Amazon RDS can automatically scale the storage
+of the DB instance.}
+
+\item{SourceDBInstanceAutomatedBackupsArn}{The Amazon Resource Name (ARN) of the replicated automated backups from
+which to restore, for example,
+\code{arn:aws:rds:useast-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE}.}
+
+\item{EnableCustomerOwnedIp}{A value that indicates whether to enable a customer-owned IP address
+(CoIP) for an RDS on Outposts DB instance.
+
+A \emph{CoIP} provides local or external connectivity to resources in your
+Outpost subnets through your on-premises network. For some use cases, a
+CoIP can provide lower latency for connections to the DB instance from
+outside of its virtual private cloud (VPC) on your local network.
+
+For more information about RDS on Outposts, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html}{Working with Amazon RDS on AWS Outposts}
+in the \emph{Amazon RDS User Guide}.
+
+For more information about CoIPs, see \href{https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing}{Customer-owned IP addresses}
+in the \emph{AWS Outposts User Guide}.}
 }
 \description{
 Restores a DB instance to an arbitrary point in time. You can restore to
 any point in time before the time identified by the LatestRestorableTime
 property. You can restore to a point up to the number of days specified
 by the BackupRetentionPeriod property.
-}
-\details{
+
 The target database is created with most of the original configuration,
 but in a system-selected Availability Zone, with the default security
 group, the default subnet group, and the default DB parameter group. By
@@ -252,7 +264,7 @@ when the instance is a SQL Server instance that has an option group that
 is associated with mirroring; in this case, the instance becomes a
 mirrored deployment and not a single-AZ deployment.
 
-This command doesn\'t apply to Aurora MySQL and Aurora PostgreSQL. For
+This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For
 Aurora, use \code{RestoreDBClusterToPointInTime}.
 }
 \section{Request syntax}{
@@ -303,7 +315,10 @@ Aurora, use \code{RestoreDBClusterToPointInTime}.
   UseDefaultProcessorFeatures = TRUE|FALSE,
   DBParameterGroupName = "string",
   DeletionProtection = TRUE|FALSE,
-  SourceDbiResourceId = "string"
+  SourceDbiResourceId = "string",
+  MaxAllocatedStorage = 123,
+  SourceDBInstanceAutomatedBackupsArn = "string",
+  EnableCustomerOwnedIp = TRUE|FALSE
 )
 }
 }

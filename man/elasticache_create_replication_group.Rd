@@ -14,7 +14,8 @@ elasticache_create_replication_group(ReplicationGroupId,
   SecurityGroupIds, Tags, SnapshotArns, SnapshotName,
   PreferredMaintenanceWindow, Port, NotificationTopicArn,
   AutoMinorVersionUpgrade, SnapshotRetentionLimit, SnapshotWindow,
-  AuthToken, TransitEncryptionEnabled, AtRestEncryptionEnabled, KmsKeyId)
+  AuthToken, TransitEncryptionEnabled, AtRestEncryptionEnabled, KmsKeyId,
+  UserGroupIds)
 }
 \arguments{
 \item{ReplicationGroupId}{[required] The replication group identifier. This parameter is stored as a
@@ -47,7 +48,7 @@ enabled) replication groups.
 Default: false}
 
 \item{MultiAZEnabled}{A flag indicating if you have Multi-AZ enabled to enhance fault
-tolerance. For more information, see \href{http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html}{Minimizing Downtime: Multi-AZ}.}
+tolerance. For more information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html}{Minimizing Downtime: Multi-AZ}.}
 
 \item{NumCacheClusters}{The number of clusters this replication group initially has.
 
@@ -62,7 +63,7 @@ to a value between 2 and 6.
 The maximum permitted value for \code{NumCacheClusters} is 6 (1 primary plus
 5 replicas).}
 
-\item{PreferredCacheClusterAZs}{A list of EC2 Availability Zones in which the replication group\'s
+\item{PreferredCacheClusterAZs}{A list of EC2 Availability Zones in which the replication group's
 clusters are created. The order of the Availability Zones in the list is
 the order in which clusters are allocated. The primary cluster is
 created in the first AZ in the list.
@@ -93,7 +94,7 @@ node group (shard). Valid values are 0 to 5.}
 \code{PrimaryAvailabilityZone}, \code{ReplicaAvailabilityZones}, \code{ReplicaCount},
 and \code{Slots}.
 
-If you\'re creating a Redis (cluster mode disabled) or a Redis (cluster
+If you're creating a Redis (cluster mode disabled) or a Redis (cluster
 mode enabled) replication group, you can use this parameter to
 individually configure each node group (shard), or you can omit this
 parameter. However, it is required when seeding a Redis (cluster mode
@@ -111,6 +112,17 @@ previous generation counterparts.
 \item General purpose:
 \itemize{
 \item Current generation:
+
+\strong{M6g node types} (available only for Redis engine version
+5.0.6 onward and for Memcached engine version 1.5.16 onward).
+
+\code{cache.m6g.large}, \code{cache.m6g.xlarge}, \code{cache.m6g.2xlarge},
+\code{cache.m6g.4xlarge}, \code{cache.m6g.8xlarge}, \code{cache.m6g.12xlarge},
+\code{cache.m6g.16xlarge}
+
+At this time, M6g node types are available in the following
+regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+eu-west-1 and ap-northeast-1.
 
 \strong{M5 node types:} \code{cache.m5.large}, \code{cache.m5.xlarge},
 \code{cache.m5.2xlarge}, \code{cache.m5.4xlarge}, \code{cache.m5.12xlarge},
@@ -143,6 +155,17 @@ previous generation counterparts.
 \item Memory optimized:
 \itemize{
 \item Current generation:
+
+\strong{R6g node types} (available only for Redis engine version
+5.0.6 onward and for Memcached engine version 1.5.16 onward).
+
+\code{cache.r6g.large}, \code{cache.r6g.xlarge}, \code{cache.r6g.2xlarge},
+\code{cache.r6g.4xlarge}, \code{cache.r6g.8xlarge}, \code{cache.r6g.12xlarge},
+\code{cache.r6g.16xlarge}
+
+At this time, R6g node types are available in the following
+regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+eu-west-1 and ap-northeast-1.
 
 \strong{R5 node types:} \code{cache.r5.large}, \code{cache.r5.xlarge},
 \code{cache.r5.2xlarge}, \code{cache.r5.4xlarge}, \code{cache.r5.12xlarge},
@@ -206,7 +229,7 @@ you specify the parameter group by name.
 
 \item{CacheSubnetGroupName}{The name of the cache subnet group to be used for the replication group.
 
-If you\'re going to launch your cluster in an Amazon VPC, you need to
+If you're going to launch your cluster in an Amazon VPC, you need to
 create a subnet group before you start creating a cluster. For more
 information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html}{Subnets and Subnet Groups}.}
 
@@ -301,13 +324,13 @@ Password constraints:
 \item Must be only printable ASCII characters.
 \item Must be at least 16 characters and no more than 128 characters in
 length.
-\item The only permitted printable special characters are !, &, \\#, \\$,
-\\^, \\<, \\>, and -. Other printable special characters cannot be used
+\item The only permitted printable special characters are !, &, \\#, $, ^,
+<, >, and -. Other printable special characters cannot be used
 in the AUTH token.
 }
 
-For more information, see \href{http://redis.io/commands/AUTH}{AUTH password}
-at http://redis.io/commands/AUTH.}
+For more information, see AUTH password at
+http://redis.io/commands/AUTH.}
 
 \item{TransitEncryptionEnabled}{A flag that enables in-transit encryption when set to \code{true}.
 
@@ -343,12 +366,13 @@ Amazon VPC using redis version \verb{3.2.6}, \verb{4.x} or later.
 Default: \code{false}}
 
 \item{KmsKeyId}{The ID of the KMS key used to encrypt the disk in the cluster.}
+
+\item{UserGroupIds}{The list of user groups to associate with the replication group.}
 }
 \description{
 Creates a Redis (cluster mode disabled) or a Redis (cluster mode
 enabled) replication group.
-}
-\details{
+
 This API can be used to create a standalone regional replication group
 or a secondary replication group associated with a Global Datastore.
 
@@ -368,7 +392,7 @@ When a Redis (cluster mode disabled) replication group has been
 successfully created, you can add one or more read replicas to it, up to
 a total of 5 read replicas. If you need to increase or decrease the
 number of node groups (console: shards), you can avail yourself of
-ElastiCache for Redis\' scaling. For more information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html}{Scaling ElastiCache for Redis Clusters}
+ElastiCache for Redis' scaling. For more information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html}{Scaling ElastiCache for Redis Clusters}
 in the \emph{ElastiCache User Guide}.
 
 This operation is valid for Redis only.
@@ -394,6 +418,10 @@ This operation is valid for Redis only.
       ReplicaCount = 123,
       PrimaryAvailabilityZone = "string",
       ReplicaAvailabilityZones = list(
+        "string"
+      ),
+      PrimaryOutpostArn = "string",
+      ReplicaOutpostArns = list(
         "string"
       )
     )
@@ -428,7 +456,10 @@ This operation is valid for Redis only.
   AuthToken = "string",
   TransitEncryptionEnabled = TRUE|FALSE,
   AtRestEncryptionEnabled = TRUE|FALSE,
-  KmsKeyId = "string"
+  KmsKeyId = "string",
+  UserGroupIds = list(
+    "string"
+  )
 )
 }
 }

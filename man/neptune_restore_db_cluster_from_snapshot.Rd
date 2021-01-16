@@ -16,7 +16,7 @@ neptune_restore_db_cluster_from_snapshot(AvailabilityZones,
 restored DB cluster can be created in.}
 
 \item{DBClusterIdentifier}{[required] The name of the DB cluster to create from the DB snapshot or DB cluster
-snapshot. This parameter isn\'t case-sensitive.
+snapshot. This parameter isn't case-sensitive.
 
 Constraints:
 \itemize{
@@ -105,13 +105,12 @@ DBClusterParameterGroup.
 }}
 
 \item{DeletionProtection}{A value that indicates whether the DB cluster has deletion protection
-enabled. The database can\'t be deleted when deletion protection is
+enabled. The database can't be deleted when deletion protection is
 enabled. By default, deletion protection is disabled.}
 }
 \description{
 Creates a new DB cluster from a DB snapshot or DB cluster snapshot.
-}
-\details{
+
 If a DB snapshot is specified, the target DB cluster is created from the
 source DB snapshot with a default configuration and default security
 group.

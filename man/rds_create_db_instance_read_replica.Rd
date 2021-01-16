@@ -15,7 +15,7 @@ rds_create_db_instance_read_replica(DBInstanceIdentifier,
   PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod,
   EnableCloudwatchLogsExports, ProcessorFeatures,
   UseDefaultProcessorFeatures, DeletionProtection, Domain,
-  DomainIAMRoleName, SourceRegion)
+  DomainIAMRoleName, ReplicaMode, MaxAllocatedStorage, SourceRegion)
 }
 \arguments{
 \item{DBInstanceIdentifier}{[required] The DB instance identifier of the read replica. This identifier is the
@@ -33,8 +33,8 @@ PostgreSQL, or SQL Server DB instance.
 source is running MySQL 5.6 or later.
 \item For the limitations of Oracle read replicas, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html}{Read Replica Limitations with Oracle}
 in the \emph{Amazon RDS User Guide}.
-\item For the limitations of SQL Server read replicas, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.ReadReplicas.Limitations.html}{Read Replica Limitations with Microsoft SQL Server}
-in the \emph{Amazon RDS User Guide}.
+\item For the limitations of SQL Server read replicas, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/}{Read Replica Limitations with Microsoft SQL Server} in
+the \emph{Amazon RDS User Guide}.
 \item Can specify a PostgreSQL DB instance only if the source is running
 PostgreSQL 9.3.5 or later (9.4.7 and higher for cross-region
 replication).
@@ -45,8 +45,8 @@ replica, specify a valid DB instance identifier.
 \item If the source DB instance is in a different AWS Region from the read
 replica, specify a valid DB instance ARN. For more information, see
 \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing}{Constructing an ARN for Amazon RDS}
-in the \emph{Amazon RDS User Guide}. This doesn\'t apply to SQL Server,
-which doesn\'t support cross-region replicas.
+in the \emph{Amazon RDS User Guide}. This doesn't apply to SQL Server,
+which doesn't support cross-region replicas.
 }}
 
 \item{DBInstanceClass}{The compute and memory capacity of the read replica, for example,
@@ -59,8 +59,8 @@ Default: Inherits from the source DB instance.}
 
 \item{AvailabilityZone}{The Availability Zone (AZ) where the read replica will be created.
 
-Default: A random, system-chosen Availability Zone in the endpoint\'s
-AWS Region.
+Default: A random, system-chosen Availability Zone in the endpoint's AWS
+Region.
 
 Example: \verb{us-east-1d}}
 
@@ -107,19 +107,19 @@ Constraints:
 \itemize{
 \item Must be 1 to 255 letters, numbers, or hyphens.
 \item First character must be a letter
-\item Can\'t end with a hyphen or contain two consecutive hyphens
+\item Can't end with a hyphen or contain two consecutive hyphens
 }}
 
 \item{PubliclyAccessible}{A value that indicates whether the DB instance is publicly accessible.
 
 When the DB instance is publicly accessible, its DNS endpoint resolves
-to the private IP address from within the DB instance\'s VPC, and to the
-public IP address from outside of the DB instance\'s VPC. Access to the
+to the private IP address from within the DB instance's VPC, and to the
+public IP address from outside of the DB instance's VPC. Access to the
 DB instance is ultimately controlled by the security group it uses, and
 that public access is not permitted if the security group assigned to
-the DB instance doesn\'t permit it.
+the DB instance doesn't permit it.
 
-When the DB instance isn\'t publicly accessible, it is an internal DB
+When the DB instance isn't publicly accessible, it is an internal DB
 instance with a DNS name that resolves to a private IP address.
 
 For more information, see CreateDBInstance.}
@@ -128,7 +128,7 @@ For more information, see CreateDBInstance.}
 
 \item{DBSubnetGroupName}{Specifies a DB subnet group for the DB instance. The new DB instance is
 created in the VPC associated with the DB subnet group. If no DB subnet
-group is specified, then the new DB instance isn\'t created in a VPC.
+group is specified, then the new DB instance isn't created in a VPC.
 
 Constraints:
 \itemize{
@@ -138,7 +138,7 @@ a DB instance in another AWS Region.
 \item The specified DB subnet group must be in the same AWS Region in
 which the operation is running.
 \item All read replicas in one AWS Region that are created from the same
-source DB instance must either:\\>
+source DB instance must either:>
 \itemize{
 \item Specify DB subnet groups from the same VPC. All these read
 replicas are created in the same VPC.
@@ -151,7 +151,7 @@ Example: \code{mySubnetgroup}}
 
 \item{VpcSecurityGroupIds}{A list of EC2 VPC security groups to associate with the read replica.
 
-Default: The default EC2 VPC security group for the DB subnet group\'s
+Default: The default EC2 VPC security group for the DB subnet group's
 VPC.}
 
 \item{StorageType}{Specifies the storage type to be associated with the read replica.
@@ -178,28 +178,29 @@ Valid Values: \verb{0, 1, 5, 10, 15, 30, 60}}
 \item{MonitoringRoleArn}{The ARN for the IAM role that permits RDS to send enhanced monitoring
 metrics to Amazon CloudWatch Logs. For example,
 \code{arn:aws:iam:123456789012:role/emaccess}. For information on creating a
-monitoring role, go to \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole}{To create an IAM role for Amazon RDS Enhanced Monitoring}
+monitoring role, go to \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Monitoring.html#USER_Monitoring}{To create an IAM role for Amazon RDS Enhanced Monitoring}
 in the \emph{Amazon RDS User Guide}.
 
 If \code{MonitoringInterval} is set to a value other than 0, then you must
 supply a \code{MonitoringRoleArn} value.}
 
-\item{KmsKeyId}{The AWS KMS key ID for an encrypted read replica. The KMS key ID is the
-Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for
-the KMS encryption key.
+\item{KmsKeyId}{The AWS KMS key identifier for an encrypted read replica.
+
+The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+name for the AWS KMS CMK.
 
 If you create an encrypted read replica in the same AWS Region as the
-source DB instance, then you do not have to specify a value for this
-parameter. The read replica is encrypted with the same KMS key as the
-source DB instance.
+source DB instance, then do not specify a value for this parameter. A
+read replica in the same Region is always encrypted with the same AWS
+KMS CMK as the source DB instance.
 
 If you create an encrypted read replica in a different AWS Region, then
-you must specify a KMS key for the destination AWS Region. KMS
-encryption keys are specific to the AWS Region that they are created in,
-and you can\'t use encryption keys from one AWS Region in another AWS
+you must specify a AWS KMS key identifier for the destination AWS
+Region. AWS KMS CMKs are specific to the AWS Region that they are
+created in, and you can't use CMKs from one AWS Region in another AWS
 Region.
 
-You can\'t create an encrypted read replica from an unencrypted DB
+You can't create an encrypted read replica from an unencrypted DB
 instance.}
 
 \item{PreSignedUrl}{The URL that contains a Signature Version 4 signed request for the
@@ -207,7 +208,7 @@ instance.}
 contains the source DB instance.
 
 You must specify this parameter when you create an encrypted read
-replica from another AWS Region by using the Amazon RDS API. Don\'t
+replica from another AWS Region by using the Amazon RDS API. Don't
 specify \code{PreSignedUrl} when you are creating an encrypted read replica
 in the same AWS Region.
 
@@ -252,16 +253,15 @@ specifying \code{PreSignedUrl} manually. Specifying \code{SourceRegion}
 autogenerates a presigned URL that is a valid request for the operation
 that can be executed in the source AWS Region.
 
-\code{SourceRegion} isn\'t supported for SQL Server, because SQL Server on
-Amazon RDS doesn\'t support cross-region read replicas.
+\code{SourceRegion} isn't supported for SQL Server, because SQL Server on
+Amazon RDS doesn't support cross-region read replicas.
 
-If you supply a value for this operation\'s \code{SourceRegion} parameter, a
+If you supply a value for this operation's \code{SourceRegion} parameter, a
 pre-signed URL will be calculated on your behalf.}
 
 \item{EnableIAMDatabaseAuthentication}{A value that indicates whether to enable mapping of AWS Identity and
 Access Management (IAM) accounts to database accounts. By default,
-mapping is disabled. For information about the supported DB engines, see
-CreateDBInstance.
+mapping is disabled.
 
 For more information about IAM database authentication, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html}{IAM Database Authentication for MySQL and PostgreSQL}
 in the \emph{Amazon RDS User Guide.}}
@@ -273,13 +273,14 @@ For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/Use
 in the \emph{Amazon RDS User Guide}.}
 
 \item{PerformanceInsightsKMSKeyId}{The AWS KMS key identifier for encryption of Performance Insights data.
-The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or
-the KMS key alias for the KMS encryption key.
+
+The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+name for the AWS KMS customer master key (CMK).
 
 If you do not specify a value for \code{PerformanceInsightsKMSKeyId}, then
-Amazon RDS uses your default encryption key. AWS KMS creates the default
-encryption key for your AWS account. Your AWS account has a different
-default encryption key for each AWS Region.}
+Amazon RDS uses your default CMK. There is a default CMK for your AWS
+account. Your AWS account has a different default CMK for each AWS
+Region.}
 
 \item{PerformanceInsightsRetentionPeriod}{The amount of time, in days, to retain Performance Insights data. Valid
 values are 7 or 731 (2 years).}
@@ -296,24 +297,36 @@ instance class of the DB instance.}
 uses its default processor features.}
 
 \item{DeletionProtection}{A value that indicates whether the DB instance has deletion protection
-enabled. The database can\'t be deleted when deletion protection is
+enabled. The database can't be deleted when deletion protection is
 enabled. By default, deletion protection is disabled. For more
 information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html}{Deleting a DB Instance}.}
 
 \item{Domain}{The Active Directory directory ID to create the DB instance in.
+Currently, only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB
+instances can be created in an Active Directory Domain.
 
-For Oracle DB instances, Amazon RDS can use Kerberos authentication to
-authenticate users that connect to the DB instance. For more
-information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html}{Using Kerberos Authentication with Amazon RDS for Oracle}
-in the \emph{Amazon RDS User Guide}.
-
-For Microsoft SQL Server DB instances, Amazon RDS can use Windows
-Authentication to authenticate users that connect to the DB instance.
-For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html}{Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server}
+For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/database-authentication.html}{Kerberos Authentication}
 in the \emph{Amazon RDS User Guide}.}
 
 \item{DomainIAMRoleName}{Specify the name of the IAM role to be used when making API calls to the
 Directory Service.}
+
+\item{ReplicaMode}{The open mode of the replica database: mounted or read-only.
+
+This parameter is only supported for Oracle DB instances.
+
+Mounted DB replicas are included in Oracle Enterprise Edition. The main
+use case for mounted replicas is cross-Region disaster recovery. The
+primary database doesn't use Active Data Guard to transmit information
+to the mounted replica. Because it doesn't accept user connections, a
+mounted replica can't serve a read-only workload.
+
+You can create a combination of mounted and read-only DB replicas for
+the same primary DB instance. For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html}{Working with Oracle Read Replicas for Amazon RDS}
+in the \emph{Amazon RDS User Guide}.}
+
+\item{MaxAllocatedStorage}{The upper limit to which Amazon RDS can automatically scale the storage
+of the DB instance.}
 
 \item{SourceRegion}{The ID of the region that contains the source for the read replica.}
 }
@@ -323,9 +336,8 @@ source DB instance. You can create a read replica for a DB instance
 running MySQL, MariaDB, Oracle, PostgreSQL, or SQL Server. For more
 information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html}{Working with Read Replicas}
 in the \emph{Amazon RDS User Guide}.
-}
-\details{
-Amazon Aurora doesn\'t support this action. Call the \code{CreateDBInstance}
+
+Amazon Aurora doesn't support this action. Call the \code{CreateDBInstance}
 action to create a DB instance for an Aurora DB cluster.
 
 All read replica DB instances are created with backups disabled. All
@@ -381,6 +393,8 @@ Your source DB instance must have backup retention enabled.
   DeletionProtection = TRUE|FALSE,
   Domain = "string",
   DomainIAMRoleName = "string",
+  ReplicaMode = "open-read-only"|"mounted",
+  MaxAllocatedStorage = 123,
   SourceRegion = "string"
 )
 }

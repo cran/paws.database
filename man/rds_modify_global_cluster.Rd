@@ -9,7 +9,7 @@ rds_modify_global_cluster(GlobalClusterIdentifier,
 }
 \arguments{
 \item{GlobalClusterIdentifier}{The DB cluster identifier for the global cluster being modified. This
-parameter isn\'t case-sensitive.
+parameter isn't case-sensitive.
 
 Constraints:
 \itemize{
@@ -24,13 +24,13 @@ Constraints:
 \itemize{
 \item Must contain from 1 to 63 letters, numbers, or hyphens
 \item The first character must be a letter
-\item Can\'t end with a hyphen or contain two consecutive hyphens
+\item Can't end with a hyphen or contain two consecutive hyphens
 }
 
 Example: \code{my-cluster2}}
 
 \item{DeletionProtection}{Indicates if the global database cluster has deletion protection
-enabled. The global database cluster can\'t be deleted when deletion
+enabled. The global database cluster can't be deleted when deletion
 protection is enabled.}
 }
 \description{
@@ -39,8 +39,7 @@ or more database configuration parameters by specifying these parameters
 and the new values in the request. For more information on Amazon
 Aurora, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html}{What Is Amazon Aurora?}
 in the \emph{Amazon Aurora User Guide.}
-}
-\details{
+
 This action only applies to Aurora DB clusters.
 }
 \section{Request syntax}{

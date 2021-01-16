@@ -11,7 +11,7 @@ neptune_describe_db_clusters(DBClusterIdentifier, Filters, MaxRecords,
 \arguments{
 \item{DBClusterIdentifier}{The user-supplied DB cluster identifier. If this parameter is specified,
 information from only the specific DB cluster is returned. This
-parameter isn\'t case-sensitive.
+parameter isn't case-sensitive.
 
 Constraints:
 \itemize{
@@ -48,8 +48,7 @@ records beyond the marker, up to the value specified by \code{MaxRecords}.}
 \description{
 Returns information about provisioned DB clusters, and supports
 pagination.
-}
-\details{
+
 This operation can also return information for Amazon RDS clusters and
 Amazon DocDB clusters.
 }

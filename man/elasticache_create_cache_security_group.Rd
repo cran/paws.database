@@ -12,7 +12,7 @@ elasticache_create_cache_security_group(CacheSecurityGroupName,
 string.
 
 Constraints: Must contain no more than 255 alphanumeric characters.
-Cannot be the word \"Default\".
+Cannot be the word "Default".
 
 Example: \code{mysecuritygroup}}
 
@@ -21,8 +21,7 @@ Example: \code{mysecuritygroup}}
 \description{
 Creates a new cache security group. Use a cache security group to
 control access to one or more clusters.
-}
-\details{
+
 Cache security groups are only used when you are creating a cluster
 outside of an Amazon Virtual Private Cloud (Amazon VPC). If you are
 creating a cluster inside of a VPC, use a cache subnet group instead.

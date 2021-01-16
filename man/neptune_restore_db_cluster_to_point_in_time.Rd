@@ -30,7 +30,7 @@ source DB cluster.
 source DB cluster.
 }
 
-If you don\'t specify a \code{RestoreType} value, then the new DB cluster is
+If you don't specify a \code{RestoreType} value, then the new DB cluster is
 restored as a full copy of the source DB cluster.}
 
 \item{SourceDBClusterIdentifier}{[required] The identifier of the source DB cluster from which to restore.
@@ -128,7 +128,7 @@ DBClusterParameterGroup.
 }}
 
 \item{DeletionProtection}{A value that indicates whether the DB cluster has deletion protection
-enabled. The database can\'t be deleted when deletion protection is
+enabled. The database can't be deleted when deletion protection is
 enabled. By default, deletion protection is disabled.}
 }
 \description{
@@ -138,8 +138,7 @@ to any point in time before \code{LatestRestorableTime} for up to
 source DB cluster with the same configuration as the original DB
 cluster, except that the new DB cluster is created with the default DB
 security group.
-}
-\details{
+
 This action only restores the DB cluster, not the DB instances for that
 DB cluster. You must invoke the CreateDBInstance action to create DB
 instances for the restored DB cluster, specifying the identifier of the

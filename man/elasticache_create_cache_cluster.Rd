@@ -11,7 +11,7 @@ elasticache_create_cache_cluster(CacheClusterId, ReplicationGroupId,
   SecurityGroupIds, Tags, SnapshotArns, SnapshotName,
   PreferredMaintenanceWindow, Port, NotificationTopicArn,
   AutoMinorVersionUpgrade, SnapshotRetentionLimit, SnapshotWindow,
-  AuthToken)
+  AuthToken, OutpostMode, PreferredOutpostArn, PreferredOutpostArns)
 }
 \arguments{
 \item{CacheClusterId}{[required] The node group (shard) identifier. This parameter is stored as a
@@ -38,7 +38,7 @@ This parameter is only valid if the \code{Engine} parameter is \code{redis}.}
 
 \item{AZMode}{Specifies whether the nodes in this Memcached cluster are created in a
 single Availability Zone or created across multiple Availability Zones
-in the cluster\'s region.
+in the cluster's region.
 
 This parameter is only supported for Memcached clusters.
 
@@ -78,7 +78,7 @@ Memcached, this value must be between 1 and 20.
 
 If you need more than 20 nodes for your Memcached cluster, please fill
 out the ElastiCache Limit Increase Request form at
-\url{http://aws.amazon.com/contact-us/elasticache-node-limit-request/}.}
+http://aws.amazon.com/contact-us/elasticache-node-limit-request/.}
 
 \item{CacheNodeType}{The compute and memory capacity of the nodes in the node group (shard).
 
@@ -90,6 +90,17 @@ previous generation counterparts.
 \item General purpose:
 \itemize{
 \item Current generation:
+
+\strong{M6g node types} (available only for Redis engine version
+5.0.6 onward and for Memcached engine version 1.5.16 onward).
+
+\code{cache.m6g.large}, \code{cache.m6g.xlarge}, \code{cache.m6g.2xlarge},
+\code{cache.m6g.4xlarge}, \code{cache.m6g.8xlarge}, \code{cache.m6g.12xlarge},
+\code{cache.m6g.16xlarge}
+
+At this time, M6g node types are available in the following
+regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+eu-west-1 and ap-northeast-1.
 
 \strong{M5 node types:} \code{cache.m5.large}, \code{cache.m5.xlarge},
 \code{cache.m5.2xlarge}, \code{cache.m5.4xlarge}, \code{cache.m5.12xlarge},
@@ -123,6 +134,17 @@ previous generation counterparts.
 \itemize{
 \item Current generation:
 
+\strong{R6g node types} (available only for Redis engine version
+5.0.6 onward and for Memcached engine version 1.5.16 onward).
+
+\code{cache.r6g.large}, \code{cache.r6g.xlarge}, \code{cache.r6g.2xlarge},
+\code{cache.r6g.4xlarge}, \code{cache.r6g.8xlarge}, \code{cache.r6g.12xlarge},
+\code{cache.r6g.16xlarge}
+
+At this time, R6g node types are available in the following
+regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+eu-west-1 and ap-northeast-1.
+
 \strong{R5 node types:} \code{cache.r5.large}, \code{cache.r5.xlarge},
 \code{cache.r5.2xlarge}, \code{cache.r5.4xlarge}, \code{cache.r5.12xlarge},
 \code{cache.r5.24xlarge}
@@ -154,7 +176,7 @@ supported on Redis version 2.8.22 and later.
 
 \item{Engine}{The name of the cache engine to be used for this cluster.
 
-Valid values for this parameter are: \code{memcached} \\| \code{redis}}
+Valid values for this parameter are: \code{memcached} | \code{redis}}
 
 \item{EngineVersion}{The version number of the cache engine to be used for this cluster. To
 view the supported cache engine versions, use the
@@ -175,7 +197,7 @@ engine is used. You cannot use any parameter group which has
 Use this parameter only when you are creating a cluster in an Amazon
 Virtual Private Cloud (Amazon VPC).
 
-If you\'re going to launch your cluster in an Amazon VPC, you need to
+If you're going to launch your cluster in an Amazon VPC, you need to
 create a subnet group before you start creating a cluster. For more
 information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html}{Subnets and Subnet Groups}.}
 
@@ -266,19 +288,25 @@ Password constraints:
 \item Must be only printable ASCII characters.
 \item Must be at least 16 characters and no more than 128 characters in
 length.
-\item The only permitted printable special characters are !, &, \\#, \\$,
-\\^, \\<, \\>, and -. Other printable special characters cannot be used
+\item The only permitted printable special characters are !, &, \\#, $, ^,
+<, >, and -. Other printable special characters cannot be used
 in the AUTH token.
 }
 
-For more information, see \href{http://redis.io/commands/AUTH}{AUTH password}
-at http://redis.io/commands/AUTH.}
+For more information, see AUTH password at
+http://redis.io/commands/AUTH.}
+
+\item{OutpostMode}{Specifies whether the nodes in the cluster are created in a single
+outpost or across multiple outposts.}
+
+\item{PreferredOutpostArn}{The outpost ARN in which the cache cluster is created.}
+
+\item{PreferredOutpostArns}{The outpost ARNs in which the cache cluster is created.}
 }
 \description{
 Creates a cluster. All nodes in the cluster run the same
 protocol-compliant cache engine software, either Memcached or Redis.
-}
-\details{
+
 This operation is not supported for Redis (cluster mode enabled)
 clusters.
 }
@@ -319,7 +347,12 @@ clusters.
   AutoMinorVersionUpgrade = TRUE|FALSE,
   SnapshotRetentionLimit = 123,
   SnapshotWindow = "string",
-  AuthToken = "string"
+  AuthToken = "string",
+  OutpostMode = "single-outpost"|"cross-outpost",
+  PreferredOutpostArn = "string",
+  PreferredOutpostArns = list(
+    "string"
+  )
 )
 }
 }

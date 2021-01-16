@@ -11,12 +11,12 @@ redshift_get_cluster_credentials(DbUser, DbName, ClusterIdentifier,
 \arguments{
 \item{DbUser}{[required] The name of a database user. If a user name matching \code{DbUser} exists in
 the database, the temporary user credentials have the same permissions
-as the existing user. If \code{DbUser} doesn\'t exist in the database and
+as the existing user. If \code{DbUser} doesn't exist in the database and
 \code{Autocreate} is \code{True}, a new user is created using the value for
 \code{DbUser} with PUBLIC permissions. If a database user matching the value
-for \code{DbUser} doesn\'t exist and \code{Autocreate} is \code{False}, then the
-command succeeds but the connection attempt will fail because the user
-doesn\'t exist in the database.
+for \code{DbUser} doesn't exist and \code{Autocreate} is \code{False}, then the command
+succeeds but the connection attempt will fail because the user doesn't
+exist in the database.
 
 For more information, see \href{https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html}{CREATE USER}
 in the Amazon Redshift Database Developer Guide.
@@ -24,13 +24,13 @@ in the Amazon Redshift Database Developer Guide.
 Constraints:
 \itemize{
 \item Must be 1 to 64 alphanumeric characters or hyphens. The user name
-can\'t be \code{PUBLIC}.
+can't be \code{PUBLIC}.
 \item Must contain only lowercase letters, numbers, underscore, plus sign,
 period (dot), at symbol (@), or hyphen.
 \item First character must be a letter.
 \item Must not contain a colon ( : ) or slash ( / ).
 \item Cannot be a reserved word. A list of reserved words can be found in
-\href{http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html}{Reserved Words}
+\href{https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html}{Reserved Words}
 in the Amazon Redshift Database Developer Guide.
 }}
 
@@ -45,7 +45,7 @@ period (dot), at symbol (@), or hyphen.
 \item First character must be a letter.
 \item Must not contain a colon ( : ) or slash ( / ).
 \item Cannot be a reserved word. A list of reserved words can be found in
-\href{http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html}{Reserved Words}
+\href{https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html}{Reserved Words}
 in the Amazon Redshift Database Developer Guide.
 }}
 
@@ -74,7 +74,7 @@ period (dot), at symbol (@), or hyphen.
 \item First character must be a letter.
 \item Must not contain a colon ( : ) or slash ( / ).
 \item Cannot be a reserved word. A list of reserved words can be found in
-\href{http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html}{Reserved Words}
+\href{https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html}{Reserved Words}
 in the Amazon Redshift Database Developer Guide.
 }}
 }
@@ -88,8 +88,7 @@ default, the temporary credentials expire in 900 seconds. You can
 optionally specify a duration between 900 seconds (15 minutes) and 3600
 seconds (60 minutes). For more information, see \href{https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html}{Using IAM Authentication to Generate Database User Credentials}
 in the Amazon Redshift Cluster Management Guide.
-}
-\details{
+
 The AWS Identity and Access Management (IAM)user or role that executes
 GetClusterCredentials must have an IAM policy attached that allows
 access to all necessary actions and resources. For more information

@@ -11,7 +11,8 @@ redshift_modify_cluster(ClusterIdentifier, ClusterType, NodeType,
   PreferredMaintenanceWindow, ClusterVersion, AllowVersionUpgrade,
   HsmClientCertificateIdentifier, HsmConfigurationIdentifier,
   NewClusterIdentifier, PubliclyAccessible, ElasticIp, EnhancedVpcRouting,
-  MaintenanceTrackName, Encrypted, KmsKeyId)
+  MaintenanceTrackName, Encrypted, KmsKeyId, AvailabilityZoneRelocation,
+  AvailabilityZone, Port)
 }
 \arguments{
 \item{ClusterIdentifier}{[required] The unique identifier of the cluster to be modified.
@@ -32,17 +33,17 @@ Valid Values: \code{multi-node | single-node}}
 \item{NodeType}{The new node type of the cluster. If you specify a new node type, you
 must also specify the number of nodes parameter.
 
-For more information about resizing clusters, go to \href{https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html}{Resizing Clusters in Amazon Redshift}
+For more information about resizing clusters, go to \href{https://docs.aws.amazon.com/redshift/latest/mgmt/managing-cluster-operations.html}{Resizing Clusters in Amazon Redshift}
 in the \emph{Amazon Redshift Cluster Management Guide}.
 
-Valid Values: \code{ds2.xlarge} \\| \code{ds2.8xlarge} \\| \code{dc1.large} \\|
-\code{dc1.8xlarge} \\| \code{dc2.large} \\| \code{dc2.8xlarge} \\| \code{ra3.4xlarge} \\|
+Valid Values: \code{ds2.xlarge} | \code{ds2.8xlarge} | \code{dc1.large} | \code{dc1.8xlarge}
+| \code{dc2.large} | \code{dc2.8xlarge} | \code{ra3.xlplus} | \code{ra3.4xlarge} |
 \code{ra3.16xlarge}}
 
 \item{NumberOfNodes}{The new number of nodes of the cluster. If you specify a new number of
 nodes, you must also specify the node type parameter.
 
-For more information about resizing clusters, go to \href{https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html}{Resizing Clusters in Amazon Redshift}
+For more information about resizing clusters, go to \href{https://docs.aws.amazon.com/redshift/latest/mgmt/managing-cluster-operations.html}{Resizing Clusters in Amazon Redshift}
 in the \emph{Amazon Redshift Cluster Management Guide}.
 
 Valid Values: Integer greater than \code{0}.}
@@ -82,8 +83,8 @@ Constraints:
 \item Must contain at least one uppercase letter.
 \item Must contain at least one lowercase letter.
 \item Must contain one number.
-\item Can be any printable ASCII character (ASCII code 33 to 126) except
-\' (single quote), \" (double quote), \\, /, @, or space.
+\item Can be any printable ASCII character (ASCII code 33 to 126) except '
+(single quote), " (double quote), \\, /, @, or space.
 }}
 
 \item{ClusterParameterGroupName}{The name of the cluster parameter group to apply to this cluster. This
@@ -110,7 +111,7 @@ Constraints: Must be a value from 0 to 35.}
 
 \item{ManualSnapshotRetentionPeriod}{The default for number of days that a newly created manual snapshot is
 retained. If the value is -1, the manual snapshot is retained
-indefinitely. This value doesn\'t retroactively change the retention
+indefinitely. This value doesn't retroactively change the retention
 periods of existing manual snapshots.
 
 The value must be either -1 or an integer between 1 and 3,653.
@@ -130,7 +131,7 @@ Default: Uses existing setting.
 
 Format: ddd:hh24:mi-ddd:hh24:mi, for example \code{wed:07:30-wed:08:00}.
 
-Valid Days: Mon \\| Tue \\| Wed \\| Thu \\| Fri \\| Sat \\| Sun
+Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun
 
 Constraints: Must be at least 30 minutes.}
 
@@ -199,19 +200,25 @@ point, the maintenance track name is applied.}
 
 \item{Encrypted}{Indicates whether the cluster is encrypted. If the value is encrypted
 (true) and you provide a value for the \code{KmsKeyId} parameter, we encrypt
-the cluster with the provided \code{KmsKeyId}. If you don\'t provide a
-\code{KmsKeyId}, we encrypt with the default key. In the China region we use
-legacy encryption if you specify that the cluster is encrypted.
+the cluster with the provided \code{KmsKeyId}. If you don't provide a
+\code{KmsKeyId}, we encrypt with the default key.
 
 If the value is not encrypted (false), then the cluster is decrypted.}
 
 \item{KmsKeyId}{The AWS Key Management Service (KMS) key ID of the encryption key that
 you want to use to encrypt data in the cluster.}
+
+\item{AvailabilityZoneRelocation}{The option to enable relocation for an Amazon Redshift cluster between
+Availability Zones after the cluster modification is complete.}
+
+\item{AvailabilityZone}{The option to initiate relocation for an Amazon Redshift cluster to the
+target Availability Zone.}
+
+\item{Port}{The option to change the port of an Amazon Redshift cluster.}
 }
 \description{
 Modifies the settings for a cluster.
-}
-\details{
+
 You can also change node type and the number of nodes to scale up or
 down the cluster. When resizing a cluster, you must specify both the
 number of nodes and the node type even if one of the parameters does not
@@ -251,7 +258,10 @@ in the \emph{Amazon Redshift Cluster Management Guide}.
   EnhancedVpcRouting = TRUE|FALSE,
   MaintenanceTrackName = "string",
   Encrypted = TRUE|FALSE,
-  KmsKeyId = "string"
+  KmsKeyId = "string",
+  AvailabilityZoneRelocation = TRUE|FALSE,
+  AvailabilityZone = "string",
+  Port = 123
 )
 }
 }

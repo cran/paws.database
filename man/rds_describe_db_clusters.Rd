@@ -10,7 +10,7 @@ rds_describe_db_clusters(DBClusterIdentifier, Filters, MaxRecords,
 \arguments{
 \item{DBClusterIdentifier}{The user-supplied DB cluster identifier. If this parameter is specified,
 information from only the specific DB cluster is returned. This
-parameter isn\'t case-sensitive.
+parameter isn't case-sensitive.
 
 Constraints:
 \itemize{
@@ -45,8 +45,7 @@ information about clusters shared from other AWS accounts.}
 \description{
 Returns information about provisioned Aurora DB clusters. This API
 supports pagination.
-}
-\details{
+
 For more information on Amazon Aurora, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html}{What Is Amazon Aurora?}
 in the \emph{Amazon Aurora User Guide.}
 

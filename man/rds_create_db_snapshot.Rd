@@ -2,7 +2,7 @@
 % Please edit documentation in R/rds_operations.R
 \name{rds_create_db_snapshot}
 \alias{rds_create_db_snapshot}
-\title{Creates a DBSnapshot}
+\title{Creates a snapshot of a DB instance}
 \usage{
 rds_create_db_snapshot(DBSnapshotIdentifier, DBInstanceIdentifier, Tags)
 }
@@ -11,10 +11,10 @@ rds_create_db_snapshot(DBSnapshotIdentifier, DBInstanceIdentifier, Tags)
 
 Constraints:
 \itemize{
-\item Can\'t be null, empty, or blank
+\item Can't be null, empty, or blank
 \item Must contain from 1 to 255 letters, numbers, or hyphens
 \item First character must be a letter
-\item Can\'t end with a hyphen or contain two consecutive hyphens
+\item Can't end with a hyphen or contain two consecutive hyphens
 }
 
 Example: \code{my-snapshot-id}}
@@ -30,8 +30,8 @@ Constraints:
 \item{Tags}{}
 }
 \description{
-Creates a DBSnapshot. The source DBInstance must be in \"available\"
-state.
+Creates a snapshot of a DB instance. The source DB instance must be in
+the \code{available} or \code{storage-optimization} state.
 }
 \section{Request syntax}{
 \preformatted{svc$create_db_snapshot(

@@ -10,7 +10,7 @@ rds_describe_db_subnet_groups(DBSubnetGroupName, Filters, MaxRecords,
 \arguments{
 \item{DBSubnetGroupName}{The name of the DB subnet group to return details for.}
 
-\item{Filters}{This parameter isn\'t currently supported.}
+\item{Filters}{This parameter isn't currently supported.}
 
 \item{MaxRecords}{The maximum number of records to include in the response. If more
 records exist than the specified \code{MaxRecords} value, a pagination token
@@ -30,9 +30,8 @@ specified by \code{MaxRecords}.}
 Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is
 specified, the list will contain only the descriptions of the specified
 DBSubnetGroup.
-}
-\details{
-For an overview of CIDR ranges, go to the \href{http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing}{Wikipedia Tutorial}.
+
+For an overview of CIDR ranges, go to the \href{https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing}{Wikipedia Tutorial}.
 }
 \section{Request syntax}{
 \preformatted{svc$describe_db_subnet_groups(

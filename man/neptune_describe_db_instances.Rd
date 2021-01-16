@@ -10,7 +10,7 @@ neptune_describe_db_instances(DBInstanceIdentifier, Filters, MaxRecords,
 \arguments{
 \item{DBInstanceIdentifier}{The user-supplied instance identifier. If this parameter is specified,
 information from only the specific DB instance is returned. This
-parameter isn\'t case-sensitive.
+parameter isn't case-sensitive.
 
 Constraints:
 \itemize{
@@ -49,8 +49,7 @@ specified by \code{MaxRecords}.}
 \description{
 Returns information about provisioned instances, and supports
 pagination.
-}
-\details{
+
 This operation can also return information for Amazon RDS instances and
 Amazon DocDB instances.
 }

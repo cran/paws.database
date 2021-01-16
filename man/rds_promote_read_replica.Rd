@@ -26,7 +26,7 @@ Default: 1
 Constraints:
 \itemize{
 \item Must be a value from 0 to 35.
-\item Can\'t be set to 0 if the DB instance is a source to read replicas.
+\item Can't be set to 0 if the DB instance is a source to read replicas.
 }}
 
 \item{PreferredBackupWindow}{The daily time range during which automated backups are created if
@@ -35,8 +35,8 @@ parameter.
 
 The default is a 30-minute window selected at random from an 8-hour
 block of time for each AWS Region. To see the time blocks available, see
-\href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html}{Adjusting the Preferred Maintenance Window}
-in the \emph{Amazon RDS User Guide.}
+\href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/}{Adjusting the Preferred Maintenance Window} in the
+\emph{Amazon RDS User Guide.}
 
 Constraints:
 \itemize{
@@ -48,8 +48,6 @@ Constraints:
 }
 \description{
 Promotes a read replica DB instance to a standalone DB instance.
-}
-\details{
 \itemize{
 \item Backup duration is a function of the amount of changes to the
 database since the previous backup. If you plan to promote a read
@@ -59,7 +57,7 @@ addition, a read replica cannot be promoted to a standalone instance
 when it is in the \code{backing-up} status. If you have enabled backups
 on your read replica, configure the automated backup window so that
 daily backups do not interfere with read replica promotion.
-\item This command doesn\'t apply to Aurora MySQL and Aurora PostgreSQL.
+\item This command doesn't apply to Aurora MySQL and Aurora PostgreSQL.
 }
 }
 \section{Request syntax}{

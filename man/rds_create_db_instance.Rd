@@ -10,15 +10,15 @@ rds_create_db_instance(DBName, DBInstanceIdentifier, AllocatedStorage,
   DBSubnetGroupName, PreferredMaintenanceWindow, DBParameterGroupName,
   BackupRetentionPeriod, PreferredBackupWindow, Port, MultiAZ,
   EngineVersion, AutoMinorVersionUpgrade, LicenseModel, Iops,
-  OptionGroupName, CharacterSetName, PubliclyAccessible, Tags,
-  DBClusterIdentifier, StorageType, TdeCredentialArn,
-  TdeCredentialPassword, StorageEncrypted, KmsKeyId, Domain,
-  CopyTagsToSnapshot, MonitoringInterval, MonitoringRoleArn,
+  OptionGroupName, CharacterSetName, NcharCharacterSetName,
+  PubliclyAccessible, Tags, DBClusterIdentifier, StorageType,
+  TdeCredentialArn, TdeCredentialPassword, StorageEncrypted, KmsKeyId,
+  Domain, CopyTagsToSnapshot, MonitoringInterval, MonitoringRoleArn,
   DomainIAMRoleName, PromotionTier, Timezone,
   EnableIAMDatabaseAuthentication, EnablePerformanceInsights,
   PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod,
   EnableCloudwatchLogsExports, ProcessorFeatures, DeletionProtection,
-  MaxAllocatedStorage)
+  MaxAllocatedStorage, EnableCustomerOwnedIp)
 }
 \arguments{
 \item{DBName}{The meaning of this parameter differs according to the database engine
@@ -27,52 +27,56 @@ you use.
 \strong{MySQL}
 
 The name of the database to create when the DB instance is created. If
-this parameter isn\'t specified, no database is created in the DB
+this parameter isn't specified, no database is created in the DB
 instance.
 
 Constraints:
 \itemize{
 \item Must contain 1 to 64 letters or numbers.
-\item Can\'t be a word reserved by the specified database engine
+\item Must begin with a letter. Subsequent characters can be letters,
+underscores, or digits (0-9).
+\item Can't be a word reserved by the specified database engine
 }
 
 \strong{MariaDB}
 
 The name of the database to create when the DB instance is created. If
-this parameter isn\'t specified, no database is created in the DB
+this parameter isn't specified, no database is created in the DB
 instance.
 
 Constraints:
 \itemize{
 \item Must contain 1 to 64 letters or numbers.
-\item Can\'t be a word reserved by the specified database engine
+\item Must begin with a letter. Subsequent characters can be letters,
+underscores, or digits (0-9).
+\item Can't be a word reserved by the specified database engine
 }
 
 \strong{PostgreSQL}
 
 The name of the database to create when the DB instance is created. If
-this parameter isn\'t specified, the default \"postgres\" database is
-created in the DB instance.
+this parameter isn't specified, no database is created in the DB
+instance.
 
 Constraints:
 \itemize{
 \item Must contain 1 to 63 letters, numbers, or underscores.
-\item Must begin with a letter or an underscore. Subsequent characters can
-be letters, underscores, or digits (0-9).
-\item Can\'t be a word reserved by the specified database engine
+\item Must begin with a letter. Subsequent characters can be letters,
+underscores, or digits (0-9).
+\item Can't be a word reserved by the specified database engine
 }
 
 \strong{Oracle}
 
 The Oracle System ID (SID) of the created DB instance. If you specify
-\code{null}, the default value \code{ORCL} is used. You can\'t specify the string
+\code{null}, the default value \code{ORCL} is used. You can't specify the string
 NULL, or any other reserved word, for \code{DBName}.
 
 Default: \code{ORCL}
 
 Constraints:
 \itemize{
-\item Can\'t be longer than 8 characters
+\item Can't be longer than 8 characters
 }
 
 \strong{SQL Server}
@@ -82,13 +86,13 @@ Not applicable. Must be null.
 \strong{Amazon Aurora}
 
 The name of the database to create when the primary instance of the DB
-cluster is created. If this parameter isn\'t specified, no database is
+cluster is created. If this parameter isn't specified, no database is
 created in the DB instance.
 
 Constraints:
 \itemize{
 \item Must contain 1 to 64 letters or numbers.
-\item Can\'t be a word reserved by the specified database engine
+\item Can't be a word reserved by the specified database engine
 }}
 
 \item{DBInstanceIdentifier}{[required] The DB instance identifier. This parameter is stored as a lowercase
@@ -98,7 +102,7 @@ Constraints:
 \itemize{
 \item Must contain from 1 to 63 letters, numbers, or hyphens.
 \item First character must be a letter.
-\item Can\'t end with a hyphen or contain two consecutive hyphens.
+\item Can't end with a hyphen or contain two consecutive hyphens.
 }
 
 Example: \code{mydbinstance}}
@@ -227,7 +231,7 @@ Constraints:
 \itemize{
 \item Required for MariaDB.
 \item Must be 1 to 16 letters or numbers.
-\item Can\'t be a reserved word for the chosen database engine.
+\item Can't be a reserved word for the chosen database engine.
 }
 
 \strong{Microsoft SQL Server}
@@ -237,7 +241,7 @@ Constraints:
 \item Required for SQL Server.
 \item Must be 1 to 128 letters or numbers.
 \item The first character must be a letter.
-\item Can\'t be a reserved word for the chosen database engine.
+\item Can't be a reserved word for the chosen database engine.
 }
 
 \strong{MySQL}
@@ -247,7 +251,7 @@ Constraints:
 \item Required for MySQL.
 \item Must be 1 to 16 letters or numbers.
 \item First character must be a letter.
-\item Can\'t be a reserved word for the chosen database engine.
+\item Can't be a reserved word for the chosen database engine.
 }
 
 \strong{Oracle}
@@ -257,7 +261,7 @@ Constraints:
 \item Required for Oracle.
 \item Must be 1 to 30 letters or numbers.
 \item First character must be a letter.
-\item Can\'t be a reserved word for the chosen database engine.
+\item Can't be a reserved word for the chosen database engine.
 }
 
 \strong{PostgreSQL}
@@ -267,11 +271,11 @@ Constraints:
 \item Required for PostgreSQL.
 \item Must be 1 to 63 letters or numbers.
 \item First character must be a letter.
-\item Can\'t be a reserved word for the chosen database engine.
+\item Can't be a reserved word for the chosen database engine.
 }}
 
 \item{MasterUserPassword}{The password for the master user. The password can include any printable
-ASCII character except \"/\", \"\"\", or \"@\".
+ASCII character except "/", """, or "@".
 
 \strong{Amazon Aurora}
 
@@ -310,26 +314,26 @@ instance.
 Not applicable. The associated list of EC2 VPC security groups is
 managed by the DB cluster.
 
-Default: The default EC2 VPC security group for the DB subnet group\'s
+Default: The default EC2 VPC security group for the DB subnet group's
 VPC.}
 
 \item{AvailabilityZone}{The Availability Zone (AZ) where the database will be created. For
 information on AWS Regions and Availability Zones, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html}{Regions and Availability Zones}.
 
-Default: A random, system-chosen Availability Zone in the endpoint\'s
-AWS Region.
+Default: A random, system-chosen Availability Zone in the endpoint's AWS
+Region.
 
 Example: \verb{us-east-1d}
 
-Constraint: The \code{AvailabilityZone} parameter can\'t be specified if the
+Constraint: The \code{AvailabilityZone} parameter can't be specified if the
 DB instance is a Multi-AZ deployment. The specified Availability Zone
 must be in the same AWS Region as the current endpoint.
 
-If you\'re creating a DB instance in an RDS on VMware environment,
+If you're creating a DB instance in an RDS on VMware environment,
 specify the identifier of the custom Availability Zone to create the DB
 instance in.
 
-For more information about RDS on VMware, see the \href{https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html}{\emph{RDS on VMware User Guide.}}}
+For more information about RDS on VMware, see the \href{https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html}{RDS on VMware User Guide.}}
 
 \item{DBSubnetGroupName}{A DB subnet group to associate with this DB instance.
 
@@ -356,7 +360,7 @@ Constraints:
 \itemize{
 \item Must be 1 to 255 letters, numbers, or hyphens.
 \item First character must be a letter
-\item Can\'t end with a hyphen or contain two consecutive hyphens
+\item Can't end with a hyphen or contain two consecutive hyphens
 }}
 
 \item{BackupRetentionPeriod}{The number of days for which automated backups are retained. Setting
@@ -373,7 +377,7 @@ Default: 1
 Constraints:
 \itemize{
 \item Must be a value from 0 to 35
-\item Can\'t be set to 0 if the DB instance is a source to read replicas
+\item Can't be set to 0 if the DB instance is a source to read replicas
 }}
 
 \item{PreferredBackupWindow}{The daily time range during which automated backups are created if
@@ -447,7 +451,7 @@ Valid values: \code{1150-65535}
 Type: Integer}
 
 \item{MultiAZ}{A value that indicates whether the DB instance is a Multi-AZ deployment.
-You can\'t set the \code{AvailabilityZone} parameter if the DB instance is a
+You can't set the \code{AvailabilityZone} parameter if the DB instance is a
 Multi-AZ deployment.}
 
 \item{EngineVersion}{The version number of the database engine to use.
@@ -471,7 +475,7 @@ in the \emph{Amazon RDS User Guide.}
 
 \strong{Microsoft SQL Server}
 
-See \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport}{Version and Feature Support on Amazon RDS}
+See \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport}{Microsoft SQL Server Versions on Amazon RDS}
 in the \emph{Amazon RDS User Guide.}
 
 \strong{MySQL}
@@ -495,7 +499,7 @@ default, minor engine upgrades are applied automatically.}
 
 \item{LicenseModel}{License model information for this DB instance.
 
-Valid values: \code{license-included} \\| \code{bring-your-own-license} \\|
+Valid values: \code{license-included} | \code{bring-your-own-license} |
 \code{general-public-license}}
 
 \item{Iops}{The amount of Provisioned IOPS (input/output operations per second) to
@@ -512,8 +516,8 @@ instance. For SQL Server DB instances, must be a multiple between 1 and
 option group.
 
 Permanent options, such as the TDE option for Oracle Advanced Security
-TDE, can\'t be removed from an option group. Also, that option group
-can\'t be removed from a DB instance once it is associated with a DB
+TDE, can't be removed from an option group. Also, that option group
+can't be removed from a DB instance once it is associated with a DB
 instance}
 
 \item{CharacterSetName}{For supported engines, indicates that the DB instance should be
@@ -524,34 +528,36 @@ associated with the specified CharacterSet.
 Not applicable. The character set is managed by the DB cluster. For more
 information, see \code{CreateDBCluster}.}
 
+\item{NcharCharacterSetName}{The name of the NCHAR character set for the Oracle DB instance.}
+
 \item{PubliclyAccessible}{A value that indicates whether the DB instance is publicly accessible.
 
 When the DB instance is publicly accessible, its DNS endpoint resolves
-to the private IP address from within the DB instance\'s VPC, and to the
-public IP address from outside of the DB instance\'s VPC. Access to the
+to the private IP address from within the DB instance's VPC, and to the
+public IP address from outside of the DB instance's VPC. Access to the
 DB instance is ultimately controlled by the security group it uses, and
 that public access is not permitted if the security group assigned to
-the DB instance doesn\'t permit it.
+the DB instance doesn't permit it.
 
-When the DB instance isn\'t publicly accessible, it is an internal DB
+When the DB instance isn't publicly accessible, it is an internal DB
 instance with a DNS name that resolves to a private IP address.
 
 Default: The default behavior varies depending on whether
 \code{DBSubnetGroupName} is specified.
 
-If \code{DBSubnetGroupName} isn\'t specified, and \code{PubliclyAccessible} isn\'t
+If \code{DBSubnetGroupName} isn't specified, and \code{PubliclyAccessible} isn't
 specified, the following applies:
 \itemize{
-\item If the default VPC in the target region doesn't have an Internet
+\item If the default VPC in the target region doesn’t have an Internet
 gateway attached to it, the DB instance is private.
 \item If the default VPC in the target region has an Internet gateway
 attached to it, the DB instance is public.
 }
 
-If \code{DBSubnetGroupName} is specified, and \code{PubliclyAccessible} isn\'t
+If \code{DBSubnetGroupName} is specified, and \code{PubliclyAccessible} isn't
 specified, the following applies:
 \itemize{
-\item If the subnets are part of a VPC that doesn't have an Internet
+\item If the subnets are part of a VPC that doesn’t have an Internet
 gateway attached to it, the DB instance is private.
 \item If the subnets are part of a VPC that has an Internet gateway
 attached to it, the DB instance is public.
@@ -577,7 +583,7 @@ encryption.}
 device.}
 
 \item{StorageEncrypted}{A value that indicates whether the DB instance is encrypted. By default,
-it isn\'t encrypted.
+it isn't encrypted.
 
 \strong{Amazon Aurora}
 
@@ -586,35 +592,25 @@ cluster.}
 
 \item{KmsKeyId}{The AWS KMS key identifier for an encrypted DB instance.
 
-The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-encryption key. If you are creating a DB instance with the same AWS
-account that owns the KMS encryption key used to encrypt the new DB
-instance, then you can use the KMS key alias instead of the ARN for the
-KM encryption key.
+The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+name for the AWS KMS customer master key (CMK). To use a CMK in a
+different AWS account, specify the key ARN or alias ARN.
 
 \strong{Amazon Aurora}
 
-Not applicable. The KMS key identifier is managed by the DB cluster. For
-more information, see \code{CreateDBCluster}.
+Not applicable. The AWS KMS key identifier is managed by the DB cluster.
+For more information, see \code{CreateDBCluster}.
 
 If \code{StorageEncrypted} is enabled, and you do not specify a value for the
-\code{KmsKeyId} parameter, then Amazon RDS will use your default encryption
-key. AWS KMS creates the default encryption key for your AWS account.
-Your AWS account has a different default encryption key for each AWS
-Region.}
+\code{KmsKeyId} parameter, then Amazon RDS uses your default CMK. There is a
+default CMK for your AWS account. Your AWS account has a different
+default CMK for each AWS Region.}
 
 \item{Domain}{The Active Directory directory ID to create the DB instance in.
-Currently, only Microsoft SQL Server and Oracle DB instances can be
-created in an Active Directory Domain.
+Currently, only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB
+instances can be created in an Active Directory Domain.
 
-For Microsoft SQL Server DB instances, Amazon RDS can use Windows
-Authentication to authenticate users that connect to the DB instance.
-For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html}{Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server}
-in the \emph{Amazon RDS User Guide}.
-
-For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
-authenticate users that connect to the DB instance. For more
-information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html}{Using Kerberos Authentication with Amazon RDS for Oracle}
+For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/database-authentication.html}{Kerberos Authentication}
 in the \emph{Amazon RDS User Guide}.}
 
 \item{CopyTagsToSnapshot}{A value that indicates whether to copy tags from the DB instance to
@@ -663,27 +659,8 @@ supported only by \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/C
 Access Management (IAM) accounts to database accounts. By default,
 mapping is disabled.
 
-You can enable IAM database authentication for the following database
-engines:
-
-\strong{Amazon Aurora}
-
-Not applicable. Mapping AWS IAM accounts to database accounts is managed
-by the DB cluster.
-
-\strong{MySQL}
-\itemize{
-\item For MySQL 5.6, minor version 5.6.34 or higher
-\item For MySQL 5.7, minor version 5.7.16 or higher
-\item For MySQL 8.0, minor version 8.0.16 or higher
-}
-
-\strong{PostgreSQL}
-\itemize{
-\item For PostgreSQL 9.5, minor version 9.5.15 or higher
-\item For PostgreSQL 9.6, minor version 9.6.11 or higher
-\item PostgreSQL 10.6, 10.7, and 10.9
-}
+This setting doesn't apply to Amazon Aurora. Mapping AWS IAM accounts to
+database accounts is managed by the DB cluster.
 
 For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html}{IAM Database Authentication for MySQL and PostgreSQL}
 in the \emph{Amazon RDS User Guide.}}
@@ -695,13 +672,14 @@ For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/Use
 in the \emph{Amazon Relational Database Service User Guide}.}
 
 \item{PerformanceInsightsKMSKeyId}{The AWS KMS key identifier for encryption of Performance Insights data.
-The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or
-the KMS key alias for the KMS encryption key.
+
+The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+name for the AWS KMS customer master key (CMK).
 
 If you do not specify a value for \code{PerformanceInsightsKMSKeyId}, then
-Amazon RDS uses your default encryption key. AWS KMS creates the default
-encryption key for your AWS account. Your AWS account has a different
-default encryption key for each AWS Region.}
+Amazon RDS uses your default CMK. There is a default CMK for your AWS
+account. Your AWS account has a different default CMK for each AWS
+Region.}
 
 \item{PerformanceInsightsRetentionPeriod}{The amount of time, in days, to retain Performance Insights data. Valid
 values are 7 or 731 (2 years).}
@@ -709,13 +687,37 @@ values are 7 or 731 (2 years).}
 \item{EnableCloudwatchLogsExports}{The list of log types that need to be enabled for exporting to
 CloudWatch Logs. The values in the list depend on the DB engine being
 used. For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch}{Publishing Database Logs to Amazon CloudWatch Logs}
-in the \emph{Amazon Relational Database Service User Guide}.}
+in the \emph{Amazon Relational Database Service User Guide}.
+
+\strong{Amazon Aurora}
+
+Not applicable. CloudWatch Logs exports are managed by the DB cluster.
+
+\strong{MariaDB}
+
+Possible values are \code{audit}, \code{error}, \code{general}, and \code{slowquery}.
+
+\strong{Microsoft SQL Server}
+
+Possible values are \code{agent} and \code{error}.
+
+\strong{MySQL}
+
+Possible values are \code{audit}, \code{error}, \code{general}, and \code{slowquery}.
+
+\strong{Oracle}
+
+Possible values are \code{alert}, \code{audit}, \code{listener}, and \code{trace}.
+
+\strong{PostgreSQL}
+
+Possible values are \code{postgresql} and \code{upgrade}.}
 
 \item{ProcessorFeatures}{The number of CPU cores and the number of threads per core for the DB
 instance class of the DB instance.}
 
 \item{DeletionProtection}{A value that indicates whether the DB instance has deletion protection
-enabled. The database can\'t be deleted when deletion protection is
+enabled. The database can't be deleted when deletion protection is
 enabled. By default, deletion protection is disabled. For more
 information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html}{Deleting a DB Instance}.
 
@@ -728,6 +730,20 @@ the DB cluster.}
 
 \item{MaxAllocatedStorage}{The upper limit to which Amazon RDS can automatically scale the storage
 of the DB instance.}
+
+\item{EnableCustomerOwnedIp}{A value that indicates whether to enable a customer-owned IP address
+(CoIP) for an RDS on Outposts DB instance.
+
+A \emph{CoIP} provides local or external connectivity to resources in your
+Outpost subnets through your on-premises network. For some use cases, a
+CoIP can provide lower latency for connections to the DB instance from
+outside of its virtual private cloud (VPC) on your local network.
+
+For more information about RDS on Outposts, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html}{Working with Amazon RDS on AWS Outposts}
+in the \emph{Amazon RDS User Guide}.
+
+For more information about CoIPs, see \href{https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing}{Customer-owned IP addresses}
+in the \emph{AWS Outposts User Guide}.}
 }
 \description{
 Creates a new DB instance.
@@ -761,6 +777,7 @@ Creates a new DB instance.
   Iops = 123,
   OptionGroupName = "string",
   CharacterSetName = "string",
+  NcharCharacterSetName = "string",
   PubliclyAccessible = TRUE|FALSE,
   Tags = list(
     list(
@@ -795,7 +812,8 @@ Creates a new DB instance.
     )
   ),
   DeletionProtection = TRUE|FALSE,
-  MaxAllocatedStorage = 123
+  MaxAllocatedStorage = 123,
+  EnableCustomerOwnedIp = TRUE|FALSE
 )
 }
 }

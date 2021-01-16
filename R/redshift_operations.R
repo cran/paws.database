@@ -7,6 +7,7 @@ NULL
 #' the configuration (term, payment type, or number of nodes) and no
 #' additional costs
 #'
+#' @description
 #' Exchanges a DC1 Reserved Node for a DC2 Reserved Node with no changes to
 #' the configuration (term, payment type, or number of nodes) and no
 #' additional costs.
@@ -51,6 +52,7 @@ redshift_accept_reserved_node_exchange <- function(ReservedNodeId, TargetReserve
 
 #' Adds an inbound (ingress) rule to an Amazon Redshift security group
 #'
+#' @description
 #' Adds an inbound (ingress) rule to an Amazon Redshift security group.
 #' Depending on whether the application accessing your cluster is running
 #' on the Internet or an Amazon EC2 instance, you can authorize inbound
@@ -66,7 +68,7 @@ redshift_accept_reserved_node_exchange <- function(ReservedNodeId, TargetReserve
 #' If you authorize access to a CIDR/IP address range, specify *CIDRIP*.
 #' For an overview of CIDR blocks, see the Wikipedia article on [Classless
 #' Inter-Domain
-#' Routing](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
+#' Routing](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
 #' 
 #' You must also associate the security group with a cluster so that
 #' clients running on these IP addresses or the EC2 instance are authorized
@@ -122,6 +124,7 @@ redshift_authorize_cluster_security_group_ingress <- function(ClusterSecurityGro
 #' Authorizes the specified AWS customer account to restore the specified
 #' snapshot
 #'
+#' @description
 #' Authorizes the specified AWS customer account to restore the specified
 #' snapshot.
 #' 
@@ -175,6 +178,7 @@ redshift_authorize_snapshot_access <- function(SnapshotIdentifier, SnapshotClust
 
 #' Deletes a set of cluster snapshots
 #'
+#' @description
 #' Deletes a set of cluster snapshots.
 #'
 #' @usage
@@ -216,6 +220,7 @@ redshift_batch_delete_cluster_snapshots <- function(Identifiers) {
 
 #' Modifies the settings for a set of cluster snapshots
 #'
+#' @description
 #' Modifies the settings for a set of cluster snapshots.
 #'
 #' @usage
@@ -268,6 +273,7 @@ redshift_batch_modify_cluster_snapshots <- function(SnapshotIdentifierList, Manu
 
 #' Cancels a resize operation for a cluster
 #'
+#' @description
 #' Cancels a resize operation for a cluster.
 #'
 #' @usage
@@ -306,6 +312,7 @@ redshift_cancel_resize <- function(ClusterIdentifier) {
 #' Copies the specified automated cluster snapshot to a new manual cluster
 #' snapshot
 #'
+#' @description
 #' Copies the specified automated cluster snapshot to a new manual cluster
 #' snapshot. The source must be an automated snapshot and it must be in the
 #' available state.
@@ -393,6 +400,7 @@ redshift_copy_cluster_snapshot <- function(SourceSnapshotIdentifier, SourceSnaps
 
 #' Creates a new cluster with the specified parameters
 #'
+#' @description
 #' Creates a new cluster with the specified parameters.
 #' 
 #' To create a cluster in Virtual Private Cloud (VPC), you must provide a
@@ -411,7 +419,8 @@ redshift_copy_cluster_snapshot <- function(SourceSnapshotIdentifier, SourceSnaps
 #'   ClusterVersion, AllowVersionUpgrade, NumberOfNodes, PubliclyAccessible,
 #'   Encrypted, HsmClientCertificateIdentifier, HsmConfigurationIdentifier,
 #'   ElasticIp, Tags, KmsKeyId, EnhancedVpcRouting, AdditionalInfo, IamRoles,
-#'   MaintenanceTrackName, SnapshotScheduleIdentifier)
+#'   MaintenanceTrackName, SnapshotScheduleIdentifier,
+#'   AvailabilityZoneRelocation)
 #'
 #' @param DBName The name of the first database to be created when the cluster is
 #' created.
@@ -457,7 +466,7 @@ redshift_copy_cluster_snapshot <- function(SourceSnapshotIdentifier, SourceSnaps
 #' 
 #' -   `multi-node`, the **NumberOfNodes** parameter is required.
 #' 
-#' Valid Values: `multi-node` \\| `single-node`
+#' Valid Values: `multi-node` | `single-node`
 #' 
 #' Default: `multi-node`
 #' @param NodeType &#91;required&#93; The node type to be provisioned for the cluster. For information about
@@ -465,15 +474,15 @@ redshift_copy_cluster_snapshot <- function(SourceSnapshotIdentifier, SourceSnaps
 #' Clusters](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes)
 #' in the *Amazon Redshift Cluster Management Guide*.
 #' 
-#' Valid Values: `ds2.xlarge` \\| `ds2.8xlarge` \\| `dc1.large` \\|
-#' `dc1.8xlarge` \\| `dc2.large` \\| `dc2.8xlarge` \\| `ra3.4xlarge` \\|
+#' Valid Values: `ds2.xlarge` | `ds2.8xlarge` | `dc1.large` | `dc1.8xlarge`
+#' | `dc2.large` | `dc2.8xlarge` | `ra3.xlplus` | `ra3.4xlarge` |
 #' `ra3.16xlarge`
 #' @param MasterUsername &#91;required&#93; The user name associated with the master user account for the cluster
 #' that is being created.
 #' 
 #' Constraints:
 #' 
-#' -   Must be 1 - 128 alphanumeric characters. The user name can\'t be
+#' -   Must be 1 - 128 alphanumeric characters. The user name can't be
 #'     `PUBLIC`.
 #' 
 #' -   First character must be a letter.
@@ -495,8 +504,8 @@ redshift_copy_cluster_snapshot <- function(SourceSnapshotIdentifier, SourceSnaps
 #' 
 #' -   Must contain one number.
 #' 
-#' -   Can be any printable ASCII character (ASCII code 33 to 126) except
-#'     \' (single quote), \" (double quote), \\, /, @@, or space.
+#' -   Can be any printable ASCII character (ASCII code 33 to 126) except '
+#'     (single quote), " (double quote), \\, /, @@, or space.
 #' @param ClusterSecurityGroups A list of security groups to be associated with this cluster.
 #' 
 #' Default: The default cluster security group for Amazon Redshift.
@@ -531,7 +540,7 @@ redshift_copy_cluster_snapshot <- function(SourceSnapshotIdentifier, SourceSnaps
 #' Windows](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows)
 #' in Amazon Redshift Cluster Management Guide.
 #' 
-#' Valid Days: Mon \\| Tue \\| Wed \\| Thu \\| Fri \\| Sat \\| Sun
+#' Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun
 #' 
 #' Constraints: Minimum 30-minute window.
 #' @param ClusterParameterGroupName The name of the parameter group to be associated with this cluster.
@@ -557,7 +566,7 @@ redshift_copy_cluster_snapshot <- function(SourceSnapshotIdentifier, SourceSnaps
 #' 
 #' Constraints: Must be a value from 0 to 35.
 #' @param ManualSnapshotRetentionPeriod The default number of days to retain a manual snapshot. If the value is
-#' -1, the snapshot is retained indefinitely. This setting doesn\'t change
+#' -1, the snapshot is retained indefinitely. This setting doesn't change
 #' the retention period of existing snapshots.
 #' 
 #' The value must be either -1 or an integer between 1 and 3,653.
@@ -595,9 +604,9 @@ redshift_copy_cluster_snapshot <- function(SourceSnapshotIdentifier, SourceSnaps
 #' Clusters](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes)
 #' in the *Amazon Redshift Cluster Management Guide*.
 #' 
-#' If you don\'t specify this parameter, you get a single-node cluster.
-#' When requesting a multi-node cluster, you must specify the number of
-#' nodes that you want in the cluster.
+#' If you don't specify this parameter, you get a single-node cluster. When
+#' requesting a multi-node cluster, you must specify the number of nodes
+#' that you want in the cluster.
 #' 
 #' Default: `1`
 #' 
@@ -639,9 +648,11 @@ redshift_copy_cluster_snapshot <- function(SourceSnapshotIdentifier, SourceSnaps
 #' 
 #' A cluster can have up to 10 IAM roles associated with it at any time.
 #' @param MaintenanceTrackName An optional parameter for the name of the maintenance track for the
-#' cluster. If you don\'t provide a maintenance track name, the cluster is
+#' cluster. If you don't provide a maintenance track name, the cluster is
 #' assigned to the `current` track.
 #' @param SnapshotScheduleIdentifier A unique identifier for the snapshot schedule.
+#' @param AvailabilityZoneRelocation The option to enable relocation for an Amazon Redshift cluster between
+#' Availability Zones after the cluster is created.
 #'
 #' @section Request syntax:
 #' ```
@@ -686,21 +697,22 @@ redshift_copy_cluster_snapshot <- function(SourceSnapshotIdentifier, SourceSnaps
 #'     "string"
 #'   ),
 #'   MaintenanceTrackName = "string",
-#'   SnapshotScheduleIdentifier = "string"
+#'   SnapshotScheduleIdentifier = "string",
+#'   AvailabilityZoneRelocation = TRUE|FALSE
 #' )
 #' ```
 #'
 #' @keywords internal
 #'
 #' @rdname redshift_create_cluster
-redshift_create_cluster <- function(DBName = NULL, ClusterIdentifier, ClusterType = NULL, NodeType, MasterUsername, MasterUserPassword, ClusterSecurityGroups = NULL, VpcSecurityGroupIds = NULL, ClusterSubnetGroupName = NULL, AvailabilityZone = NULL, PreferredMaintenanceWindow = NULL, ClusterParameterGroupName = NULL, AutomatedSnapshotRetentionPeriod = NULL, ManualSnapshotRetentionPeriod = NULL, Port = NULL, ClusterVersion = NULL, AllowVersionUpgrade = NULL, NumberOfNodes = NULL, PubliclyAccessible = NULL, Encrypted = NULL, HsmClientCertificateIdentifier = NULL, HsmConfigurationIdentifier = NULL, ElasticIp = NULL, Tags = NULL, KmsKeyId = NULL, EnhancedVpcRouting = NULL, AdditionalInfo = NULL, IamRoles = NULL, MaintenanceTrackName = NULL, SnapshotScheduleIdentifier = NULL) {
+redshift_create_cluster <- function(DBName = NULL, ClusterIdentifier, ClusterType = NULL, NodeType, MasterUsername, MasterUserPassword, ClusterSecurityGroups = NULL, VpcSecurityGroupIds = NULL, ClusterSubnetGroupName = NULL, AvailabilityZone = NULL, PreferredMaintenanceWindow = NULL, ClusterParameterGroupName = NULL, AutomatedSnapshotRetentionPeriod = NULL, ManualSnapshotRetentionPeriod = NULL, Port = NULL, ClusterVersion = NULL, AllowVersionUpgrade = NULL, NumberOfNodes = NULL, PubliclyAccessible = NULL, Encrypted = NULL, HsmClientCertificateIdentifier = NULL, HsmConfigurationIdentifier = NULL, ElasticIp = NULL, Tags = NULL, KmsKeyId = NULL, EnhancedVpcRouting = NULL, AdditionalInfo = NULL, IamRoles = NULL, MaintenanceTrackName = NULL, SnapshotScheduleIdentifier = NULL, AvailabilityZoneRelocation = NULL) {
   op <- new_operation(
     name = "CreateCluster",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .redshift$create_cluster_input(DBName = DBName, ClusterIdentifier = ClusterIdentifier, ClusterType = ClusterType, NodeType = NodeType, MasterUsername = MasterUsername, MasterUserPassword = MasterUserPassword, ClusterSecurityGroups = ClusterSecurityGroups, VpcSecurityGroupIds = VpcSecurityGroupIds, ClusterSubnetGroupName = ClusterSubnetGroupName, AvailabilityZone = AvailabilityZone, PreferredMaintenanceWindow = PreferredMaintenanceWindow, ClusterParameterGroupName = ClusterParameterGroupName, AutomatedSnapshotRetentionPeriod = AutomatedSnapshotRetentionPeriod, ManualSnapshotRetentionPeriod = ManualSnapshotRetentionPeriod, Port = Port, ClusterVersion = ClusterVersion, AllowVersionUpgrade = AllowVersionUpgrade, NumberOfNodes = NumberOfNodes, PubliclyAccessible = PubliclyAccessible, Encrypted = Encrypted, HsmClientCertificateIdentifier = HsmClientCertificateIdentifier, HsmConfigurationIdentifier = HsmConfigurationIdentifier, ElasticIp = ElasticIp, Tags = Tags, KmsKeyId = KmsKeyId, EnhancedVpcRouting = EnhancedVpcRouting, AdditionalInfo = AdditionalInfo, IamRoles = IamRoles, MaintenanceTrackName = MaintenanceTrackName, SnapshotScheduleIdentifier = SnapshotScheduleIdentifier)
+  input <- .redshift$create_cluster_input(DBName = DBName, ClusterIdentifier = ClusterIdentifier, ClusterType = ClusterType, NodeType = NodeType, MasterUsername = MasterUsername, MasterUserPassword = MasterUserPassword, ClusterSecurityGroups = ClusterSecurityGroups, VpcSecurityGroupIds = VpcSecurityGroupIds, ClusterSubnetGroupName = ClusterSubnetGroupName, AvailabilityZone = AvailabilityZone, PreferredMaintenanceWindow = PreferredMaintenanceWindow, ClusterParameterGroupName = ClusterParameterGroupName, AutomatedSnapshotRetentionPeriod = AutomatedSnapshotRetentionPeriod, ManualSnapshotRetentionPeriod = ManualSnapshotRetentionPeriod, Port = Port, ClusterVersion = ClusterVersion, AllowVersionUpgrade = AllowVersionUpgrade, NumberOfNodes = NumberOfNodes, PubliclyAccessible = PubliclyAccessible, Encrypted = Encrypted, HsmClientCertificateIdentifier = HsmClientCertificateIdentifier, HsmConfigurationIdentifier = HsmConfigurationIdentifier, ElasticIp = ElasticIp, Tags = Tags, KmsKeyId = KmsKeyId, EnhancedVpcRouting = EnhancedVpcRouting, AdditionalInfo = AdditionalInfo, IamRoles = IamRoles, MaintenanceTrackName = MaintenanceTrackName, SnapshotScheduleIdentifier = SnapshotScheduleIdentifier, AvailabilityZoneRelocation = AvailabilityZoneRelocation)
   output <- .redshift$create_cluster_output()
   config <- get_config()
   svc <- .redshift$service(config)
@@ -712,6 +724,7 @@ redshift_create_cluster <- function(DBName = NULL, ClusterIdentifier, ClusterTyp
 
 #' Creates an Amazon Redshift parameter group
 #'
+#' @description
 #' Creates an Amazon Redshift parameter group.
 #' 
 #' Creating parameter groups is independent of creating clusters. You can
@@ -751,7 +764,7 @@ redshift_create_cluster <- function(DBName = NULL, ClusterIdentifier, ClusterTyp
 #' including the default parameter groups for each Amazon Redshift engine
 #' version. The parameter group family names associated with the default
 #' parameter groups provide you the valid values. For example, a valid
-#' family name is \"redshift-1.0\".
+#' family name is "redshift-1.0".
 #' @param Description &#91;required&#93; A description of the parameter group.
 #' @param Tags A list of tag instances.
 #'
@@ -792,6 +805,7 @@ redshift_create_cluster_parameter_group <- function(ParameterGroupName, Paramete
 
 #' Creates a new Amazon Redshift security group
 #'
+#' @description
 #' Creates a new Amazon Redshift security group. You use security groups to
 #' control access to non-VPC clusters.
 #' 
@@ -811,7 +825,7 @@ redshift_create_cluster_parameter_group <- function(ParameterGroupName, Paramete
 #' 
 #' -   Must contain no more than 255 alphanumeric characters or hyphens.
 #' 
-#' -   Must not be \"Default\".
+#' -   Must not be "Default".
 #' 
 #' -   Must be unique for all security groups that are created by your AWS
 #'     account.
@@ -856,6 +870,7 @@ redshift_create_cluster_security_group <- function(ClusterSecurityGroupName, Des
 
 #' Creates a manual snapshot of the specified cluster
 #'
+#' @description
 #' Creates a manual snapshot of the specified cluster. The cluster must be
 #' in the `available` state.
 #' 
@@ -928,6 +943,7 @@ redshift_create_cluster_snapshot <- function(SnapshotIdentifier, ClusterIdentifi
 
 #' Creates a new Amazon Redshift subnet group
 #'
+#' @description
 #' Creates a new Amazon Redshift subnet group. You must provide a list of
 #' one or more subnets in your existing Amazon Virtual Private Cloud
 #' (Amazon VPC) when creating Amazon Redshift subnet group.
@@ -948,7 +964,7 @@ redshift_create_cluster_snapshot <- function(SnapshotIdentifier, ClusterIdentifi
 #' 
 #' -   Must contain no more than 255 alphanumeric characters or hyphens.
 #' 
-#' -   Must not be \"Default\".
+#' -   Must not be "Default".
 #' 
 #' -   Must be unique for all subnet groups that are created by your AWS
 #'     account.
@@ -998,6 +1014,7 @@ redshift_create_cluster_subnet_group <- function(ClusterSubnetGroupName, Descrip
 
 #' Creates an Amazon Redshift event notification subscription
 #'
+#' @description
 #' Creates an Amazon Redshift event notification subscription. This action
 #' requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by
 #' either the Amazon Redshift console, the Amazon SNS console, or the
@@ -1117,8 +1134,9 @@ redshift_create_event_subscription <- function(SubscriptionName, SnsTopicArn, So
 #' use to connect to the client's HSM in order to store and retrieve the
 #' keys used to encrypt the cluster databases
 #'
+#' @description
 #' Creates an HSM client certificate that an Amazon Redshift cluster will
-#' use to connect to the client\'s HSM in order to store and retrieve the
+#' use to connect to the client's HSM in order to store and retrieve the
 #' keys used to encrypt the cluster databases.
 #' 
 #' The command returns a public key, which you must store in the HSM. In
@@ -1126,8 +1144,8 @@ redshift_create_event_subscription <- function(SubscriptionName, SnsTopicArn, So
 #' Redshift HSM configuration that provides a cluster the information
 #' needed to store and use encryption keys in the HSM. For more
 #' information, go to [Hardware Security
-#' Modules](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html)
-#' in the Amazon Redshift Cluster Management Guide.
+#' Modules](https://docs.aws.amazon.com/redshift/latest/mgmt/) in the
+#' Amazon Redshift Cluster Management Guide.
 #'
 #' @usage
 #' redshift_create_hsm_client_certificate(HsmClientCertificateIdentifier,
@@ -1175,6 +1193,7 @@ redshift_create_hsm_client_certificate <- function(HsmClientCertificateIdentifie
 #' an Amazon Redshift cluster to store and use database encryption keys in
 #' a Hardware Security Module (HSM)
 #'
+#' @description
 #' Creates an HSM configuration that contains the information required by
 #' an Amazon Redshift cluster to store and use database encryption keys in
 #' a Hardware Security Module (HSM). After creating the HSM configuration,
@@ -1183,8 +1202,8 @@ redshift_create_hsm_client_certificate <- function(HsmClientCertificateIdentifie
 #' 
 #' In addition to creating an HSM configuration, you must also create an
 #' HSM client certificate. For more information, go to [Hardware Security
-#' Modules](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html)
-#' in the Amazon Redshift Cluster Management Guide.
+#' Modules](https://docs.aws.amazon.com/redshift/latest/mgmt/) in the
+#' Amazon Redshift Cluster Management Guide.
 #'
 #' @usage
 #' redshift_create_hsm_configuration(HsmConfigurationIdentifier,
@@ -1243,6 +1262,7 @@ redshift_create_hsm_configuration <- function(HsmConfigurationIdentifier, Descri
 
 #' Creates a scheduled action
 #'
+#' @description
 #' Creates a scheduled action. A scheduled action contains a schedule and
 #' an Amazon Redshift API action. For example, you can create a schedule of
 #' when to run the `ResizeCluster` API operation.
@@ -1328,6 +1348,7 @@ redshift_create_scheduled_action <- function(ScheduledActionName, TargetAction, 
 #' customer master key (CMK) from AWS Key Management Service (AWS KMS) to
 #' encrypt copied snapshots in a destination region
 #'
+#' @description
 #' Creates a snapshot copy grant that permits Amazon Redshift to use a
 #' customer master key (CMK) from AWS Key Management Service (AWS KMS) to
 #' encrypt copied snapshots in a destination region.
@@ -1397,6 +1418,7 @@ redshift_create_snapshot_copy_grant <- function(SnapshotCopyGrantName, KmsKeyId 
 #' Create a snapshot schedule that can be associated to a cluster and which
 #' overrides the default system backup schedule
 #'
+#' @description
 #' Create a snapshot schedule that can be associated to a cluster and which
 #' overrides the default system backup schedule.
 #'
@@ -1405,8 +1427,7 @@ redshift_create_snapshot_copy_grant <- function(SnapshotCopyGrantName, KmsKeyId 
 #'   ScheduleIdentifier, ScheduleDescription, Tags, DryRun, NextInvocations)
 #'
 #' @param ScheduleDefinitions The definition of the snapshot schedule. The definition is made up of
-#' schedule expressions, for example \"cron(30 12 *)\" or \"rate(12
-#' hours)\".
+#' schedule expressions, for example "cron(30 12 *)" or "rate(12 hours)".
 #' @param ScheduleIdentifier A unique identifier for a snapshot schedule. Only alphanumeric
 #' characters are allowed for the identifier.
 #' @param ScheduleDescription The description of the snapshot schedule.
@@ -1455,6 +1476,7 @@ redshift_create_snapshot_schedule <- function(ScheduleDefinitions = NULL, Schedu
 
 #' Adds tags to a cluster
 #'
+#' @description
 #' Adds tags to a cluster.
 #' 
 #' A resource can have up to 50 tags. If you try to create more than 50
@@ -1512,6 +1534,7 @@ redshift_create_tags <- function(ResourceName, Tags) {
 #' Creates a usage limit for a specified Amazon Redshift feature on a
 #' cluster
 #'
+#' @description
 #' Creates a usage limit for a specified Amazon Redshift feature on a
 #' cluster. The usage limit is identified by the returned usage limit
 #' identifier.
@@ -1577,6 +1600,7 @@ redshift_create_usage_limit <- function(ClusterIdentifier, FeatureType, LimitTyp
 #' Deletes a previously provisioned cluster without its final snapshot
 #' being created
 #'
+#' @description
 #' Deletes a previously provisioned cluster without its final snapshot
 #' being created. A successful response from the web service indicates that
 #' the request was received correctly. Use DescribeClusters to monitor the
@@ -1590,9 +1614,9 @@ redshift_create_usage_limit <- function(ClusterIdentifier, FeatureType, LimitTyp
 #' *SkipFinalClusterSnapshot* to `false` and specify a name for
 #' *FinalClusterSnapshotIdentifier*. You can later restore this snapshot to
 #' resume using the cluster. If a final cluster snapshot is requested, the
-#' status of the cluster will be \"final-snapshot\" while the snapshot is
-#' being taken, then it\'s \"deleting\" once Amazon Redshift begins
-#' deleting the cluster.
+#' status of the cluster will be "final-snapshot" while the snapshot is
+#' being taken, then it's "deleting" once Amazon Redshift begins deleting
+#' the cluster.
 #' 
 #' For more information about managing clusters, go to [Amazon Redshift
 #' Clusters](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
@@ -1672,6 +1696,7 @@ redshift_delete_cluster <- function(ClusterIdentifier, SkipFinalClusterSnapshot 
 
 #' Deletes a specified Amazon Redshift parameter group
 #'
+#' @description
 #' Deletes a specified Amazon Redshift parameter group.
 #' 
 #' You cannot delete a parameter group if it is associated with a cluster.
@@ -1716,6 +1741,7 @@ redshift_delete_cluster_parameter_group <- function(ParameterGroupName) {
 
 #' Deletes an Amazon Redshift security group
 #'
+#' @description
 #' Deletes an Amazon Redshift security group.
 #' 
 #' You cannot delete a security group that is associated with any clusters.
@@ -1760,6 +1786,7 @@ redshift_delete_cluster_security_group <- function(ClusterSecurityGroupName) {
 
 #' Deletes the specified manual snapshot
 #'
+#' @description
 #' Deletes the specified manual snapshot. The snapshot must be in the
 #' `available` state, with no other users authorized to access the
 #' snapshot.
@@ -1816,6 +1843,7 @@ redshift_delete_cluster_snapshot <- function(SnapshotIdentifier, SnapshotCluster
 
 #' Deletes the specified cluster subnet group
 #'
+#' @description
 #' Deletes the specified cluster subnet group.
 #'
 #' @usage
@@ -1852,6 +1880,7 @@ redshift_delete_cluster_subnet_group <- function(ClusterSubnetGroupName) {
 
 #' Deletes an Amazon Redshift event notification subscription
 #'
+#' @description
 #' Deletes an Amazon Redshift event notification subscription.
 #'
 #' @usage
@@ -1889,6 +1918,7 @@ redshift_delete_event_subscription <- function(SubscriptionName) {
 
 #' Deletes the specified HSM client certificate
 #'
+#' @description
 #' Deletes the specified HSM client certificate.
 #'
 #' @usage
@@ -1925,6 +1955,7 @@ redshift_delete_hsm_client_certificate <- function(HsmClientCertificateIdentifie
 
 #' Deletes the specified Amazon Redshift HSM configuration
 #'
+#' @description
 #' Deletes the specified Amazon Redshift HSM configuration.
 #'
 #' @usage
@@ -1961,6 +1992,7 @@ redshift_delete_hsm_configuration <- function(HsmConfigurationIdentifier) {
 
 #' Deletes a scheduled action
 #'
+#' @description
 #' Deletes a scheduled action.
 #'
 #' @usage
@@ -1997,6 +2029,7 @@ redshift_delete_scheduled_action <- function(ScheduledActionName) {
 
 #' Deletes the specified snapshot copy grant
 #'
+#' @description
 #' Deletes the specified snapshot copy grant.
 #'
 #' @usage
@@ -2033,6 +2066,7 @@ redshift_delete_snapshot_copy_grant <- function(SnapshotCopyGrantName) {
 
 #' Deletes a snapshot schedule
 #'
+#' @description
 #' Deletes a snapshot schedule.
 #'
 #' @usage
@@ -2069,6 +2103,7 @@ redshift_delete_snapshot_schedule <- function(ScheduleIdentifier) {
 
 #' Deletes tags from a resource
 #'
+#' @description
 #' Deletes tags from a resource. You must provide the ARN of the resource
 #' from which you want to delete the tag or tags.
 #'
@@ -2111,6 +2146,7 @@ redshift_delete_tags <- function(ResourceName, TagKeys) {
 
 #' Deletes a usage limit from a cluster
 #'
+#' @description
 #' Deletes a usage limit from a cluster.
 #'
 #' @usage
@@ -2147,6 +2183,7 @@ redshift_delete_usage_limit <- function(UsageLimitId) {
 
 #' Returns a list of attributes attached to an account
 #'
+#' @description
 #' Returns a list of attributes attached to an account
 #'
 #' @usage
@@ -2185,6 +2222,7 @@ redshift_describe_account_attributes <- function(AttributeNames = NULL) {
 
 #' Returns an array of ClusterDbRevision objects
 #'
+#' @description
 #' Returns an array of `ClusterDbRevision` objects.
 #'
 #' @usage
@@ -2246,6 +2284,7 @@ redshift_describe_cluster_db_revisions <- function(ClusterIdentifier = NULL, Max
 #' Returns a list of Amazon Redshift parameter groups, including parameter
 #' groups you created and the default parameter group
 #'
+#' @description
 #' Returns a list of Amazon Redshift parameter groups, including parameter
 #' groups you created and the default parameter group. For each parameter
 #' group, the response includes the parameter group name, description, and
@@ -2343,6 +2382,7 @@ redshift_describe_cluster_parameter_groups <- function(ParameterGroupName = NULL
 #' Returns a detailed list of parameters contained within the specified
 #' Amazon Redshift parameter group
 #'
+#' @description
 #' Returns a detailed list of parameters contained within the specified
 #' Amazon Redshift parameter group. For each parameter the response
 #' includes information such as parameter name, description, data type,
@@ -2369,7 +2409,7 @@ redshift_describe_cluster_parameter_groups <- function(ParameterGroupName = NULL
 #' 
 #' Default: All parameter types returned.
 #' 
-#' Valid Values: `user` \\| `engine-default`
+#' Valid Values: `user` | `engine-default`
 #' @param MaxRecords The maximum number of response records to return in each call. If the
 #' number of remaining response records exceeds the specified `MaxRecords`
 #' value, a value is returned in a `marker` field of the response. You can
@@ -2418,6 +2458,7 @@ redshift_describe_cluster_parameters <- function(ParameterGroupName, Source = NU
 
 #' Returns information about Amazon Redshift security groups
 #'
+#' @description
 #' Returns information about Amazon Redshift security groups. If the name
 #' of a security group is specified, the response will contain only
 #' information about only that security group.
@@ -2516,6 +2557,7 @@ redshift_describe_cluster_security_groups <- function(ClusterSecurityGroupName =
 #' Returns one or more snapshot objects, which contain metadata about your
 #' cluster snapshots
 #'
+#' @description
 #' Returns one or more snapshot objects, which contain metadata about your
 #' cluster snapshots. By default, this operation returns information about
 #' all snapshots of all clusters that are owned by you AWS customer
@@ -2546,17 +2588,17 @@ redshift_describe_cluster_security_groups <- function(ClusterSecurityGroupName =
 #' @param SnapshotType The type of snapshots for which you are requesting information. By
 #' default, snapshots of all types are returned.
 #' 
-#' Valid Values: `automated` \\| `manual`
+#' Valid Values: `automated` | `manual`
 #' @param StartTime A value that requests only snapshots created at or after the specified
 #' time. The time value is specified in ISO 8601 format. For more
 #' information about ISO 8601, go to the [ISO8601 Wikipedia
-#' page.](http://en.wikipedia.org/wiki/ISO_8601)
+#' page.](https://en.wikipedia.org/wiki/ISO_8601)
 #' 
 #' Example: `2012-07-16T18:00:00Z`
 #' @param EndTime A time value that requests only snapshots created at or before the
 #' specified time. The time value is specified in ISO 8601 format. For more
 #' information about ISO 8601, go to the [ISO8601 Wikipedia
-#' page.](http://en.wikipedia.org/wiki/ISO_8601)
+#' page.](https://en.wikipedia.org/wiki/ISO_8601)
 #' 
 #' Example: `2012-07-16T18:00:00Z`
 #' @param MaxRecords The maximum number of response records to return in each call. If the
@@ -2598,7 +2640,7 @@ redshift_describe_cluster_security_groups <- function(ClusterSecurityGroupName =
 #' -   If `ClusterExists` is set to `true`, `ClusterIdentifier` is
 #'     required.
 #' 
-#' -   If `ClusterExists` is set to `false` and `ClusterIdentifier` isn\'t
+#' -   If `ClusterExists` is set to `false` and `ClusterIdentifier` isn't
 #'     specified, all snapshots associated with deleted clusters (orphaned
 #'     snapshots) are returned.
 #' 
@@ -2664,6 +2706,7 @@ redshift_describe_cluster_snapshots <- function(ClusterIdentifier = NULL, Snapsh
 #' Returns one or more cluster subnet group objects, which contain metadata
 #' about your cluster subnet groups
 #'
+#' @description
 #' Returns one or more cluster subnet group objects, which contain metadata
 #' about your cluster subnet groups. By default, this operation returns
 #' information about all cluster subnet groups that are defined in you AWS
@@ -2750,6 +2793,7 @@ redshift_describe_cluster_subnet_groups <- function(ClusterSubnetGroupName = NUL
 
 #' Returns a list of all the available maintenance tracks
 #'
+#' @description
 #' Returns a list of all the available maintenance tracks.
 #'
 #' @usage
@@ -2796,6 +2840,7 @@ redshift_describe_cluster_tracks <- function(MaintenanceTrackName = NULL, MaxRec
 
 #' Returns descriptions of the available Amazon Redshift cluster versions
 #'
+#' @description
 #' Returns descriptions of the available Amazon Redshift cluster versions.
 #' You can call this operation even before creating any clusters to learn
 #' more about the Amazon Redshift versions. For more information about
@@ -2870,6 +2915,7 @@ redshift_describe_cluster_versions <- function(ClusterVersion = NULL, ClusterPar
 #' properties, cluster database properties, maintenance and backup
 #' properties, and security and access properties
 #'
+#' @description
 #' Returns properties of provisioned clusters including general cluster
 #' properties, cluster database properties, maintenance and backup
 #' properties, and security and access properties. This operation supports
@@ -2965,6 +3011,7 @@ redshift_describe_clusters <- function(ClusterIdentifier = NULL, MaxRecords = NU
 #' Returns a list of parameter settings for the specified parameter group
 #' family
 #'
+#' @description
 #' Returns a list of parameter settings for the specified parameter group
 #' family.
 #' 
@@ -3027,6 +3074,7 @@ redshift_describe_default_cluster_parameters <- function(ParameterGroupFamily, M
 #' Displays a list of event categories for all event source types, or for a
 #' specified source type
 #'
+#' @description
 #' Displays a list of event categories for all event source types, or for a
 #' specified source type. For a list of the event categories and source
 #' types, go to [Amazon Redshift Event
@@ -3071,6 +3119,7 @@ redshift_describe_event_categories <- function(SourceType = NULL) {
 #' Lists descriptions of all the Amazon Redshift event notification
 #' subscriptions for a customer account
 #'
+#' @description
 #' Lists descriptions of all the Amazon Redshift event notification
 #' subscriptions for a customer account. If you specify a subscription
 #' name, lists the description for that subscription.
@@ -3160,6 +3209,7 @@ redshift_describe_event_subscriptions <- function(SubscriptionName = NULL, MaxRe
 #' Returns events related to clusters, security groups, snapshots, and
 #' parameter groups for the past 14 days
 #'
+#' @description
 #' Returns events related to clusters, security groups, snapshots, and
 #' parameter groups for the past 14 days. Events specific to a particular
 #' cluster, security group, snapshot or parameter group can be obtained by
@@ -3207,12 +3257,12 @@ redshift_describe_event_subscriptions <- function(SubscriptionName = NULL, MaxRe
 #'     snapshot identifier.
 #' @param StartTime The beginning of the time interval to retrieve events for, specified in
 #' ISO 8601 format. For more information about ISO 8601, go to the [ISO8601
-#' Wikipedia page.](http://en.wikipedia.org/wiki/ISO_8601)
+#' Wikipedia page.](https://en.wikipedia.org/wiki/ISO_8601)
 #' 
 #' Example: `2009-07-08T18:00Z`
 #' @param EndTime The end of the time interval for which to retrieve events, specified in
 #' ISO 8601 format. For more information about ISO 8601, go to the [ISO8601
-#' Wikipedia page.](http://en.wikipedia.org/wiki/ISO_8601)
+#' Wikipedia page.](https://en.wikipedia.org/wiki/ISO_8601)
 #' 
 #' Example: `2009-07-08T18:00Z`
 #' @param Duration The number of minutes prior to the time of the request for which to
@@ -3276,6 +3326,7 @@ redshift_describe_events <- function(SourceIdentifier = NULL, SourceType = NULL,
 
 #' Returns information about the specified HSM client certificate
 #'
+#' @description
 #' Returns information about the specified HSM client certificate. If no
 #' certificate ID is specified, returns information about all the HSM
 #' certificates owned by your AWS customer account.
@@ -3366,6 +3417,7 @@ redshift_describe_hsm_client_certificates <- function(HsmClientCertificateIdenti
 #' Returns information about the specified Amazon Redshift HSM
 #' configuration
 #'
+#' @description
 #' Returns information about the specified Amazon Redshift HSM
 #' configuration. If no configuration ID is specified, returns information
 #' about all the HSM configurations owned by your AWS customer account.
@@ -3455,6 +3507,7 @@ redshift_describe_hsm_configurations <- function(HsmConfigurationIdentifier = NU
 #' Describes whether information, such as queries and connection attempts,
 #' is being logged for the specified Amazon Redshift cluster
 #'
+#' @description
 #' Describes whether information, such as queries and connection attempts,
 #' is being logged for the specified Amazon Redshift cluster.
 #'
@@ -3495,6 +3548,7 @@ redshift_describe_logging_status <- function(ClusterIdentifier) {
 #' Returns properties of possible node configurations such as node type,
 #' number of nodes, and disk usage for the specified action type
 #'
+#' @description
 #' Returns properties of possible node configurations such as node type,
 #' number of nodes, and disk usage for the specified action type.
 #'
@@ -3504,11 +3558,11 @@ redshift_describe_logging_status <- function(ClusterIdentifier) {
 #'   MaxRecords)
 #'
 #' @param ActionType &#91;required&#93; The action type to evaluate for possible node configurations. Specify
-#' \"restore-cluster\" to get configuration combinations based on an
-#' existing snapshot. Specify \"recommend-node-config\" to get
-#' configuration recommendations based on an existing cluster or snapshot.
-#' Specify \"resize-cluster\" to get configuration combinations for elastic
-#' resize based on an existing cluster.
+#' "restore-cluster" to get configuration combinations based on an existing
+#' snapshot. Specify "recommend-node-config" to get configuration
+#' recommendations based on an existing cluster or snapshot. Specify
+#' "resize-cluster" to get configuration combinations for elastic resize
+#' based on an existing cluster.
 #' @param ClusterIdentifier The identifier of the cluster to evaluate for possible node
 #' configurations.
 #' @param SnapshotIdentifier The identifier of the snapshot to evaluate for possible node
@@ -3577,6 +3631,7 @@ redshift_describe_node_configuration_options <- function(ActionType, ClusterIden
 
 #' Returns a list of orderable cluster options
 #'
+#' @description
 #' Returns a list of orderable cluster options. Before you create a new
 #' cluster you can use this operation to find what options are available,
 #' such as the EC2 Availability Zones (AZ) in the specific AWS Region that
@@ -3653,6 +3708,7 @@ redshift_describe_orderable_cluster_options <- function(ClusterVersion = NULL, N
 #' recurring costs of reserving the node and duration the node will be
 #' reserved for you
 #'
+#' @description
 #' Returns a list of the available reserved node offerings by Amazon
 #' Redshift with their descriptions including the node type, the fixed and
 #' recurring costs of reserving the node and duration the node will be
@@ -3718,6 +3774,7 @@ redshift_describe_reserved_node_offerings <- function(ReservedNodeOfferingId = N
 
 #' Returns the descriptions of the reserved nodes
 #'
+#' @description
 #' Returns the descriptions of the reserved nodes.
 #'
 #' @usage
@@ -3772,6 +3829,7 @@ redshift_describe_reserved_nodes <- function(ReservedNodeId = NULL, MaxRecords =
 #' Returns information about the last resize operation for the specified
 #' cluster
 #'
+#' @description
 #' Returns information about the last resize operation for the specified
 #' cluster. If no resize operation has ever been initiated for the
 #' specified cluster, a `HTTP 404` error is returned. If a resize operation
@@ -3819,6 +3877,7 @@ redshift_describe_resize <- function(ClusterIdentifier) {
 
 #' Describes properties of scheduled actions
 #'
+#' @description
 #' Describes properties of scheduled actions.
 #'
 #' @usage
@@ -3899,6 +3958,7 @@ redshift_describe_scheduled_actions <- function(ScheduledActionName = NULL, Targ
 #' Returns a list of snapshot copy grants owned by the AWS account in the
 #' destination region
 #'
+#' @description
 #' Returns a list of snapshot copy grants owned by the AWS account in the
 #' destination region.
 #' 
@@ -3980,6 +4040,7 @@ redshift_describe_snapshot_copy_grants <- function(SnapshotCopyGrantName = NULL,
 
 #' Returns a list of snapshot schedules
 #'
+#' @description
 #' Returns a list of snapshot schedules.
 #'
 #' @usage
@@ -4041,6 +4102,7 @@ redshift_describe_snapshot_schedules <- function(ClusterIdentifier = NULL, Sched
 
 #' Returns account level backups storage size and provisional storage
 #'
+#' @description
 #' Returns account level backups storage size and provisional storage.
 #'
 #' @usage
@@ -4073,9 +4135,10 @@ redshift_describe_storage <- function() {
 #' Lists the status of one or more table restore requests made using the
 #' RestoreTableFromClusterSnapshot API action
 #'
+#' @description
 #' Lists the status of one or more table restore requests made using the
-#' RestoreTableFromClusterSnapshot API action. If you don\'t specify a
-#' value for the `TableRestoreRequestId` parameter, then
+#' RestoreTableFromClusterSnapshot API action. If you don't specify a value
+#' for the `TableRestoreRequestId` parameter, then
 #' `DescribeTableRestoreStatus` returns the status of all table restore
 #' requests ordered by the date and time of the request in ascending order.
 #' Otherwise `DescribeTableRestoreStatus` returns the status of the table
@@ -4087,7 +4150,7 @@ redshift_describe_storage <- function() {
 #'
 #' @param ClusterIdentifier The Amazon Redshift cluster that the table is being restored to.
 #' @param TableRestoreRequestId The identifier of the table restore request to return status for. If you
-#' don\'t specify a `TableRestoreRequestId` value, then
+#' don't specify a `TableRestoreRequestId` value, then
 #' `DescribeTableRestoreStatus` returns the status of all in-progress table
 #' restore requests.
 #' @param MaxRecords The maximum number of records to include in the response. If more
@@ -4131,6 +4194,7 @@ redshift_describe_table_restore_status <- function(ClusterIdentifier = NULL, Tab
 
 #' Returns a list of tags
 #'
+#' @description
 #' Returns a list of tags. You can return tags from a specific resource by
 #' specifying an ARN, or you can return all tags for a given type of
 #' resource, such as clusters, snapshots, and so on.
@@ -4252,6 +4316,7 @@ redshift_describe_tags <- function(ResourceName = NULL, ResourceType = NULL, Max
 
 #' Shows usage limits on a cluster
 #'
+#' @description
 #' Shows usage limits on a cluster. Results are filtered based on the
 #' combination of input usage limit identifier, cluster identifier, and
 #' feature type parameters:
@@ -4347,6 +4412,7 @@ redshift_describe_usage_limits <- function(UsageLimitId = NULL, ClusterIdentifie
 #' Stops logging information, such as queries and connection attempts, for
 #' the specified Amazon Redshift cluster
 #'
+#' @description
 #' Stops logging information, such as queries and connection attempts, for
 #' the specified Amazon Redshift cluster.
 #'
@@ -4387,6 +4453,7 @@ redshift_disable_logging <- function(ClusterIdentifier) {
 #' Disables the automatic copying of snapshots from one region to another
 #' region for a specified cluster
 #'
+#' @description
 #' Disables the automatic copying of snapshots from one region to another
 #' region for a specified cluster.
 #' 
@@ -4434,6 +4501,7 @@ redshift_disable_snapshot_copy <- function(ClusterIdentifier) {
 #' Starts logging information, such as queries and connection attempts, for
 #' the specified Amazon Redshift cluster
 #'
+#' @description
 #' Starts logging information, such as queries and connection attempts, for
 #' the specified Amazon Redshift cluster.
 #'
@@ -4456,7 +4524,7 @@ redshift_disable_snapshot_copy <- function(ClusterIdentifier) {
 #' 
 #' -   Cannot exceed 512 characters
 #' 
-#' -   Cannot contain spaces( ), double quotes (\"), single quotes (\'), a
+#' -   Cannot contain spaces( ), double quotes ("), single quotes ('), a
 #'     backslash (\\), or control characters. The hexadecimal codes for
 #'     invalid characters are:
 #' 
@@ -4502,6 +4570,7 @@ redshift_enable_logging <- function(ClusterIdentifier, BucketName, S3KeyPrefix =
 #' Enables the automatic copy of snapshots from one region to another
 #' region for a specified cluster
 #'
+#' @description
 #' Enables the automatic copy of snapshots from one region to another
 #' region for a specified cluster.
 #'
@@ -4567,6 +4636,7 @@ redshift_enable_snapshot_copy <- function(ClusterIdentifier, DestinationRegion, 
 #' Returns a database user name and temporary password with temporary
 #' authorization to log on to an Amazon Redshift database
 #'
+#' @description
 #' Returns a database user name and temporary password with temporary
 #' authorization to log on to an Amazon Redshift database. The action
 #' returns the database user name prefixed with `IAM:` if `AutoCreate` is
@@ -4601,12 +4671,12 @@ redshift_enable_snapshot_copy <- function(ClusterIdentifier, DestinationRegion, 
 #'
 #' @param DbUser &#91;required&#93; The name of a database user. If a user name matching `DbUser` exists in
 #' the database, the temporary user credentials have the same permissions
-#' as the existing user. If `DbUser` doesn\'t exist in the database and
+#' as the existing user. If `DbUser` doesn't exist in the database and
 #' `Autocreate` is `True`, a new user is created using the value for
 #' `DbUser` with PUBLIC permissions. If a database user matching the value
-#' for `DbUser` doesn\'t exist and `Autocreate` is `False`, then the
-#' command succeeds but the connection attempt will fail because the user
-#' doesn\'t exist in the database.
+#' for `DbUser` doesn't exist and `Autocreate` is `False`, then the command
+#' succeeds but the connection attempt will fail because the user doesn't
+#' exist in the database.
 #' 
 #' For more information, see [CREATE
 #' USER](https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html)
@@ -4615,7 +4685,7 @@ redshift_enable_snapshot_copy <- function(ClusterIdentifier, DestinationRegion, 
 #' Constraints:
 #' 
 #' -   Must be 1 to 64 alphanumeric characters or hyphens. The user name
-#'     can\'t be `PUBLIC`.
+#'     can't be `PUBLIC`.
 #' 
 #' -   Must contain only lowercase letters, numbers, underscore, plus sign,
 #'     period (dot), at symbol (@@), or hyphen.
@@ -4626,7 +4696,7 @@ redshift_enable_snapshot_copy <- function(ClusterIdentifier, DestinationRegion, 
 #' 
 #' -   Cannot be a reserved word. A list of reserved words can be found in
 #'     [Reserved
-#'     Words](http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
+#'     Words](https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
 #'     in the Amazon Redshift Database Developer Guide.
 #' @param DbName The name of a database that `DbUser` is authorized to log on to. If
 #' `DbName` is not specified, `DbUser` can log on to any existing database.
@@ -4644,7 +4714,7 @@ redshift_enable_snapshot_copy <- function(ClusterIdentifier, DestinationRegion, 
 #' 
 #' -   Cannot be a reserved word. A list of reserved words can be found in
 #'     [Reserved
-#'     Words](http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
+#'     Words](https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
 #'     in the Amazon Redshift Database Developer Guide.
 #' @param ClusterIdentifier &#91;required&#93; The unique identifier of the cluster that contains the database for
 #' which your are requesting credentials. This parameter is case sensitive.
@@ -4673,7 +4743,7 @@ redshift_enable_snapshot_copy <- function(ClusterIdentifier, DestinationRegion, 
 #' 
 #' -   Cannot be a reserved word. A list of reserved words can be found in
 #'     [Reserved
-#'     Words](http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
+#'     Words](https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
 #'     in the Amazon Redshift Database Developer Guide.
 #'
 #' @section Request syntax:
@@ -4713,6 +4783,7 @@ redshift_get_cluster_credentials <- function(DbUser, DbName = NULL, ClusterIdent
 #' Returns an array of DC2 ReservedNodeOfferings that matches the payment
 #' type, term, and usage price of the given DC1 reserved node
 #'
+#' @description
 #' Returns an array of DC2 ReservedNodeOfferings that matches the payment
 #' type, term, and usage price of the given DC1 reserved node.
 #'
@@ -4758,6 +4829,7 @@ redshift_get_reserved_node_exchange_offerings <- function(ReservedNodeId, MaxRec
 
 #' Modifies the settings for a cluster
 #'
+#' @description
 #' Modifies the settings for a cluster.
 #' 
 #' You can also change node type and the number of nodes to scale up or
@@ -4782,7 +4854,8 @@ redshift_get_reserved_node_exchange_offerings <- function(ReservedNodeId, MaxRec
 #'   PreferredMaintenanceWindow, ClusterVersion, AllowVersionUpgrade,
 #'   HsmClientCertificateIdentifier, HsmConfigurationIdentifier,
 #'   NewClusterIdentifier, PubliclyAccessible, ElasticIp, EnhancedVpcRouting,
-#'   MaintenanceTrackName, Encrypted, KmsKeyId)
+#'   MaintenanceTrackName, Encrypted, KmsKeyId, AvailabilityZoneRelocation,
+#'   AvailabilityZone, Port)
 #'
 #' @param ClusterIdentifier &#91;required&#93; The unique identifier of the cluster to be modified.
 #' 
@@ -4802,18 +4875,18 @@ redshift_get_reserved_node_exchange_offerings <- function(ReservedNodeId, MaxRec
 #' 
 #' For more information about resizing clusters, go to [Resizing Clusters
 #' in Amazon
-#' Redshift](https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html)
+#' Redshift](https://docs.aws.amazon.com/redshift/latest/mgmt/managing-cluster-operations.html)
 #' in the *Amazon Redshift Cluster Management Guide*.
 #' 
-#' Valid Values: `ds2.xlarge` \\| `ds2.8xlarge` \\| `dc1.large` \\|
-#' `dc1.8xlarge` \\| `dc2.large` \\| `dc2.8xlarge` \\| `ra3.4xlarge` \\|
+#' Valid Values: `ds2.xlarge` | `ds2.8xlarge` | `dc1.large` | `dc1.8xlarge`
+#' | `dc2.large` | `dc2.8xlarge` | `ra3.xlplus` | `ra3.4xlarge` |
 #' `ra3.16xlarge`
 #' @param NumberOfNodes The new number of nodes of the cluster. If you specify a new number of
 #' nodes, you must also specify the node type parameter.
 #' 
 #' For more information about resizing clusters, go to [Resizing Clusters
 #' in Amazon
-#' Redshift](https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html)
+#' Redshift](https://docs.aws.amazon.com/redshift/latest/mgmt/managing-cluster-operations.html)
 #' in the *Amazon Redshift Cluster Management Guide*.
 #' 
 #' Valid Values: Integer greater than `0`.
@@ -4855,8 +4928,8 @@ redshift_get_reserved_node_exchange_offerings <- function(ReservedNodeId, MaxRec
 #' 
 #' -   Must contain one number.
 #' 
-#' -   Can be any printable ASCII character (ASCII code 33 to 126) except
-#'     \' (single quote), \" (double quote), \\, /, @@, or space.
+#' -   Can be any printable ASCII character (ASCII code 33 to 126) except '
+#'     (single quote), " (double quote), \\, /, @@, or space.
 #' @param ClusterParameterGroupName The name of the cluster parameter group to apply to this cluster. This
 #' change is applied only after the cluster is rebooted. To reboot a
 #' cluster use RebootCluster.
@@ -4879,7 +4952,7 @@ redshift_get_reserved_node_exchange_offerings <- function(ReservedNodeId, MaxRec
 #' Constraints: Must be a value from 0 to 35.
 #' @param ManualSnapshotRetentionPeriod The default for number of days that a newly created manual snapshot is
 #' retained. If the value is -1, the manual snapshot is retained
-#' indefinitely. This value doesn\'t retroactively change the retention
+#' indefinitely. This value doesn't retroactively change the retention
 #' periods of existing manual snapshots.
 #' 
 #' The value must be either -1 or an integer between 1 and 3,653.
@@ -4898,7 +4971,7 @@ redshift_get_reserved_node_exchange_offerings <- function(ReservedNodeId, MaxRec
 #' 
 #' Format: ddd:hh24:mi-ddd:hh24:mi, for example `wed:07:30-wed:08:00`.
 #' 
-#' Valid Days: Mon \\| Tue \\| Wed \\| Thu \\| Fri \\| Sat \\| Sun
+#' Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun
 #' 
 #' Constraints: Must be at least 30 minutes.
 #' @param ClusterVersion The new version number of the Amazon Redshift engine to upgrade to.
@@ -4964,13 +5037,17 @@ redshift_get_reserved_node_exchange_offerings <- function(ReservedNodeId, MaxRec
 #' point, the maintenance track name is applied.
 #' @param Encrypted Indicates whether the cluster is encrypted. If the value is encrypted
 #' (true) and you provide a value for the `KmsKeyId` parameter, we encrypt
-#' the cluster with the provided `KmsKeyId`. If you don\'t provide a
-#' `KmsKeyId`, we encrypt with the default key. In the China region we use
-#' legacy encryption if you specify that the cluster is encrypted.
+#' the cluster with the provided `KmsKeyId`. If you don't provide a
+#' `KmsKeyId`, we encrypt with the default key.
 #' 
 #' If the value is not encrypted (false), then the cluster is decrypted.
 #' @param KmsKeyId The AWS Key Management Service (KMS) key ID of the encryption key that
 #' you want to use to encrypt data in the cluster.
+#' @param AvailabilityZoneRelocation The option to enable relocation for an Amazon Redshift cluster between
+#' Availability Zones after the cluster modification is complete.
+#' @param AvailabilityZone The option to initiate relocation for an Amazon Redshift cluster to the
+#' target Availability Zone.
+#' @param Port The option to change the port of an Amazon Redshift cluster.
 #'
 #' @section Request syntax:
 #' ```
@@ -5000,21 +5077,24 @@ redshift_get_reserved_node_exchange_offerings <- function(ReservedNodeId, MaxRec
 #'   EnhancedVpcRouting = TRUE|FALSE,
 #'   MaintenanceTrackName = "string",
 #'   Encrypted = TRUE|FALSE,
-#'   KmsKeyId = "string"
+#'   KmsKeyId = "string",
+#'   AvailabilityZoneRelocation = TRUE|FALSE,
+#'   AvailabilityZone = "string",
+#'   Port = 123
 #' )
 #' ```
 #'
 #' @keywords internal
 #'
 #' @rdname redshift_modify_cluster
-redshift_modify_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeType = NULL, NumberOfNodes = NULL, ClusterSecurityGroups = NULL, VpcSecurityGroupIds = NULL, MasterUserPassword = NULL, ClusterParameterGroupName = NULL, AutomatedSnapshotRetentionPeriod = NULL, ManualSnapshotRetentionPeriod = NULL, PreferredMaintenanceWindow = NULL, ClusterVersion = NULL, AllowVersionUpgrade = NULL, HsmClientCertificateIdentifier = NULL, HsmConfigurationIdentifier = NULL, NewClusterIdentifier = NULL, PubliclyAccessible = NULL, ElasticIp = NULL, EnhancedVpcRouting = NULL, MaintenanceTrackName = NULL, Encrypted = NULL, KmsKeyId = NULL) {
+redshift_modify_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeType = NULL, NumberOfNodes = NULL, ClusterSecurityGroups = NULL, VpcSecurityGroupIds = NULL, MasterUserPassword = NULL, ClusterParameterGroupName = NULL, AutomatedSnapshotRetentionPeriod = NULL, ManualSnapshotRetentionPeriod = NULL, PreferredMaintenanceWindow = NULL, ClusterVersion = NULL, AllowVersionUpgrade = NULL, HsmClientCertificateIdentifier = NULL, HsmConfigurationIdentifier = NULL, NewClusterIdentifier = NULL, PubliclyAccessible = NULL, ElasticIp = NULL, EnhancedVpcRouting = NULL, MaintenanceTrackName = NULL, Encrypted = NULL, KmsKeyId = NULL, AvailabilityZoneRelocation = NULL, AvailabilityZone = NULL, Port = NULL) {
   op <- new_operation(
     name = "ModifyCluster",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .redshift$modify_cluster_input(ClusterIdentifier = ClusterIdentifier, ClusterType = ClusterType, NodeType = NodeType, NumberOfNodes = NumberOfNodes, ClusterSecurityGroups = ClusterSecurityGroups, VpcSecurityGroupIds = VpcSecurityGroupIds, MasterUserPassword = MasterUserPassword, ClusterParameterGroupName = ClusterParameterGroupName, AutomatedSnapshotRetentionPeriod = AutomatedSnapshotRetentionPeriod, ManualSnapshotRetentionPeriod = ManualSnapshotRetentionPeriod, PreferredMaintenanceWindow = PreferredMaintenanceWindow, ClusterVersion = ClusterVersion, AllowVersionUpgrade = AllowVersionUpgrade, HsmClientCertificateIdentifier = HsmClientCertificateIdentifier, HsmConfigurationIdentifier = HsmConfigurationIdentifier, NewClusterIdentifier = NewClusterIdentifier, PubliclyAccessible = PubliclyAccessible, ElasticIp = ElasticIp, EnhancedVpcRouting = EnhancedVpcRouting, MaintenanceTrackName = MaintenanceTrackName, Encrypted = Encrypted, KmsKeyId = KmsKeyId)
+  input <- .redshift$modify_cluster_input(ClusterIdentifier = ClusterIdentifier, ClusterType = ClusterType, NodeType = NodeType, NumberOfNodes = NumberOfNodes, ClusterSecurityGroups = ClusterSecurityGroups, VpcSecurityGroupIds = VpcSecurityGroupIds, MasterUserPassword = MasterUserPassword, ClusterParameterGroupName = ClusterParameterGroupName, AutomatedSnapshotRetentionPeriod = AutomatedSnapshotRetentionPeriod, ManualSnapshotRetentionPeriod = ManualSnapshotRetentionPeriod, PreferredMaintenanceWindow = PreferredMaintenanceWindow, ClusterVersion = ClusterVersion, AllowVersionUpgrade = AllowVersionUpgrade, HsmClientCertificateIdentifier = HsmClientCertificateIdentifier, HsmConfigurationIdentifier = HsmConfigurationIdentifier, NewClusterIdentifier = NewClusterIdentifier, PubliclyAccessible = PubliclyAccessible, ElasticIp = ElasticIp, EnhancedVpcRouting = EnhancedVpcRouting, MaintenanceTrackName = MaintenanceTrackName, Encrypted = Encrypted, KmsKeyId = KmsKeyId, AvailabilityZoneRelocation = AvailabilityZoneRelocation, AvailabilityZone = AvailabilityZone, Port = Port)
   output <- .redshift$modify_cluster_output()
   config <- get_config()
   svc <- .redshift$service(config)
@@ -5026,6 +5106,7 @@ redshift_modify_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeT
 
 #' Modifies the database revision of a cluster
 #'
+#' @description
 #' Modifies the database revision of a cluster. The database revision is a
 #' unique revision of the database running in a cluster.
 #'
@@ -5070,6 +5151,7 @@ redshift_modify_cluster_db_revision <- function(ClusterIdentifier, RevisionTarge
 #' Modifies the list of AWS Identity and Access Management (IAM) roles that
 #' can be used by the cluster to access other AWS services
 #'
+#' @description
 #' Modifies the list of AWS Identity and Access Management (IAM) roles that
 #' can be used by the cluster to access other AWS services.
 #' 
@@ -5123,6 +5205,7 @@ redshift_modify_cluster_iam_roles <- function(ClusterIdentifier, AddIamRoles = N
 
 #' Modifies the maintenance settings of a cluster
 #'
+#' @description
 #' Modifies the maintenance settings of a cluster.
 #'
 #' @usage
@@ -5136,10 +5219,10 @@ redshift_modify_cluster_iam_roles <- function(ClusterIdentifier, AddIamRoles = N
 #' @param DeferMaintenanceStartTime A timestamp indicating the start time for the deferred maintenance
 #' window.
 #' @param DeferMaintenanceEndTime A timestamp indicating end time for the deferred maintenance window. If
-#' you specify an end time, you can\'t specify a duration.
+#' you specify an end time, you can't specify a duration.
 #' @param DeferMaintenanceDuration An integer indicating the duration of the maintenance window in days. If
-#' you specify a duration, you can\'t specify an end time. The duration
-#' must be 45 days or less.
+#' you specify a duration, you can't specify an end time. The duration must
+#' be 45 days or less.
 #'
 #' @section Request syntax:
 #' ```
@@ -5179,6 +5262,7 @@ redshift_modify_cluster_maintenance <- function(ClusterIdentifier, DeferMaintena
 
 #' Modifies the parameters of a parameter group
 #'
+#' @description
 #' Modifies the parameters of a parameter group.
 #' 
 #' For more information about parameters and parameter groups, go to
@@ -5242,6 +5326,7 @@ redshift_modify_cluster_parameter_group <- function(ParameterGroupName, Paramete
 
 #' Modifies the settings for a snapshot
 #'
+#' @description
 #' Modifies the settings for a snapshot.
 #' 
 #' This exanmple modifies the manual retention period setting for a cluster
@@ -5293,6 +5378,7 @@ redshift_modify_cluster_snapshot <- function(SnapshotIdentifier, ManualSnapshotR
 
 #' Modifies a snapshot schedule for a cluster
 #'
+#' @description
 #' Modifies a snapshot schedule for a cluster.
 #'
 #' @usage
@@ -5338,6 +5424,7 @@ redshift_modify_cluster_snapshot_schedule <- function(ClusterIdentifier, Schedul
 #' Modifies a cluster subnet group to include the specified list of VPC
 #' subnets
 #'
+#' @description
 #' Modifies a cluster subnet group to include the specified list of VPC
 #' subnets. The operation replaces the existing list of subnets with the
 #' new list of subnets.
@@ -5384,6 +5471,7 @@ redshift_modify_cluster_subnet_group <- function(ClusterSubnetGroupName, Descrip
 
 #' Modifies an existing Amazon Redshift event notification subscription
 #'
+#' @description
 #' Modifies an existing Amazon Redshift event notification subscription.
 #'
 #' @usage
@@ -5461,6 +5549,7 @@ redshift_modify_event_subscription <- function(SubscriptionName, SnsTopicArn = N
 
 #' Modifies a scheduled action
 #'
+#' @description
 #' Modifies a scheduled action.
 #'
 #' @usage
@@ -5538,6 +5627,7 @@ redshift_modify_scheduled_action <- function(ScheduledActionName, TargetAction =
 #' Modifies the number of days to retain snapshots in the destination AWS
 #' Region after they are copied from the source AWS Region
 #'
+#' @description
 #' Modifies the number of days to retain snapshots in the destination AWS
 #' Region after they are copied from the source AWS Region. By default,
 #' this operation only changes the retention period of copied automated
@@ -5613,6 +5703,7 @@ redshift_modify_snapshot_copy_retention_period <- function(ClusterIdentifier, Re
 
 #' Modifies a snapshot schedule
 #'
+#' @description
 #' Modifies a snapshot schedule. Any schedule associated with a cluster is
 #' modified asynchronously.
 #'
@@ -5622,8 +5713,8 @@ redshift_modify_snapshot_copy_retention_period <- function(ClusterIdentifier, Re
 #'
 #' @param ScheduleIdentifier &#91;required&#93; A unique alphanumeric identifier of the schedule to modify.
 #' @param ScheduleDefinitions &#91;required&#93; An updated list of schedule definitions. A schedule definition is made
-#' up of schedule expressions, for example, \"cron(30 12 *)\" or \"rate(12
-#' hours)\".
+#' up of schedule expressions, for example, "cron(30 12 *)" or "rate(12
+#' hours)".
 #'
 #' @section Request syntax:
 #' ```
@@ -5657,7 +5748,8 @@ redshift_modify_snapshot_schedule <- function(ScheduleIdentifier, ScheduleDefini
 
 #' Modifies a usage limit in a cluster
 #'
-#' Modifies a usage limit in a cluster. You can\'t modify the feature type
+#' @description
+#' Modifies a usage limit in a cluster. You can't modify the feature type
 #' or period of a usage limit.
 #'
 #' @usage
@@ -5700,6 +5792,7 @@ redshift_modify_usage_limit <- function(UsageLimitId, Amount = NULL, BreachActio
 
 #' Pauses a cluster
 #'
+#' @description
 #' Pauses a cluster.
 #'
 #' @usage
@@ -5736,6 +5829,7 @@ redshift_pause_cluster <- function(ClusterIdentifier) {
 
 #' Allows you to purchase reserved nodes
 #'
+#' @description
 #' Allows you to purchase reserved nodes. Amazon Redshift offers a
 #' predefined set of reserved node offerings. You can purchase one or more
 #' of the offerings. You can call the DescribeReservedNodeOfferings API to
@@ -5788,6 +5882,7 @@ redshift_purchase_reserved_node_offering <- function(ReservedNodeOfferingId, Nod
 
 #' Reboots a cluster
 #'
+#' @description
 #' Reboots a cluster. This action is taken as soon as possible. It results
 #' in a momentary outage to the cluster, during which the cluster status is
 #' set to `rebooting`. A cluster event is created when the reboot is
@@ -5833,9 +5928,10 @@ redshift_reboot_cluster <- function(ClusterIdentifier) {
 #' default values and sets the source values of the parameters to
 #' "engine-default"
 #'
+#' @description
 #' Sets one or more parameters of the specified parameter group to their
 #' default values and sets the source values of the parameters to
-#' \"engine-default\". To reset the entire parameter group specify the
+#' "engine-default". To reset the entire parameter group specify the
 #' *ResetAllParameters* parameter. For parameter changes to take effect you
 #' must reboot any associated clusters.
 #'
@@ -5897,7 +5993,8 @@ redshift_reset_cluster_parameter_group <- function(ParameterGroupName, ResetAllP
 
 #' Changes the size of the cluster
 #'
-#' Changes the size of the cluster. You can change the cluster\'s type, or
+#' @description
+#' Changes the size of the cluster. You can change the cluster's type, or
 #' change the number or type of nodes. The default behavior is to use the
 #' elastic resize method. With an elastic resize, your cluster is available
 #' for read and write operations more quickly than with the classic resize
@@ -5907,6 +6004,10 @@ redshift_reset_cluster_parameter_group <- function(ParameterGroupName, ResetAllP
 #' 
 #' -   You can only resize clusters of the following types:
 #' 
+#'     -   dc1.large (if your cluster is in a VPC)
+#' 
+#'     -   dc1.8xlarge (if your cluster is in a VPC)
+#' 
 #'     -   dc2.large
 #' 
 #'     -   dc2.8xlarge
@@ -5914,6 +6015,8 @@ redshift_reset_cluster_parameter_group <- function(ParameterGroupName, ResetAllP
 #'     -   ds2.xlarge
 #' 
 #'     -   ds2.8xlarge
+#' 
+#'     -   ra3.xlplus
 #' 
 #'     -   ra3.4xlarge
 #' 
@@ -5929,10 +6032,11 @@ redshift_reset_cluster_parameter_group <- function(ParameterGroupName, ResetAllP
 #' @param ClusterIdentifier &#91;required&#93; The unique identifier for the cluster to resize.
 #' @param ClusterType The new cluster type for the specified cluster.
 #' @param NodeType The new node type for the nodes you are adding. If not specified, the
-#' cluster\'s current node type is used.
-#' @param NumberOfNodes The new number of nodes for the cluster.
+#' cluster's current node type is used.
+#' @param NumberOfNodes The new number of nodes for the cluster. If not specified, the cluster's
+#' current number of nodes is used.
 #' @param Classic A boolean value indicating whether the resize operation is using the
-#' classic resize process. If you don\'t provide this parameter or set the
+#' classic resize process. If you don't provide this parameter or set the
 #' value to `false`, the resize type is elastic.
 #'
 #' @section Request syntax:
@@ -5968,6 +6072,7 @@ redshift_resize_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeT
 
 #' Creates a new cluster from a snapshot
 #'
+#' @description
 #' Creates a new cluster from a snapshot. By default, Amazon Redshift
 #' creates the resulting cluster with the same configuration as the
 #' original cluster from which the snapshot was created, except that the
@@ -5995,7 +6100,8 @@ redshift_resize_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeT
 #'   ClusterSecurityGroups, VpcSecurityGroupIds, PreferredMaintenanceWindow,
 #'   AutomatedSnapshotRetentionPeriod, ManualSnapshotRetentionPeriod,
 #'   KmsKeyId, NodeType, EnhancedVpcRouting, AdditionalInfo, IamRoles,
-#'   MaintenanceTrackName, SnapshotScheduleIdentifier, NumberOfNodes)
+#'   MaintenanceTrackName, SnapshotScheduleIdentifier, NumberOfNodes,
+#'   AvailabilityZoneRelocation)
 #'
 #' @param ClusterIdentifier &#91;required&#93; The identifier of the cluster that will be created from restoring the
 #' snapshot.
@@ -6012,7 +6118,7 @@ redshift_resize_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeT
 #' 
 #' -   Must be unique for all clusters within an AWS account.
 #' @param SnapshotIdentifier &#91;required&#93; The name of the snapshot from which to create the new cluster. This
-#' parameter isn\'t case sensitive.
+#' parameter isn't case sensitive.
 #' 
 #' Example: `my-snapshot-id`
 #' @param SnapshotClusterIdentifier The name of the cluster the source snapshot was created from. This
@@ -6083,7 +6189,7 @@ redshift_resize_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeT
 #' Windows](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows)
 #' in Amazon Redshift Cluster Management Guide.
 #' 
-#' Valid Days: Mon \\| Tue \\| Wed \\| Thu \\| Fri \\| Sat \\| Sun
+#' Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun
 #' 
 #' Constraints: Minimum 30-minute window.
 #' @param AutomatedSnapshotRetentionPeriod The number of days that automated snapshots are retained. If the value
@@ -6096,7 +6202,7 @@ redshift_resize_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeT
 #' 
 #' Constraints: Must be a value from 0 to 35.
 #' @param ManualSnapshotRetentionPeriod The default number of days to retain a manual snapshot. If the value is
-#' -1, the snapshot is retained indefinitely. This setting doesn\'t change
+#' -1, the snapshot is retained indefinitely. This setting doesn't change
 #' the retention period of existing snapshots.
 #' 
 #' The value must be either -1 or an integer between 1 and 3,653.
@@ -6112,7 +6218,7 @@ redshift_resize_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeT
 #' into ds2.xlarge. If you have a DC instance type, you must restore into
 #' that same instance type and size. In other words, you can only restore a
 #' dc1.large instance type into another dc1.large instance type or
-#' dc2.large instance type. You can\'t restore dc1.8xlarge to dc2.8xlarge.
+#' dc2.large instance type. You can't restore dc1.8xlarge to dc2.8xlarge.
 #' First restore to a dc1.8xlarge cluster, then resize to a dc2.8large
 #' cluster. For more information about node types, see [About Clusters and
 #' Nodes](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes)
@@ -6142,6 +6248,8 @@ redshift_resize_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeT
 #' source cluster are on different tracks.
 #' @param SnapshotScheduleIdentifier A unique identifier for the snapshot schedule.
 #' @param NumberOfNodes The number of nodes specified when provisioning the restored cluster.
+#' @param AvailabilityZoneRelocation The option to enable relocation for an Amazon Redshift cluster between
+#' Availability Zones after the cluster is restored.
 #'
 #' @section Request syntax:
 #' ```
@@ -6177,21 +6285,22 @@ redshift_resize_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeT
 #'   ),
 #'   MaintenanceTrackName = "string",
 #'   SnapshotScheduleIdentifier = "string",
-#'   NumberOfNodes = 123
+#'   NumberOfNodes = 123,
+#'   AvailabilityZoneRelocation = TRUE|FALSE
 #' )
 #' ```
 #'
 #' @keywords internal
 #'
 #' @rdname redshift_restore_from_cluster_snapshot
-redshift_restore_from_cluster_snapshot <- function(ClusterIdentifier, SnapshotIdentifier, SnapshotClusterIdentifier = NULL, Port = NULL, AvailabilityZone = NULL, AllowVersionUpgrade = NULL, ClusterSubnetGroupName = NULL, PubliclyAccessible = NULL, OwnerAccount = NULL, HsmClientCertificateIdentifier = NULL, HsmConfigurationIdentifier = NULL, ElasticIp = NULL, ClusterParameterGroupName = NULL, ClusterSecurityGroups = NULL, VpcSecurityGroupIds = NULL, PreferredMaintenanceWindow = NULL, AutomatedSnapshotRetentionPeriod = NULL, ManualSnapshotRetentionPeriod = NULL, KmsKeyId = NULL, NodeType = NULL, EnhancedVpcRouting = NULL, AdditionalInfo = NULL, IamRoles = NULL, MaintenanceTrackName = NULL, SnapshotScheduleIdentifier = NULL, NumberOfNodes = NULL) {
+redshift_restore_from_cluster_snapshot <- function(ClusterIdentifier, SnapshotIdentifier, SnapshotClusterIdentifier = NULL, Port = NULL, AvailabilityZone = NULL, AllowVersionUpgrade = NULL, ClusterSubnetGroupName = NULL, PubliclyAccessible = NULL, OwnerAccount = NULL, HsmClientCertificateIdentifier = NULL, HsmConfigurationIdentifier = NULL, ElasticIp = NULL, ClusterParameterGroupName = NULL, ClusterSecurityGroups = NULL, VpcSecurityGroupIds = NULL, PreferredMaintenanceWindow = NULL, AutomatedSnapshotRetentionPeriod = NULL, ManualSnapshotRetentionPeriod = NULL, KmsKeyId = NULL, NodeType = NULL, EnhancedVpcRouting = NULL, AdditionalInfo = NULL, IamRoles = NULL, MaintenanceTrackName = NULL, SnapshotScheduleIdentifier = NULL, NumberOfNodes = NULL, AvailabilityZoneRelocation = NULL) {
   op <- new_operation(
     name = "RestoreFromClusterSnapshot",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .redshift$restore_from_cluster_snapshot_input(ClusterIdentifier = ClusterIdentifier, SnapshotIdentifier = SnapshotIdentifier, SnapshotClusterIdentifier = SnapshotClusterIdentifier, Port = Port, AvailabilityZone = AvailabilityZone, AllowVersionUpgrade = AllowVersionUpgrade, ClusterSubnetGroupName = ClusterSubnetGroupName, PubliclyAccessible = PubliclyAccessible, OwnerAccount = OwnerAccount, HsmClientCertificateIdentifier = HsmClientCertificateIdentifier, HsmConfigurationIdentifier = HsmConfigurationIdentifier, ElasticIp = ElasticIp, ClusterParameterGroupName = ClusterParameterGroupName, ClusterSecurityGroups = ClusterSecurityGroups, VpcSecurityGroupIds = VpcSecurityGroupIds, PreferredMaintenanceWindow = PreferredMaintenanceWindow, AutomatedSnapshotRetentionPeriod = AutomatedSnapshotRetentionPeriod, ManualSnapshotRetentionPeriod = ManualSnapshotRetentionPeriod, KmsKeyId = KmsKeyId, NodeType = NodeType, EnhancedVpcRouting = EnhancedVpcRouting, AdditionalInfo = AdditionalInfo, IamRoles = IamRoles, MaintenanceTrackName = MaintenanceTrackName, SnapshotScheduleIdentifier = SnapshotScheduleIdentifier, NumberOfNodes = NumberOfNodes)
+  input <- .redshift$restore_from_cluster_snapshot_input(ClusterIdentifier = ClusterIdentifier, SnapshotIdentifier = SnapshotIdentifier, SnapshotClusterIdentifier = SnapshotClusterIdentifier, Port = Port, AvailabilityZone = AvailabilityZone, AllowVersionUpgrade = AllowVersionUpgrade, ClusterSubnetGroupName = ClusterSubnetGroupName, PubliclyAccessible = PubliclyAccessible, OwnerAccount = OwnerAccount, HsmClientCertificateIdentifier = HsmClientCertificateIdentifier, HsmConfigurationIdentifier = HsmConfigurationIdentifier, ElasticIp = ElasticIp, ClusterParameterGroupName = ClusterParameterGroupName, ClusterSecurityGroups = ClusterSecurityGroups, VpcSecurityGroupIds = VpcSecurityGroupIds, PreferredMaintenanceWindow = PreferredMaintenanceWindow, AutomatedSnapshotRetentionPeriod = AutomatedSnapshotRetentionPeriod, ManualSnapshotRetentionPeriod = ManualSnapshotRetentionPeriod, KmsKeyId = KmsKeyId, NodeType = NodeType, EnhancedVpcRouting = EnhancedVpcRouting, AdditionalInfo = AdditionalInfo, IamRoles = IamRoles, MaintenanceTrackName = MaintenanceTrackName, SnapshotScheduleIdentifier = SnapshotScheduleIdentifier, NumberOfNodes = NumberOfNodes, AvailabilityZoneRelocation = AvailabilityZoneRelocation)
   output <- .redshift$restore_from_cluster_snapshot_output()
   config <- get_config()
   svc <- .redshift$service(config)
@@ -6203,6 +6312,7 @@ redshift_restore_from_cluster_snapshot <- function(ClusterIdentifier, SnapshotId
 
 #' Creates a new table from a table in an Amazon Redshift cluster snapshot
 #'
+#' @description
 #' Creates a new table from a table in an Amazon Redshift cluster snapshot.
 #' You must create the new table within the Amazon Redshift cluster that
 #' the snapshot was taken from.
@@ -6272,6 +6382,7 @@ redshift_restore_table_from_cluster_snapshot <- function(ClusterIdentifier, Snap
 
 #' Resumes a paused cluster
 #'
+#' @description
 #' Resumes a paused cluster.
 #'
 #' @usage
@@ -6309,6 +6420,7 @@ redshift_resume_cluster <- function(ClusterIdentifier) {
 #' Revokes an ingress rule in an Amazon Redshift security group for a
 #' previously authorized IP range or Amazon EC2 security group
 #'
+#' @description
 #' Revokes an ingress rule in an Amazon Redshift security group for a
 #' previously authorized IP range or Amazon EC2 security group. To add an
 #' ingress rule, see AuthorizeClusterSecurityGroupIngress. For information
@@ -6369,6 +6481,7 @@ redshift_revoke_cluster_security_group_ingress <- function(ClusterSecurityGroupN
 #' Removes the ability of the specified AWS customer account to restore the
 #' specified snapshot
 #'
+#' @description
 #' Removes the ability of the specified AWS customer account to restore the
 #' specified snapshot. If the account is currently restoring the snapshot,
 #' the restore will run to completion.
@@ -6421,6 +6534,7 @@ redshift_revoke_snapshot_access <- function(SnapshotIdentifier, SnapshotClusterI
 
 #' Rotates the encryption keys for a cluster
 #'
+#' @description
 #' Rotates the encryption keys for a cluster.
 #'
 #' @usage

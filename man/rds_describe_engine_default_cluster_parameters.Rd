@@ -12,7 +12,7 @@ rds_describe_engine_default_cluster_parameters(DBParameterGroupFamily,
 \item{DBParameterGroupFamily}{[required] The name of the DB cluster parameter group family to return engine
 parameter information for.}
 
-\item{Filters}{This parameter isn\'t currently supported.}
+\item{Filters}{This parameter isn't currently supported.}
 
 \item{MaxRecords}{The maximum number of records to include in the response. If more
 records exist than the specified \code{MaxRecords} value, a pagination token
@@ -31,8 +31,7 @@ the value specified by \code{MaxRecords}.}
 \description{
 Returns the default engine and system parameter information for the
 cluster database engine.
-}
-\details{
+
 For more information on Amazon Aurora, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html}{What Is Amazon Aurora?}
 in the \emph{Amazon Aurora User Guide.}
 }

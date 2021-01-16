@@ -37,8 +37,7 @@ Example: \code{aurora-postgresql9.6}}
 }
 \description{
 Creates a new DB cluster parameter group.
-}
-\details{
+
 Parameters in a DB cluster parameter group apply to all of the instances
 in a DB cluster.
 
@@ -46,7 +45,7 @@ A DB cluster parameter group is initially created with the default
 parameters for the database engine used by instances in the DB cluster.
 To provide custom values for any of the parameters, you must modify the
 group after creating it using \code{ModifyDBClusterParameterGroup}. Once
-you\'ve created a DB cluster parameter group, you need to associate it
+you've created a DB cluster parameter group, you need to associate it
 with your DB cluster using \code{ModifyDBCluster}. When you associate a new
 DB cluster parameter group with a running DB cluster, you need to reboot
 the DB instances in the DB cluster without failover for the new DB
@@ -60,7 +59,7 @@ parameter group is used as the default for a new DB cluster. This is
 especially important for parameters that are critical when creating the
 default database for a DB cluster, such as the character set for the
 default database defined by the \code{character_set_database} parameter. You
-can use the \emph{Parameter Groups} option of the \href{https://console.aws.amazon.com/rds/}{Amazon RDS console} or the
+can use the \emph{Parameter Groups} option of the Amazon RDS console or the
 \code{DescribeDBClusterParameters} action to verify that your DB cluster
 parameter group has been created or modified.
 

@@ -19,8 +19,7 @@ This operation applies any modified cache parameter groups to the
 cluster. The reboot operation takes place as soon as possible, and
 results in a momentary outage to the cluster. During the reboot, the
 cluster status is set to REBOOTING.
-}
-\details{
+
 The reboot causes the contents of the cache (for each cache node being
 rebooted) to be lost.
 
@@ -31,7 +30,7 @@ Rebooting a cluster is currently supported on Memcached and Redis
 (cluster mode enabled) clusters.
 
 If you make changes to parameters that require a Redis (cluster mode
-enabled) cluster reboot for the changes to be applied, see \href{http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html}{Rebooting a Cluster}
+enabled) cluster reboot for the changes to be applied, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html}{Rebooting a Cluster}
 for an alternate process.
 }
 \section{Request syntax}{

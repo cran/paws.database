@@ -15,7 +15,7 @@ Constraints:
 \itemize{
 \item Must contain from 1 to 63 alphanumeric characters or hyphens.
 \item First character must be a letter.
-\item Can\'t end with a hyphen or contain two consecutive hyphens.
+\item Can't end with a hyphen or contain two consecutive hyphens.
 }
 
 Example: \code{my-cluster1}}
@@ -26,7 +26,7 @@ be described.
 Constraints:
 \itemize{
 \item Must contain a valid universally unique identifier (UUID). For more
-information about UUIDs, see \href{http://www.ietf.org/rfc/rfc4122.txt}{A Universally Unique Identifier (UUID) URN Namespace}.
+information about UUIDs, see \href{https://www.ietf.org/rfc/rfc4122.txt}{A Universally Unique Identifier (UUID) URN Namespace}.
 }
 
 Example: \verb{123e4567-e89b-12d3-a456-426655440000}}
@@ -66,8 +66,7 @@ specified by \code{MaxRecords}.}
 }
 \description{
 Returns information about backtracks for a DB cluster.
-}
-\details{
+
 For more information on Amazon Aurora, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html}{What Is Amazon Aurora?}
 in the \emph{Amazon Aurora User Guide.}
 

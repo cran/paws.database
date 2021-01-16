@@ -17,7 +17,7 @@ show parameters that are the same as the default parameter group.
 
 Default: All parameter types returned.
 
-Valid Values: \code{user} \\| \code{engine-default}}
+Valid Values: \code{user} | \code{engine-default}}
 
 \item{MaxRecords}{The maximum number of response records to return in each call. If the
 number of remaining response records exceeds the specified \code{MaxRecords}
@@ -41,8 +41,7 @@ Returns a detailed list of parameters contained within the specified
 Amazon Redshift parameter group. For each parameter the response
 includes information such as parameter name, description, data type,
 value, whether the parameter value is modifiable, and so on.
-}
-\details{
+
 You can specify \emph{source} filter to retrieve parameters of only specific
 type. For example, to retrieve parameters that were modified by a user
 action such as from ModifyClusterParameterGroup, you can specify

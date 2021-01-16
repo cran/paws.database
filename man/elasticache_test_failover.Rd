@@ -21,8 +21,7 @@ period.}
 Represents the input of a \code{TestFailover} operation which test automatic
 failover on a specified node group (called shard in the console) in a
 replication group (called cluster in the console).
-}
-\details{
+
 \strong{Note the following}
 \itemize{
 \item A customer can use this operation to test automatic failover on up
@@ -42,9 +41,9 @@ events, listed here in order of occurrance:
 \item Replication group message:
 \verb{Test Failover API called for node group &lt;node-group-id&gt;}
 \item Cache cluster message:
-\verb{Failover from master node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed}
+\verb{Failover from primary node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed}
 \item Replication group message:
-\verb{Failover from master node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed}
+\verb{Failover from primary node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed}
 \item Cache cluster message: \verb{Recovering cache nodes &lt;node-id&gt;}
 \item Cache cluster message:
 \verb{Finished recovery for cache nodes &lt;node-id&gt;}

@@ -17,7 +17,8 @@ rds_restore_db_instance_from_s3(DBName, DBInstanceIdentifier,
   SourceEngineVersion, S3BucketName, S3Prefix, S3IngestionRoleArn,
   EnablePerformanceInsights, PerformanceInsightsKMSKeyId,
   PerformanceInsightsRetentionPeriod, EnableCloudwatchLogsExports,
-  ProcessorFeatures, UseDefaultProcessorFeatures, DeletionProtection)
+  ProcessorFeatures, UseDefaultProcessorFeatures, DeletionProtection,
+  MaxAllocatedStorage)
 }
 \arguments{
 \item{DBName}{The name of the database to create when the DB instance is created.
@@ -30,7 +31,7 @@ Constraints:
 \itemize{
 \item Must contain from 1 to 63 letters, numbers, or hyphens.
 \item First character must be a letter.
-\item Can\'t end with a hyphen or contain two consecutive hyphens.
+\item Can't end with a hyphen or contain two consecutive hyphens.
 }
 
 Example: \code{mydbinstance}}
@@ -48,7 +49,7 @@ Regions, or for all database engines. For the full list of DB instance
 classes, and availability for your engine, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html}{DB Instance Class}
 in the \emph{Amazon RDS User Guide.}
 
-Importing from Amazon S3 isn\'t supported on the db.t2.micro DB instance
+Importing from Amazon S3 isn't supported on the db.t2.micro DB instance
 class.}
 
 \item{Engine}{[required] The name of the database engine to be used for this instance.
@@ -61,11 +62,11 @@ Constraints:
 \itemize{
 \item Must be 1 to 16 letters or numbers.
 \item First character must be a letter.
-\item Can\'t be a reserved word for the chosen database engine.
+\item Can't be a reserved word for the chosen database engine.
 }}
 
 \item{MasterUserPassword}{The password for the master user. The password can include any printable
-ASCII character except \"/\", \"\"\", or \"@\".
+ASCII character except "/", """, or "@".
 
 Constraints: Must contain from 8 to 41 characters.}
 
@@ -79,12 +80,12 @@ Default: The default DB security group for the database engine.}
 information about AWS Regions and Availability Zones, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html}{Regions and Availability Zones}
 in the \emph{Amazon RDS User Guide.}
 
-Default: A random, system-chosen Availability Zone in the endpoint\'s
-AWS Region.
+Default: A random, system-chosen Availability Zone in the endpoint's AWS
+Region.
 
 Example: \verb{us-east-1d}
 
-Constraint: The \code{AvailabilityZone} parameter can\'t be specified if the
+Constraint: The \code{AvailabilityZone} parameter can't be specified if the
 DB instance is a Multi-AZ deployment. The specified Availability Zone
 must be in the same AWS Region as the current endpoint.}
 
@@ -133,7 +134,7 @@ Valid Values: \code{1150}-\code{65535}
 Default: \code{3306}}
 
 \item{MultiAZ}{A value that indicates whether the DB instance is a Multi-AZ deployment.
-If the DB instance is a Multi-AZ deployment, you can\'t set the
+If the DB instance is a Multi-AZ deployment, you can't set the
 \code{AvailabilityZone} parameter.}
 
 \item{EngineVersion}{The version number of the database engine to use. Choose the latest
@@ -158,13 +159,13 @@ is used.}
 \item{PubliclyAccessible}{A value that indicates whether the DB instance is publicly accessible.
 
 When the DB instance is publicly accessible, its DNS endpoint resolves
-to the private IP address from within the DB instance\'s VPC, and to the
-public IP address from outside of the DB instance\'s VPC. Access to the
+to the private IP address from within the DB instance's VPC, and to the
+public IP address from outside of the DB instance's VPC. Access to the
 DB instance is ultimately controlled by the security group it uses, and
 that public access is not permitted if the security group assigned to
-the DB instance doesn\'t permit it.
+the DB instance doesn't permit it.
 
-When the DB instance isn\'t publicly accessible, it is an internal DB
+When the DB instance isn't publicly accessible, it is an internal DB
 instance with a DNS name that resolves to a private IP address.
 
 For more information, see CreateDBInstance.}
@@ -175,7 +176,7 @@ in the \emph{Amazon RDS User Guide.}}
 
 \item{StorageType}{Specifies the storage type to be associated with the DB instance.
 
-Valid values: \code{standard} \\| \code{gp2} \\| \code{io1}
+Valid values: \code{standard} | \code{gp2} | \code{io1}
 
 If you specify \code{io1}, you must also include a value for the \code{Iops}
 parameter.
@@ -186,17 +187,14 @@ Default: \code{io1} if the \code{Iops} parameter is specified; otherwise \code{g
 
 \item{KmsKeyId}{The AWS KMS key identifier for an encrypted DB instance.
 
-The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-encryption key. If you are creating a DB instance with the same AWS
-account that owns the KMS encryption key used to encrypt the new DB
-instance, then you can use the KMS key alias instead of the ARN for the
-KM encryption key.
+The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+name for the AWS KMS customer master key (CMK). To use a CMK in a
+different AWS account, specify the key ARN or alias ARN.
 
 If the \code{StorageEncrypted} parameter is enabled, and you do not specify a
 value for the \code{KmsKeyId} parameter, then Amazon RDS will use your
-default encryption key. AWS KMS creates the default encryption key for
-your AWS account. Your AWS account has a different default encryption
-key for each AWS Region.}
+default CMK. There is a default CMK for your AWS account. Your AWS
+account has a different default CMK for each AWS Region.}
 
 \item{CopyTagsToSnapshot}{A value that indicates whether to copy all tags from the DB instance to
 snapshots of the DB instance. By default, tags are not copied.}
@@ -223,8 +221,7 @@ supply a \code{MonitoringRoleArn} value.}
 
 \item{EnableIAMDatabaseAuthentication}{A value that indicates whether to enable mapping of AWS Identity and
 Access Management (IAM) accounts to database accounts. By default,
-mapping is disabled. For information about the supported DB engines, see
-CreateDBInstance.
+mapping is disabled.
 
 For more information about IAM database authentication, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html}{IAM Database Authentication for MySQL and PostgreSQL}
 in the \emph{Amazon RDS User Guide.}}
@@ -254,13 +251,14 @@ For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/Use
 in the \emph{Amazon Relational Database Service User Guide}.}
 
 \item{PerformanceInsightsKMSKeyId}{The AWS KMS key identifier for encryption of Performance Insights data.
-The KMS key ID is the Amazon Resource Name (ARN), the KMS key
-identifier, or the KMS key alias for the KMS encryption key.
+
+The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+name for the AWS KMS customer master key (CMK).
 
 If you do not specify a value for \code{PerformanceInsightsKMSKeyId}, then
-Amazon RDS uses your default encryption key. AWS KMS creates the default
-encryption key for your AWS account. Your AWS account has a different
-default encryption key for each AWS Region.}
+Amazon RDS uses your default CMK. There is a default CMK for your AWS
+account. Your AWS account has a different default CMK for each AWS
+Region.}
 
 \item{PerformanceInsightsRetentionPeriod}{The amount of time, in days, to retain Performance Insights data. Valid
 values are 7 or 731 (2 years).}
@@ -277,9 +275,12 @@ instance class of the DB instance.}
 uses its default processor features.}
 
 \item{DeletionProtection}{A value that indicates whether the DB instance has deletion protection
-enabled. The database can\'t be deleted when deletion protection is
+enabled. The database can't be deleted when deletion protection is
 enabled. By default, deletion protection is disabled. For more
 information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html}{Deleting a DB Instance}.}
+
+\item{MaxAllocatedStorage}{The upper limit to which Amazon RDS can automatically scale the storage
+of the DB instance.}
 }
 \description{
 Amazon Relational Database Service (Amazon RDS) supports importing MySQL
@@ -349,7 +350,8 @@ in the \emph{Amazon RDS User Guide.}
     )
   ),
   UseDefaultProcessorFeatures = TRUE|FALSE,
-  DeletionProtection = TRUE|FALSE
+  DeletionProtection = TRUE|FALSE,
+  MaxAllocatedStorage = 123
 )
 }
 }

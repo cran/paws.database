@@ -19,7 +19,7 @@ Constraints:
 \itemize{
 \item Must contain from 1 to 63 letters, numbers, or hyphens
 \item First character must be a letter
-\item Can\'t end with a hyphen or contain two consecutive hyphens
+\item Can't end with a hyphen or contain two consecutive hyphens
 }}
 
 \item{RestoreType}{The type of restore to be performed. You can specify one of the
@@ -31,10 +31,10 @@ source DB cluster.
 source DB cluster.
 }
 
-Constraints: You can\'t specify \code{copy-on-write} if the engine version of
+Constraints: You can't specify \code{copy-on-write} if the engine version of
 the source DB cluster is earlier than 1.11.
 
-If you don\'t specify a \code{RestoreType} value, then the new DB cluster is
+If you don't specify a \code{RestoreType} value, then the new DB cluster is
 restored as a full copy of the source DB cluster.}
 
 \item{SourceDBClusterIdentifier}{[required] The identifier of the source DB cluster from which to restore.
@@ -52,21 +52,20 @@ format
 Constraints:
 \itemize{
 \item Must be before the latest restorable time for the DB instance
-\item Must be specified if \code{UseLatestRestorableTime} parameter isn\'t
+\item Must be specified if \code{UseLatestRestorableTime} parameter isn't
 provided
-\item Can\'t be specified if the \code{UseLatestRestorableTime} parameter is
+\item Can't be specified if the \code{UseLatestRestorableTime} parameter is
 enabled
-\item Can\'t be specified if the \code{RestoreType} parameter is
-\code{copy-on-write}
+\item Can't be specified if the \code{RestoreType} parameter is \code{copy-on-write}
 }
 
 Example: \verb{2015-03-07T23:45:00Z}}
 
 \item{UseLatestRestorableTime}{A value that indicates whether to restore the DB cluster to the latest
-restorable backup time. By default, the DB cluster isn\'t restored to
-the latest restorable backup time.
+restorable backup time. By default, the DB cluster isn't restored to the
+latest restorable backup time.
 
-Constraints: Can\'t be specified if \code{RestoreToTime} parameter is
+Constraints: Can't be specified if \code{RestoreToTime} parameter is
 provided.}
 
 \item{Port}{The port number on which the new DB cluster accepts connections.
@@ -91,28 +90,26 @@ Example: \code{mySubnetgroup}}
 \item{KmsKeyId}{The AWS KMS key identifier to use when restoring an encrypted DB cluster
 from an encrypted DB cluster.
 
-The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-encryption key. If you are restoring a DB cluster with the same AWS
-account that owns the KMS encryption key used to encrypt the new DB
-cluster, then you can use the KMS key alias instead of the ARN for the
-KMS encryption key.
+The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+name for the AWS KMS customer master key (CMK). To use a CMK in a
+different AWS account, specify the key ARN or alias ARN.
 
 You can restore to a new DB cluster and encrypt the new DB cluster with
-a KMS key that is different than the KMS key used to encrypt the source
-DB cluster. The new DB cluster is encrypted with the KMS key identified
-by the \code{KmsKeyId} parameter.
+a AWS KMS CMK that is different than the AWS KMS key used to encrypt the
+source DB cluster. The new DB cluster is encrypted with the AWS KMS CMK
+identified by the \code{KmsKeyId} parameter.
 
-If you don\'t specify a value for the \code{KmsKeyId} parameter, then the
+If you don't specify a value for the \code{KmsKeyId} parameter, then the
 following occurs:
 \itemize{
 \item If the DB cluster is encrypted, then the restored DB cluster is
-encrypted using the KMS key that was used to encrypt the source DB
-cluster.
-\item If the DB cluster isn\'t encrypted, then the restored DB cluster
-isn\'t encrypted.
+encrypted using the AWS KMS CMK that was used to encrypt the source
+DB cluster.
+\item If the DB cluster isn't encrypted, then the restored DB cluster
+isn't encrypted.
 }
 
-If \code{DBClusterIdentifier} refers to a DB cluster that isn\'t encrypted,
+If \code{DBClusterIdentifier} refers to a DB cluster that isn't encrypted,
 then the restore request is rejected.}
 
 \item{EnableIAMDatabaseAuthentication}{A value that indicates whether to enable mapping of AWS Identity and
@@ -150,11 +147,11 @@ Constraints:
 group.
 \item Must be 1 to 255 letters, numbers, or hyphens.
 \item First character must be a letter.
-\item Can\'t end with a hyphen or contain two consecutive hyphens.
+\item Can't end with a hyphen or contain two consecutive hyphens.
 }}
 
 \item{DeletionProtection}{A value that indicates whether the DB cluster has deletion protection
-enabled. The database can\'t be deleted when deletion protection is
+enabled. The database can't be deleted when deletion protection is
 enabled. By default, deletion protection is disabled.}
 
 \item{CopyTagsToSnapshot}{A value that indicates whether to copy all tags from the restored DB
@@ -166,7 +163,7 @@ The domain must be created prior to this operation.
 
 For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
 Authentication to authenticate users that connect to the DB cluster. For
-more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html}{Kerberos Authentication}
+more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/database-authentication.html}{Kerberos Authentication}
 in the \emph{Amazon Aurora User Guide}.}
 
 \item{DomainIAMRoleName}{Specify the name of the IAM role to be used when making API calls to the
@@ -179,8 +176,7 @@ to any point in time before \code{LatestRestorableTime} for up to
 source DB cluster with the same configuration as the original DB
 cluster, except that the new DB cluster is created with the default DB
 security group.
-}
-\details{
+
 This action only restores the DB cluster, not the DB instances for that
 DB cluster. You must invoke the \code{CreateDBInstance} action to create DB
 instances for the restored DB cluster, specifying the identifier of the

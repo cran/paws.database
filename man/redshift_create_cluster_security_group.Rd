@@ -14,7 +14,7 @@ lowercase string.
 Constraints:
 \itemize{
 \item Must contain no more than 255 alphanumeric characters or hyphens.
-\item Must not be \"Default\".
+\item Must not be "Default".
 \item Must be unique for all security groups that are created by your AWS
 account.
 }
@@ -28,8 +28,7 @@ Example: \code{examplesecuritygroup}}
 \description{
 Creates a new Amazon Redshift security group. You use security groups to
 control access to non-VPC clusters.
-}
-\details{
+
 For information about managing security groups, go to \href{https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html}{Amazon Redshift Cluster Security Groups}
 in the \emph{Amazon Redshift Cluster Management Guide}.
 }

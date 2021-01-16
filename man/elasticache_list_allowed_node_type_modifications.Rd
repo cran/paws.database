@@ -26,10 +26,9 @@ You must provide a value for either the \code{CacheClusterId} or the
 \code{ReplicationGroupId}.}
 }
 \description{
-Lists all available node types that you can scale your Redis cluster\'s
-or replication group\'s current node type.
-}
-\details{
+Lists all available node types that you can scale your Redis cluster's
+or replication group's current node type.
+
 When you use the \code{ModifyCacheCluster} or \code{ModifyReplicationGroup}
 operations to scale your cluster or replication group, the value of the
 \code{CacheNodeType} parameter must be one of the node types returned by this

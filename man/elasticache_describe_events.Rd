@@ -45,15 +45,14 @@ Returns events related to clusters, cache security groups, and cache
 parameter groups. You can obtain events specific to a particular
 cluster, cache security group, or cache parameter group by providing the
 name as a parameter.
-}
-\details{
+
 By default, only the events occurring within the last hour are returned;
-however, you can retrieve up to 14 days\' worth of events if necessary.
+however, you can retrieve up to 14 days' worth of events if necessary.
 }
 \section{Request syntax}{
 \preformatted{svc$describe_events(
   SourceIdentifier = "string",
-  SourceType = "cache-cluster"|"cache-parameter-group"|"cache-security-group"|"cache-subnet-group"|"replication-group",
+  SourceType = "cache-cluster"|"cache-parameter-group"|"cache-security-group"|"cache-subnet-group"|"replication-group"|"user"|"user-group",
   StartTime = as.POSIXct(
     "2015-01-01"
   ),

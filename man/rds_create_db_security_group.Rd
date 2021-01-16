@@ -15,8 +15,8 @@ Constraints:
 \itemize{
 \item Must be 1 to 255 letters, numbers, or hyphens.
 \item First character must be a letter
-\item Can\'t end with a hyphen or contain two consecutive hyphens
-\item Must not be \"Default\"
+\item Can't end with a hyphen or contain two consecutive hyphens
+\item Must not be "Default"
 }
 
 Example: \code{mysecuritygroup}}
@@ -28,8 +28,7 @@ Example: \code{mysecuritygroup}}
 \description{
 Creates a new DB security group. DB security groups control access to a
 DB instance.
-}
-\details{
+
 A DB security group controls access to EC2-Classic DB instances that are
 not in a VPC.
 }

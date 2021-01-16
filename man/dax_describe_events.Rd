@@ -20,7 +20,7 @@ ISO 8601 format.}
 \item{EndTime}{The end of the time interval for which to retrieve events, specified in
 ISO 8601 format.}
 
-\item{Duration}{The number of minutes\' worth of events to retrieve.}
+\item{Duration}{The number of minutes' worth of events to retrieve.}
 
 \item{MaxResults}{The maximum number of results to include in the response. If more
 results exist than the specified \code{MaxResults} value, a token is included
@@ -37,10 +37,9 @@ specified by \code{MaxResults}.}
 Returns events related to DAX clusters and parameter groups. You can
 obtain events specific to a particular DAX cluster or parameter group by
 providing the name as a parameter.
-}
-\details{
+
 By default, only the events occurring within the last 24 hours are
-returned; however, you can retrieve up to 14 days\' worth of events if
+returned; however, you can retrieve up to 14 days' worth of events if
 necessary.
 }
 \section{Request syntax}{

@@ -21,7 +21,7 @@ DBClusterParameterGroup.
 \item{Source}{A value that indicates to return only parameters for a specific source.
 Parameter sources can be \code{engine}, \code{service}, or \code{customer}.}
 
-\item{Filters}{This parameter isn\'t currently supported.}
+\item{Filters}{This parameter isn't currently supported.}
 
 \item{MaxRecords}{The maximum number of records to include in the response. If more
 records exist than the specified \code{MaxRecords} value, a pagination token
@@ -40,8 +40,7 @@ specified by \code{MaxRecords}.}
 \description{
 Returns the detailed parameter list for a particular DB cluster
 parameter group.
-}
-\details{
+
 For more information on Amazon Aurora, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html}{What Is Amazon Aurora?}
 in the \emph{Amazon Aurora User Guide.}
 

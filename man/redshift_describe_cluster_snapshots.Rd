@@ -19,17 +19,17 @@ information.}
 \item{SnapshotType}{The type of snapshots for which you are requesting information. By
 default, snapshots of all types are returned.
 
-Valid Values: \code{automated} \\| \code{manual}}
+Valid Values: \code{automated} | \code{manual}}
 
 \item{StartTime}{A value that requests only snapshots created at or after the specified
 time. The time value is specified in ISO 8601 format. For more
-information about ISO 8601, go to the \href{http://en.wikipedia.org/wiki/ISO_8601}{ISO8601 Wikipedia page.}
+information about ISO 8601, go to the \href{https://en.wikipedia.org/wiki/ISO_8601}{ISO8601 Wikipedia page.}
 
 Example: \verb{2012-07-16T18:00:00Z}}
 
 \item{EndTime}{A time value that requests only snapshots created at or before the
 specified time. The time value is specified in ISO 8601 format. For more
-information about ISO 8601, go to the \href{http://en.wikipedia.org/wiki/ISO_8601}{ISO8601 Wikipedia page.}
+information about ISO 8601, go to the \href{https://en.wikipedia.org/wiki/ISO_8601}{ISO8601 Wikipedia page.}
 
 Example: \verb{2012-07-16T18:00:00Z}}
 
@@ -76,7 +76,7 @@ Values for this parameter work as follows:
 \itemize{
 \item If \code{ClusterExists} is set to \code{true}, \code{ClusterIdentifier} is
 required.
-\item If \code{ClusterExists} is set to \code{false} and \code{ClusterIdentifier} isn\'t
+\item If \code{ClusterExists} is set to \code{false} and \code{ClusterIdentifier} isn't
 specified, all snapshots associated with deleted clusters (orphaned
 snapshots) are returned.
 \item If \code{ClusterExists} is set to \code{false} and \code{ClusterIdentifier} is
@@ -94,8 +94,7 @@ cluster snapshots. By default, this operation returns information about
 all snapshots of all clusters that are owned by you AWS customer
 account. No information is returned for snapshots owned by inactive AWS
 customer accounts.
-}
-\details{
+
 If you specify both tag keys and tag values in the same request, Amazon
 Redshift returns all snapshots that match any combination of the
 specified keys and values. For example, if you have \code{owner} and

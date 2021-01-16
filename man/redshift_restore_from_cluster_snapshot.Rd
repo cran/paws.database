@@ -12,7 +12,8 @@ redshift_restore_from_cluster_snapshot(ClusterIdentifier,
   ClusterSecurityGroups, VpcSecurityGroupIds, PreferredMaintenanceWindow,
   AutomatedSnapshotRetentionPeriod, ManualSnapshotRetentionPeriod,
   KmsKeyId, NodeType, EnhancedVpcRouting, AdditionalInfo, IamRoles,
-  MaintenanceTrackName, SnapshotScheduleIdentifier, NumberOfNodes)
+  MaintenanceTrackName, SnapshotScheduleIdentifier, NumberOfNodes,
+  AvailabilityZoneRelocation)
 }
 \arguments{
 \item{ClusterIdentifier}{[required] The identifier of the cluster that will be created from restoring the
@@ -28,7 +29,7 @@ Constraints:
 }}
 
 \item{SnapshotIdentifier}{[required] The name of the snapshot from which to create the new cluster. This
-parameter isn\'t case sensitive.
+parameter isn't case sensitive.
 
 Example: \code{my-snapshot-id}}
 
@@ -109,7 +110,7 @@ taken. For more information about the time blocks for each region, see
 \href{https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows}{Maintenance Windows}
 in Amazon Redshift Cluster Management Guide.
 
-Valid Days: Mon \\| Tue \\| Wed \\| Thu \\| Fri \\| Sat \\| Sun
+Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun
 
 Constraints: Minimum 30-minute window.}
 
@@ -124,7 +125,7 @@ taken.
 Constraints: Must be a value from 0 to 35.}
 
 \item{ManualSnapshotRetentionPeriod}{The default number of days to retain a manual snapshot. If the value is
--1, the snapshot is retained indefinitely. This setting doesn\'t change
+-1, the snapshot is retained indefinitely. This setting doesn't change
 the retention period of existing snapshots.
 
 The value must be either -1 or an integer between 1 and 3,653.}
@@ -142,7 +143,7 @@ example, you can restore ds1.8xlarge into ds2.8xlarge, or ds1.xlarge
 into ds2.xlarge. If you have a DC instance type, you must restore into
 that same instance type and size. In other words, you can only restore a
 dc1.large instance type into another dc1.large instance type or
-dc2.large instance type. You can\'t restore dc1.8xlarge to dc2.8xlarge.
+dc2.large instance type. You can't restore dc1.8xlarge to dc2.8xlarge.
 First restore to a dc1.8xlarge cluster, then resize to a dc2.8large
 cluster. For more information about node types, see \href{https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes}{About Clusters and Nodes}
 in the \emph{Amazon Redshift Cluster Management Guide}.}
@@ -176,6 +177,9 @@ source cluster are on different tracks.}
 \item{SnapshotScheduleIdentifier}{A unique identifier for the snapshot schedule.}
 
 \item{NumberOfNodes}{The number of nodes specified when provisioning the restored cluster.}
+
+\item{AvailabilityZoneRelocation}{The option to enable relocation for an Amazon Redshift cluster between
+Availability Zones after the cluster is restored.}
 }
 \description{
 Creates a new cluster from a snapshot. By default, Amazon Redshift
@@ -187,8 +191,7 @@ ModifyCluster API to associate a different security group and different
 parameter group with the restored cluster. If you are using a DS node
 type, you can also choose to change to another DS node type of the same
 size during restore.
-}
-\details{
+
 If you restore a cluster into a VPC, you must provide a cluster subnet
 group where you want the cluster restored.
 
@@ -228,7 +231,8 @@ in the \emph{Amazon Redshift Cluster Management Guide}.
   ),
   MaintenanceTrackName = "string",
   SnapshotScheduleIdentifier = "string",
-  NumberOfNodes = 123
+  NumberOfNodes = 123,
+  AvailabilityZoneRelocation = TRUE|FALSE
 )
 }
 }

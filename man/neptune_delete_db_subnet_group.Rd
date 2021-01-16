@@ -9,7 +9,7 @@ neptune_delete_db_subnet_group(DBSubnetGroupName)
 \arguments{
 \item{DBSubnetGroupName}{[required] The name of the database subnet group to delete.
 
-You can\'t delete the default subnet group.
+You can't delete the default subnet group.
 
 Constraints:
 
@@ -20,8 +20,7 @@ Example: \code{mySubnetgroup}}
 }
 \description{
 Deletes a DB subnet group.
-}
-\details{
+
 The specified database subnet group must not be associated with any DB
 instances.
 }

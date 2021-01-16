@@ -101,13 +101,13 @@ attribute. If \code{Value} is a negative number, then it is
 subtracted from the existing attribute.
 
 If you use \code{ADD} to increment or decrement a number value for an
-item that doesn\'t exist before the update, DynamoDB uses \code{0} as
+item that doesn't exist before the update, DynamoDB uses \code{0} as
 the initial value.
 
 Similarly, if you use \code{ADD} for an existing item to increment or
-decrement an attribute value that doesn\'t exist before the
+decrement an attribute value that doesn't exist before the
 update, DynamoDB uses \code{0} as the initial value. For example,
-suppose that the item you want to update doesn\'t have an
+suppose that the item you want to update doesn't have an
 attribute named \code{itemcount}, but you decide to \code{ADD} the number
 \code{3} to this attribute anyway. DynamoDB will create the
 \code{itemcount} attribute, set its initial value to \code{0}, and finally
@@ -145,7 +145,7 @@ attributes.
 You can have many actions in a single expression, such as the following:
 \verb{SET a=:value1, b=:value2 DELETE :value3, :value4, :value5}
 
-For more information on update expressions, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html}{Modifying Items and Attributes}
+For more information on update expressions, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.UpdateExpressions.html}{Modifying Items and Attributes}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{ConditionExpression}{A condition that must be satisfied in order for a conditional update to
@@ -162,7 +162,7 @@ These function names are case-sensitive.
 \item Logical operators: \code{AND | OR | NOT}
 }
 
-For more information about condition expressions, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html}{Specifying Conditions}
+For more information about condition expressions, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html}{Specifying Conditions}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{ExpressionAttributeNames}{One or more substitution tokens for attribute names in an expression.
@@ -200,7 +200,7 @@ example:
 Tokens that begin with the \strong{:} character are \emph{expression attribute
 values}, which are placeholders for the actual value at runtime.
 
-For more information about expression attribute names, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html}{Specifying Item Attributes}
+For more information about expression attribute names, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html}{Specifying Item Attributes}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{ExpressionAttributeValues}{One or more values that can be substituted in an expression.
@@ -219,19 +219,18 @@ You could then use these values in an expression, such as this:
 
 \verb{ProductStatus IN (:avail, :back, :disc)}
 
-For more information on expression attribute values, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html}{Condition Expressions}
+For more information on expression attribute values, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html}{Condition Expressions}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 }
 \description{
-Edits an existing item\'s attributes, or adds a new item to the table if
+Edits an existing item's attributes, or adds a new item to the table if
 it does not already exist. You can put, delete, or add attribute values.
 You can also perform a conditional update on an existing item (insert a
-new attribute name-value pair if it doesn\'t exist, or replace an
+new attribute name-value pair if it doesn't exist, or replace an
 existing name-value pair if it has certain expected attribute values).
-}
-\details{
-You can also return the item\'s attribute values in the same
-\code{UpdateItem} operation using the \code{ReturnValues} parameter.
+
+You can also return the item's attribute values in the same \code{UpdateItem}
+operation using the \code{ReturnValues} parameter.
 }
 \section{Request syntax}{
 \preformatted{svc$update_item(
