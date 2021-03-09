@@ -23,11 +23,33 @@ Constraints: minimum 20, maximum 100.}
 
 \item{Marker}{An optional parameter that specifies the starting point to return a set
 of response records. When the results of a
-DescribeDefaultClusterParameters request exceed the value specified in
-\code{MaxRecords}, AWS returns a value in the \code{Marker} field of the response.
-You can retrieve the next set of response records by providing the
-returned marker value in the \code{Marker} parameter and retrying the
-request.}
+\code{\link[=redshift_describe_default_cluster_parameters]{describe_default_cluster_parameters}}
+request exceed the value specified in \code{MaxRecords}, AWS returns a value
+in the \code{Marker} field of the response. You can retrieve the next set of
+response records by providing the returned marker value in the \code{Marker}
+parameter and retrying the request.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  DefaultClusterParameters = list(
+    ParameterGroupFamily = "string",
+    Marker = "string",
+    Parameters = list(
+      list(
+        ParameterName = "string",
+        ParameterValue = "string",
+        Description = "string",
+        Source = "string",
+        DataType = "string",
+        AllowedValues = "string",
+        ApplyType = "static"|"dynamic",
+        IsModifiable = TRUE|FALSE,
+        MinimumEngineVersion = "string"
+      )
+    )
+  )
+)
+}
 }
 \description{
 Returns a list of parameter settings for the specified parameter group

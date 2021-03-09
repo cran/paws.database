@@ -28,9 +28,23 @@ Default: 100
 Constraints: Minimum 20, maximum 100.}
 
 \item{Marker}{An optional pagination token provided by a previous
-\code{DescribeDBClusterParameterGroups} request. If this parameter is
-specified, the response includes only records beyond the marker, up to
-the value specified by \code{MaxRecords}.}
+\code{\link[=neptune_describe_db_cluster_parameter_groups]{describe_db_cluster_parameter_groups}}
+request. If this parameter is specified, the response includes only
+records beyond the marker, up to the value specified by \code{MaxRecords}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Marker = "string",
+  DBClusterParameterGroups = list(
+    list(
+      DBClusterParameterGroupName = "string",
+      DBParameterGroupFamily = "string",
+      Description = "string",
+      DBClusterParameterGroupArn = "string"
+    )
+  )
+)
+}
 }
 \description{
 Returns a list of \code{DBClusterParameterGroup} descriptions. If a

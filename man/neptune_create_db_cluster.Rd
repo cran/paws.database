@@ -168,6 +168,85 @@ CloudWatch Logs.}
 enabled. The database can't be deleted when deletion protection is
 enabled. By default, deletion protection is enabled.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  DBCluster = list(
+    AllocatedStorage = 123,
+    AvailabilityZones = list(
+      "string"
+    ),
+    BackupRetentionPeriod = 123,
+    CharacterSetName = "string",
+    DatabaseName = "string",
+    DBClusterIdentifier = "string",
+    DBClusterParameterGroup = "string",
+    DBSubnetGroup = "string",
+    Status = "string",
+    PercentProgress = "string",
+    EarliestRestorableTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    Endpoint = "string",
+    ReaderEndpoint = "string",
+    MultiAZ = TRUE|FALSE,
+    Engine = "string",
+    EngineVersion = "string",
+    LatestRestorableTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    Port = 123,
+    MasterUsername = "string",
+    DBClusterOptionGroupMemberships = list(
+      list(
+        DBClusterOptionGroupName = "string",
+        Status = "string"
+      )
+    ),
+    PreferredBackupWindow = "string",
+    PreferredMaintenanceWindow = "string",
+    ReplicationSourceIdentifier = "string",
+    ReadReplicaIdentifiers = list(
+      "string"
+    ),
+    DBClusterMembers = list(
+      list(
+        DBInstanceIdentifier = "string",
+        IsClusterWriter = TRUE|FALSE,
+        DBClusterParameterGroupStatus = "string",
+        PromotionTier = 123
+      )
+    ),
+    VpcSecurityGroups = list(
+      list(
+        VpcSecurityGroupId = "string",
+        Status = "string"
+      )
+    ),
+    HostedZoneId = "string",
+    StorageEncrypted = TRUE|FALSE,
+    KmsKeyId = "string",
+    DbClusterResourceId = "string",
+    DBClusterArn = "string",
+    AssociatedRoles = list(
+      list(
+        RoleArn = "string",
+        Status = "string",
+        FeatureName = "string"
+      )
+    ),
+    IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+    CloneGroupId = "string",
+    ClusterCreateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    EnabledCloudwatchLogsExports = list(
+      "string"
+    ),
+    DeletionProtection = TRUE|FALSE
+  )
+)
+}
+}
 \description{
 Creates a new Amazon Neptune DB cluster.
 
@@ -175,11 +254,12 @@ You can use the \code{ReplicationSourceIdentifier} parameter to create the DB
 cluster as a Read Replica of another DB cluster or Amazon Neptune DB
 instance.
 
-Note that when you create a new cluster using \code{CreateDBCluster}
-directly, deletion protection is disabled by default (when you create a
-new production cluster in the console, deletion protection is enabled by
-default). You can only delete a DB cluster if its \code{DeletionProtection}
-field is set to \code{false}.
+Note that when you create a new cluster using
+\code{\link[=neptune_create_db_cluster]{create_db_cluster}} directly, deletion
+protection is disabled by default (when you create a new production
+cluster in the console, deletion protection is enabled by default). You
+can only delete a DB cluster if its \code{DeletionProtection} field is set to
+\code{false}.
 }
 \section{Request syntax}{
 \preformatted{svc$create_db_cluster(

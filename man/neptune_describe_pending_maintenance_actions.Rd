@@ -26,9 +26,10 @@ for the DB instances identified by these ARNs.
 }}
 
 \item{Marker}{An optional pagination token provided by a previous
-\code{DescribePendingMaintenanceActions} request. If this parameter is
-specified, the response includes only records beyond the marker, up to a
-number of records specified by \code{MaxRecords}.}
+\code{\link[=neptune_describe_pending_maintenance_actions]{describe_pending_maintenance_actions}}
+request. If this parameter is specified, the response includes only
+records beyond the marker, up to a number of records specified by
+\code{MaxRecords}.}
 
 \item{MaxRecords}{The maximum number of records to include in the response. If more
 records exist than the specified \code{MaxRecords} value, a pagination token
@@ -38,6 +39,33 @@ results can be retrieved.
 Default: 100
 
 Constraints: Minimum 20, maximum 100.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  PendingMaintenanceActions = list(
+    list(
+      ResourceIdentifier = "string",
+      PendingMaintenanceActionDetails = list(
+        list(
+          Action = "string",
+          AutoAppliedAfterDate = as.POSIXct(
+            "2015-01-01"
+          ),
+          ForcedApplyDate = as.POSIXct(
+            "2015-01-01"
+          ),
+          OptInStatus = "string",
+          CurrentApplyDate = as.POSIXct(
+            "2015-01-01"
+          ),
+          Description = "string"
+        )
+      )
+    )
+  ),
+  Marker = "string"
+)
+}
 }
 \description{
 Returns a list of resources (for example, DB instances) that have at

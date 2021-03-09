@@ -28,11 +28,52 @@ provided.
 
 Example: \code{111122223333}}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  ClusterSecurityGroup = list(
+    ClusterSecurityGroupName = "string",
+    Description = "string",
+    EC2SecurityGroups = list(
+      list(
+        Status = "string",
+        EC2SecurityGroupName = "string",
+        EC2SecurityGroupOwnerId = "string",
+        Tags = list(
+          list(
+            Key = "string",
+            Value = "string"
+          )
+        )
+      )
+    ),
+    IPRanges = list(
+      list(
+        Status = "string",
+        CIDRIP = "string",
+        Tags = list(
+          list(
+            Key = "string",
+            Value = "string"
+          )
+        )
+      )
+    ),
+    Tags = list(
+      list(
+        Key = "string",
+        Value = "string"
+      )
+    )
+  )
+)
+}
+}
 \description{
 Revokes an ingress rule in an Amazon Redshift security group for a
 previously authorized IP range or Amazon EC2 security group. To add an
-ingress rule, see AuthorizeClusterSecurityGroupIngress. For information
-about managing security groups, go to \href{https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html}{Amazon Redshift Cluster Security Groups}
+ingress rule, see
+\code{\link[=redshift_authorize_cluster_security_group_ingress]{authorize_cluster_security_group_ingress}}.
+For information about managing security groups, go to \href{https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html}{Amazon Redshift Cluster Security Groups}
 in the \emph{Amazon Redshift Cluster Management Guide}.
 }
 \section{Request syntax}{

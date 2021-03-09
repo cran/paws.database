@@ -82,9 +82,9 @@ Default: 100
 Constraints: Minimum 20, maximum 100.}
 
 \item{Marker}{An optional pagination token provided by a previous
-\code{DescribeDBSnapshots} request. If this parameter is specified, the
-response includes only records beyond the marker, up to the value
-specified by \code{MaxRecords}.}
+\code{\link[=rds_describe_db_snapshots]{describe_db_snapshots}} request. If this
+parameter is specified, the response includes only records beyond the
+marker, up to the value specified by \code{MaxRecords}.}
 
 \item{IncludeShared}{A value that indicates whether to include shared manual DB cluster
 snapshots from other AWS accounts that this AWS account has been given
@@ -92,7 +92,8 @@ permission to copy or restore. By default, these snapshots are not
 included.
 
 You can give an AWS account permission to restore a manual DB snapshot
-from another AWS account by using the \code{ModifyDBSnapshotAttribute} API
+from another AWS account by using the
+\code{\link[=rds_modify_db_snapshot_attribute]{modify_db_snapshot_attribute}} API
 action.}
 
 \item{IncludePublic}{A value that indicates whether to include manual DB cluster snapshots
@@ -100,9 +101,62 @@ that are public and can be copied or restored by any AWS account. By
 default, the public snapshots are not included.
 
 You can share a manual DB snapshot as public by using the
-ModifyDBSnapshotAttribute API.}
+\code{\link[=rds_modify_db_snapshot_attribute]{modify_db_snapshot_attribute}} API.}
 
 \item{DbiResourceId}{A specific DB resource ID to describe.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Marker = "string",
+  DBSnapshots = list(
+    list(
+      DBSnapshotIdentifier = "string",
+      DBInstanceIdentifier = "string",
+      SnapshotCreateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      Engine = "string",
+      AllocatedStorage = 123,
+      Status = "string",
+      Port = 123,
+      AvailabilityZone = "string",
+      VpcId = "string",
+      InstanceCreateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      MasterUsername = "string",
+      EngineVersion = "string",
+      LicenseModel = "string",
+      SnapshotType = "string",
+      Iops = 123,
+      OptionGroupName = "string",
+      PercentProgress = 123,
+      SourceRegion = "string",
+      SourceDBSnapshotIdentifier = "string",
+      StorageType = "string",
+      TdeCredentialArn = "string",
+      Encrypted = TRUE|FALSE,
+      KmsKeyId = "string",
+      DBSnapshotArn = "string",
+      Timezone = "string",
+      IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+      ProcessorFeatures = list(
+        list(
+          Name = "string",
+          Value = "string"
+        )
+      ),
+      DbiResourceId = "string",
+      TagList = list(
+        list(
+          Key = "string",
+          Value = "string"
+        )
+      )
+    )
+  )
+)
+}
 }
 \description{
 Returns information about DB snapshots. This API action supports

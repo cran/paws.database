@@ -26,11 +26,25 @@ Default: 100
 Constraints: Minimum 20, maximum 100.}
 
 \item{Marker}{An optional pagination token provided by a previous
-\code{DescribeSourceRegions} request. If this parameter is specified, the
-response includes only records beyond the marker, up to the value
-specified by \code{MaxRecords}.}
+\code{\link[=rds_describe_source_regions]{describe_source_regions}} request. If
+this parameter is specified, the response includes only records beyond
+the marker, up to the value specified by \code{MaxRecords}.}
 
 \item{Filters}{This parameter isn't currently supported.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Marker = "string",
+  SourceRegions = list(
+    list(
+      RegionName = "string",
+      Endpoint = "string",
+      Status = "string",
+      SupportsDBInstanceAutomatedBackupsReplication = TRUE|FALSE
+    )
+  )
+)
+}
 }
 \description{
 Returns a list of the source AWS Regions where the current AWS Region

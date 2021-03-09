@@ -30,8 +30,10 @@ NULL
 #' 
 #' -   Specify one or more empty parameter sets.
 #' 
-#' -   Use the `ExecuteStatement` operation instead of the
-#'     `BatchExecuteStatement` operation.
+#' -   Use the [`execute_statement`][rdsdataservice_execute_statement]
+#'     operation instead of the
+#'     [`batch_execute_statement`][rdsdataservice_batch_execute_statement]
+#'     operation.
 #' 
 #' Array parameters are not supported.
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
@@ -39,11 +41,50 @@ NULL
 #' @param secretArn &#91;required&#93; The name or ARN of the secret that enables access to the DB cluster.
 #' @param sql &#91;required&#93; The SQL statement to run.
 #' @param transactionId The identifier of a transaction that was started by using the
-#' `BeginTransaction` operation. Specify the transaction ID of the
-#' transaction that you want to include the SQL statement in.
+#' [`begin_transaction`][rdsdataservice_begin_transaction] operation.
+#' Specify the transaction ID of the transaction that you want to include
+#' the SQL statement in.
 #' 
 #' If the SQL statement is not part of a transaction, don't set this
 #' parameter.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   updateResults = list(
+#'     list(
+#'       generatedFields = list(
+#'         list(
+#'           arrayValue = list(
+#'             arrayValues = list(
+#'               list()
+#'             ),
+#'             booleanValues = list(
+#'               TRUE|FALSE
+#'             ),
+#'             doubleValues = list(
+#'               123.0
+#'             ),
+#'             longValues = list(
+#'               123
+#'             ),
+#'             stringValues = list(
+#'               "string"
+#'             )
+#'           ),
+#'           blobValue = raw,
+#'           booleanValue = TRUE|FALSE,
+#'           doubleValue = 123.0,
+#'           isNull = TRUE|FALSE,
+#'           longValue = 123,
+#'           stringValue = "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -115,7 +156,7 @@ rdsdataservice_batch_execute_statement <- function(database = NULL, parameterSet
 #' @description
 #' Starts a SQL transaction.
 #' 
-#'      &lt;important&gt; &lt;p&gt;A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24 hours.&lt;/p&gt; &lt;p&gt;A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's committed, it's rolled back automatically.&lt;/p&gt; &lt;p&gt;DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate &lt;code&gt;ExecuteStatement&lt;/code&gt; call with &lt;code&gt;continueAfterTimeout&lt;/code&gt; enabled.&lt;/p&gt; &lt;/important&gt; 
+#'      <important> <p>A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24 hours.</p> <p>A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's committed, it's rolled back automatically.</p> <p>DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate <code>ExecuteStatement</code> call with <code>continueAfterTimeout</code> enabled.</p> </important> 
 #'
 #' @usage
 #' rdsdataservice_begin_transaction(database, resourceArn, schema,
@@ -125,6 +166,14 @@ rdsdataservice_batch_execute_statement <- function(database = NULL, parameterSet
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
 #' @param schema The name of the database schema.
 #' @param secretArn &#91;required&#93; The name or ARN of the secret that enables access to the DB cluster.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   transactionId = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -160,7 +209,8 @@ rdsdataservice_begin_transaction <- function(database = NULL, resourceArn, schem
 #' commits the changes
 #'
 #' @description
-#' Ends a SQL transaction started with the `BeginTransaction` operation and
+#' Ends a SQL transaction started with the
+#' [`begin_transaction`][rdsdataservice_begin_transaction] operation and
 #' commits the changes.
 #'
 #' @usage
@@ -169,6 +219,14 @@ rdsdataservice_begin_transaction <- function(database = NULL, resourceArn, schem
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
 #' @param secretArn &#91;required&#93; The name or ARN of the secret that enables access to the DB cluster.
 #' @param transactionId &#91;required&#93; The identifier of the transaction to end and commit.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   transactionStatus = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -204,8 +262,9 @@ rdsdataservice_commit_transaction <- function(resourceArn, secretArn, transactio
 #' @description
 #' Runs one or more SQL statements.
 #' 
-#' This operation is deprecated. Use the `BatchExecuteStatement` or
-#' `ExecuteStatement` operation.
+#' This operation is deprecated. Use the
+#' [`batch_execute_statement`][rdsdataservice_batch_execute_statement] or
+#' [`execute_statement`][rdsdataservice_execute_statement] operation.
 #'
 #' @usage
 #' rdsdataservice_execute_sql(awsSecretStoreArn, database,
@@ -221,6 +280,65 @@ rdsdataservice_commit_transaction <- function(resourceArn, secretArn, transactio
 #' You can separate SQL statements from each other with a semicolon (;).
 #' Any valid SQL statement is permitted, including data definition, data
 #' manipulation, and commit statements.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   sqlStatementResults = list(
+#'     list(
+#'       numberOfRecordsUpdated = 123,
+#'       resultFrame = list(
+#'         records = list(
+#'           list(
+#'             values = list(
+#'               list(
+#'                 arrayValues = list(
+#'                   list()
+#'                 ),
+#'                 bigIntValue = 123,
+#'                 bitValue = TRUE|FALSE,
+#'                 blobValue = raw,
+#'                 doubleValue = 123.0,
+#'                 intValue = 123,
+#'                 isNull = TRUE|FALSE,
+#'                 realValue = 123.0,
+#'                 stringValue = "string",
+#'                 structValue = list(
+#'                   attributes = list(
+#'                     list()
+#'                   )
+#'                 )
+#'               )
+#'             )
+#'           )
+#'         ),
+#'         resultSetMetadata = list(
+#'           columnCount = 123,
+#'           columnMetadata = list(
+#'             list(
+#'               arrayBaseColumnType = 123,
+#'               isAutoIncrement = TRUE|FALSE,
+#'               isCaseSensitive = TRUE|FALSE,
+#'               isCurrency = TRUE|FALSE,
+#'               isSigned = TRUE|FALSE,
+#'               label = "string",
+#'               name = "string",
+#'               nullable = 123,
+#'               precision = 123,
+#'               scale = 123,
+#'               schemaName = "string",
+#'               tableName = "string",
+#'               type = 123,
+#'               typeName = "string"
+#'             )
+#'           )
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -289,11 +407,94 @@ rdsdataservice_execute_sql <- function(awsSecretStoreArn, database = NULL, dbClu
 #' @param secretArn &#91;required&#93; The name or ARN of the secret that enables access to the DB cluster.
 #' @param sql &#91;required&#93; The SQL statement to run.
 #' @param transactionId The identifier of a transaction that was started by using the
-#' `BeginTransaction` operation. Specify the transaction ID of the
-#' transaction that you want to include the SQL statement in.
+#' [`begin_transaction`][rdsdataservice_begin_transaction] operation.
+#' Specify the transaction ID of the transaction that you want to include
+#' the SQL statement in.
 #' 
 #' If the SQL statement is not part of a transaction, don't set this
 #' parameter.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   columnMetadata = list(
+#'     list(
+#'       arrayBaseColumnType = 123,
+#'       isAutoIncrement = TRUE|FALSE,
+#'       isCaseSensitive = TRUE|FALSE,
+#'       isCurrency = TRUE|FALSE,
+#'       isSigned = TRUE|FALSE,
+#'       label = "string",
+#'       name = "string",
+#'       nullable = 123,
+#'       precision = 123,
+#'       scale = 123,
+#'       schemaName = "string",
+#'       tableName = "string",
+#'       type = 123,
+#'       typeName = "string"
+#'     )
+#'   ),
+#'   generatedFields = list(
+#'     list(
+#'       arrayValue = list(
+#'         arrayValues = list(
+#'           list()
+#'         ),
+#'         booleanValues = list(
+#'           TRUE|FALSE
+#'         ),
+#'         doubleValues = list(
+#'           123.0
+#'         ),
+#'         longValues = list(
+#'           123
+#'         ),
+#'         stringValues = list(
+#'           "string"
+#'         )
+#'       ),
+#'       blobValue = raw,
+#'       booleanValue = TRUE|FALSE,
+#'       doubleValue = 123.0,
+#'       isNull = TRUE|FALSE,
+#'       longValue = 123,
+#'       stringValue = "string"
+#'     )
+#'   ),
+#'   numberOfRecordsUpdated = 123,
+#'   records = list(
+#'     list(
+#'       list(
+#'         arrayValue = list(
+#'           arrayValues = list(
+#'             list()
+#'           ),
+#'           booleanValues = list(
+#'             TRUE|FALSE
+#'           ),
+#'           doubleValues = list(
+#'             123.0
+#'           ),
+#'           longValues = list(
+#'             123
+#'           ),
+#'           stringValues = list(
+#'             "string"
+#'           )
+#'         ),
+#'         blobValue = raw,
+#'         booleanValue = TRUE|FALSE,
+#'         doubleValue = 123.0,
+#'         isNull = TRUE|FALSE,
+#'         longValue = 123,
+#'         stringValue = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -376,6 +577,14 @@ rdsdataservice_execute_statement <- function(continueAfterTimeout = NULL, databa
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
 #' @param secretArn &#91;required&#93; The name or ARN of the secret that enables access to the DB cluster.
 #' @param transactionId &#91;required&#93; The identifier of the transaction to roll back.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   transactionStatus = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```

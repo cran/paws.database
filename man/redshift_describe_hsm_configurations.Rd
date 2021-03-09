@@ -24,7 +24,8 @@ Default: \code{100}
 Constraints: minimum 20, maximum 100.}
 
 \item{Marker}{An optional parameter that specifies the starting point to return a set
-of response records. When the results of a DescribeHsmConfigurations
+of response records. When the results of a
+\code{\link[=redshift_describe_hsm_configurations]{describe_hsm_configurations}}
 request exceed the value specified in \code{MaxRecords}, AWS returns a value
 in the \code{Marker} field of the response. You can retrieve the next set of
 response records by providing the returned marker value in the \code{Marker}
@@ -45,6 +46,26 @@ tagged with values called \code{admin} and \code{test}. If you specify both of
 these tag values in the request, Amazon Redshift returns a response with
 the HSM configurations that have either or both of these tag values
 associated with them.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Marker = "string",
+  HsmConfigurations = list(
+    list(
+      HsmConfigurationIdentifier = "string",
+      Description = "string",
+      HsmIpAddress = "string",
+      HsmPartitionName = "string",
+      Tags = list(
+        list(
+          Key = "string",
+          Value = "string"
+        )
+      )
+    )
+  )
+)
+}
 }
 \description{
 Returns information about the specified Amazon Redshift HSM

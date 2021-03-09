@@ -122,7 +122,8 @@ the DB instance doesn't permit it.
 When the DB instance isn't publicly accessible, it is an internal DB
 instance with a DNS name that resolves to a private IP address.
 
-For more information, see CreateDBInstance.}
+For more information, see
+\code{\link[=rds_create_db_instance]{create_db_instance}}.}
 
 \item{Tags}{}
 
@@ -204,8 +205,9 @@ You can't create an encrypted read replica from an unencrypted DB
 instance.}
 
 \item{PreSignedUrl}{The URL that contains a Signature Version 4 signed request for the
-\code{CreateDBInstanceReadReplica} API action in the source AWS Region that
-contains the source DB instance.
+\code{\link[=rds_create_db_instance_read_replica]{create_db_instance_read_replica}}
+API action in the source AWS Region that contains the source DB
+instance.
 
 You must specify this parameter when you create an encrypted read
 replica from another AWS Region by using the Amazon RDS API. Don't
@@ -213,26 +215,31 @@ specify \code{PreSignedUrl} when you are creating an encrypted read replica
 in the same AWS Region.
 
 The presigned URL must be a valid request for the
-\code{CreateDBInstanceReadReplica} API action that can be executed in the
-source AWS Region that contains the encrypted source DB instance. The
-presigned URL request must contain the following parameter values:
+\code{\link[=rds_create_db_instance_read_replica]{create_db_instance_read_replica}}
+API action that can be executed in the source AWS Region that contains
+the encrypted source DB instance. The presigned URL request must contain
+the following parameter values:
 \itemize{
 \item \code{DestinationRegion} - The AWS Region that the encrypted read replica
 is created in. This AWS Region is the same one where the
-\code{CreateDBInstanceReadReplica} action is called that contains this
-presigned URL.
+\code{\link[=rds_create_db_instance_read_replica]{create_db_instance_read_replica}}
+action is called that contains this presigned URL.
 
 For example, if you create an encrypted DB instance in the us-west-1
 AWS Region, from a source DB instance in the us-east-2 AWS Region,
-then you call the \code{CreateDBInstanceReadReplica} action in the
-us-east-1 AWS Region and provide a presigned URL that contains a
-call to the \code{CreateDBInstanceReadReplica} action in the us-west-2
-AWS Region. For this example, the \code{DestinationRegion} in the
-presigned URL must be set to the us-east-1 AWS Region.
+then you call the
+\code{\link[=rds_create_db_instance_read_replica]{create_db_instance_read_replica}}
+action in the us-east-1 AWS Region and provide a presigned URL that
+contains a call to the
+\code{\link[=rds_create_db_instance_read_replica]{create_db_instance_read_replica}}
+action in the us-west-2 AWS Region. For this example, the
+\code{DestinationRegion} in the presigned URL must be set to the
+us-east-1 AWS Region.
 \item \code{KmsKeyId} - The AWS KMS key identifier for the key to use to
 encrypt the read replica in the destination AWS Region. This is the
-same identifier for both the \code{CreateDBInstanceReadReplica} action
-that is called in the destination AWS Region, and the action
+same identifier for both the
+\code{\link[=rds_create_db_instance_read_replica]{create_db_instance_read_replica}}
+action that is called in the destination AWS Region, and the action
 contained in the presigned URL.
 \item \code{SourceDBInstanceIdentifier} - The DB instance identifier for the
 encrypted DB instance to be replicated. This identifier must be in
@@ -330,6 +337,195 @@ of the DB instance.}
 
 \item{SourceRegion}{The ID of the region that contains the source for the read replica.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  DBInstance = list(
+    DBInstanceIdentifier = "string",
+    DBInstanceClass = "string",
+    Engine = "string",
+    DBInstanceStatus = "string",
+    MasterUsername = "string",
+    DBName = "string",
+    Endpoint = list(
+      Address = "string",
+      Port = 123,
+      HostedZoneId = "string"
+    ),
+    AllocatedStorage = 123,
+    InstanceCreateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    PreferredBackupWindow = "string",
+    BackupRetentionPeriod = 123,
+    DBSecurityGroups = list(
+      list(
+        DBSecurityGroupName = "string",
+        Status = "string"
+      )
+    ),
+    VpcSecurityGroups = list(
+      list(
+        VpcSecurityGroupId = "string",
+        Status = "string"
+      )
+    ),
+    DBParameterGroups = list(
+      list(
+        DBParameterGroupName = "string",
+        ParameterApplyStatus = "string"
+      )
+    ),
+    AvailabilityZone = "string",
+    DBSubnetGroup = list(
+      DBSubnetGroupName = "string",
+      DBSubnetGroupDescription = "string",
+      VpcId = "string",
+      SubnetGroupStatus = "string",
+      Subnets = list(
+        list(
+          SubnetIdentifier = "string",
+          SubnetAvailabilityZone = list(
+            Name = "string"
+          ),
+          SubnetOutpost = list(
+            Arn = "string"
+          ),
+          SubnetStatus = "string"
+        )
+      ),
+      DBSubnetGroupArn = "string"
+    ),
+    PreferredMaintenanceWindow = "string",
+    PendingModifiedValues = list(
+      DBInstanceClass = "string",
+      AllocatedStorage = 123,
+      MasterUserPassword = "string",
+      Port = 123,
+      BackupRetentionPeriod = 123,
+      MultiAZ = TRUE|FALSE,
+      EngineVersion = "string",
+      LicenseModel = "string",
+      Iops = 123,
+      DBInstanceIdentifier = "string",
+      StorageType = "string",
+      CACertificateIdentifier = "string",
+      DBSubnetGroupName = "string",
+      PendingCloudwatchLogsExports = list(
+        LogTypesToEnable = list(
+          "string"
+        ),
+        LogTypesToDisable = list(
+          "string"
+        )
+      ),
+      ProcessorFeatures = list(
+        list(
+          Name = "string",
+          Value = "string"
+        )
+      ),
+      IAMDatabaseAuthenticationEnabled = TRUE|FALSE
+    ),
+    LatestRestorableTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    MultiAZ = TRUE|FALSE,
+    EngineVersion = "string",
+    AutoMinorVersionUpgrade = TRUE|FALSE,
+    ReadReplicaSourceDBInstanceIdentifier = "string",
+    ReadReplicaDBInstanceIdentifiers = list(
+      "string"
+    ),
+    ReadReplicaDBClusterIdentifiers = list(
+      "string"
+    ),
+    ReplicaMode = "open-read-only"|"mounted",
+    LicenseModel = "string",
+    Iops = 123,
+    OptionGroupMemberships = list(
+      list(
+        OptionGroupName = "string",
+        Status = "string"
+      )
+    ),
+    CharacterSetName = "string",
+    NcharCharacterSetName = "string",
+    SecondaryAvailabilityZone = "string",
+    PubliclyAccessible = TRUE|FALSE,
+    StatusInfos = list(
+      list(
+        StatusType = "string",
+        Normal = TRUE|FALSE,
+        Status = "string",
+        Message = "string"
+      )
+    ),
+    StorageType = "string",
+    TdeCredentialArn = "string",
+    DbInstancePort = 123,
+    DBClusterIdentifier = "string",
+    StorageEncrypted = TRUE|FALSE,
+    KmsKeyId = "string",
+    DbiResourceId = "string",
+    CACertificateIdentifier = "string",
+    DomainMemberships = list(
+      list(
+        Domain = "string",
+        Status = "string",
+        FQDN = "string",
+        IAMRoleName = "string"
+      )
+    ),
+    CopyTagsToSnapshot = TRUE|FALSE,
+    MonitoringInterval = 123,
+    EnhancedMonitoringResourceArn = "string",
+    MonitoringRoleArn = "string",
+    PromotionTier = 123,
+    DBInstanceArn = "string",
+    Timezone = "string",
+    IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+    PerformanceInsightsEnabled = TRUE|FALSE,
+    PerformanceInsightsKMSKeyId = "string",
+    PerformanceInsightsRetentionPeriod = 123,
+    EnabledCloudwatchLogsExports = list(
+      "string"
+    ),
+    ProcessorFeatures = list(
+      list(
+        Name = "string",
+        Value = "string"
+      )
+    ),
+    DeletionProtection = TRUE|FALSE,
+    AssociatedRoles = list(
+      list(
+        RoleArn = "string",
+        FeatureName = "string",
+        Status = "string"
+      )
+    ),
+    ListenerEndpoint = list(
+      Address = "string",
+      Port = 123,
+      HostedZoneId = "string"
+    ),
+    MaxAllocatedStorage = 123,
+    TagList = list(
+      list(
+        Key = "string",
+        Value = "string"
+      )
+    ),
+    DBInstanceAutomatedBackupsReplications = list(
+      list(
+        DBInstanceAutomatedBackupsArn = "string"
+      )
+    ),
+    CustomerOwnedIpEnabled = TRUE|FALSE
+  )
+)
+}
+}
 \description{
 Creates a new DB instance that acts as a read replica for an existing
 source DB instance. You can create a read replica for a DB instance
@@ -337,8 +533,9 @@ running MySQL, MariaDB, Oracle, PostgreSQL, or SQL Server. For more
 information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html}{Working with Read Replicas}
 in the \emph{Amazon RDS User Guide}.
 
-Amazon Aurora doesn't support this action. Call the \code{CreateDBInstance}
-action to create a DB instance for an Aurora DB cluster.
+Amazon Aurora doesn't support this action. Call the
+\code{\link[=rds_create_db_instance]{create_db_instance}} action to create a DB
+instance for an Aurora DB cluster.
 
 All read replica DB instances are created with backups disabled. All
 other DB instance attributes (including DB security groups and DB

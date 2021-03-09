@@ -18,6 +18,24 @@ Example: \code{mysecuritygroup}}
 
 \item{Description}{[required] A description for the cache security group.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  CacheSecurityGroup = list(
+    OwnerId = "string",
+    CacheSecurityGroupName = "string",
+    Description = "string",
+    EC2SecurityGroups = list(
+      list(
+        Status = "string",
+        EC2SecurityGroupName = "string",
+        EC2SecurityGroupOwnerId = "string"
+      )
+    ),
+    ARN = "string"
+  )
+)
+}
+}
 \description{
 Creates a new cache security group. Use a cache security group to
 control access to one or more clusters.
@@ -26,7 +44,7 @@ Cache security groups are only used when you are creating a cluster
 outside of an Amazon Virtual Private Cloud (Amazon VPC). If you are
 creating a cluster inside of a VPC, use a cache subnet group instead.
 For more information, see
-\href{https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html}{CreateCacheSubnetGroup}.
+\code{\link[=elasticache_create_cache_subnet_group]{create_cache_subnet_group}}.
 }
 \section{Request syntax}{
 \preformatted{svc$create_cache_security_group(

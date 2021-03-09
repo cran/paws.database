@@ -25,8 +25,8 @@ When you submit your cluster resize request, your existing cluster goes
 into a read-only mode. After Amazon Redshift provisions a new cluster
 based on your resize requirements, there will be outage for a period
 while the old cluster is deleted and your connection is switched to the
-new cluster. You can use DescribeResize to track the progress of the
-resize request.
+new cluster. You can use \code{\link[=redshift_describe_resize]{describe_resize}}
+to track the progress of the resize request.
 
 Valid Values: \code{multi-node | single-node}}
 
@@ -89,7 +89,7 @@ Constraints:
 
 \item{ClusterParameterGroupName}{The name of the cluster parameter group to apply to this cluster. This
 change is applied only after the cluster is rebooted. To reboot a
-cluster use RebootCluster.
+cluster use \code{\link[=redshift_reboot_cluster]{reboot_cluster}}.
 
 Default: Uses existing setting.
 
@@ -99,7 +99,7 @@ group family that matches the cluster version.}
 \item{AutomatedSnapshotRetentionPeriod}{The number of days that automated snapshots are retained. If the value
 is 0, automated snapshots are disabled. Even if automated snapshots are
 disabled, you can still create manual snapshots when you want with
-CreateClusterSnapshot.
+\code{\link[=redshift_create_cluster_snapshot]{create_cluster_snapshot}}.
 
 If you decrease the automated snapshot retention period from its current
 value, existing automated snapshots that fall outside of the new
@@ -215,6 +215,166 @@ Availability Zones after the cluster modification is complete.}
 target Availability Zone.}
 
 \item{Port}{The option to change the port of an Amazon Redshift cluster.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Cluster = list(
+    ClusterIdentifier = "string",
+    NodeType = "string",
+    ClusterStatus = "string",
+    ClusterAvailabilityStatus = "string",
+    ModifyStatus = "string",
+    MasterUsername = "string",
+    DBName = "string",
+    Endpoint = list(
+      Address = "string",
+      Port = 123,
+      VpcEndpoints = list(
+        list(
+          VpcEndpointId = "string"
+        )
+      )
+    ),
+    ClusterCreateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    AutomatedSnapshotRetentionPeriod = 123,
+    ManualSnapshotRetentionPeriod = 123,
+    ClusterSecurityGroups = list(
+      list(
+        ClusterSecurityGroupName = "string",
+        Status = "string"
+      )
+    ),
+    VpcSecurityGroups = list(
+      list(
+        VpcSecurityGroupId = "string",
+        Status = "string"
+      )
+    ),
+    ClusterParameterGroups = list(
+      list(
+        ParameterGroupName = "string",
+        ParameterApplyStatus = "string",
+        ClusterParameterStatusList = list(
+          list(
+            ParameterName = "string",
+            ParameterApplyStatus = "string",
+            ParameterApplyErrorDescription = "string"
+          )
+        )
+      )
+    ),
+    ClusterSubnetGroupName = "string",
+    VpcId = "string",
+    AvailabilityZone = "string",
+    PreferredMaintenanceWindow = "string",
+    PendingModifiedValues = list(
+      MasterUserPassword = "string",
+      NodeType = "string",
+      NumberOfNodes = 123,
+      ClusterType = "string",
+      ClusterVersion = "string",
+      AutomatedSnapshotRetentionPeriod = 123,
+      ClusterIdentifier = "string",
+      PubliclyAccessible = TRUE|FALSE,
+      EnhancedVpcRouting = TRUE|FALSE,
+      MaintenanceTrackName = "string",
+      EncryptionType = "string"
+    ),
+    ClusterVersion = "string",
+    AllowVersionUpgrade = TRUE|FALSE,
+    NumberOfNodes = 123,
+    PubliclyAccessible = TRUE|FALSE,
+    Encrypted = TRUE|FALSE,
+    RestoreStatus = list(
+      Status = "string",
+      CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+      SnapshotSizeInMegaBytes = 123,
+      ProgressInMegaBytes = 123,
+      ElapsedTimeInSeconds = 123,
+      EstimatedTimeToCompletionInSeconds = 123
+    ),
+    DataTransferProgress = list(
+      Status = "string",
+      CurrentRateInMegaBytesPerSecond = 123.0,
+      TotalDataInMegaBytes = 123,
+      DataTransferredInMegaBytes = 123,
+      EstimatedTimeToCompletionInSeconds = 123,
+      ElapsedTimeInSeconds = 123
+    ),
+    HsmStatus = list(
+      HsmClientCertificateIdentifier = "string",
+      HsmConfigurationIdentifier = "string",
+      Status = "string"
+    ),
+    ClusterSnapshotCopyStatus = list(
+      DestinationRegion = "string",
+      RetentionPeriod = 123,
+      ManualSnapshotRetentionPeriod = 123,
+      SnapshotCopyGrantName = "string"
+    ),
+    ClusterPublicKey = "string",
+    ClusterNodes = list(
+      list(
+        NodeRole = "string",
+        PrivateIPAddress = "string",
+        PublicIPAddress = "string"
+      )
+    ),
+    ElasticIpStatus = list(
+      ElasticIp = "string",
+      Status = "string"
+    ),
+    ClusterRevisionNumber = "string",
+    Tags = list(
+      list(
+        Key = "string",
+        Value = "string"
+      )
+    ),
+    KmsKeyId = "string",
+    EnhancedVpcRouting = TRUE|FALSE,
+    IamRoles = list(
+      list(
+        IamRoleArn = "string",
+        ApplyStatus = "string"
+      )
+    ),
+    PendingActions = list(
+      "string"
+    ),
+    MaintenanceTrackName = "string",
+    ElasticResizeNumberOfNodeOptions = "string",
+    DeferredMaintenanceWindows = list(
+      list(
+        DeferMaintenanceIdentifier = "string",
+        DeferMaintenanceStartTime = as.POSIXct(
+          "2015-01-01"
+        ),
+        DeferMaintenanceEndTime = as.POSIXct(
+          "2015-01-01"
+        )
+      )
+    ),
+    SnapshotScheduleIdentifier = "string",
+    SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+    ExpectedNextSnapshotScheduleTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    ExpectedNextSnapshotScheduleTimeStatus = "string",
+    NextMaintenanceWindowStartTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    ResizeInfo = list(
+      ResizeType = "string",
+      AllowCancelResize = TRUE|FALSE
+    ),
+    AvailabilityZoneRelocationStatus = "string",
+    ClusterNamespaceArn = "string"
+  )
+)
+}
 }
 \description{
 Modifies the settings for a cluster.

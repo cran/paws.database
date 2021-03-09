@@ -22,7 +22,8 @@ Default: \code{100}
 Constraints: minimum 20, maximum 100.}
 
 \item{Marker}{An optional parameter that specifies the starting point to return a set
-of response records. When the results of a DescribeClusterSubnetGroups
+of response records. When the results of a
+\code{\link[=redshift_describe_cluster_subnet_groups]{describe_cluster_subnet_groups}}
 request exceed the value specified in \code{MaxRecords}, AWS returns a value
 in the \code{Marker} field of the response. You can retrieve the next set of
 response records by providing the returned marker value in the \code{Marker}
@@ -42,6 +43,40 @@ with values called \code{admin} and \code{test}. If you specify both of these ta
 values in the request, Amazon Redshift returns a response with the
 subnet groups that have either or both of these tag values associated
 with them.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Marker = "string",
+  ClusterSubnetGroups = list(
+    list(
+      ClusterSubnetGroupName = "string",
+      Description = "string",
+      VpcId = "string",
+      SubnetGroupStatus = "string",
+      Subnets = list(
+        list(
+          SubnetIdentifier = "string",
+          SubnetAvailabilityZone = list(
+            Name = "string",
+            SupportedPlatforms = list(
+              list(
+                Name = "string"
+              )
+            )
+          ),
+          SubnetStatus = "string"
+        )
+      ),
+      Tags = list(
+        list(
+          Key = "string",
+          Value = "string"
+        )
+      )
+    )
+  )
+)
+}
 }
 \description{
 Returns one or more cluster subnet group objects, which contain metadata

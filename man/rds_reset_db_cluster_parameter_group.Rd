@@ -20,6 +20,12 @@ parameter.}
 the default values. You can't use this parameter if the
 \code{ResetAllParameters} parameter is enabled.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  DBClusterParameterGroupName = "string"
+)
+}
+}
 \description{
 Modifies the parameters of a DB cluster parameter group to the default
 value. To reset specific parameters submit a list of the following:
@@ -29,9 +35,10 @@ parameter group, specify the \code{DBClusterParameterGroupName} and
 
 When resetting the entire group, dynamic parameters are updated
 immediately and static parameters are set to \code{pending-reboot} to take
-effect on the next DB instance restart or \code{RebootDBInstance} request.
-You must call \code{RebootDBInstance} for every DB instance in your DB
-cluster that you want the updated static parameter to apply to.
+effect on the next DB instance restart or
+\code{\link[=rds_reboot_db_instance]{reboot_db_instance}} request. You must call
+\code{\link[=rds_reboot_db_instance]{reboot_db_instance}} for every DB instance in
+your DB cluster that you want the updated static parameter to apply to.
 
 For more information on Amazon Aurora, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html}{What Is Amazon Aurora?}
 in the \emph{Amazon Aurora User Guide.}

@@ -22,7 +22,7 @@ information about only the database engines identified by these
 identifiers.
 
 For more information about the valid engines for installation media,
-see ImportInstallationMedia.
+see \code{\link[=rds_import_installation_media]{import_installation_media}}.
 }}
 
 \item{MaxRecords}{An optional pagination token provided by a previous
@@ -33,6 +33,26 @@ specified by \code{MaxRecords}.}
 \item{Marker}{An optional pagination token provided by a previous request. If this
 parameter is specified, the response includes only records beyond the
 marker, up to the value specified by \code{MaxRecords}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Marker = "string",
+  InstallationMedia = list(
+    list(
+      InstallationMediaId = "string",
+      CustomAvailabilityZoneId = "string",
+      Engine = "string",
+      EngineVersion = "string",
+      EngineInstallationMediaPath = "string",
+      OSInstallationMediaPath = "string",
+      Status = "string",
+      FailureCause = list(
+        Message = "string"
+      )
+    )
+  )
+)
+}
 }
 \description{
 Describes the available installation media for a DB engine that requires

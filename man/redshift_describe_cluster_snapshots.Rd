@@ -44,7 +44,8 @@ Default: \code{100}
 Constraints: minimum 20, maximum 100.}
 
 \item{Marker}{An optional parameter that specifies the starting point to return a set
-of response records. When the results of a DescribeClusterSnapshots
+of response records. When the results of a
+\code{\link[=redshift_describe_cluster_snapshots]{describe_cluster_snapshots}}
 request exceed the value specified in \code{MaxRecords}, AWS returns a value
 in the \code{Marker} field of the response. You can retrieve the next set of
 response records by providing the returned marker value in the \code{Marker}
@@ -87,6 +88,68 @@ specified for an existing cluster, no snapshots are returned.
 }}
 
 \item{SortingEntities}{}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Marker = "string",
+  Snapshots = list(
+    list(
+      SnapshotIdentifier = "string",
+      ClusterIdentifier = "string",
+      SnapshotCreateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      Status = "string",
+      Port = 123,
+      AvailabilityZone = "string",
+      ClusterCreateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      MasterUsername = "string",
+      ClusterVersion = "string",
+      EngineFullVersion = "string",
+      SnapshotType = "string",
+      NodeType = "string",
+      NumberOfNodes = 123,
+      DBName = "string",
+      VpcId = "string",
+      Encrypted = TRUE|FALSE,
+      KmsKeyId = "string",
+      EncryptedWithHSM = TRUE|FALSE,
+      AccountsWithRestoreAccess = list(
+        list(
+          AccountId = "string",
+          AccountAlias = "string"
+        )
+      ),
+      OwnerAccount = "string",
+      TotalBackupSizeInMegaBytes = 123.0,
+      ActualIncrementalBackupSizeInMegaBytes = 123.0,
+      BackupProgressInMegaBytes = 123.0,
+      CurrentBackupRateInMegaBytesPerSecond = 123.0,
+      EstimatedSecondsToCompletion = 123,
+      ElapsedTimeInSeconds = 123,
+      SourceRegion = "string",
+      Tags = list(
+        list(
+          Key = "string",
+          Value = "string"
+        )
+      ),
+      RestorableNodeTypes = list(
+        "string"
+      ),
+      EnhancedVpcRouting = TRUE|FALSE,
+      MaintenanceTrackName = "string",
+      ManualSnapshotRetentionPeriod = 123,
+      ManualSnapshotRemainingDays = 123,
+      SnapshotRetentionStartTime = as.POSIXct(
+        "2015-01-01"
+      )
+    )
+  )
+)
+}
 }
 \description{
 Returns one or more snapshot objects, which contain metadata about your

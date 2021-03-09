@@ -64,7 +64,8 @@ Default: The default DB security group for the database engine.}
 \item{VpcSecurityGroupIds}{A list of EC2 VPC security groups to associate with this DB instance.
 
 Not applicable. The associated list of EC2 VPC security groups is
-managed by the DB cluster. For more information, see CreateDBCluster.
+managed by the DB cluster. For more information, see
+\code{\link[=neptune_create_db_cluster]{create_db_cluster}}.
 
 Default: The default EC2 VPC security group for the DB subnet group's
 VPC.}
@@ -111,7 +112,8 @@ Constraints:
 \item{BackupRetentionPeriod}{The number of days for which automated backups are retained.
 
 Not applicable. The retention period for automated backups is managed by
-the DB cluster. For more information, see CreateDBCluster.
+the DB cluster. For more information, see
+\code{\link[=neptune_create_db_cluster]{create_db_cluster}}.
 
 Default: 1
 
@@ -124,12 +126,13 @@ Constraints:
 \item{PreferredBackupWindow}{The daily time range during which automated backups are created.
 
 Not applicable. The daily time range for creating automated backups is
-managed by the DB cluster. For more information, see CreateDBCluster.}
+managed by the DB cluster. For more information, see
+\code{\link[=neptune_create_db_cluster]{create_db_cluster}}.}
 
 \item{Port}{The port number on which the database accepts connections.
 
 Not applicable. The port is managed by the DB cluster. For more
-information, see CreateDBCluster.
+information, see \code{\link[=neptune_create_db_cluster]{create_db_cluster}}.
 
 Default: \code{8182}
 
@@ -164,7 +167,8 @@ be initially allocated for the DB instance.}
 
 \item{DBClusterIdentifier}{The identifier of the DB cluster that the instance will belong to.
 
-For information on creating a DB cluster, see CreateDBCluster.
+For information on creating a DB cluster, see
+\code{\link[=neptune_create_db_cluster]{create_db_cluster}}.
 
 Type: String}
 
@@ -181,7 +185,8 @@ device.}
 \item{StorageEncrypted}{Specifies whether the DB instance is encrypted.
 
 Not applicable. The encryption for DB instances is managed by the DB
-cluster. For more information, see CreateDBCluster.
+cluster. For more information, see
+\code{\link[=neptune_create_db_cluster]{create_db_cluster}}.
 
 Default: false}
 
@@ -194,7 +199,7 @@ instance, then you can use the KMS key alias instead of the ARN for the
 KM encryption key.
 
 Not applicable. The KMS key identifier is managed by the DB cluster. For
-more information, see CreateDBCluster.
+more information, see \code{\link[=neptune_create_db_cluster]{create_db_cluster}}.
 
 If the \code{StorageEncrypted} parameter is true, and you do not specify a
 value for the \code{KmsKeyId} parameter, then Amazon Neptune will use your
@@ -253,6 +258,151 @@ enabled. By default, deletion protection is disabled. See \href{https://docs.aws
 
 DB instances in a DB cluster can be deleted even when deletion
 protection is enabled in their parent DB cluster.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  DBInstance = list(
+    DBInstanceIdentifier = "string",
+    DBInstanceClass = "string",
+    Engine = "string",
+    DBInstanceStatus = "string",
+    MasterUsername = "string",
+    DBName = "string",
+    Endpoint = list(
+      Address = "string",
+      Port = 123,
+      HostedZoneId = "string"
+    ),
+    AllocatedStorage = 123,
+    InstanceCreateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    PreferredBackupWindow = "string",
+    BackupRetentionPeriod = 123,
+    DBSecurityGroups = list(
+      list(
+        DBSecurityGroupName = "string",
+        Status = "string"
+      )
+    ),
+    VpcSecurityGroups = list(
+      list(
+        VpcSecurityGroupId = "string",
+        Status = "string"
+      )
+    ),
+    DBParameterGroups = list(
+      list(
+        DBParameterGroupName = "string",
+        ParameterApplyStatus = "string"
+      )
+    ),
+    AvailabilityZone = "string",
+    DBSubnetGroup = list(
+      DBSubnetGroupName = "string",
+      DBSubnetGroupDescription = "string",
+      VpcId = "string",
+      SubnetGroupStatus = "string",
+      Subnets = list(
+        list(
+          SubnetIdentifier = "string",
+          SubnetAvailabilityZone = list(
+            Name = "string"
+          ),
+          SubnetStatus = "string"
+        )
+      ),
+      DBSubnetGroupArn = "string"
+    ),
+    PreferredMaintenanceWindow = "string",
+    PendingModifiedValues = list(
+      DBInstanceClass = "string",
+      AllocatedStorage = 123,
+      MasterUserPassword = "string",
+      Port = 123,
+      BackupRetentionPeriod = 123,
+      MultiAZ = TRUE|FALSE,
+      EngineVersion = "string",
+      LicenseModel = "string",
+      Iops = 123,
+      DBInstanceIdentifier = "string",
+      StorageType = "string",
+      CACertificateIdentifier = "string",
+      DBSubnetGroupName = "string",
+      PendingCloudwatchLogsExports = list(
+        LogTypesToEnable = list(
+          "string"
+        ),
+        LogTypesToDisable = list(
+          "string"
+        )
+      )
+    ),
+    LatestRestorableTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    MultiAZ = TRUE|FALSE,
+    EngineVersion = "string",
+    AutoMinorVersionUpgrade = TRUE|FALSE,
+    ReadReplicaSourceDBInstanceIdentifier = "string",
+    ReadReplicaDBInstanceIdentifiers = list(
+      "string"
+    ),
+    ReadReplicaDBClusterIdentifiers = list(
+      "string"
+    ),
+    LicenseModel = "string",
+    Iops = 123,
+    OptionGroupMemberships = list(
+      list(
+        OptionGroupName = "string",
+        Status = "string"
+      )
+    ),
+    CharacterSetName = "string",
+    SecondaryAvailabilityZone = "string",
+    PubliclyAccessible = TRUE|FALSE,
+    StatusInfos = list(
+      list(
+        StatusType = "string",
+        Normal = TRUE|FALSE,
+        Status = "string",
+        Message = "string"
+      )
+    ),
+    StorageType = "string",
+    TdeCredentialArn = "string",
+    DbInstancePort = 123,
+    DBClusterIdentifier = "string",
+    StorageEncrypted = TRUE|FALSE,
+    KmsKeyId = "string",
+    DbiResourceId = "string",
+    CACertificateIdentifier = "string",
+    DomainMemberships = list(
+      list(
+        Domain = "string",
+        Status = "string",
+        FQDN = "string",
+        IAMRoleName = "string"
+      )
+    ),
+    CopyTagsToSnapshot = TRUE|FALSE,
+    MonitoringInterval = 123,
+    EnhancedMonitoringResourceArn = "string",
+    MonitoringRoleArn = "string",
+    PromotionTier = 123,
+    DBInstanceArn = "string",
+    Timezone = "string",
+    IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+    PerformanceInsightsEnabled = TRUE|FALSE,
+    PerformanceInsightsKMSKeyId = "string",
+    EnabledCloudwatchLogsExports = list(
+      "string"
+    ),
+    DeletionProtection = TRUE|FALSE
+  )
+)
+}
 }
 \description{
 Creates a new DB instance.

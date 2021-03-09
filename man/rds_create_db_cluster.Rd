@@ -79,17 +79,17 @@ Valid Values: \code{aurora} (for MySQL 5.6-compatible Aurora), \code{aurora-mysq
 To list all of the available engine versions for \code{aurora} (for MySQL
 5.6-compatible Aurora), use the following command:
 
-\verb{aws rds describe-db-engine-versions --engine aurora --query "DBEngineVersions\\\[\\\].EngineVersion"}
+\verb{aws rds describe-db-engine-versions --engine aurora --query "DBEngineVersions[].EngineVersion"}
 
 To list all of the available engine versions for \code{aurora-mysql} (for
 MySQL 5.7-compatible Aurora), use the following command:
 
-\verb{aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions\\\[\\\].EngineVersion"}
+\verb{aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"}
 
 To list all of the available engine versions for \code{aurora-postgresql},
 use the following command:
 
-\verb{aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions\\\[\\\].EngineVersion"}
+\verb{aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions[].EngineVersion"}
 
 \strong{Aurora MySQL}
 
@@ -190,22 +190,24 @@ valid in the destination AWS Region. This CMK is used to encrypt the
 read replica in that AWS Region.}
 
 \item{PreSignedUrl}{A URL that contains a Signature Version 4 signed request for the
-\code{CreateDBCluster} action to be called in the source AWS Region where the
-DB cluster is replicated from. You only need to specify \code{PreSignedUrl}
-when you are performing cross-region replication from an encrypted DB
-cluster.
+\code{\link[=rds_create_db_cluster]{create_db_cluster}} action to be called in the
+source AWS Region where the DB cluster is replicated from. You only need
+to specify \code{PreSignedUrl} when you are performing cross-region
+replication from an encrypted DB cluster.
 
-The pre-signed URL must be a valid request for the \code{CreateDBCluster} API
-action that can be executed in the source AWS Region that contains the
-encrypted DB cluster to be copied.
+The pre-signed URL must be a valid request for the
+\code{\link[=rds_create_db_cluster]{create_db_cluster}} API action that can be
+executed in the source AWS Region that contains the encrypted DB cluster
+to be copied.
 
 The pre-signed URL request must contain the following parameter values:
 \itemize{
 \item \code{KmsKeyId} - The AWS KMS key identifier for the key to use to
 encrypt the copy of the DB cluster in the destination AWS Region.
 This should refer to the same AWS KMS CMK for both the
-\code{CreateDBCluster} action that is called in the destination AWS
-Region, and the action contained in the pre-signed URL.
+\code{\link[=rds_create_db_cluster]{create_db_cluster}} action that is called
+in the destination AWS Region, and the action contained in the
+pre-signed URL.
 \item \code{DestinationRegion} - The name of the AWS Region that Aurora read
 replica will be created in.
 \item \code{ReplicationSourceIdentifier} - The DB cluster identifier for the
@@ -332,6 +334,139 @@ in an Aurora global database. By default, Aurora disallows write
 operations for secondary clusters.}
 
 \item{SourceRegion}{The ID of the region that contains the source for the read replica.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  DBCluster = list(
+    AllocatedStorage = 123,
+    AvailabilityZones = list(
+      "string"
+    ),
+    BackupRetentionPeriod = 123,
+    CharacterSetName = "string",
+    DatabaseName = "string",
+    DBClusterIdentifier = "string",
+    DBClusterParameterGroup = "string",
+    DBSubnetGroup = "string",
+    Status = "string",
+    PercentProgress = "string",
+    EarliestRestorableTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    Endpoint = "string",
+    ReaderEndpoint = "string",
+    CustomEndpoints = list(
+      "string"
+    ),
+    MultiAZ = TRUE|FALSE,
+    Engine = "string",
+    EngineVersion = "string",
+    LatestRestorableTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    Port = 123,
+    MasterUsername = "string",
+    DBClusterOptionGroupMemberships = list(
+      list(
+        DBClusterOptionGroupName = "string",
+        Status = "string"
+      )
+    ),
+    PreferredBackupWindow = "string",
+    PreferredMaintenanceWindow = "string",
+    ReplicationSourceIdentifier = "string",
+    ReadReplicaIdentifiers = list(
+      "string"
+    ),
+    DBClusterMembers = list(
+      list(
+        DBInstanceIdentifier = "string",
+        IsClusterWriter = TRUE|FALSE,
+        DBClusterParameterGroupStatus = "string",
+        PromotionTier = 123
+      )
+    ),
+    VpcSecurityGroups = list(
+      list(
+        VpcSecurityGroupId = "string",
+        Status = "string"
+      )
+    ),
+    HostedZoneId = "string",
+    StorageEncrypted = TRUE|FALSE,
+    KmsKeyId = "string",
+    DbClusterResourceId = "string",
+    DBClusterArn = "string",
+    AssociatedRoles = list(
+      list(
+        RoleArn = "string",
+        Status = "string",
+        FeatureName = "string"
+      )
+    ),
+    IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+    CloneGroupId = "string",
+    ClusterCreateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    EarliestBacktrackTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    BacktrackWindow = 123,
+    BacktrackConsumedChangeRecords = 123,
+    EnabledCloudwatchLogsExports = list(
+      "string"
+    ),
+    Capacity = 123,
+    EngineMode = "string",
+    ScalingConfigurationInfo = list(
+      MinCapacity = 123,
+      MaxCapacity = 123,
+      AutoPause = TRUE|FALSE,
+      SecondsUntilAutoPause = 123,
+      TimeoutAction = "string"
+    ),
+    DeletionProtection = TRUE|FALSE,
+    HttpEndpointEnabled = TRUE|FALSE,
+    ActivityStreamMode = "sync"|"async",
+    ActivityStreamStatus = "stopped"|"starting"|"started"|"stopping",
+    ActivityStreamKmsKeyId = "string",
+    ActivityStreamKinesisStreamName = "string",
+    CopyTagsToSnapshot = TRUE|FALSE,
+    CrossAccountClone = TRUE|FALSE,
+    DomainMemberships = list(
+      list(
+        Domain = "string",
+        Status = "string",
+        FQDN = "string",
+        IAMRoleName = "string"
+      )
+    ),
+    TagList = list(
+      list(
+        Key = "string",
+        Value = "string"
+      )
+    ),
+    GlobalWriteForwardingStatus = "enabled"|"disabled"|"enabling"|"disabling"|"unknown",
+    GlobalWriteForwardingRequested = TRUE|FALSE,
+    PendingModifiedValues = list(
+      PendingCloudwatchLogsExports = list(
+        LogTypesToEnable = list(
+          "string"
+        ),
+        LogTypesToDisable = list(
+          "string"
+        )
+      ),
+      DBClusterIdentifier = "string",
+      MasterUserPassword = "string",
+      IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+      EngineVersion = "string"
+    )
+  )
+)
+}
 }
 \description{
 Creates a new Amazon Aurora DB cluster.

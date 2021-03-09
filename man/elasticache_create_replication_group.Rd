@@ -201,7 +201,9 @@ replication group.}
 
 \item{EngineVersion}{The version number of the cache engine to be used for the clusters in
 this replication group. To view the supported cache engine versions, use
-the \code{DescribeCacheEngineVersions} operation.
+the
+\code{\link[=elasticache_describe_cache_engine_versions]{describe_cache_engine_versions}}
+operation.
 
 \strong{Important:} You can upgrade to a newer engine version (see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement}{Selecting a Cache Engine and Version})
 in the \emph{ElastiCache User Guide}, but you cannot downgrade to an earlier
@@ -324,7 +326,7 @@ Password constraints:
 \item Must be only printable ASCII characters.
 \item Must be at least 16 characters and no more than 128 characters in
 length.
-\item The only permitted printable special characters are !, &, \\#, $, ^,
+\item The only permitted printable special characters are !, &, \#, $, ^,
 <, >, and -. Other printable special characters cannot be used
 in the AUTH token.
 }
@@ -368,6 +370,94 @@ Default: \code{false}}
 \item{KmsKeyId}{The ID of the KMS key used to encrypt the disk in the cluster.}
 
 \item{UserGroupIds}{The list of user groups to associate with the replication group.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  ReplicationGroup = list(
+    ReplicationGroupId = "string",
+    Description = "string",
+    GlobalReplicationGroupInfo = list(
+      GlobalReplicationGroupId = "string",
+      GlobalReplicationGroupMemberRole = "string"
+    ),
+    Status = "string",
+    PendingModifiedValues = list(
+      PrimaryClusterId = "string",
+      AutomaticFailoverStatus = "enabled"|"disabled",
+      Resharding = list(
+        SlotMigration = list(
+          ProgressPercentage = 123.0
+        )
+      ),
+      AuthTokenStatus = "SETTING"|"ROTATING",
+      UserGroups = list(
+        UserGroupIdsToAdd = list(
+          "string"
+        ),
+        UserGroupIdsToRemove = list(
+          "string"
+        )
+      )
+    ),
+    MemberClusters = list(
+      "string"
+    ),
+    NodeGroups = list(
+      list(
+        NodeGroupId = "string",
+        Status = "string",
+        PrimaryEndpoint = list(
+          Address = "string",
+          Port = 123
+        ),
+        ReaderEndpoint = list(
+          Address = "string",
+          Port = 123
+        ),
+        Slots = "string",
+        NodeGroupMembers = list(
+          list(
+            CacheClusterId = "string",
+            CacheNodeId = "string",
+            ReadEndpoint = list(
+              Address = "string",
+              Port = 123
+            ),
+            PreferredAvailabilityZone = "string",
+            PreferredOutpostArn = "string",
+            CurrentRole = "string"
+          )
+        )
+      )
+    ),
+    SnapshottingClusterId = "string",
+    AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+    MultiAZ = "enabled"|"disabled",
+    ConfigurationEndpoint = list(
+      Address = "string",
+      Port = 123
+    ),
+    SnapshotRetentionLimit = 123,
+    SnapshotWindow = "string",
+    ClusterEnabled = TRUE|FALSE,
+    CacheNodeType = "string",
+    AuthTokenEnabled = TRUE|FALSE,
+    AuthTokenLastModifiedDate = as.POSIXct(
+      "2015-01-01"
+    ),
+    TransitEncryptionEnabled = TRUE|FALSE,
+    AtRestEncryptionEnabled = TRUE|FALSE,
+    MemberClustersOutpostArns = list(
+      "string"
+    ),
+    KmsKeyId = "string",
+    ARN = "string",
+    UserGroupIds = list(
+      "string"
+    )
+  )
+)
+}
 }
 \description{
 Creates a Redis (cluster mode disabled) or a Redis (cluster mode

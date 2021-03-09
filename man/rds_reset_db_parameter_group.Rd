@@ -45,6 +45,12 @@ and changes are applied when DB instance reboots.
 
 Valid Values (for Apply method): \code{pending-reboot}}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  DBParameterGroupName = "string"
+)
+}
+}
 \description{
 Modifies the parameters of a DB parameter group to the engine/system
 default value. To reset specific parameters, provide a list of the
@@ -53,7 +59,7 @@ parameter group, specify the \code{DBParameterGroup} name and
 \code{ResetAllParameters} parameters. When resetting the entire group,
 dynamic parameters are updated immediately and static parameters are set
 to \code{pending-reboot} to take effect on the next DB instance restart or
-\code{RebootDBInstance} request.
+\code{\link[=rds_reboot_db_instance]{reboot_db_instance}} request.
 }
 \section{Request syntax}{
 \preformatted{svc$reset_db_parameter_group(

@@ -14,6 +14,33 @@ requesting. This parameter is case-sensitive.
 By default, resize operations for all clusters defined for an AWS
 account are returned.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  TargetNodeType = "string",
+  TargetNumberOfNodes = 123,
+  TargetClusterType = "string",
+  Status = "string",
+  ImportTablesCompleted = list(
+    "string"
+  ),
+  ImportTablesInProgress = list(
+    "string"
+  ),
+  ImportTablesNotStarted = list(
+    "string"
+  ),
+  AvgResizeRateInMegaBytesPerSecond = 123.0,
+  TotalResizeDataInMegaBytes = 123,
+  ProgressInMegaBytes = 123,
+  ElapsedTimeInSeconds = 123,
+  EstimatedTimeToCompletionInSeconds = 123,
+  ResizeType = "string",
+  Message = "string",
+  TargetEncryptionType = "string",
+  DataTransferProgressPercent = 123.0
+)
+}
+}
 \description{
 Returns information about the last resize operation for the specified
 cluster. If no resize operation has ever been initiated for the
@@ -21,8 +48,9 @@ specified cluster, a \verb{HTTP 404} error is returned. If a resize operation
 was initiated and completed, the status of the resize remains as
 \code{SUCCEEDED} until the next resize.
 
-A resize operation can be requested using ModifyCluster and specifying a
-different number or type of nodes for the cluster.
+A resize operation can be requested using
+\code{\link[=redshift_modify_cluster]{modify_cluster}} and specifying a different
+number or type of nodes for the cluster.
 }
 \section{Request syntax}{
 \preformatted{svc$describe_resize(

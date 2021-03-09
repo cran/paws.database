@@ -52,7 +52,7 @@ name in an expression.
 misinterpreted in an expression.
 }
 
-Use the \strong{\\#} character in an expression to dereference an attribute
+Use the \strong{\#} character in an expression to dereference an attribute
 name. For example, consider the following attribute name:
 \itemize{
 \item \code{Percentile}
@@ -64,7 +64,7 @@ words, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguid
 in the \emph{Amazon DynamoDB Developer Guide}). To work around this, you
 could specify the following for \code{ExpressionAttributeNames}:
 \itemize{
-\item \verb{\\\{"#P":"Percentile"\\\}}
+\item \code{{"#P":"Percentile"}}
 }
 
 You could then use this substitution in an expression, as in this
@@ -79,15 +79,71 @@ values}, which are placeholders for the actual value at runtime.
 For more information on expression attribute names, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html}{Specifying Item Attributes}
 in the \emph{Amazon DynamoDB Developer Guide}.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  Item = list(
+    list(
+      S = "string",
+      N = "string",
+      B = raw,
+      SS = list(
+        "string"
+      ),
+      NS = list(
+        "string"
+      ),
+      BS = list(
+        raw
+      ),
+      M = list(
+        list()
+      ),
+      L = list(
+        list()
+      ),
+      NULL = TRUE|FALSE,
+      BOOL = TRUE|FALSE
+    )
+  ),
+  ConsumedCapacity = list(
+    TableName = "string",
+    CapacityUnits = 123.0,
+    ReadCapacityUnits = 123.0,
+    WriteCapacityUnits = 123.0,
+    Table = list(
+      ReadCapacityUnits = 123.0,
+      WriteCapacityUnits = 123.0,
+      CapacityUnits = 123.0
+    ),
+    LocalSecondaryIndexes = list(
+      list(
+        ReadCapacityUnits = 123.0,
+        WriteCapacityUnits = 123.0,
+        CapacityUnits = 123.0
+      )
+    ),
+    GlobalSecondaryIndexes = list(
+      list(
+        ReadCapacityUnits = 123.0,
+        WriteCapacityUnits = 123.0,
+        CapacityUnits = 123.0
+      )
+    )
+  )
+)
+}
+}
 \description{
-The \code{GetItem} operation returns a set of attributes for the item with
-the given primary key. If there is no matching item, \code{GetItem} does not
-return any data and there will be no \code{Item} element in the response.
+The \code{\link[=dynamodb_get_item]{get_item}} operation returns a set of
+attributes for the item with the given primary key. If there is no
+matching item, \code{\link[=dynamodb_get_item]{get_item}} does not return any data
+and there will be no \code{Item} element in the response.
 
-\code{GetItem} provides an eventually consistent read by default. If your
-application requires a strongly consistent read, set \code{ConsistentRead} to
-\code{true}. Although a strongly consistent read might take more time than an
-eventually consistent read, it always returns the last updated value.
+\code{\link[=dynamodb_get_item]{get_item}} provides an eventually consistent read
+by default. If your application requires a strongly consistent read, set
+\code{ConsistentRead} to \code{true}. Although a strongly consistent read might
+take more time than an eventually consistent read, it always returns the
+last updated value.
 }
 \section{Request syntax}{
 \preformatted{svc$get_item(

@@ -26,23 +26,46 @@ Valid values: \code{db-instance} | \code{db-cluster} | \code{db-parameter-group}
 want to subscribe to. You can see a list of the categories for a given
 source type in
 \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html}{Events}
-in the \emph{Amazon RDS User Guide} or by using the \code{DescribeEventCategories}
-operation.}
+in the \emph{Amazon RDS User Guide} or by using the
+\code{\link[=rds_describe_event_categories]{describe_event_categories}} operation.}
 
 \item{Enabled}{A value that indicates whether to activate the subscription.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  EventSubscription = list(
+    CustomerAwsId = "string",
+    CustSubscriptionId = "string",
+    SnsTopicArn = "string",
+    Status = "string",
+    SubscriptionCreationTime = "string",
+    SourceType = "string",
+    SourceIdsList = list(
+      "string"
+    ),
+    EventCategoriesList = list(
+      "string"
+    ),
+    Enabled = TRUE|FALSE,
+    EventSubscriptionArn = "string"
+  )
+)
+}
 }
 \description{
 Modifies an existing RDS event notification subscription. You can't
 modify the source identifiers using this call. To change source
 identifiers for a subscription, use the
-\code{AddSourceIdentifierToSubscription} and
-\code{RemoveSourceIdentifierFromSubscription} calls.
+\code{\link[=rds_add_source_identifier_to_subscription]{add_source_identifier_to_subscription}}
+and
+\code{\link[=rds_remove_source_identifier_from_subscription]{remove_source_identifier_from_subscription}}
+calls.
 
 You can see a list of the event categories for a given source type
 (\code{SourceType}) in
 \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html}{Events}
-in the \emph{Amazon RDS User Guide} or by using the \code{DescribeEventCategories}
-operation.
+in the \emph{Amazon RDS User Guide} or by using the
+\code{\link[=rds_describe_event_categories]{describe_event_categories}} operation.
 }
 \section{Request syntax}{
 \preformatted{svc$modify_event_subscription(

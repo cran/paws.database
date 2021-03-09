@@ -18,6 +18,9 @@ NULL
 #' an Amazon Resource Name .
 #' @param Tags &#91;required&#93; The tags to be assigned to the Amazon DocumentDB resource.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$add_tags_to_resource(
@@ -79,6 +82,32 @@ docdb_add_tags_to_resource <- function(ResourceName, Tags) {
 #' 
 #' -   `undo-opt-in` - Cancel any existing `next-maintenance` opt-in
 #'     requests.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ResourcePendingMaintenanceActions = list(
+#'     ResourceIdentifier = "string",
+#'     PendingMaintenanceActionDetails = list(
+#'       list(
+#'         Action = "string",
+#'         AutoAppliedAfterDate = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         ForcedApplyDate = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         OptInStatus = "string",
+#'         CurrentApplyDate = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         Description = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -149,6 +178,19 @@ docdb_apply_pending_maintenance_action <- function(ResourceIdentifier, ApplyActi
 #' Example: `my-cluster-param-group1`
 #' @param TargetDBClusterParameterGroupDescription &#91;required&#93; A description for the copied cluster parameter group.
 #' @param Tags The tags that are to be assigned to the parameter group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterParameterGroup = list(
+#'     DBClusterParameterGroupName = "string",
+#'     DBParameterGroupFamily = "string",
+#'     Description = "string",
+#'     DBClusterParameterGroupArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -253,9 +295,10 @@ docdb_copy_db_cluster_parameter_group <- function(SourceDBClusterParameterGroupI
 #' If you copy an unencrypted cluster snapshot and specify a value for the
 #' `KmsKeyId` parameter, an error is returned.
 #' @param PreSignedUrl The URL that contains a Signature Version 4 signed request for the
-#' `CopyDBClusterSnapshot` API action in the AWS Region that contains the
-#' source cluster snapshot to copy. You must use the `PreSignedUrl`
-#' parameter when copying a cluster snapshot from another AWS Region.
+#' [`copy_db_cluster_snapshot`][docdb_copy_db_cluster_snapshot] API action
+#' in the AWS Region that contains the source cluster snapshot to copy. You
+#' must use the `PreSignedUrl` parameter when copying a cluster snapshot
+#' from another AWS Region.
 #' 
 #' If you are using an AWS SDK tool or the AWS CLI, you can specify
 #' `SourceRegion` (or `--source-region` for the AWS CLI) instead of
@@ -264,9 +307,10 @@ docdb_copy_db_cluster_parameter_group <- function(SourceDBClusterParameterGroupI
 #' that can be executed in the source AWS Region.
 #' 
 #' The presigned URL must be a valid request for the
-#' `CopyDBClusterSnapshot` API action that can be executed in the source
-#' AWS Region that contains the cluster snapshot to be copied. The
-#' presigned URL request must contain the following parameter values:
+#' [`copy_db_cluster_snapshot`][docdb_copy_db_cluster_snapshot] API action
+#' that can be executed in the source AWS Region that contains the cluster
+#' snapshot to be copied. The presigned URL request must contain the
+#' following parameter values:
 #' 
 #' -   `SourceRegion` - The ID of the region that contains the snapshot to
 #'     be copied.
@@ -284,6 +328,38 @@ docdb_copy_db_cluster_parameter_group <- function(SourceDBClusterParameterGroupI
 #' @param CopyTags Set to `true` to copy all tags from the source cluster snapshot to the
 #' target cluster snapshot, and otherwise `false`. The default is `false`.
 #' @param Tags The tags to be assigned to the cluster snapshot.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterSnapshot = list(
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     DBClusterSnapshotIdentifier = "string",
+#'     DBClusterIdentifier = "string",
+#'     SnapshotCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Engine = "string",
+#'     Status = "string",
+#'     Port = 123,
+#'     VpcId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MasterUsername = "string",
+#'     EngineVersion = "string",
+#'     SnapshotType = "string",
+#'     PercentProgress = 123,
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DBClusterSnapshotArn = "string",
+#'     SourceDBClusterSnapshotArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -444,6 +520,71 @@ docdb_copy_db_cluster_snapshot <- function(SourceDBClusterSnapshotIdentifier, Ta
 #' `DeletionProtection` is disabled. `DeletionProtection` protects clusters
 #' from being accidentally deleted.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_db_cluster(
@@ -539,6 +680,19 @@ docdb_create_db_cluster <- function(AvailabilityZones = NULL, BackupRetentionPer
 #' @param Description &#91;required&#93; The description for the cluster parameter group.
 #' @param Tags The tags to be assigned to the cluster parameter group.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterParameterGroup = list(
+#'     DBClusterParameterGroupName = "string",
+#'     DBParameterGroupFamily = "string",
+#'     Description = "string",
+#'     DBClusterParameterGroupArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_db_cluster_parameter_group(
@@ -604,6 +758,38 @@ docdb_create_db_cluster_parameter_group <- function(DBClusterParameterGroupName,
 #' 
 #' Example: `my-cluster`
 #' @param Tags The tags to be assigned to the cluster snapshot.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterSnapshot = list(
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     DBClusterSnapshotIdentifier = "string",
+#'     DBClusterIdentifier = "string",
+#'     SnapshotCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Engine = "string",
+#'     Status = "string",
+#'     Port = 123,
+#'     VpcId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MasterUsername = "string",
+#'     EngineVersion = "string",
+#'     SnapshotType = "string",
+#'     PercentProgress = 123,
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DBClusterSnapshotArn = "string",
+#'     SourceDBClusterSnapshotArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -698,6 +884,100 @@ docdb_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBClus
 #' 
 #' Valid values: 0-15
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBInstance = list(
+#'     DBInstanceIdentifier = "string",
+#'     DBInstanceClass = "string",
+#'     Engine = "string",
+#'     DBInstanceStatus = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       HostedZoneId = "string"
+#'     ),
+#'     InstanceCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     BackupRetentionPeriod = 123,
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     AvailabilityZone = "string",
+#'     DBSubnetGroup = list(
+#'       DBSubnetGroupName = "string",
+#'       DBSubnetGroupDescription = "string",
+#'       VpcId = "string",
+#'       SubnetGroupStatus = "string",
+#'       Subnets = list(
+#'         list(
+#'           SubnetIdentifier = "string",
+#'           SubnetAvailabilityZone = list(
+#'             Name = "string"
+#'           ),
+#'           SubnetStatus = "string"
+#'         )
+#'       ),
+#'       DBSubnetGroupArn = "string"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       DBInstanceClass = "string",
+#'       AllocatedStorage = 123,
+#'       MasterUserPassword = "string",
+#'       Port = 123,
+#'       BackupRetentionPeriod = 123,
+#'       MultiAZ = TRUE|FALSE,
+#'       EngineVersion = "string",
+#'       LicenseModel = "string",
+#'       Iops = 123,
+#'       DBInstanceIdentifier = "string",
+#'       StorageType = "string",
+#'       CACertificateIdentifier = "string",
+#'       DBSubnetGroupName = "string",
+#'       PendingCloudwatchLogsExports = list(
+#'         LogTypesToEnable = list(
+#'           "string"
+#'         ),
+#'         LogTypesToDisable = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EngineVersion = "string",
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     StatusInfos = list(
+#'       list(
+#'         StatusType = "string",
+#'         Normal = TRUE|FALSE,
+#'         Status = "string",
+#'         Message = "string"
+#'       )
+#'     ),
+#'     DBClusterIdentifier = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbiResourceId = "string",
+#'     CACertificateIdentifier = "string",
+#'     PromotionTier = 123,
+#'     DBInstanceArn = "string",
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_db_instance(
@@ -758,6 +1038,29 @@ docdb_create_db_instance <- function(DBInstanceIdentifier, DBInstanceClass, Engi
 #' @param DBSubnetGroupDescription &#91;required&#93; The description for the subnet group.
 #' @param SubnetIds &#91;required&#93; The Amazon EC2 subnet IDs for the subnet group.
 #' @param Tags The tags to be assigned to the subnet group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBSubnetGroup = list(
+#'     DBSubnetGroupName = "string",
+#'     DBSubnetGroupDescription = "string",
+#'     VpcId = "string",
+#'     SubnetGroupStatus = "string",
+#'     Subnets = list(
+#'       list(
+#'         SubnetIdentifier = "string",
+#'         SubnetAvailabilityZone = list(
+#'           Name = "string"
+#'         ),
+#'         SubnetStatus = "string"
+#'       )
+#'     ),
+#'     DBSubnetGroupArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -836,6 +1139,71 @@ docdb_create_db_subnet_group <- function(DBSubnetGroupName, DBSubnetGroupDescrip
 #' 
 #' -   Cannot end with a hyphen or contain two consecutive hyphens.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_db_cluster(
@@ -884,6 +1252,9 @@ docdb_delete_db_cluster <- function(DBClusterIdentifier, SkipFinalSnapshot = NUL
 #' 
 #' -   Cannot be associated with any clusters.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_db_cluster_parameter_group(
@@ -927,6 +1298,38 @@ docdb_delete_db_cluster_parameter_group <- function(DBClusterParameterGroupName)
 #' Constraints: Must be the name of an existing cluster snapshot in the
 #' `available` state.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterSnapshot = list(
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     DBClusterSnapshotIdentifier = "string",
+#'     DBClusterIdentifier = "string",
+#'     SnapshotCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Engine = "string",
+#'     Status = "string",
+#'     Port = 123,
+#'     VpcId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MasterUsername = "string",
+#'     EngineVersion = "string",
+#'     SnapshotType = "string",
+#'     PercentProgress = 123,
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DBClusterSnapshotArn = "string",
+#'     SourceDBClusterSnapshotArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_db_cluster_snapshot(
@@ -968,6 +1371,100 @@ docdb_delete_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier) {
 #' Constraints:
 #' 
 #' -   Must match the name of an existing instance.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBInstance = list(
+#'     DBInstanceIdentifier = "string",
+#'     DBInstanceClass = "string",
+#'     Engine = "string",
+#'     DBInstanceStatus = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       HostedZoneId = "string"
+#'     ),
+#'     InstanceCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     BackupRetentionPeriod = 123,
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     AvailabilityZone = "string",
+#'     DBSubnetGroup = list(
+#'       DBSubnetGroupName = "string",
+#'       DBSubnetGroupDescription = "string",
+#'       VpcId = "string",
+#'       SubnetGroupStatus = "string",
+#'       Subnets = list(
+#'         list(
+#'           SubnetIdentifier = "string",
+#'           SubnetAvailabilityZone = list(
+#'             Name = "string"
+#'           ),
+#'           SubnetStatus = "string"
+#'         )
+#'       ),
+#'       DBSubnetGroupArn = "string"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       DBInstanceClass = "string",
+#'       AllocatedStorage = 123,
+#'       MasterUserPassword = "string",
+#'       Port = 123,
+#'       BackupRetentionPeriod = 123,
+#'       MultiAZ = TRUE|FALSE,
+#'       EngineVersion = "string",
+#'       LicenseModel = "string",
+#'       Iops = 123,
+#'       DBInstanceIdentifier = "string",
+#'       StorageType = "string",
+#'       CACertificateIdentifier = "string",
+#'       DBSubnetGroupName = "string",
+#'       PendingCloudwatchLogsExports = list(
+#'         LogTypesToEnable = list(
+#'           "string"
+#'         ),
+#'         LogTypesToDisable = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EngineVersion = "string",
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     StatusInfos = list(
+#'       list(
+#'         StatusType = "string",
+#'         Normal = TRUE|FALSE,
+#'         Status = "string",
+#'         Message = "string"
+#'       )
+#'     ),
+#'     DBClusterIdentifier = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbiResourceId = "string",
+#'     CACertificateIdentifier = "string",
+#'     PromotionTier = 123,
+#'     DBInstanceArn = "string",
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1016,6 +1513,9 @@ docdb_delete_db_instance <- function(DBInstanceIdentifier) {
 #' Must match the name of an existing `DBSubnetGroup`. Must not be default.
 #' 
 #' Example: `mySubnetgroup`
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -1077,9 +1577,31 @@ docdb_delete_db_subnet_group <- function(DBSubnetGroupName) {
 #' 
 #' -   Maximum: 100
 #' @param Marker An optional pagination token provided by a previous
-#' `DescribeCertificates` request. If this parameter is specified, the
-#' response includes only records beyond the marker, up to the value
-#' specified by `MaxRecords`.
+#' [`describe_certificates`][docdb_describe_certificates] request. If this
+#' parameter is specified, the response includes only records beyond the
+#' marker, up to the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Certificates = list(
+#'     list(
+#'       CertificateIdentifier = "string",
+#'       CertificateType = "string",
+#'       Thumbprint = "string",
+#'       ValidFrom = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ValidTill = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       CertificateArn = "string"
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1147,6 +1669,22 @@ docdb_describe_certificates <- function(CertificateIdentifier = NULL, Filters = 
 #' @param Marker An optional pagination token provided by a previous request. If this
 #' parameter is specified, the response includes only records beyond the
 #' marker, up to the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   DBClusterParameterGroups = list(
+#'     list(
+#'       DBClusterParameterGroupName = "string",
+#'       DBParameterGroupFamily = "string",
+#'       Description = "string",
+#'       DBClusterParameterGroupArn = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1218,6 +1756,28 @@ docdb_describe_db_cluster_parameter_groups <- function(DBClusterParameterGroupNa
 #' parameter is specified, the response includes only records beyond the
 #' marker, up to the value specified by `MaxRecords`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Parameters = list(
+#'     list(
+#'       ParameterName = "string",
+#'       ParameterValue = "string",
+#'       Description = "string",
+#'       Source = "string",
+#'       ApplyType = "string",
+#'       DataType = "string",
+#'       AllowedValues = "string",
+#'       IsModifiable = TRUE|FALSE,
+#'       MinimumEngineVersion = "string",
+#'       ApplyMethod = "immediate"|"pending-reboot"
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_db_cluster_parameters(
@@ -1264,17 +1824,36 @@ docdb_describe_db_cluster_parameters <- function(DBClusterParameterGroupName, So
 #' manual DB cluster snapshot.
 #' 
 #' When you share snapshots with other AWS accounts,
-#' `DescribeDBClusterSnapshotAttributes` returns the `restore` attribute
-#' and a list of IDs for the AWS accounts that are authorized to copy or
-#' restore the manual cluster snapshot. If `all` is included in the list of
-#' values for the `restore` attribute, then the manual cluster snapshot is
-#' public and can be copied or restored by all AWS accounts.
+#' [`describe_db_cluster_snapshot_attributes`][docdb_describe_db_cluster_snapshot_attributes]
+#' returns the `restore` attribute and a list of IDs for the AWS accounts
+#' that are authorized to copy or restore the manual cluster snapshot. If
+#' `all` is included in the list of values for the `restore` attribute,
+#' then the manual cluster snapshot is public and can be copied or restored
+#' by all AWS accounts.
 #'
 #' @usage
 #' docdb_describe_db_cluster_snapshot_attributes(
 #'   DBClusterSnapshotIdentifier)
 #'
 #' @param DBClusterSnapshotIdentifier &#91;required&#93; The identifier for the cluster snapshot to describe the attributes for.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterSnapshotAttributesResult = list(
+#'     DBClusterSnapshotIdentifier = "string",
+#'     DBClusterSnapshotAttributes = list(
+#'       list(
+#'         AttributeName = "string",
+#'         AttributeValues = list(
+#'           "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1377,6 +1956,41 @@ docdb_describe_db_cluster_snapshot_attributes <- function(DBClusterSnapshotIdent
 #' can be copied or restored by any AWS account, and otherwise `false`. The
 #' default is `false`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   DBClusterSnapshots = list(
+#'     list(
+#'       AvailabilityZones = list(
+#'         "string"
+#'       ),
+#'       DBClusterSnapshotIdentifier = "string",
+#'       DBClusterIdentifier = "string",
+#'       SnapshotCreateTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Engine = "string",
+#'       Status = "string",
+#'       Port = 123,
+#'       VpcId = "string",
+#'       ClusterCreateTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       MasterUsername = "string",
+#'       EngineVersion = "string",
+#'       SnapshotType = "string",
+#'       PercentProgress = 123,
+#'       StorageEncrypted = TRUE|FALSE,
+#'       KmsKeyId = "string",
+#'       DBClusterSnapshotArn = "string",
+#'       SourceDBClusterSnapshotArn = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_db_cluster_snapshots(
@@ -1458,6 +2072,74 @@ docdb_describe_db_cluster_snapshots <- function(DBClusterIdentifier = NULL, DBCl
 #' parameter is specified, the response includes only records beyond the
 #' marker, up to the value specified by `MaxRecords`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   DBClusters = list(
+#'     list(
+#'       AvailabilityZones = list(
+#'         "string"
+#'       ),
+#'       BackupRetentionPeriod = 123,
+#'       DBClusterIdentifier = "string",
+#'       DBClusterParameterGroup = "string",
+#'       DBSubnetGroup = "string",
+#'       Status = "string",
+#'       PercentProgress = "string",
+#'       EarliestRestorableTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Endpoint = "string",
+#'       ReaderEndpoint = "string",
+#'       MultiAZ = TRUE|FALSE,
+#'       Engine = "string",
+#'       EngineVersion = "string",
+#'       LatestRestorableTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Port = 123,
+#'       MasterUsername = "string",
+#'       PreferredBackupWindow = "string",
+#'       PreferredMaintenanceWindow = "string",
+#'       DBClusterMembers = list(
+#'         list(
+#'           DBInstanceIdentifier = "string",
+#'           IsClusterWriter = TRUE|FALSE,
+#'           DBClusterParameterGroupStatus = "string",
+#'           PromotionTier = 123
+#'         )
+#'       ),
+#'       VpcSecurityGroups = list(
+#'         list(
+#'           VpcSecurityGroupId = "string",
+#'           Status = "string"
+#'         )
+#'       ),
+#'       HostedZoneId = "string",
+#'       StorageEncrypted = TRUE|FALSE,
+#'       KmsKeyId = "string",
+#'       DbClusterResourceId = "string",
+#'       DBClusterArn = "string",
+#'       AssociatedRoles = list(
+#'         list(
+#'           RoleArn = "string",
+#'           Status = "string"
+#'         )
+#'       ),
+#'       ClusterCreateTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EnabledCloudwatchLogsExports = list(
+#'         "string"
+#'       ),
+#'       DeletionProtection = TRUE|FALSE
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_db_clusters(
@@ -1529,11 +2211,43 @@ docdb_describe_db_clusters <- function(DBClusterIdentifier = NULL, Filters = NUL
 #' @param DefaultOnly Indicates that only the default version of the specified engine or
 #' engine and major version combination is returned.
 #' @param ListSupportedCharacterSets If this parameter is specified and the requested engine supports the
-#' `CharacterSetName` parameter for `CreateDBInstance`, the response
-#' includes a list of supported character sets for each engine version.
+#' `CharacterSetName` parameter for
+#' [`create_db_instance`][docdb_create_db_instance], the response includes
+#' a list of supported character sets for each engine version.
 #' @param ListSupportedTimezones If this parameter is specified and the requested engine supports the
-#' `TimeZone` parameter for `CreateDBInstance`, the response includes a
-#' list of supported time zones for each engine version.
+#' `TimeZone` parameter for
+#' [`create_db_instance`][docdb_create_db_instance], the response includes
+#' a list of supported time zones for each engine version.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   DBEngineVersions = list(
+#'     list(
+#'       Engine = "string",
+#'       EngineVersion = "string",
+#'       DBParameterGroupFamily = "string",
+#'       DBEngineDescription = "string",
+#'       DBEngineVersionDescription = "string",
+#'       ValidUpgradeTarget = list(
+#'         list(
+#'           Engine = "string",
+#'           EngineVersion = "string",
+#'           Description = "string",
+#'           AutoUpgrade = TRUE|FALSE,
+#'           IsMajorVersionUpgrade = TRUE|FALSE
+#'         )
+#'       ),
+#'       ExportableLogTypes = list(
+#'         "string"
+#'       ),
+#'       SupportsLogExportsToCloudwatchLogs = TRUE|FALSE
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1618,6 +2332,103 @@ docdb_describe_db_engine_versions <- function(Engine = NULL, EngineVersion = NUL
 #' parameter is specified, the response includes only records beyond the
 #' marker, up to the value specified by `MaxRecords`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   DBInstances = list(
+#'     list(
+#'       DBInstanceIdentifier = "string",
+#'       DBInstanceClass = "string",
+#'       Engine = "string",
+#'       DBInstanceStatus = "string",
+#'       Endpoint = list(
+#'         Address = "string",
+#'         Port = 123,
+#'         HostedZoneId = "string"
+#'       ),
+#'       InstanceCreateTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       PreferredBackupWindow = "string",
+#'       BackupRetentionPeriod = 123,
+#'       VpcSecurityGroups = list(
+#'         list(
+#'           VpcSecurityGroupId = "string",
+#'           Status = "string"
+#'         )
+#'       ),
+#'       AvailabilityZone = "string",
+#'       DBSubnetGroup = list(
+#'         DBSubnetGroupName = "string",
+#'         DBSubnetGroupDescription = "string",
+#'         VpcId = "string",
+#'         SubnetGroupStatus = "string",
+#'         Subnets = list(
+#'           list(
+#'             SubnetIdentifier = "string",
+#'             SubnetAvailabilityZone = list(
+#'               Name = "string"
+#'             ),
+#'             SubnetStatus = "string"
+#'           )
+#'         ),
+#'         DBSubnetGroupArn = "string"
+#'       ),
+#'       PreferredMaintenanceWindow = "string",
+#'       PendingModifiedValues = list(
+#'         DBInstanceClass = "string",
+#'         AllocatedStorage = 123,
+#'         MasterUserPassword = "string",
+#'         Port = 123,
+#'         BackupRetentionPeriod = 123,
+#'         MultiAZ = TRUE|FALSE,
+#'         EngineVersion = "string",
+#'         LicenseModel = "string",
+#'         Iops = 123,
+#'         DBInstanceIdentifier = "string",
+#'         StorageType = "string",
+#'         CACertificateIdentifier = "string",
+#'         DBSubnetGroupName = "string",
+#'         PendingCloudwatchLogsExports = list(
+#'           LogTypesToEnable = list(
+#'             "string"
+#'           ),
+#'           LogTypesToDisable = list(
+#'             "string"
+#'           )
+#'         )
+#'       ),
+#'       LatestRestorableTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EngineVersion = "string",
+#'       AutoMinorVersionUpgrade = TRUE|FALSE,
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       StatusInfos = list(
+#'         list(
+#'           StatusType = "string",
+#'           Normal = TRUE|FALSE,
+#'           Status = "string",
+#'           Message = "string"
+#'         )
+#'       ),
+#'       DBClusterIdentifier = "string",
+#'       StorageEncrypted = TRUE|FALSE,
+#'       KmsKeyId = "string",
+#'       DbiResourceId = "string",
+#'       CACertificateIdentifier = "string",
+#'       PromotionTier = 123,
+#'       DBInstanceArn = "string",
+#'       EnabledCloudwatchLogsExports = list(
+#'         "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_db_instances(
@@ -1679,6 +2490,32 @@ docdb_describe_db_instances <- function(DBInstanceIdentifier = NULL, Filters = N
 #' @param Marker An optional pagination token provided by a previous request. If this
 #' parameter is specified, the response includes only records beyond the
 #' marker, up to the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   DBSubnetGroups = list(
+#'     list(
+#'       DBSubnetGroupName = "string",
+#'       DBSubnetGroupDescription = "string",
+#'       VpcId = "string",
+#'       SubnetGroupStatus = "string",
+#'       Subnets = list(
+#'         list(
+#'           SubnetIdentifier = "string",
+#'           SubnetAvailabilityZone = list(
+#'             Name = "string"
+#'           ),
+#'           SubnetStatus = "string"
+#'         )
+#'       ),
+#'       DBSubnetGroupArn = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1743,6 +2580,31 @@ docdb_describe_db_subnet_groups <- function(DBSubnetGroupName = NULL, Filters = 
 #' parameter is specified, the response includes only records beyond the
 #' marker, up to the value specified by `MaxRecords`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EngineDefaults = list(
+#'     DBParameterGroupFamily = "string",
+#'     Marker = "string",
+#'     Parameters = list(
+#'       list(
+#'         ParameterName = "string",
+#'         ParameterValue = "string",
+#'         Description = "string",
+#'         Source = "string",
+#'         ApplyType = "string",
+#'         DataType = "string",
+#'         AllowedValues = "string",
+#'         IsModifiable = TRUE|FALSE,
+#'         MinimumEngineVersion = "string",
+#'         ApplyMethod = "immediate"|"pending-reboot"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_engine_default_cluster_parameters(
@@ -1795,6 +2657,21 @@ docdb_describe_engine_default_cluster_parameters <- function(DBParameterGroupFam
 #' Valid values: `db-instance`, `db-parameter-group`, `db-security-group`,
 #' `db-snapshot`
 #' @param Filters This parameter is not currently supported.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EventCategoriesMapList = list(
+#'     list(
+#'       SourceType = "string",
+#'       EventCategories = list(
+#'         "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1894,6 +2771,28 @@ docdb_describe_event_categories <- function(SourceType = NULL, Filters = NULL) {
 #' parameter is specified, the response includes only records beyond the
 #' marker, up to the value specified by `MaxRecords`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   Events = list(
+#'     list(
+#'       SourceIdentifier = "string",
+#'       SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot",
+#'       Message = "string",
+#'       EventCategories = list(
+#'         "string"
+#'       ),
+#'       Date = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       SourceArn = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_events(
@@ -1973,6 +2872,28 @@ docdb_describe_events <- function(SourceIdentifier = NULL, SourceType = NULL, St
 #' parameter is specified, the response includes only records beyond the
 #' marker, up to the value specified by `MaxRecords`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   OrderableDBInstanceOptions = list(
+#'     list(
+#'       Engine = "string",
+#'       EngineVersion = "string",
+#'       DBInstanceClass = "string",
+#'       LicenseModel = "string",
+#'       AvailabilityZones = list(
+#'         list(
+#'           Name = "string"
+#'         )
+#'       ),
+#'       Vpc = TRUE|FALSE
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_orderable_db_instance_options(
@@ -2050,6 +2971,35 @@ docdb_describe_orderable_db_instance_options <- function(Engine, EngineVersion =
 #' 
 #' Constraints: Minimum 20, maximum 100.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PendingMaintenanceActions = list(
+#'     list(
+#'       ResourceIdentifier = "string",
+#'       PendingMaintenanceActionDetails = list(
+#'         list(
+#'           Action = "string",
+#'           AutoAppliedAfterDate = as.POSIXct(
+#'             "2015-01-01"
+#'           ),
+#'           ForcedApplyDate = as.POSIXct(
+#'             "2015-01-01"
+#'           ),
+#'           OptInStatus = "string",
+#'           CurrentApplyDate = as.POSIXct(
+#'             "2015-01-01"
+#'           ),
+#'           Description = "string"
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_pending_maintenance_actions(
@@ -2116,6 +3066,71 @@ docdb_describe_pending_maintenance_actions <- function(ResourceIdentifier = NULL
 #' You must specify the instance identifier for an Amazon DocumentDB
 #' replica in the cluster. For example, `mydbcluster-replica1`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$failover_db_cluster(
@@ -2155,6 +3170,19 @@ docdb_failover_db_cluster <- function(DBClusterIdentifier = NULL, TargetDBInstan
 #' @param ResourceName &#91;required&#93; The Amazon DocumentDB resource with tags to be listed. This value is an
 #' Amazon Resource Name (ARN).
 #' @param Filters This parameter is not currently supported.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TagList = list(
+#'     list(
+#'       Key = "string",
+#'       Value = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2300,6 +3328,71 @@ docdb_list_tags_for_resource <- function(ResourceName, Filters = NULL) {
 #' `DeletionProtection` is disabled. `DeletionProtection` protects clusters
 #' from being accidentally deleted.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$modify_db_cluster(
@@ -2375,6 +3468,14 @@ docdb_modify_db_cluster <- function(DBClusterIdentifier, NewDBClusterIdentifier 
 #'
 #' @param DBClusterParameterGroupName &#91;required&#93; The name of the cluster parameter group to modify.
 #' @param Parameters &#91;required&#93; A list of parameters in the cluster parameter group to modify.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterParameterGroupName = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2463,6 +3564,24 @@ docdb_modify_db_cluster_parameter_group <- function(DBClusterParameterGroupName,
 #' or restore the cluster snapshot, set it to `all` . If you specify `all`,
 #' an AWS account whose account ID is explicitly added to the `restore`
 #' attribute can still copy or restore a manual cluster snapshot.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterSnapshotAttributesResult = list(
+#'     DBClusterSnapshotIdentifier = "string",
+#'     DBClusterSnapshotAttributes = list(
+#'       list(
+#'         AttributeName = "string",
+#'         AttributeValues = list(
+#'           "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2581,6 +3700,100 @@ docdb_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdentifi
 #' 
 #' Valid values: 0-15
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBInstance = list(
+#'     DBInstanceIdentifier = "string",
+#'     DBInstanceClass = "string",
+#'     Engine = "string",
+#'     DBInstanceStatus = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       HostedZoneId = "string"
+#'     ),
+#'     InstanceCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     BackupRetentionPeriod = 123,
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     AvailabilityZone = "string",
+#'     DBSubnetGroup = list(
+#'       DBSubnetGroupName = "string",
+#'       DBSubnetGroupDescription = "string",
+#'       VpcId = "string",
+#'       SubnetGroupStatus = "string",
+#'       Subnets = list(
+#'         list(
+#'           SubnetIdentifier = "string",
+#'           SubnetAvailabilityZone = list(
+#'             Name = "string"
+#'           ),
+#'           SubnetStatus = "string"
+#'         )
+#'       ),
+#'       DBSubnetGroupArn = "string"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       DBInstanceClass = "string",
+#'       AllocatedStorage = 123,
+#'       MasterUserPassword = "string",
+#'       Port = 123,
+#'       BackupRetentionPeriod = 123,
+#'       MultiAZ = TRUE|FALSE,
+#'       EngineVersion = "string",
+#'       LicenseModel = "string",
+#'       Iops = 123,
+#'       DBInstanceIdentifier = "string",
+#'       StorageType = "string",
+#'       CACertificateIdentifier = "string",
+#'       DBSubnetGroupName = "string",
+#'       PendingCloudwatchLogsExports = list(
+#'         LogTypesToEnable = list(
+#'           "string"
+#'         ),
+#'         LogTypesToDisable = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EngineVersion = "string",
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     StatusInfos = list(
+#'       list(
+#'         StatusType = "string",
+#'         Normal = TRUE|FALSE,
+#'         Status = "string",
+#'         Message = "string"
+#'       )
+#'     ),
+#'     DBClusterIdentifier = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbiResourceId = "string",
+#'     CACertificateIdentifier = "string",
+#'     PromotionTier = 123,
+#'     DBInstanceArn = "string",
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$modify_db_instance(
@@ -2634,6 +3847,29 @@ docdb_modify_db_instance <- function(DBInstanceIdentifier, DBInstanceClass = NUL
 #' Example: `mySubnetgroup`
 #' @param DBSubnetGroupDescription The description for the subnet group.
 #' @param SubnetIds &#91;required&#93; The Amazon EC2 subnet IDs for the subnet group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBSubnetGroup = list(
+#'     DBSubnetGroupName = "string",
+#'     DBSubnetGroupDescription = "string",
+#'     VpcId = "string",
+#'     SubnetGroupStatus = "string",
+#'     Subnets = list(
+#'       list(
+#'         SubnetIdentifier = "string",
+#'         SubnetAvailabilityZone = list(
+#'           Name = "string"
+#'         ),
+#'         SubnetStatus = "string"
+#'       )
+#'     ),
+#'     DBSubnetGroupArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2691,6 +3927,100 @@ docdb_modify_db_subnet_group <- function(DBSubnetGroupName, DBSubnetGroupDescrip
 #' Constraint: You can't specify `true` if the instance is not configured
 #' for Multi-AZ.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBInstance = list(
+#'     DBInstanceIdentifier = "string",
+#'     DBInstanceClass = "string",
+#'     Engine = "string",
+#'     DBInstanceStatus = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       HostedZoneId = "string"
+#'     ),
+#'     InstanceCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     BackupRetentionPeriod = 123,
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     AvailabilityZone = "string",
+#'     DBSubnetGroup = list(
+#'       DBSubnetGroupName = "string",
+#'       DBSubnetGroupDescription = "string",
+#'       VpcId = "string",
+#'       SubnetGroupStatus = "string",
+#'       Subnets = list(
+#'         list(
+#'           SubnetIdentifier = "string",
+#'           SubnetAvailabilityZone = list(
+#'             Name = "string"
+#'           ),
+#'           SubnetStatus = "string"
+#'         )
+#'       ),
+#'       DBSubnetGroupArn = "string"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       DBInstanceClass = "string",
+#'       AllocatedStorage = 123,
+#'       MasterUserPassword = "string",
+#'       Port = 123,
+#'       BackupRetentionPeriod = 123,
+#'       MultiAZ = TRUE|FALSE,
+#'       EngineVersion = "string",
+#'       LicenseModel = "string",
+#'       Iops = 123,
+#'       DBInstanceIdentifier = "string",
+#'       StorageType = "string",
+#'       CACertificateIdentifier = "string",
+#'       DBSubnetGroupName = "string",
+#'       PendingCloudwatchLogsExports = list(
+#'         LogTypesToEnable = list(
+#'           "string"
+#'         ),
+#'         LogTypesToDisable = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EngineVersion = "string",
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     StatusInfos = list(
+#'       list(
+#'         StatusType = "string",
+#'         Normal = TRUE|FALSE,
+#'         Status = "string",
+#'         Message = "string"
+#'       )
+#'     ),
+#'     DBClusterIdentifier = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbiResourceId = "string",
+#'     CACertificateIdentifier = "string",
+#'     PromotionTier = 123,
+#'     DBInstanceArn = "string",
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$reboot_db_instance(
@@ -2730,6 +4060,9 @@ docdb_reboot_db_instance <- function(DBInstanceIdentifier, ForceFailover = NULL)
 #' @param ResourceName &#91;required&#93; The Amazon DocumentDB resource that the tags are removed from. This
 #' value is an Amazon Resource Name (ARN).
 #' @param TagKeys &#91;required&#93; The tag key (name) of the tag to be removed.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -2787,6 +4120,14 @@ docdb_remove_tags_from_resource <- function(ResourceName, TagKeys) {
 #' @param Parameters A list of parameter names in the cluster parameter group to reset to the
 #' default values. You can't use this parameter if the `ResetAllParameters`
 #' parameter is set to `true`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterParameterGroupName = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2917,6 +4258,71 @@ docdb_reset_db_cluster_parameter_group <- function(DBClusterParameterGroupName, 
 #' is enabled, the cluster cannot be deleted unless it is modified and
 #' `DeletionProtection` is disabled. `DeletionProtection` protects clusters
 #' from being accidentally deleted.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3066,6 +4472,71 @@ docdb_restore_db_cluster_from_snapshot <- function(AvailabilityZones = NULL, DBC
 #' `DeletionProtection` is disabled. `DeletionProtection` protects clusters
 #' from being accidentally deleted.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$restore_db_cluster_to_point_in_time(
@@ -3127,6 +4598,71 @@ docdb_restore_db_cluster_to_point_in_time <- function(DBClusterIdentifier, Sourc
 #' @param DBClusterIdentifier &#91;required&#93; The identifier of the cluster to restart. Example:
 #' `docdb-2019-05-28-15-24-52`
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$start_db_cluster(
@@ -3167,6 +4703,71 @@ docdb_start_db_cluster <- function(DBClusterIdentifier) {
 #'
 #' @param DBClusterIdentifier &#91;required&#93; The identifier of the cluster to stop. Example:
 #' `docdb-2019-05-28-15-24-52`
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```

@@ -22,6 +22,9 @@ NULL
 #' to be associated with. For the list of supported feature names, see
 #' DBEngineVersion.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$add_role_to_db_cluster(
@@ -78,6 +81,29 @@ neptune_add_role_to_db_cluster <- function(DBClusterIdentifier, RoleArn, Feature
 #' -   If the source type is a DB snapshot, a `DBSnapshotIdentifier` must
 #'     be supplied.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EventSubscription = list(
+#'     CustomerAwsId = "string",
+#'     CustSubscriptionId = "string",
+#'     SnsTopicArn = "string",
+#'     Status = "string",
+#'     SubscriptionCreationTime = "string",
+#'     SourceType = "string",
+#'     SourceIdsList = list(
+#'       "string"
+#'     ),
+#'     EventCategoriesList = list(
+#'       "string"
+#'     ),
+#'     Enabled = TRUE|FALSE,
+#'     EventSubscriptionArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$add_source_identifier_to_subscription(
@@ -122,6 +148,9 @@ neptune_add_source_identifier_to_subscription <- function(SubscriptionName, Sour
 #' [Constructing an Amazon Resource Name
 #' (ARN)](https://docs.aws.amazon.com/neptune/latest/userguide/#tagging.ARN.Constructing).
 #' @param Tags &#91;required&#93; The tags to be assigned to the Amazon Neptune resource.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -186,6 +215,32 @@ neptune_add_tags_to_resource <- function(ResourceName, Tags) {
 #' 
 #' -   `undo-opt-in` - Cancel any existing `next-maintenance` opt-in
 #'     requests.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ResourcePendingMaintenanceActions = list(
+#'     ResourceIdentifier = "string",
+#'     PendingMaintenanceActionDetails = list(
+#'       list(
+#'         Action = "string",
+#'         AutoAppliedAfterDate = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         ForcedApplyDate = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         OptInStatus = "string",
+#'         CurrentApplyDate = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         Description = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -259,6 +314,19 @@ neptune_apply_pending_maintenance_action <- function(ResourceIdentifier, ApplyAc
 #' Example: `my-cluster-param-group1`
 #' @param TargetDBClusterParameterGroupDescription &#91;required&#93; A description for the copied DB cluster parameter group.
 #' @param Tags The tags to be assigned to the copied DB cluster parameter group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterParameterGroup = list(
+#'     DBClusterParameterGroupName = "string",
+#'     DBParameterGroupFamily = "string",
+#'     Description = "string",
+#'     DBClusterParameterGroupArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -358,6 +426,41 @@ neptune_copy_db_cluster_parameter_group <- function(SourceDBClusterParameterGrou
 #' DB cluster snapshot, and otherwise false. The default is false.
 #' @param Tags The tags to assign to the new DB cluster snapshot copy.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterSnapshot = list(
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     DBClusterSnapshotIdentifier = "string",
+#'     DBClusterIdentifier = "string",
+#'     SnapshotCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Engine = "string",
+#'     AllocatedStorage = 123,
+#'     Status = "string",
+#'     Port = 123,
+#'     VpcId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MasterUsername = "string",
+#'     EngineVersion = "string",
+#'     LicenseModel = "string",
+#'     SnapshotType = "string",
+#'     PercentProgress = 123,
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DBClusterSnapshotArn = "string",
+#'     SourceDBClusterSnapshotArn = "string",
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$copy_db_cluster_snapshot(
@@ -431,6 +534,19 @@ neptune_copy_db_cluster_snapshot <- function(SourceDBClusterSnapshotIdentifier, 
 #' @param TargetDBParameterGroupDescription &#91;required&#93; A description for the copied DB parameter group.
 #' @param Tags The tags to be assigned to the copied DB parameter group.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBParameterGroup = list(
+#'     DBParameterGroupName = "string",
+#'     DBParameterGroupFamily = "string",
+#'     Description = "string",
+#'     DBParameterGroupArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$copy_db_parameter_group(
@@ -475,11 +591,12 @@ neptune_copy_db_parameter_group <- function(SourceDBParameterGroupIdentifier, Ta
 #' cluster as a Read Replica of another DB cluster or Amazon Neptune DB
 #' instance.
 #' 
-#' Note that when you create a new cluster using `CreateDBCluster`
-#' directly, deletion protection is disabled by default (when you create a
-#' new production cluster in the console, deletion protection is enabled by
-#' default). You can only delete a DB cluster if its `DeletionProtection`
-#' field is set to `false`.
+#' Note that when you create a new cluster using
+#' [`create_db_cluster`][neptune_create_db_cluster] directly, deletion
+#' protection is disabled by default (when you create a new production
+#' cluster in the console, deletion protection is enabled by default). You
+#' can only delete a DB cluster if its `DeletionProtection` field is set to
+#' `false`.
 #'
 #' @usage
 #' neptune_create_db_cluster(AvailabilityZones, BackupRetentionPeriod,
@@ -627,6 +744,87 @@ neptune_copy_db_parameter_group <- function(SourceDBParameterGroupIdentifier, Ta
 #' enabled. The database can't be deleted when deletion protection is
 #' enabled. By default, deletion protection is enabled.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AllocatedStorage = 123,
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     CharacterSetName = "string",
+#'     DatabaseName = "string",
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     DBClusterOptionGroupMemberships = list(
+#'       list(
+#'         DBClusterOptionGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     ReplicationSourceIdentifier = "string",
+#'     ReadReplicaIdentifiers = list(
+#'       "string"
+#'     ),
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string",
+#'         FeatureName = "string"
+#'       )
+#'     ),
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'     CloneGroupId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_db_cluster(
@@ -712,6 +910,27 @@ neptune_create_db_cluster <- function(AvailabilityZones = NULL, BackupRetentionP
 #' endpoint. Only relevant if the list of static members is empty.
 #' @param Tags The tags to be assigned to the Amazon Neptune resource.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterEndpointIdentifier = "string",
+#'   DBClusterIdentifier = "string",
+#'   DBClusterEndpointResourceIdentifier = "string",
+#'   Endpoint = "string",
+#'   Status = "string",
+#'   EndpointType = "string",
+#'   CustomEndpointType = "string",
+#'   StaticMembers = list(
+#'     "string"
+#'   ),
+#'   ExcludedMembers = list(
+#'     "string"
+#'   ),
+#'   DBClusterEndpointArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_db_cluster_endpoint(
@@ -764,12 +983,14 @@ neptune_create_db_cluster_endpoint <- function(DBClusterIdentifier, DBClusterEnd
 #' A DB cluster parameter group is initially created with the default
 #' parameters for the database engine used by instances in the DB cluster.
 #' To provide custom values for any of the parameters, you must modify the
-#' group after creating it using ModifyDBClusterParameterGroup. Once you've
-#' created a DB cluster parameter group, you need to associate it with your
-#' DB cluster using ModifyDBCluster. When you associate a new DB cluster
-#' parameter group with a running DB cluster, you need to reboot the DB
-#' instances in the DB cluster without failover for the new DB cluster
-#' parameter group and associated settings to take effect.
+#' group after creating it using
+#' [`modify_db_cluster_parameter_group`][neptune_modify_db_cluster_parameter_group].
+#' Once you've created a DB cluster parameter group, you need to associate
+#' it with your DB cluster using
+#' [`modify_db_cluster`][neptune_modify_db_cluster]. When you associate a
+#' new DB cluster parameter group with a running DB cluster, you need to
+#' reboot the DB instances in the DB cluster without failover for the new
+#' DB cluster parameter group and associated settings to take effect.
 #' 
 #' After you create a DB cluster parameter group, you should wait at least
 #' 5 minutes before creating your first DB cluster that uses that DB
@@ -780,8 +1001,10 @@ neptune_create_db_cluster_endpoint <- function(DBClusterIdentifier, DBClusterEnd
 #' default database for a DB cluster, such as the character set for the
 #' default database defined by the `character_set_database` parameter. You
 #' can use the *Parameter Groups* option of the Amazon Neptune console or
-#' the DescribeDBClusterParameters command to verify that your DB cluster
-#' parameter group has been created or modified.
+#' the
+#' [`describe_db_cluster_parameters`][neptune_describe_db_cluster_parameters]
+#' command to verify that your DB cluster parameter group has been created
+#' or modified.
 #'
 #' @usage
 #' neptune_create_db_cluster_parameter_group(DBClusterParameterGroupName,
@@ -801,6 +1024,19 @@ neptune_create_db_cluster_endpoint <- function(DBClusterIdentifier, DBClusterEnd
 #' group family.
 #' @param Description &#91;required&#93; The description for the DB cluster parameter group.
 #' @param Tags The tags to be assigned to the new DB cluster parameter group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterParameterGroup = list(
+#'     DBClusterParameterGroupName = "string",
+#'     DBParameterGroupFamily = "string",
+#'     Description = "string",
+#'     DBClusterParameterGroupArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -867,6 +1103,41 @@ neptune_create_db_cluster_parameter_group <- function(DBClusterParameterGroupNam
 #' 
 #' Example: `my-cluster1`
 #' @param Tags The tags to be assigned to the DB cluster snapshot.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterSnapshot = list(
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     DBClusterSnapshotIdentifier = "string",
+#'     DBClusterIdentifier = "string",
+#'     SnapshotCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Engine = "string",
+#'     AllocatedStorage = 123,
+#'     Status = "string",
+#'     Port = 123,
+#'     VpcId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MasterUsername = "string",
+#'     EngineVersion = "string",
+#'     LicenseModel = "string",
+#'     SnapshotType = "string",
+#'     PercentProgress = 123,
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DBClusterSnapshotArn = "string",
+#'     SourceDBClusterSnapshotArn = "string",
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -960,7 +1231,8 @@ neptune_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCl
 #' @param VpcSecurityGroupIds A list of EC2 VPC security groups to associate with this DB instance.
 #' 
 #' Not applicable. The associated list of EC2 VPC security groups is
-#' managed by the DB cluster. For more information, see CreateDBCluster.
+#' managed by the DB cluster. For more information, see
+#' [`create_db_cluster`][neptune_create_db_cluster].
 #' 
 #' Default: The default EC2 VPC security group for the DB subnet group's
 #' VPC.
@@ -1003,7 +1275,8 @@ neptune_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCl
 #' @param BackupRetentionPeriod The number of days for which automated backups are retained.
 #' 
 #' Not applicable. The retention period for automated backups is managed by
-#' the DB cluster. For more information, see CreateDBCluster.
+#' the DB cluster. For more information, see
+#' [`create_db_cluster`][neptune_create_db_cluster].
 #' 
 #' Default: 1
 #' 
@@ -1015,11 +1288,12 @@ neptune_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCl
 #' @param PreferredBackupWindow The daily time range during which automated backups are created.
 #' 
 #' Not applicable. The daily time range for creating automated backups is
-#' managed by the DB cluster. For more information, see CreateDBCluster.
+#' managed by the DB cluster. For more information, see
+#' [`create_db_cluster`][neptune_create_db_cluster].
 #' @param Port The port number on which the database accepts connections.
 #' 
 #' Not applicable. The port is managed by the DB cluster. For more
-#' information, see CreateDBCluster.
+#' information, see [`create_db_cluster`][neptune_create_db_cluster].
 #' 
 #' Default: `8182`
 #' 
@@ -1044,7 +1318,8 @@ neptune_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCl
 #' @param Tags The tags to assign to the new instance.
 #' @param DBClusterIdentifier The identifier of the DB cluster that the instance will belong to.
 #' 
-#' For information on creating a DB cluster, see CreateDBCluster.
+#' For information on creating a DB cluster, see
+#' [`create_db_cluster`][neptune_create_db_cluster].
 #' 
 #' Type: String
 #' @param StorageType Specifies the storage type to be associated with the DB instance.
@@ -1057,7 +1332,8 @@ neptune_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCl
 #' @param StorageEncrypted Specifies whether the DB instance is encrypted.
 #' 
 #' Not applicable. The encryption for DB instances is managed by the DB
-#' cluster. For more information, see CreateDBCluster.
+#' cluster. For more information, see
+#' [`create_db_cluster`][neptune_create_db_cluster].
 #' 
 #' Default: false
 #' @param KmsKeyId The AWS KMS key identifier for an encrypted DB instance.
@@ -1069,7 +1345,7 @@ neptune_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCl
 #' KM encryption key.
 #' 
 #' Not applicable. The KMS key identifier is managed by the DB cluster. For
-#' more information, see CreateDBCluster.
+#' more information, see [`create_db_cluster`][neptune_create_db_cluster].
 #' 
 #' If the `StorageEncrypted` parameter is true, and you do not specify a
 #' value for the `KmsKeyId` parameter, then Amazon Neptune will use your
@@ -1117,6 +1393,153 @@ neptune_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCl
 #' 
 #' DB instances in a DB cluster can be deleted even when deletion
 #' protection is enabled in their parent DB cluster.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBInstance = list(
+#'     DBInstanceIdentifier = "string",
+#'     DBInstanceClass = "string",
+#'     Engine = "string",
+#'     DBInstanceStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       HostedZoneId = "string"
+#'     ),
+#'     AllocatedStorage = 123,
+#'     InstanceCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     BackupRetentionPeriod = 123,
+#'     DBSecurityGroups = list(
+#'       list(
+#'         DBSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     DBParameterGroups = list(
+#'       list(
+#'         DBParameterGroupName = "string",
+#'         ParameterApplyStatus = "string"
+#'       )
+#'     ),
+#'     AvailabilityZone = "string",
+#'     DBSubnetGroup = list(
+#'       DBSubnetGroupName = "string",
+#'       DBSubnetGroupDescription = "string",
+#'       VpcId = "string",
+#'       SubnetGroupStatus = "string",
+#'       Subnets = list(
+#'         list(
+#'           SubnetIdentifier = "string",
+#'           SubnetAvailabilityZone = list(
+#'             Name = "string"
+#'           ),
+#'           SubnetStatus = "string"
+#'         )
+#'       ),
+#'       DBSubnetGroupArn = "string"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       DBInstanceClass = "string",
+#'       AllocatedStorage = 123,
+#'       MasterUserPassword = "string",
+#'       Port = 123,
+#'       BackupRetentionPeriod = 123,
+#'       MultiAZ = TRUE|FALSE,
+#'       EngineVersion = "string",
+#'       LicenseModel = "string",
+#'       Iops = 123,
+#'       DBInstanceIdentifier = "string",
+#'       StorageType = "string",
+#'       CACertificateIdentifier = "string",
+#'       DBSubnetGroupName = "string",
+#'       PendingCloudwatchLogsExports = list(
+#'         LogTypesToEnable = list(
+#'           "string"
+#'         ),
+#'         LogTypesToDisable = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MultiAZ = TRUE|FALSE,
+#'     EngineVersion = "string",
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     ReadReplicaSourceDBInstanceIdentifier = "string",
+#'     ReadReplicaDBInstanceIdentifiers = list(
+#'       "string"
+#'     ),
+#'     ReadReplicaDBClusterIdentifiers = list(
+#'       "string"
+#'     ),
+#'     LicenseModel = "string",
+#'     Iops = 123,
+#'     OptionGroupMemberships = list(
+#'       list(
+#'         OptionGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     CharacterSetName = "string",
+#'     SecondaryAvailabilityZone = "string",
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     StatusInfos = list(
+#'       list(
+#'         StatusType = "string",
+#'         Normal = TRUE|FALSE,
+#'         Status = "string",
+#'         Message = "string"
+#'       )
+#'     ),
+#'     StorageType = "string",
+#'     TdeCredentialArn = "string",
+#'     DbInstancePort = 123,
+#'     DBClusterIdentifier = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbiResourceId = "string",
+#'     CACertificateIdentifier = "string",
+#'     DomainMemberships = list(
+#'       list(
+#'         Domain = "string",
+#'         Status = "string",
+#'         FQDN = "string",
+#'         IAMRoleName = "string"
+#'       )
+#'     ),
+#'     CopyTagsToSnapshot = TRUE|FALSE,
+#'     MonitoringInterval = 123,
+#'     EnhancedMonitoringResourceArn = "string",
+#'     MonitoringRoleArn = "string",
+#'     PromotionTier = 123,
+#'     DBInstanceArn = "string",
+#'     Timezone = "string",
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'     PerformanceInsightsEnabled = TRUE|FALSE,
+#'     PerformanceInsightsKMSKeyId = "string",
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1246,6 +1669,19 @@ neptune_create_db_instance <- function(DBName = NULL, DBInstanceIdentifier, Allo
 #' @param Description &#91;required&#93; The description for the DB parameter group.
 #' @param Tags The tags to be assigned to the new DB parameter group.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBParameterGroup = list(
+#'     DBParameterGroupName = "string",
+#'     DBParameterGroupFamily = "string",
+#'     Description = "string",
+#'     DBParameterGroupArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_db_parameter_group(
@@ -1301,6 +1737,29 @@ neptune_create_db_parameter_group <- function(DBParameterGroupName, DBParameterG
 #' @param DBSubnetGroupDescription &#91;required&#93; The description for the DB subnet group.
 #' @param SubnetIds &#91;required&#93; The EC2 Subnet IDs for the DB subnet group.
 #' @param Tags The tags to be assigned to the new DB subnet group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBSubnetGroup = list(
+#'     DBSubnetGroupName = "string",
+#'     DBSubnetGroupDescription = "string",
+#'     VpcId = "string",
+#'     SubnetGroupStatus = "string",
+#'     Subnets = list(
+#'       list(
+#'         SubnetIdentifier = "string",
+#'         SubnetAvailabilityZone = list(
+#'           Name = "string"
+#'         ),
+#'         SubnetStatus = "string"
+#'       )
+#'     ),
+#'     DBSubnetGroupArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1409,6 +1868,29 @@ neptune_create_db_subnet_group <- function(DBSubnetGroupName, DBSubnetGroupDescr
 #' **false** to create the subscription but not active it.
 #' @param Tags The tags to be applied to the new event subscription.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EventSubscription = list(
+#'     CustomerAwsId = "string",
+#'     CustSubscriptionId = "string",
+#'     SnsTopicArn = "string",
+#'     Status = "string",
+#'     SubscriptionCreationTime = "string",
+#'     SourceType = "string",
+#'     SourceIdsList = list(
+#'       "string"
+#'     ),
+#'     EventCategoriesList = list(
+#'       "string"
+#'     ),
+#'     Enabled = TRUE|FALSE,
+#'     EventSubscriptionArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_event_subscription(
@@ -1496,6 +1978,87 @@ neptune_create_event_subscription <- function(SubscriptionName, SnsTopicArn, Sou
 #' 
 #' -   Cannot end with a hyphen or contain two consecutive hyphens
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AllocatedStorage = 123,
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     CharacterSetName = "string",
+#'     DatabaseName = "string",
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     DBClusterOptionGroupMemberships = list(
+#'       list(
+#'         DBClusterOptionGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     ReplicationSourceIdentifier = "string",
+#'     ReadReplicaIdentifiers = list(
+#'       "string"
+#'     ),
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string",
+#'         FeatureName = "string"
+#'       )
+#'     ),
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'     CloneGroupId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_db_cluster(
@@ -1537,6 +2100,27 @@ neptune_delete_db_cluster <- function(DBClusterIdentifier, SkipFinalSnapshot = N
 #'
 #' @param DBClusterEndpointIdentifier &#91;required&#93; The identifier associated with the custom endpoint. This parameter is
 #' stored as a lowercase string.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterEndpointIdentifier = "string",
+#'   DBClusterIdentifier = "string",
+#'   DBClusterEndpointResourceIdentifier = "string",
+#'   Endpoint = "string",
+#'   Status = "string",
+#'   EndpointType = "string",
+#'   CustomEndpointType = "string",
+#'   StaticMembers = list(
+#'     "string"
+#'   ),
+#'   ExcludedMembers = list(
+#'     "string"
+#'   ),
+#'   DBClusterEndpointArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1584,6 +2168,9 @@ neptune_delete_db_cluster_endpoint <- function(DBClusterEndpointIdentifier) {
 #' 
 #' -   Cannot be associated with any DB clusters.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_db_cluster_parameter_group(
@@ -1627,6 +2214,41 @@ neptune_delete_db_cluster_parameter_group <- function(DBClusterParameterGroupNam
 #' Constraints: Must be the name of an existing DB cluster snapshot in the
 #' `available` state.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterSnapshot = list(
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     DBClusterSnapshotIdentifier = "string",
+#'     DBClusterIdentifier = "string",
+#'     SnapshotCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Engine = "string",
+#'     AllocatedStorage = 123,
+#'     Status = "string",
+#'     Port = 123,
+#'     VpcId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MasterUsername = "string",
+#'     EngineVersion = "string",
+#'     LicenseModel = "string",
+#'     SnapshotType = "string",
+#'     PercentProgress = 123,
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DBClusterSnapshotArn = "string",
+#'     SourceDBClusterSnapshotArn = "string",
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_db_cluster_snapshot(
@@ -1660,7 +2282,8 @@ neptune_delete_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier) {
 #' The DeleteDBInstance action deletes a previously provisioned DB
 #' instance. When you delete a DB instance, all automated backups for that
 #' instance are deleted and can't be recovered. Manual DB snapshots of the
-#' DB instance to be deleted by `DeleteDBInstance` are not deleted.
+#' DB instance to be deleted by
+#' [`delete_db_instance`][neptune_delete_db_instance] are not deleted.
 #' 
 #' If you request a final DB snapshot the status of the Amazon Neptune DB
 #' instance is `deleting` until the DB snapshot is created. The API action
@@ -1715,6 +2338,153 @@ neptune_delete_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier) {
 #' 
 #' -   Cannot be specified when deleting a Read Replica.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBInstance = list(
+#'     DBInstanceIdentifier = "string",
+#'     DBInstanceClass = "string",
+#'     Engine = "string",
+#'     DBInstanceStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       HostedZoneId = "string"
+#'     ),
+#'     AllocatedStorage = 123,
+#'     InstanceCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     BackupRetentionPeriod = 123,
+#'     DBSecurityGroups = list(
+#'       list(
+#'         DBSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     DBParameterGroups = list(
+#'       list(
+#'         DBParameterGroupName = "string",
+#'         ParameterApplyStatus = "string"
+#'       )
+#'     ),
+#'     AvailabilityZone = "string",
+#'     DBSubnetGroup = list(
+#'       DBSubnetGroupName = "string",
+#'       DBSubnetGroupDescription = "string",
+#'       VpcId = "string",
+#'       SubnetGroupStatus = "string",
+#'       Subnets = list(
+#'         list(
+#'           SubnetIdentifier = "string",
+#'           SubnetAvailabilityZone = list(
+#'             Name = "string"
+#'           ),
+#'           SubnetStatus = "string"
+#'         )
+#'       ),
+#'       DBSubnetGroupArn = "string"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       DBInstanceClass = "string",
+#'       AllocatedStorage = 123,
+#'       MasterUserPassword = "string",
+#'       Port = 123,
+#'       BackupRetentionPeriod = 123,
+#'       MultiAZ = TRUE|FALSE,
+#'       EngineVersion = "string",
+#'       LicenseModel = "string",
+#'       Iops = 123,
+#'       DBInstanceIdentifier = "string",
+#'       StorageType = "string",
+#'       CACertificateIdentifier = "string",
+#'       DBSubnetGroupName = "string",
+#'       PendingCloudwatchLogsExports = list(
+#'         LogTypesToEnable = list(
+#'           "string"
+#'         ),
+#'         LogTypesToDisable = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MultiAZ = TRUE|FALSE,
+#'     EngineVersion = "string",
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     ReadReplicaSourceDBInstanceIdentifier = "string",
+#'     ReadReplicaDBInstanceIdentifiers = list(
+#'       "string"
+#'     ),
+#'     ReadReplicaDBClusterIdentifiers = list(
+#'       "string"
+#'     ),
+#'     LicenseModel = "string",
+#'     Iops = 123,
+#'     OptionGroupMemberships = list(
+#'       list(
+#'         OptionGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     CharacterSetName = "string",
+#'     SecondaryAvailabilityZone = "string",
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     StatusInfos = list(
+#'       list(
+#'         StatusType = "string",
+#'         Normal = TRUE|FALSE,
+#'         Status = "string",
+#'         Message = "string"
+#'       )
+#'     ),
+#'     StorageType = "string",
+#'     TdeCredentialArn = "string",
+#'     DbInstancePort = 123,
+#'     DBClusterIdentifier = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbiResourceId = "string",
+#'     CACertificateIdentifier = "string",
+#'     DomainMemberships = list(
+#'       list(
+#'         Domain = "string",
+#'         Status = "string",
+#'         FQDN = "string",
+#'         IAMRoleName = "string"
+#'       )
+#'     ),
+#'     CopyTagsToSnapshot = TRUE|FALSE,
+#'     MonitoringInterval = 123,
+#'     EnhancedMonitoringResourceArn = "string",
+#'     MonitoringRoleArn = "string",
+#'     PromotionTier = 123,
+#'     DBInstanceArn = "string",
+#'     Timezone = "string",
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'     PerformanceInsightsEnabled = TRUE|FALSE,
+#'     PerformanceInsightsKMSKeyId = "string",
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_db_instance(
@@ -1762,6 +2532,9 @@ neptune_delete_db_instance <- function(DBInstanceIdentifier, SkipFinalSnapshot =
 #' -   You can't delete a default DB parameter group
 #' 
 #' -   Cannot be associated with any DB instances
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -1812,6 +2585,9 @@ neptune_delete_db_parameter_group <- function(DBParameterGroupName) {
 #' 
 #' Example: `mySubnetgroup`
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_db_subnet_group(
@@ -1848,6 +2624,29 @@ neptune_delete_db_subnet_group <- function(DBSubnetGroupName) {
 #' neptune_delete_event_subscription(SubscriptionName)
 #'
 #' @param SubscriptionName &#91;required&#93; The name of the event notification subscription you want to delete.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EventSubscription = list(
+#'     CustomerAwsId = "string",
+#'     CustSubscriptionId = "string",
+#'     SnsTopicArn = "string",
+#'     Status = "string",
+#'     SubscriptionCreationTime = "string",
+#'     SourceType = "string",
+#'     SourceIdsList = list(
+#'       "string"
+#'     ),
+#'     EventCategoriesList = list(
+#'       "string"
+#'     ),
+#'     Enabled = TRUE|FALSE,
+#'     EventSubscriptionArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1894,8 +2693,8 @@ neptune_delete_event_subscription <- function(SubscriptionName) {
 #' a lowercase string.
 #' @param Filters A set of name-value pairs that define which endpoints to include in the
 #' output. The filters are specified as name-value pairs, in the format
-#' `Name=<i>endpoint_type</i>,Values=<i>endpoint_type1</i>,<i>endpoint_type2</i>,...`.
-#' `Name` can be one of: `db-cluster-endpoint-type`,
+#' `Name=endpoint_type,Values=endpoint_type1,endpoint_type2,...`. `Name`
+#' can be one of: `db-cluster-endpoint-type`,
 #' `db-cluster-endpoint-custom-type`, `db-cluster-endpoint-id`,
 #' `db-cluster-endpoint-status`. `Values` for the
 #' ` db-cluster-endpoint-type` filter can be one or more of: `reader`,
@@ -1912,9 +2711,35 @@ neptune_delete_event_subscription <- function(SubscriptionName) {
 #' 
 #' Constraints: Minimum 20, maximum 100.
 #' @param Marker An optional pagination token provided by a previous
-#' `DescribeDBClusterEndpoints` request. If this parameter is specified,
-#' the response includes only records beyond the marker, up to the value
-#' specified by `MaxRecords`.
+#' [`describe_db_cluster_endpoints`][neptune_describe_db_cluster_endpoints]
+#' request. If this parameter is specified, the response includes only
+#' records beyond the marker, up to the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   DBClusterEndpoints = list(
+#'     list(
+#'       DBClusterEndpointIdentifier = "string",
+#'       DBClusterIdentifier = "string",
+#'       DBClusterEndpointResourceIdentifier = "string",
+#'       Endpoint = "string",
+#'       Status = "string",
+#'       EndpointType = "string",
+#'       CustomEndpointType = "string",
+#'       StaticMembers = list(
+#'         "string"
+#'       ),
+#'       ExcludedMembers = list(
+#'         "string"
+#'       ),
+#'       DBClusterEndpointArn = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1982,9 +2807,25 @@ neptune_describe_db_cluster_endpoints <- function(DBClusterIdentifier = NULL, DB
 #' 
 #' Constraints: Minimum 20, maximum 100.
 #' @param Marker An optional pagination token provided by a previous
-#' `DescribeDBClusterParameterGroups` request. If this parameter is
-#' specified, the response includes only records beyond the marker, up to
-#' the value specified by `MaxRecords`.
+#' [`describe_db_cluster_parameter_groups`][neptune_describe_db_cluster_parameter_groups]
+#' request. If this parameter is specified, the response includes only
+#' records beyond the marker, up to the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   DBClusterParameterGroups = list(
+#'     list(
+#'       DBClusterParameterGroupName = "string",
+#'       DBParameterGroupFamily = "string",
+#'       Description = "string",
+#'       DBClusterParameterGroupArn = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2053,9 +2894,31 @@ neptune_describe_db_cluster_parameter_groups <- function(DBClusterParameterGroup
 #' 
 #' Constraints: Minimum 20, maximum 100.
 #' @param Marker An optional pagination token provided by a previous
-#' `DescribeDBClusterParameters` request. If this parameter is specified,
-#' the response includes only records beyond the marker, up to the value
-#' specified by `MaxRecords`.
+#' [`describe_db_cluster_parameters`][neptune_describe_db_cluster_parameters]
+#' request. If this parameter is specified, the response includes only
+#' records beyond the marker, up to the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Parameters = list(
+#'     list(
+#'       ParameterName = "string",
+#'       ParameterValue = "string",
+#'       Description = "string",
+#'       Source = "string",
+#'       ApplyType = "string",
+#'       DataType = "string",
+#'       AllowedValues = "string",
+#'       IsModifiable = TRUE|FALSE,
+#'       MinimumEngineVersion = "string",
+#'       ApplyMethod = "immediate"|"pending-reboot"
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2103,15 +2966,18 @@ neptune_describe_db_cluster_parameters <- function(DBClusterParameterGroupName, 
 #' manual DB cluster snapshot.
 #' 
 #' When sharing snapshots with other AWS accounts,
-#' `DescribeDBClusterSnapshotAttributes` returns the `restore` attribute
-#' and a list of IDs for the AWS accounts that are authorized to copy or
-#' restore the manual DB cluster snapshot. If `all` is included in the list
-#' of values for the `restore` attribute, then the manual DB cluster
-#' snapshot is public and can be copied or restored by all AWS accounts.
+#' [`describe_db_cluster_snapshot_attributes`][neptune_describe_db_cluster_snapshot_attributes]
+#' returns the `restore` attribute and a list of IDs for the AWS accounts
+#' that are authorized to copy or restore the manual DB cluster snapshot.
+#' If `all` is included in the list of values for the `restore` attribute,
+#' then the manual DB cluster snapshot is public and can be copied or
+#' restored by all AWS accounts.
 #' 
 #' To add or remove access for an AWS account to copy or restore a manual
 #' DB cluster snapshot, or to make the manual DB cluster snapshot public or
-#' private, use the ModifyDBClusterSnapshotAttribute API action.
+#' private, use the
+#' [`modify_db_cluster_snapshot_attribute`][neptune_modify_db_cluster_snapshot_attribute]
+#' API action.
 #'
 #' @usage
 #' neptune_describe_db_cluster_snapshot_attributes(
@@ -2119,6 +2985,24 @@ neptune_describe_db_cluster_parameters <- function(DBClusterParameterGroupName, 
 #'
 #' @param DBClusterSnapshotIdentifier &#91;required&#93; The identifier for the DB cluster snapshot to describe the attributes
 #' for.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterSnapshotAttributesResult = list(
+#'     DBClusterSnapshotIdentifier = "string",
+#'     DBClusterSnapshotAttributes = list(
+#'       list(
+#'         AttributeName = "string",
+#'         AttributeValues = list(
+#'           "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2213,22 +3097,62 @@ neptune_describe_db_cluster_snapshot_attributes <- function(DBClusterSnapshotIde
 #' 
 #' Constraints: Minimum 20, maximum 100.
 #' @param Marker An optional pagination token provided by a previous
-#' `DescribeDBClusterSnapshots` request. If this parameter is specified,
-#' the response includes only records beyond the marker, up to the value
-#' specified by `MaxRecords`.
+#' [`describe_db_cluster_snapshots`][neptune_describe_db_cluster_snapshots]
+#' request. If this parameter is specified, the response includes only
+#' records beyond the marker, up to the value specified by `MaxRecords`.
 #' @param IncludeShared True to include shared manual DB cluster snapshots from other AWS
 #' accounts that this AWS account has been given permission to copy or
 #' restore, and otherwise false. The default is `false`.
 #' 
 #' You can give an AWS account permission to restore a manual DB cluster
 #' snapshot from another AWS account by the
-#' ModifyDBClusterSnapshotAttribute API action.
+#' [`modify_db_cluster_snapshot_attribute`][neptune_modify_db_cluster_snapshot_attribute]
+#' API action.
 #' @param IncludePublic True to include manual DB cluster snapshots that are public and can be
 #' copied or restored by any AWS account, and otherwise false. The default
 #' is `false`. The default is false.
 #' 
 #' You can share a manual DB cluster snapshot as public by using the
-#' ModifyDBClusterSnapshotAttribute API action.
+#' [`modify_db_cluster_snapshot_attribute`][neptune_modify_db_cluster_snapshot_attribute]
+#' API action.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   DBClusterSnapshots = list(
+#'     list(
+#'       AvailabilityZones = list(
+#'         "string"
+#'       ),
+#'       DBClusterSnapshotIdentifier = "string",
+#'       DBClusterIdentifier = "string",
+#'       SnapshotCreateTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Engine = "string",
+#'       AllocatedStorage = 123,
+#'       Status = "string",
+#'       Port = 123,
+#'       VpcId = "string",
+#'       ClusterCreateTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       MasterUsername = "string",
+#'       EngineVersion = "string",
+#'       LicenseModel = "string",
+#'       SnapshotType = "string",
+#'       PercentProgress = 123,
+#'       StorageEncrypted = TRUE|FALSE,
+#'       KmsKeyId = "string",
+#'       DBClusterSnapshotArn = "string",
+#'       SourceDBClusterSnapshotArn = "string",
+#'       IAMDatabaseAuthenticationEnabled = TRUE|FALSE
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2313,9 +3237,94 @@ neptune_describe_db_cluster_snapshots <- function(DBClusterIdentifier = NULL, DB
 #' Default: 100
 #' 
 #' Constraints: Minimum 20, maximum 100.
-#' @param Marker An optional pagination token provided by a previous DescribeDBClusters
-#' request. If this parameter is specified, the response includes only
-#' records beyond the marker, up to the value specified by `MaxRecords`.
+#' @param Marker An optional pagination token provided by a previous
+#' [`describe_db_clusters`][neptune_describe_db_clusters] request. If this
+#' parameter is specified, the response includes only records beyond the
+#' marker, up to the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   DBClusters = list(
+#'     list(
+#'       AllocatedStorage = 123,
+#'       AvailabilityZones = list(
+#'         "string"
+#'       ),
+#'       BackupRetentionPeriod = 123,
+#'       CharacterSetName = "string",
+#'       DatabaseName = "string",
+#'       DBClusterIdentifier = "string",
+#'       DBClusterParameterGroup = "string",
+#'       DBSubnetGroup = "string",
+#'       Status = "string",
+#'       PercentProgress = "string",
+#'       EarliestRestorableTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Endpoint = "string",
+#'       ReaderEndpoint = "string",
+#'       MultiAZ = TRUE|FALSE,
+#'       Engine = "string",
+#'       EngineVersion = "string",
+#'       LatestRestorableTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Port = 123,
+#'       MasterUsername = "string",
+#'       DBClusterOptionGroupMemberships = list(
+#'         list(
+#'           DBClusterOptionGroupName = "string",
+#'           Status = "string"
+#'         )
+#'       ),
+#'       PreferredBackupWindow = "string",
+#'       PreferredMaintenanceWindow = "string",
+#'       ReplicationSourceIdentifier = "string",
+#'       ReadReplicaIdentifiers = list(
+#'         "string"
+#'       ),
+#'       DBClusterMembers = list(
+#'         list(
+#'           DBInstanceIdentifier = "string",
+#'           IsClusterWriter = TRUE|FALSE,
+#'           DBClusterParameterGroupStatus = "string",
+#'           PromotionTier = 123
+#'         )
+#'       ),
+#'       VpcSecurityGroups = list(
+#'         list(
+#'           VpcSecurityGroupId = "string",
+#'           Status = "string"
+#'         )
+#'       ),
+#'       HostedZoneId = "string",
+#'       StorageEncrypted = TRUE|FALSE,
+#'       KmsKeyId = "string",
+#'       DbClusterResourceId = "string",
+#'       DBClusterArn = "string",
+#'       AssociatedRoles = list(
+#'         list(
+#'           RoleArn = "string",
+#'           Status = "string",
+#'           FeatureName = "string"
+#'         )
+#'       ),
+#'       IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'       CloneGroupId = "string",
+#'       ClusterCreateTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EnabledCloudwatchLogsExports = list(
+#'         "string"
+#'       ),
+#'       DeletionProtection = TRUE|FALSE
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2388,11 +3397,59 @@ neptune_describe_db_clusters <- function(DBClusterIdentifier = NULL, Filters = N
 #' @param DefaultOnly Indicates that only the default version of the specified engine or
 #' engine and major version combination is returned.
 #' @param ListSupportedCharacterSets If this parameter is specified and the requested engine supports the
-#' `CharacterSetName` parameter for `CreateDBInstance`, the response
+#' `CharacterSetName` parameter for
+#' [`create_db_instance`][neptune_create_db_instance], the response
 #' includes a list of supported character sets for each engine version.
 #' @param ListSupportedTimezones If this parameter is specified and the requested engine supports the
-#' `TimeZone` parameter for `CreateDBInstance`, the response includes a
-#' list of supported time zones for each engine version.
+#' `TimeZone` parameter for
+#' [`create_db_instance`][neptune_create_db_instance], the response
+#' includes a list of supported time zones for each engine version.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   DBEngineVersions = list(
+#'     list(
+#'       Engine = "string",
+#'       EngineVersion = "string",
+#'       DBParameterGroupFamily = "string",
+#'       DBEngineDescription = "string",
+#'       DBEngineVersionDescription = "string",
+#'       DefaultCharacterSet = list(
+#'         CharacterSetName = "string",
+#'         CharacterSetDescription = "string"
+#'       ),
+#'       SupportedCharacterSets = list(
+#'         list(
+#'           CharacterSetName = "string",
+#'           CharacterSetDescription = "string"
+#'         )
+#'       ),
+#'       ValidUpgradeTarget = list(
+#'         list(
+#'           Engine = "string",
+#'           EngineVersion = "string",
+#'           Description = "string",
+#'           AutoUpgrade = TRUE|FALSE,
+#'           IsMajorVersionUpgrade = TRUE|FALSE
+#'         )
+#'       ),
+#'       SupportedTimezones = list(
+#'         list(
+#'           TimezoneName = "string"
+#'         )
+#'       ),
+#'       ExportableLogTypes = list(
+#'         "string"
+#'       ),
+#'       SupportsLogExportsToCloudwatchLogs = TRUE|FALSE,
+#'       SupportsReadReplica = TRUE|FALSE
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2479,9 +3536,159 @@ neptune_describe_db_engine_versions <- function(Engine = NULL, EngineVersion = N
 #' 
 #' Constraints: Minimum 20, maximum 100.
 #' @param Marker An optional pagination token provided by a previous
-#' `DescribeDBInstances` request. If this parameter is specified, the
-#' response includes only records beyond the marker, up to the value
-#' specified by `MaxRecords`.
+#' [`describe_db_instances`][neptune_describe_db_instances] request. If
+#' this parameter is specified, the response includes only records beyond
+#' the marker, up to the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   DBInstances = list(
+#'     list(
+#'       DBInstanceIdentifier = "string",
+#'       DBInstanceClass = "string",
+#'       Engine = "string",
+#'       DBInstanceStatus = "string",
+#'       MasterUsername = "string",
+#'       DBName = "string",
+#'       Endpoint = list(
+#'         Address = "string",
+#'         Port = 123,
+#'         HostedZoneId = "string"
+#'       ),
+#'       AllocatedStorage = 123,
+#'       InstanceCreateTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       PreferredBackupWindow = "string",
+#'       BackupRetentionPeriod = 123,
+#'       DBSecurityGroups = list(
+#'         list(
+#'           DBSecurityGroupName = "string",
+#'           Status = "string"
+#'         )
+#'       ),
+#'       VpcSecurityGroups = list(
+#'         list(
+#'           VpcSecurityGroupId = "string",
+#'           Status = "string"
+#'         )
+#'       ),
+#'       DBParameterGroups = list(
+#'         list(
+#'           DBParameterGroupName = "string",
+#'           ParameterApplyStatus = "string"
+#'         )
+#'       ),
+#'       AvailabilityZone = "string",
+#'       DBSubnetGroup = list(
+#'         DBSubnetGroupName = "string",
+#'         DBSubnetGroupDescription = "string",
+#'         VpcId = "string",
+#'         SubnetGroupStatus = "string",
+#'         Subnets = list(
+#'           list(
+#'             SubnetIdentifier = "string",
+#'             SubnetAvailabilityZone = list(
+#'               Name = "string"
+#'             ),
+#'             SubnetStatus = "string"
+#'           )
+#'         ),
+#'         DBSubnetGroupArn = "string"
+#'       ),
+#'       PreferredMaintenanceWindow = "string",
+#'       PendingModifiedValues = list(
+#'         DBInstanceClass = "string",
+#'         AllocatedStorage = 123,
+#'         MasterUserPassword = "string",
+#'         Port = 123,
+#'         BackupRetentionPeriod = 123,
+#'         MultiAZ = TRUE|FALSE,
+#'         EngineVersion = "string",
+#'         LicenseModel = "string",
+#'         Iops = 123,
+#'         DBInstanceIdentifier = "string",
+#'         StorageType = "string",
+#'         CACertificateIdentifier = "string",
+#'         DBSubnetGroupName = "string",
+#'         PendingCloudwatchLogsExports = list(
+#'           LogTypesToEnable = list(
+#'             "string"
+#'           ),
+#'           LogTypesToDisable = list(
+#'             "string"
+#'           )
+#'         )
+#'       ),
+#'       LatestRestorableTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       MultiAZ = TRUE|FALSE,
+#'       EngineVersion = "string",
+#'       AutoMinorVersionUpgrade = TRUE|FALSE,
+#'       ReadReplicaSourceDBInstanceIdentifier = "string",
+#'       ReadReplicaDBInstanceIdentifiers = list(
+#'         "string"
+#'       ),
+#'       ReadReplicaDBClusterIdentifiers = list(
+#'         "string"
+#'       ),
+#'       LicenseModel = "string",
+#'       Iops = 123,
+#'       OptionGroupMemberships = list(
+#'         list(
+#'           OptionGroupName = "string",
+#'           Status = "string"
+#'         )
+#'       ),
+#'       CharacterSetName = "string",
+#'       SecondaryAvailabilityZone = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       StatusInfos = list(
+#'         list(
+#'           StatusType = "string",
+#'           Normal = TRUE|FALSE,
+#'           Status = "string",
+#'           Message = "string"
+#'         )
+#'       ),
+#'       StorageType = "string",
+#'       TdeCredentialArn = "string",
+#'       DbInstancePort = 123,
+#'       DBClusterIdentifier = "string",
+#'       StorageEncrypted = TRUE|FALSE,
+#'       KmsKeyId = "string",
+#'       DbiResourceId = "string",
+#'       CACertificateIdentifier = "string",
+#'       DomainMemberships = list(
+#'         list(
+#'           Domain = "string",
+#'           Status = "string",
+#'           FQDN = "string",
+#'           IAMRoleName = "string"
+#'         )
+#'       ),
+#'       CopyTagsToSnapshot = TRUE|FALSE,
+#'       MonitoringInterval = 123,
+#'       EnhancedMonitoringResourceArn = "string",
+#'       MonitoringRoleArn = "string",
+#'       PromotionTier = 123,
+#'       DBInstanceArn = "string",
+#'       Timezone = "string",
+#'       IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'       PerformanceInsightsEnabled = TRUE|FALSE,
+#'       PerformanceInsightsKMSKeyId = "string",
+#'       EnabledCloudwatchLogsExports = list(
+#'         "string"
+#'       ),
+#'       DeletionProtection = TRUE|FALSE
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2547,9 +3754,25 @@ neptune_describe_db_instances <- function(DBInstanceIdentifier = NULL, Filters =
 #' 
 #' Constraints: Minimum 20, maximum 100.
 #' @param Marker An optional pagination token provided by a previous
-#' `DescribeDBParameterGroups` request. If this parameter is specified, the
-#' response includes only records beyond the marker, up to the value
-#' specified by `MaxRecords`.
+#' [`describe_db_parameter_groups`][neptune_describe_db_parameter_groups]
+#' request. If this parameter is specified, the response includes only
+#' records beyond the marker, up to the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   DBParameterGroups = list(
+#'     list(
+#'       DBParameterGroupName = "string",
+#'       DBParameterGroupFamily = "string",
+#'       Description = "string",
+#'       DBParameterGroupArn = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2617,9 +3840,31 @@ neptune_describe_db_parameter_groups <- function(DBParameterGroupName = NULL, Fi
 #' 
 #' Constraints: Minimum 20, maximum 100.
 #' @param Marker An optional pagination token provided by a previous
-#' `DescribeDBParameters` request. If this parameter is specified, the
-#' response includes only records beyond the marker, up to the value
-#' specified by `MaxRecords`.
+#' [`describe_db_parameters`][neptune_describe_db_parameters] request. If
+#' this parameter is specified, the response includes only records beyond
+#' the marker, up to the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Parameters = list(
+#'     list(
+#'       ParameterName = "string",
+#'       ParameterValue = "string",
+#'       Description = "string",
+#'       Source = "string",
+#'       ApplyType = "string",
+#'       DataType = "string",
+#'       AllowedValues = "string",
+#'       IsModifiable = TRUE|FALSE,
+#'       MinimumEngineVersion = "string",
+#'       ApplyMethod = "immediate"|"pending-reboot"
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2688,6 +3933,32 @@ neptune_describe_db_parameters <- function(DBParameterGroupName, Source = NULL, 
 #' response includes only records beyond the marker, up to the value
 #' specified by `MaxRecords`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   DBSubnetGroups = list(
+#'     list(
+#'       DBSubnetGroupName = "string",
+#'       DBSubnetGroupDescription = "string",
+#'       VpcId = "string",
+#'       SubnetGroupStatus = "string",
+#'       Subnets = list(
+#'         list(
+#'           SubnetIdentifier = "string",
+#'           SubnetAvailabilityZone = list(
+#'             Name = "string"
+#'           ),
+#'           SubnetStatus = "string"
+#'         )
+#'       ),
+#'       DBSubnetGroupArn = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_db_subnet_groups(
@@ -2748,9 +4019,34 @@ neptune_describe_db_subnet_groups <- function(DBSubnetGroupName = NULL, Filters 
 #' 
 #' Constraints: Minimum 20, maximum 100.
 #' @param Marker An optional pagination token provided by a previous
-#' `DescribeEngineDefaultClusterParameters` request. If this parameter is
-#' specified, the response includes only records beyond the marker, up to
-#' the value specified by `MaxRecords`.
+#' [`describe_engine_default_cluster_parameters`][neptune_describe_engine_default_cluster_parameters]
+#' request. If this parameter is specified, the response includes only
+#' records beyond the marker, up to the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EngineDefaults = list(
+#'     DBParameterGroupFamily = "string",
+#'     Marker = "string",
+#'     Parameters = list(
+#'       list(
+#'         ParameterName = "string",
+#'         ParameterValue = "string",
+#'         Description = "string",
+#'         Source = "string",
+#'         ApplyType = "string",
+#'         DataType = "string",
+#'         AllowedValues = "string",
+#'         IsModifiable = TRUE|FALSE,
+#'         MinimumEngineVersion = "string",
+#'         ApplyMethod = "immediate"|"pending-reboot"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2811,9 +4107,34 @@ neptune_describe_engine_default_cluster_parameters <- function(DBParameterGroupF
 #' 
 #' Constraints: Minimum 20, maximum 100.
 #' @param Marker An optional pagination token provided by a previous
-#' `DescribeEngineDefaultParameters` request. If this parameter is
-#' specified, the response includes only records beyond the marker, up to
-#' the value specified by `MaxRecords`.
+#' [`describe_engine_default_parameters`][neptune_describe_engine_default_parameters]
+#' request. If this parameter is specified, the response includes only
+#' records beyond the marker, up to the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EngineDefaults = list(
+#'     DBParameterGroupFamily = "string",
+#'     Marker = "string",
+#'     Parameters = list(
+#'       list(
+#'         ParameterName = "string",
+#'         ParameterValue = "string",
+#'         Description = "string",
+#'         Source = "string",
+#'         ApplyType = "string",
+#'         DataType = "string",
+#'         AllowedValues = "string",
+#'         IsModifiable = TRUE|FALSE,
+#'         MinimumEngineVersion = "string",
+#'         ApplyMethod = "immediate"|"pending-reboot"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2867,6 +4188,21 @@ neptune_describe_engine_default_parameters <- function(DBParameterGroupFamily, F
 #' Valid values: db-instance | db-parameter-group | db-security-group |
 #' db-snapshot
 #' @param Filters This parameter is not currently supported.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EventCategoriesMapList = list(
+#'     list(
+#'       SourceType = "string",
+#'       EventCategories = list(
+#'         "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2931,6 +4267,32 @@ neptune_describe_event_categories <- function(SourceType = NULL, Filters = NULL)
 #' DescribeOrderableDBInstanceOptions request. If this parameter is
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by `MaxRecords` .
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   EventSubscriptionsList = list(
+#'     list(
+#'       CustomerAwsId = "string",
+#'       CustSubscriptionId = "string",
+#'       SnsTopicArn = "string",
+#'       Status = "string",
+#'       SubscriptionCreationTime = "string",
+#'       SourceType = "string",
+#'       SourceIdsList = list(
+#'         "string"
+#'       ),
+#'       EventCategoriesList = list(
+#'         "string"
+#'       ),
+#'       Enabled = TRUE|FALSE,
+#'       EventSubscriptionArn = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3033,6 +4395,28 @@ neptune_describe_event_subscriptions <- function(SubscriptionName = NULL, Filter
 #' request. If this parameter is specified, the response includes only
 #' records beyond the marker, up to the value specified by `MaxRecords`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   Events = list(
+#'     list(
+#'       SourceIdentifier = "string",
+#'       SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot",
+#'       Message = "string",
+#'       EventCategories = list(
+#'         "string"
+#'       ),
+#'       Date = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       SourceArn = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_events(
@@ -3114,6 +4498,42 @@ neptune_describe_events <- function(SourceIdentifier = NULL, SourceType = NULL, 
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by `MaxRecords` .
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   OrderableDBInstanceOptions = list(
+#'     list(
+#'       Engine = "string",
+#'       EngineVersion = "string",
+#'       DBInstanceClass = "string",
+#'       LicenseModel = "string",
+#'       AvailabilityZones = list(
+#'         list(
+#'           Name = "string"
+#'         )
+#'       ),
+#'       MultiAZCapable = TRUE|FALSE,
+#'       ReadReplicaCapable = TRUE|FALSE,
+#'       Vpc = TRUE|FALSE,
+#'       SupportsStorageEncryption = TRUE|FALSE,
+#'       StorageType = "string",
+#'       SupportsIops = TRUE|FALSE,
+#'       SupportsEnhancedMonitoring = TRUE|FALSE,
+#'       SupportsIAMDatabaseAuthentication = TRUE|FALSE,
+#'       SupportsPerformanceInsights = TRUE|FALSE,
+#'       MinStorageSize = 123,
+#'       MaxStorageSize = 123,
+#'       MinIopsPerDbInstance = 123,
+#'       MaxIopsPerDbInstance = 123,
+#'       MinIopsPerGib = 123.0,
+#'       MaxIopsPerGib = 123.0
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_orderable_db_instance_options(
@@ -3181,9 +4601,10 @@ neptune_describe_orderable_db_instance_options <- function(Engine, EngineVersion
 #'     ARNs. The results list will only include pending maintenance actions
 #'     for the DB instances identified by these ARNs.
 #' @param Marker An optional pagination token provided by a previous
-#' `DescribePendingMaintenanceActions` request. If this parameter is
-#' specified, the response includes only records beyond the marker, up to a
-#' number of records specified by `MaxRecords`.
+#' [`describe_pending_maintenance_actions`][neptune_describe_pending_maintenance_actions]
+#' request. If this parameter is specified, the response includes only
+#' records beyond the marker, up to a number of records specified by
+#' `MaxRecords`.
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a pagination token
 #' called a marker is included in the response so that the remaining
@@ -3192,6 +4613,35 @@ neptune_describe_orderable_db_instance_options <- function(Engine, EngineVersion
 #' Default: 100
 #' 
 #' Constraints: Minimum 20, maximum 100.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PendingMaintenanceActions = list(
+#'     list(
+#'       ResourceIdentifier = "string",
+#'       PendingMaintenanceActionDetails = list(
+#'         list(
+#'           Action = "string",
+#'           AutoAppliedAfterDate = as.POSIXct(
+#'             "2015-01-01"
+#'           ),
+#'           ForcedApplyDate = as.POSIXct(
+#'             "2015-01-01"
+#'           ),
+#'           OptInStatus = "string",
+#'           CurrentApplyDate = as.POSIXct(
+#'             "2015-01-01"
+#'           ),
+#'           Description = "string"
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3234,14 +4684,50 @@ neptune_describe_pending_maintenance_actions <- function(ResourceIdentifier = NU
 #' modifications you can make to your DB instance
 #'
 #' @description
-#' You can call DescribeValidDBInstanceModifications to learn what
-#' modifications you can make to your DB instance. You can use this
-#' information when you call ModifyDBInstance.
+#' You can call
+#' [`describe_valid_db_instance_modifications`][neptune_describe_valid_db_instance_modifications]
+#' to learn what modifications you can make to your DB instance. You can
+#' use this information when you call
+#' [`modify_db_instance`][neptune_modify_db_instance].
 #'
 #' @usage
 #' neptune_describe_valid_db_instance_modifications(DBInstanceIdentifier)
 #'
 #' @param DBInstanceIdentifier &#91;required&#93; The customer identifier or the ARN of your DB instance.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ValidDBInstanceModificationsMessage = list(
+#'     Storage = list(
+#'       list(
+#'         StorageType = "string",
+#'         StorageSize = list(
+#'           list(
+#'             From = 123,
+#'             To = 123,
+#'             Step = 123
+#'           )
+#'         ),
+#'         ProvisionedIops = list(
+#'           list(
+#'             From = 123,
+#'             To = 123,
+#'             Step = 123
+#'           )
+#'         ),
+#'         IopsToStorageRatio = list(
+#'           list(
+#'             From = 123.0,
+#'             To = 123.0
+#'           )
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3301,6 +4787,87 @@ neptune_describe_valid_db_instance_modifications <- function(DBInstanceIdentifie
 #' You must specify the instance identifier for an Read Replica in the DB
 #' cluster. For example, `mydbcluster-replica1`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AllocatedStorage = 123,
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     CharacterSetName = "string",
+#'     DatabaseName = "string",
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     DBClusterOptionGroupMemberships = list(
+#'       list(
+#'         DBClusterOptionGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     ReplicationSourceIdentifier = "string",
+#'     ReadReplicaIdentifiers = list(
+#'       "string"
+#'     ),
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string",
+#'         FeatureName = "string"
+#'       )
+#'     ),
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'     CloneGroupId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$failover_db_cluster(
@@ -3342,6 +4909,19 @@ neptune_failover_db_cluster <- function(DBClusterIdentifier = NULL, TargetDBInst
 #' [Constructing an Amazon Resource Name
 #' (ARN)](https://docs.aws.amazon.com/neptune/latest/userguide/#tagging.ARN.Constructing).
 #' @param Filters This parameter is not currently supported.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TagList = list(
+#'     list(
+#'       Key = "string",
+#'       Value = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3488,10 +5068,91 @@ neptune_list_tags_for_resource <- function(ResourceName, Filters = NULL) {
 #' For a list of valid engine versions, see [Engine Releases for Amazon
 #' Neptune](https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html),
 #' or call
-#' [DescribeDBEngineVersions](https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions).
+#' [`describe_db_engine_versions`][neptune_describe_db_engine_versions].
 #' @param DeletionProtection A value that indicates whether the DB cluster has deletion protection
 #' enabled. The database can't be deleted when deletion protection is
 #' enabled. By default, deletion protection is disabled.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AllocatedStorage = 123,
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     CharacterSetName = "string",
+#'     DatabaseName = "string",
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     DBClusterOptionGroupMemberships = list(
+#'       list(
+#'         DBClusterOptionGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     ReplicationSourceIdentifier = "string",
+#'     ReadReplicaIdentifiers = list(
+#'       "string"
+#'     ),
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string",
+#'         FeatureName = "string"
+#'       )
+#'     ),
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'     CloneGroupId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3561,6 +5222,27 @@ neptune_modify_db_cluster <- function(DBClusterIdentifier, NewDBClusterIdentifie
 #' group. All other eligible instances are reachable through the custom
 #' endpoint. Only relevant if the list of static members is empty.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterEndpointIdentifier = "string",
+#'   DBClusterIdentifier = "string",
+#'   DBClusterEndpointResourceIdentifier = "string",
+#'   Endpoint = "string",
+#'   Status = "string",
+#'   EndpointType = "string",
+#'   CustomEndpointType = "string",
+#'   StaticMembers = list(
+#'     "string"
+#'   ),
+#'   ExcludedMembers = list(
+#'     "string"
+#'   ),
+#'   DBClusterEndpointArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$modify_db_cluster_endpoint(
@@ -3616,8 +5298,9 @@ neptune_modify_db_cluster_endpoint <- function(DBClusterEndpointIdentifier, Endp
 #' database for a DB cluster, such as the character set for the default
 #' database defined by the `character_set_database` parameter. You can use
 #' the *Parameter Groups* option of the Amazon Neptune console or the
-#' DescribeDBClusterParameters command to verify that your DB cluster
-#' parameter group has been created or modified.
+#' [`describe_db_cluster_parameters`][neptune_describe_db_cluster_parameters]
+#' command to verify that your DB cluster parameter group has been created
+#' or modified.
 #'
 #' @usage
 #' neptune_modify_db_cluster_parameter_group(DBClusterParameterGroupName,
@@ -3625,6 +5308,14 @@ neptune_modify_db_cluster_endpoint <- function(DBClusterEndpointIdentifier, Endp
 #'
 #' @param DBClusterParameterGroupName &#91;required&#93; The name of the DB cluster parameter group to modify.
 #' @param Parameters &#91;required&#93; A list of parameters in the DB cluster parameter group to modify.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterParameterGroupName = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3688,7 +5379,9 @@ neptune_modify_db_cluster_parameter_group <- function(DBClusterParameterGroupNam
 #' 
 #' To view which AWS accounts have access to copy or restore a manual DB
 #' cluster snapshot, or whether a manual DB cluster snapshot public or
-#' private, use the DescribeDBClusterSnapshotAttributes API action.
+#' private, use the
+#' [`describe_db_cluster_snapshot_attributes`][neptune_describe_db_cluster_snapshot_attributes]
+#' API action.
 #'
 #' @usage
 #' neptune_modify_db_cluster_snapshot_attribute(
@@ -3717,6 +5410,24 @@ neptune_modify_db_cluster_parameter_group <- function(DBClusterParameterGroupNam
 #' `all`, an AWS account whose account ID is explicitly added to the
 #' `restore` attribute can still copy or restore a manual DB cluster
 #' snapshot.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterSnapshotAttributesResult = list(
+#'     DBClusterSnapshotIdentifier = "string",
+#'     DBClusterSnapshotAttributes = list(
+#'       list(
+#'         AttributeName = "string",
+#'         AttributeValues = list(
+#'           "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3758,8 +5469,9 @@ neptune_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdenti
 #' Modifies settings for a DB instance. You can change one or more database
 #' configuration parameters by specifying these parameters and the new
 #' values in the request. To learn what modifications you can make to your
-#' DB instance, call DescribeValidDBInstanceModifications before you call
-#' ModifyDBInstance.
+#' DB instance, call
+#' [`describe_valid_db_instance_modifications`][neptune_describe_valid_db_instance_modifications]
+#' before you call [`modify_db_instance`][neptune_modify_db_instance].
 #'
 #' @usage
 #' neptune_modify_db_instance(DBInstanceIdentifier, AllocatedStorage,
@@ -3816,7 +5528,8 @@ neptune_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdenti
 #' change is asynchronously applied as soon as possible.
 #' 
 #' Not applicable. The associated list of EC2 VPC security groups is
-#' managed by the DB cluster. For more information, see ModifyDBCluster.
+#' managed by the DB cluster. For more information, see
+#' [`modify_db_cluster`][neptune_modify_db_cluster].
 #' 
 #' Constraints:
 #' 
@@ -3827,8 +5540,9 @@ neptune_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdenti
 #' 
 #' If this parameter is set to `false`, changes to the DB instance are
 #' applied during the next maintenance window. Some parameter changes can
-#' cause an outage and are applied on the next call to RebootDBInstance, or
-#' the next failure reboot.
+#' cause an outage and are applied on the next call to
+#' [`reboot_db_instance`][neptune_reboot_db_instance], or the next failure
+#' reboot.
 #' 
 #' Default: `false`
 #' @param MasterUserPassword Not applicable.
@@ -3844,14 +5558,16 @@ neptune_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdenti
 #' Constraints: The DB parameter group must be in the same DB parameter
 #' group family as this DB instance.
 #' @param BackupRetentionPeriod Not applicable. The retention period for automated backups is managed by
-#' the DB cluster. For more information, see ModifyDBCluster.
+#' the DB cluster. For more information, see
+#' [`modify_db_cluster`][neptune_modify_db_cluster].
 #' 
 #' Default: Uses existing setting
 #' @param PreferredBackupWindow The daily time range during which automated backups are created if
 #' automated backups are enabled.
 #' 
 #' Not applicable. The daily time range for creating automated backups is
-#' managed by the DB cluster. For more information, see ModifyDBCluster.
+#' managed by the DB cluster. For more information, see
+#' [`modify_db_cluster`][neptune_modify_db_cluster].
 #' 
 #' Constraints:
 #' 
@@ -3885,7 +5601,9 @@ neptune_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdenti
 #' set to `true` for this request.
 #' @param EngineVersion The version number of the database engine to upgrade to. Currently,
 #' setting this parameter has no effect. To upgrade your database engine to
-#' the most recent release, use the ApplyPendingMaintenanceAction API.
+#' the most recent release, use the
+#' [`apply_pending_maintenance_action`][neptune_apply_pending_maintenance_action]
+#' API.
 #' @param AllowMajorVersionUpgrade Indicates that major version upgrades are allowed. Changing this
 #' parameter doesn't result in an outage and the change is asynchronously
 #' applied as soon as possible.
@@ -3968,7 +5686,8 @@ neptune_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdenti
 #' engines
 #' 
 #' Not applicable. Mapping AWS IAM accounts to database accounts is managed
-#' by the DB cluster. For more information, see ModifyDBCluster.
+#' by the DB cluster. For more information, see
+#' [`modify_db_cluster`][neptune_modify_db_cluster].
 #' 
 #' Default: `false`
 #' @param EnablePerformanceInsights *(Not supported by Neptune)*
@@ -3979,6 +5698,153 @@ neptune_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdenti
 #' enabled. The database can't be deleted when deletion protection is
 #' enabled. By default, deletion protection is disabled. See [Deleting a DB
 #' Instance](https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html).
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBInstance = list(
+#'     DBInstanceIdentifier = "string",
+#'     DBInstanceClass = "string",
+#'     Engine = "string",
+#'     DBInstanceStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       HostedZoneId = "string"
+#'     ),
+#'     AllocatedStorage = 123,
+#'     InstanceCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     BackupRetentionPeriod = 123,
+#'     DBSecurityGroups = list(
+#'       list(
+#'         DBSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     DBParameterGroups = list(
+#'       list(
+#'         DBParameterGroupName = "string",
+#'         ParameterApplyStatus = "string"
+#'       )
+#'     ),
+#'     AvailabilityZone = "string",
+#'     DBSubnetGroup = list(
+#'       DBSubnetGroupName = "string",
+#'       DBSubnetGroupDescription = "string",
+#'       VpcId = "string",
+#'       SubnetGroupStatus = "string",
+#'       Subnets = list(
+#'         list(
+#'           SubnetIdentifier = "string",
+#'           SubnetAvailabilityZone = list(
+#'             Name = "string"
+#'           ),
+#'           SubnetStatus = "string"
+#'         )
+#'       ),
+#'       DBSubnetGroupArn = "string"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       DBInstanceClass = "string",
+#'       AllocatedStorage = 123,
+#'       MasterUserPassword = "string",
+#'       Port = 123,
+#'       BackupRetentionPeriod = 123,
+#'       MultiAZ = TRUE|FALSE,
+#'       EngineVersion = "string",
+#'       LicenseModel = "string",
+#'       Iops = 123,
+#'       DBInstanceIdentifier = "string",
+#'       StorageType = "string",
+#'       CACertificateIdentifier = "string",
+#'       DBSubnetGroupName = "string",
+#'       PendingCloudwatchLogsExports = list(
+#'         LogTypesToEnable = list(
+#'           "string"
+#'         ),
+#'         LogTypesToDisable = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MultiAZ = TRUE|FALSE,
+#'     EngineVersion = "string",
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     ReadReplicaSourceDBInstanceIdentifier = "string",
+#'     ReadReplicaDBInstanceIdentifiers = list(
+#'       "string"
+#'     ),
+#'     ReadReplicaDBClusterIdentifiers = list(
+#'       "string"
+#'     ),
+#'     LicenseModel = "string",
+#'     Iops = 123,
+#'     OptionGroupMemberships = list(
+#'       list(
+#'         OptionGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     CharacterSetName = "string",
+#'     SecondaryAvailabilityZone = "string",
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     StatusInfos = list(
+#'       list(
+#'         StatusType = "string",
+#'         Normal = TRUE|FALSE,
+#'         Status = "string",
+#'         Message = "string"
+#'       )
+#'     ),
+#'     StorageType = "string",
+#'     TdeCredentialArn = "string",
+#'     DbInstancePort = 123,
+#'     DBClusterIdentifier = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbiResourceId = "string",
+#'     CACertificateIdentifier = "string",
+#'     DomainMemberships = list(
+#'       list(
+#'         Domain = "string",
+#'         Status = "string",
+#'         FQDN = "string",
+#'         IAMRoleName = "string"
+#'       )
+#'     ),
+#'     CopyTagsToSnapshot = TRUE|FALSE,
+#'     MonitoringInterval = 123,
+#'     EnhancedMonitoringResourceArn = "string",
+#'     MonitoringRoleArn = "string",
+#'     PromotionTier = 123,
+#'     DBInstanceArn = "string",
+#'     Timezone = "string",
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'     PerformanceInsightsEnabled = TRUE|FALSE,
+#'     PerformanceInsightsKMSKeyId = "string",
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4097,6 +5963,14 @@ neptune_modify_db_instance <- function(DBInstanceIdentifier, AllocatedStorage = 
 #' use the pending-reboot value for both dynamic and static parameters, and
 #' changes are applied when you reboot the DB instance without failover.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBParameterGroupName = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$modify_db_parameter_group(
@@ -4158,6 +6032,29 @@ neptune_modify_db_parameter_group <- function(DBParameterGroupName, Parameters) 
 #' @param DBSubnetGroupDescription The description for the DB subnet group.
 #' @param SubnetIds &#91;required&#93; The EC2 subnet IDs for the DB subnet group.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBSubnetGroup = list(
+#'     DBSubnetGroupName = "string",
+#'     DBSubnetGroupDescription = "string",
+#'     VpcId = "string",
+#'     SubnetGroupStatus = "string",
+#'     Subnets = list(
+#'       list(
+#'         SubnetIdentifier = "string",
+#'         SubnetAvailabilityZone = list(
+#'           Name = "string"
+#'         ),
+#'         SubnetStatus = "string"
+#'       )
+#'     ),
+#'     DBSubnetGroupArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$modify_db_subnet_group(
@@ -4195,8 +6092,10 @@ neptune_modify_db_subnet_group <- function(DBSubnetGroupName, DBSubnetGroupDescr
 #' Modifies an existing event notification subscription. Note that you
 #' can't modify the source identifiers using this call; to change source
 #' identifiers for a subscription, use the
-#' AddSourceIdentifierToSubscription and
-#' RemoveSourceIdentifierFromSubscription calls.
+#' [`add_source_identifier_to_subscription`][neptune_add_source_identifier_to_subscription]
+#' and
+#' [`remove_source_identifier_from_subscription`][neptune_remove_source_identifier_from_subscription]
+#' calls.
 #' 
 #' You can see a list of the event categories for a given SourceType by
 #' using the **DescribeEventCategories** action.
@@ -4220,6 +6119,29 @@ neptune_modify_db_subnet_group <- function(DBSubnetGroupName, DBSubnetGroupDescr
 #' to. You can see a list of the categories for a given SourceType by using
 #' the **DescribeEventCategories** action.
 #' @param Enabled A Boolean value; set to **true** to activate the subscription.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EventSubscription = list(
+#'     CustomerAwsId = "string",
+#'     CustSubscriptionId = "string",
+#'     SnsTopicArn = "string",
+#'     Status = "string",
+#'     SubscriptionCreationTime = "string",
+#'     SourceType = "string",
+#'     SourceIdsList = list(
+#'       "string"
+#'     ),
+#'     EventCategoriesList = list(
+#'       "string"
+#'     ),
+#'     Enabled = TRUE|FALSE,
+#'     EventSubscriptionArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4263,6 +6185,87 @@ neptune_modify_event_subscription <- function(SubscriptionName, SnsTopicArn = NU
 #' neptune_promote_read_replica_db_cluster(DBClusterIdentifier)
 #'
 #' @param DBClusterIdentifier &#91;required&#93; Not supported.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AllocatedStorage = 123,
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     CharacterSetName = "string",
+#'     DatabaseName = "string",
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     DBClusterOptionGroupMemberships = list(
+#'       list(
+#'         DBClusterOptionGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     ReplicationSourceIdentifier = "string",
+#'     ReadReplicaIdentifiers = list(
+#'       "string"
+#'     ),
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string",
+#'         FeatureName = "string"
+#'       )
+#'     ),
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'     CloneGroupId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4318,6 +6321,153 @@ neptune_promote_read_replica_db_cluster <- function(DBClusterIdentifier) {
 #' Constraint: You can't specify `true` if the instance is not configured
 #' for MultiAZ.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBInstance = list(
+#'     DBInstanceIdentifier = "string",
+#'     DBInstanceClass = "string",
+#'     Engine = "string",
+#'     DBInstanceStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       HostedZoneId = "string"
+#'     ),
+#'     AllocatedStorage = 123,
+#'     InstanceCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     BackupRetentionPeriod = 123,
+#'     DBSecurityGroups = list(
+#'       list(
+#'         DBSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     DBParameterGroups = list(
+#'       list(
+#'         DBParameterGroupName = "string",
+#'         ParameterApplyStatus = "string"
+#'       )
+#'     ),
+#'     AvailabilityZone = "string",
+#'     DBSubnetGroup = list(
+#'       DBSubnetGroupName = "string",
+#'       DBSubnetGroupDescription = "string",
+#'       VpcId = "string",
+#'       SubnetGroupStatus = "string",
+#'       Subnets = list(
+#'         list(
+#'           SubnetIdentifier = "string",
+#'           SubnetAvailabilityZone = list(
+#'             Name = "string"
+#'           ),
+#'           SubnetStatus = "string"
+#'         )
+#'       ),
+#'       DBSubnetGroupArn = "string"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       DBInstanceClass = "string",
+#'       AllocatedStorage = 123,
+#'       MasterUserPassword = "string",
+#'       Port = 123,
+#'       BackupRetentionPeriod = 123,
+#'       MultiAZ = TRUE|FALSE,
+#'       EngineVersion = "string",
+#'       LicenseModel = "string",
+#'       Iops = 123,
+#'       DBInstanceIdentifier = "string",
+#'       StorageType = "string",
+#'       CACertificateIdentifier = "string",
+#'       DBSubnetGroupName = "string",
+#'       PendingCloudwatchLogsExports = list(
+#'         LogTypesToEnable = list(
+#'           "string"
+#'         ),
+#'         LogTypesToDisable = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MultiAZ = TRUE|FALSE,
+#'     EngineVersion = "string",
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     ReadReplicaSourceDBInstanceIdentifier = "string",
+#'     ReadReplicaDBInstanceIdentifiers = list(
+#'       "string"
+#'     ),
+#'     ReadReplicaDBClusterIdentifiers = list(
+#'       "string"
+#'     ),
+#'     LicenseModel = "string",
+#'     Iops = 123,
+#'     OptionGroupMemberships = list(
+#'       list(
+#'         OptionGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     CharacterSetName = "string",
+#'     SecondaryAvailabilityZone = "string",
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     StatusInfos = list(
+#'       list(
+#'         StatusType = "string",
+#'         Normal = TRUE|FALSE,
+#'         Status = "string",
+#'         Message = "string"
+#'       )
+#'     ),
+#'     StorageType = "string",
+#'     TdeCredentialArn = "string",
+#'     DbInstancePort = 123,
+#'     DBClusterIdentifier = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbiResourceId = "string",
+#'     CACertificateIdentifier = "string",
+#'     DomainMemberships = list(
+#'       list(
+#'         Domain = "string",
+#'         Status = "string",
+#'         FQDN = "string",
+#'         IAMRoleName = "string"
+#'       )
+#'     ),
+#'     CopyTagsToSnapshot = TRUE|FALSE,
+#'     MonitoringInterval = 123,
+#'     EnhancedMonitoringResourceArn = "string",
+#'     MonitoringRoleArn = "string",
+#'     PromotionTier = 123,
+#'     DBInstanceArn = "string",
+#'     Timezone = "string",
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'     PerformanceInsightsEnabled = TRUE|FALSE,
+#'     PerformanceInsightsKMSKeyId = "string",
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$reboot_db_instance(
@@ -4365,6 +6515,9 @@ neptune_reboot_db_instance <- function(DBInstanceIdentifier, ForceFailover = NUL
 #' disassociated from. For the list of supported feature names, see
 #' DBEngineVersion.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$remove_role_from_db_cluster(
@@ -4411,6 +6564,29 @@ neptune_remove_role_from_db_cluster <- function(DBClusterIdentifier, RoleArn, Fe
 #' **DB instance identifier** for a DB instance or the name of a security
 #' group.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EventSubscription = list(
+#'     CustomerAwsId = "string",
+#'     CustSubscriptionId = "string",
+#'     SnsTopicArn = "string",
+#'     Status = "string",
+#'     SubscriptionCreationTime = "string",
+#'     SourceType = "string",
+#'     SourceIdsList = list(
+#'       "string"
+#'     ),
+#'     EventCategoriesList = list(
+#'       "string"
+#'     ),
+#'     Enabled = TRUE|FALSE,
+#'     EventSubscriptionArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$remove_source_identifier_from_subscription(
@@ -4452,6 +6628,9 @@ neptune_remove_source_identifier_from_subscription <- function(SubscriptionName,
 #' see [Constructing an Amazon Resource Name
 #' (ARN)](https://docs.aws.amazon.com/neptune/latest/userguide/#tagging.ARN.Constructing).
 #' @param TagKeys &#91;required&#93; The tag key (name) of the tag to be removed.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -4495,9 +6674,11 @@ neptune_remove_tags_from_resource <- function(ResourceName, TagKeys) {
 #' 
 #' When resetting the entire group, dynamic parameters are updated
 #' immediately and static parameters are set to `pending-reboot` to take
-#' effect on the next DB instance restart or RebootDBInstance request. You
-#' must call RebootDBInstance for every DB instance in your DB cluster that
-#' you want the updated static parameter to apply to.
+#' effect on the next DB instance restart or
+#' [`reboot_db_instance`][neptune_reboot_db_instance] request. You must
+#' call [`reboot_db_instance`][neptune_reboot_db_instance] for every DB
+#' instance in your DB cluster that you want the updated static parameter
+#' to apply to.
 #'
 #' @usage
 #' neptune_reset_db_cluster_parameter_group(DBClusterParameterGroupName,
@@ -4511,6 +6692,14 @@ neptune_remove_tags_from_resource <- function(ResourceName, TagKeys) {
 #' @param Parameters A list of parameter names in the DB cluster parameter group to reset to
 #' the default values. You can't use this parameter if the
 #' `ResetAllParameters` parameter is set to `true`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBClusterParameterGroupName = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4565,7 +6754,7 @@ neptune_reset_db_cluster_parameter_group <- function(DBClusterParameterGroupName
 #' `ResetAllParameters` parameters. When resetting the entire group,
 #' dynamic parameters are updated immediately and static parameters are set
 #' to `pending-reboot` to take effect on the next DB instance restart or
-#' `RebootDBInstance` request.
+#' [`reboot_db_instance`][neptune_reboot_db_instance] request.
 #'
 #' @usage
 #' neptune_reset_db_parameter_group(DBParameterGroupName,
@@ -4586,6 +6775,14 @@ neptune_reset_db_cluster_parameter_group <- function(DBClusterParameterGroupName
 #' maximum of 20 parameters can be modified in a single request.
 #' 
 #' Valid Values (for Apply method): `pending-reboot`
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBParameterGroupName = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4731,6 +6928,87 @@ neptune_reset_db_parameter_group <- function(DBParameterGroupName, ResetAllParam
 #' enabled. The database can't be deleted when deletion protection is
 #' enabled. By default, deletion protection is disabled.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AllocatedStorage = 123,
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     CharacterSetName = "string",
+#'     DatabaseName = "string",
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     DBClusterOptionGroupMemberships = list(
+#'       list(
+#'         DBClusterOptionGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     ReplicationSourceIdentifier = "string",
+#'     ReadReplicaIdentifiers = list(
+#'       "string"
+#'     ),
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string",
+#'         FeatureName = "string"
+#'       )
+#'     ),
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'     CloneGroupId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$restore_db_cluster_from_snapshot(
@@ -4795,11 +7073,13 @@ neptune_restore_db_cluster_from_snapshot <- function(AvailabilityZones = NULL, D
 #' security group.
 #' 
 #' This action only restores the DB cluster, not the DB instances for that
-#' DB cluster. You must invoke the CreateDBInstance action to create DB
+#' DB cluster. You must invoke the
+#' [`create_db_instance`][neptune_create_db_instance] action to create DB
 #' instances for the restored DB cluster, specifying the identifier of the
 #' restored DB cluster in `DBClusterIdentifier`. You can create DB
-#' instances only after the `RestoreDBClusterToPointInTime` action has
-#' completed and the DB cluster is available.
+#' instances only after the
+#' [`restore_db_cluster_to_point_in_time`][neptune_restore_db_cluster_to_point_in_time]
+#' action has completed and the DB cluster is available.
 #'
 #' @usage
 #' neptune_restore_db_cluster_to_point_in_time(DBClusterIdentifier,
@@ -4915,6 +7195,87 @@ neptune_restore_db_cluster_from_snapshot <- function(AvailabilityZones = NULL, D
 #' enabled. The database can't be deleted when deletion protection is
 #' enabled. By default, deletion protection is disabled.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AllocatedStorage = 123,
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     CharacterSetName = "string",
+#'     DatabaseName = "string",
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     DBClusterOptionGroupMemberships = list(
+#'       list(
+#'         DBClusterOptionGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     ReplicationSourceIdentifier = "string",
+#'     ReadReplicaIdentifiers = list(
+#'       "string"
+#'     ),
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string",
+#'         FeatureName = "string"
+#'       )
+#'     ),
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'     CloneGroupId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$restore_db_cluster_to_point_in_time(
@@ -4980,6 +7341,87 @@ neptune_restore_db_cluster_to_point_in_time <- function(DBClusterIdentifier, Res
 #' @param DBClusterIdentifier &#91;required&#93; The DB cluster identifier of the Neptune DB cluster to be started. This
 #' parameter is stored as a lowercase string.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AllocatedStorage = 123,
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     CharacterSetName = "string",
+#'     DatabaseName = "string",
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     DBClusterOptionGroupMemberships = list(
+#'       list(
+#'         DBClusterOptionGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     ReplicationSourceIdentifier = "string",
+#'     ReadReplicaIdentifiers = list(
+#'       "string"
+#'     ),
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string",
+#'         FeatureName = "string"
+#'       )
+#'     ),
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'     CloneGroupId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$start_db_cluster(
@@ -5022,6 +7464,87 @@ neptune_start_db_cluster <- function(DBClusterIdentifier) {
 #'
 #' @param DBClusterIdentifier &#91;required&#93; The DB cluster identifier of the Neptune DB cluster to be stopped. This
 #' parameter is stored as a lowercase string.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DBCluster = list(
+#'     AllocatedStorage = 123,
+#'     AvailabilityZones = list(
+#'       "string"
+#'     ),
+#'     BackupRetentionPeriod = 123,
+#'     CharacterSetName = "string",
+#'     DatabaseName = "string",
+#'     DBClusterIdentifier = "string",
+#'     DBClusterParameterGroup = "string",
+#'     DBSubnetGroup = "string",
+#'     Status = "string",
+#'     PercentProgress = "string",
+#'     EarliestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Endpoint = "string",
+#'     ReaderEndpoint = "string",
+#'     MultiAZ = TRUE|FALSE,
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     LatestRestorableTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Port = 123,
+#'     MasterUsername = "string",
+#'     DBClusterOptionGroupMemberships = list(
+#'       list(
+#'         DBClusterOptionGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     PreferredBackupWindow = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     ReplicationSourceIdentifier = "string",
+#'     ReadReplicaIdentifiers = list(
+#'       "string"
+#'     ),
+#'     DBClusterMembers = list(
+#'       list(
+#'         DBInstanceIdentifier = "string",
+#'         IsClusterWriter = TRUE|FALSE,
+#'         DBClusterParameterGroupStatus = "string",
+#'         PromotionTier = 123
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     HostedZoneId = "string",
+#'     StorageEncrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     DbClusterResourceId = "string",
+#'     DBClusterArn = "string",
+#'     AssociatedRoles = list(
+#'       list(
+#'         RoleArn = "string",
+#'         Status = "string",
+#'         FeatureName = "string"
+#'       )
+#'     ),
+#'     IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+#'     CloneGroupId = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EnabledCloudwatchLogsExports = list(
+#'       "string"
+#'     ),
+#'     DeletionProtection = TRUE|FALSE
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```

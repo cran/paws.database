@@ -33,11 +33,17 @@ shard.
 \item{SequenceNumber}{The sequence number of a stream record in the shard from which to start
 reading.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  ShardIterator = "string"
+)
+}
+}
 \description{
 Returns a shard iterator. A shard iterator provides information about
 how to retrieve the stream records from within a shard. Use the shard
-iterator in a subsequent \code{GetRecords} request to read the stream records
-from the shard.
+iterator in a subsequent \code{\link[=dynamodbstreams_get_records]{get_records}}
+request to read the stream records from the shard.
 
 A shard iterator expires 15 minutes after it is returned to the
 requester.
@@ -59,7 +65,7 @@ requester.
 svc$get_shard_iterator(
   ShardId = "00000001414576573621-f55eea83",
   ShardIteratorType = "TRIM_HORIZON",
-  StreamArn = "arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:1..."
+  StreamArn = "arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2..."
 )
 }
 

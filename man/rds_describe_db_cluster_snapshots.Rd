@@ -77,9 +77,9 @@ Default: 100
 Constraints: Minimum 20, maximum 100.}
 
 \item{Marker}{An optional pagination token provided by a previous
-\code{DescribeDBClusterSnapshots} request. If this parameter is specified,
-the response includes only records beyond the marker, up to the value
-specified by \code{MaxRecords}.}
+\code{\link[=rds_describe_db_cluster_snapshots]{describe_db_cluster_snapshots}}
+request. If this parameter is specified, the response includes only
+records beyond the marker, up to the value specified by \code{MaxRecords}.}
 
 \item{IncludeShared}{A value that indicates whether to include shared manual DB cluster
 snapshots from other AWS accounts that this AWS account has been given
@@ -88,14 +88,58 @@ included.
 
 You can give an AWS account permission to restore a manual DB cluster
 snapshot from another AWS account by the
-\code{ModifyDBClusterSnapshotAttribute} API action.}
+\code{\link[=rds_modify_db_cluster_snapshot_attribute]{modify_db_cluster_snapshot_attribute}}
+API action.}
 
 \item{IncludePublic}{A value that indicates whether to include manual DB cluster snapshots
 that are public and can be copied or restored by any AWS account. By
 default, the public snapshots are not included.
 
 You can share a manual DB cluster snapshot as public by using the
-ModifyDBClusterSnapshotAttribute API action.}
+\code{\link[=rds_modify_db_cluster_snapshot_attribute]{modify_db_cluster_snapshot_attribute}}
+API action.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Marker = "string",
+  DBClusterSnapshots = list(
+    list(
+      AvailabilityZones = list(
+        "string"
+      ),
+      DBClusterSnapshotIdentifier = "string",
+      DBClusterIdentifier = "string",
+      SnapshotCreateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      Engine = "string",
+      AllocatedStorage = 123,
+      Status = "string",
+      Port = 123,
+      VpcId = "string",
+      ClusterCreateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      MasterUsername = "string",
+      EngineVersion = "string",
+      LicenseModel = "string",
+      SnapshotType = "string",
+      PercentProgress = 123,
+      StorageEncrypted = TRUE|FALSE,
+      KmsKeyId = "string",
+      DBClusterSnapshotArn = "string",
+      SourceDBClusterSnapshotArn = "string",
+      IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+      TagList = list(
+        list(
+          Key = "string",
+          Value = "string"
+        )
+      )
+    )
+  )
+)
+}
 }
 \description{
 Returns information about DB cluster snapshots. This API action supports

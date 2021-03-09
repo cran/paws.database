@@ -11,6 +11,24 @@ dynamodb_create_backup(TableName, BackupName)
 
 \item{BackupName}{[required] Specified name for the backup.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  BackupDetails = list(
+    BackupArn = "string",
+    BackupName = "string",
+    BackupSizeBytes = 123,
+    BackupStatus = "CREATING"|"DELETED"|"AVAILABLE",
+    BackupType = "USER"|"SYSTEM"|"AWS_BACKUP",
+    BackupCreationDateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    BackupExpiryDateTime = as.POSIXct(
+      "2015-01-01"
+    )
+  )
+)
+}
+}
 \description{
 Creates a backup for an existing table.
 
@@ -24,7 +42,8 @@ changes until the time of the request to the last full table snapshot.
 Backup requests are processed instantaneously and become available for
 restore within minutes.
 
-You can call \code{CreateBackup} at a maximum rate of 50 times per second.
+You can call \code{\link[=dynamodb_create_backup]{create_backup}} at a maximum rate
+of 50 times per second.
 
 All backups in DynamoDB work without consuming any provisioned
 throughput on the table.

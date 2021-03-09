@@ -12,11 +12,33 @@ rds_modify_certificates(CertificateIdentifier, RemoveCustomerOverride)
 \item{CertificateIdentifier}{The new default certificate identifier to override the current one with.
 
 To determine the valid values, use the \code{describe-certificates} AWS CLI
-command or the \code{DescribeCertificates} API operation.}
+command or the \code{\link[=rds_describe_certificates]{describe_certificates}} API
+operation.}
 
 \item{RemoveCustomerOverride}{A value that indicates whether to remove the override for the default
 certificate. If the override is removed, the default certificate is the
 system default.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Certificate = list(
+    CertificateIdentifier = "string",
+    CertificateType = "string",
+    Thumbprint = "string",
+    ValidFrom = as.POSIXct(
+      "2015-01-01"
+    ),
+    ValidTill = as.POSIXct(
+      "2015-01-01"
+    ),
+    CertificateArn = "string",
+    CustomerOverride = TRUE|FALSE,
+    CustomerOverrideValidTill = as.POSIXct(
+      "2015-01-01"
+    )
+  )
+)
+}
 }
 \description{
 Override the system-default Secure Sockets Layer/Transport Layer

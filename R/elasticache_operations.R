@@ -35,6 +35,19 @@ NULL
 #' @param Tags &#91;required&#93; A list of cost allocation tags to be added to this resource. A tag is a
 #' key-value pair. A tag key must be accompanied by a tag value.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TagList = list(
+#'     list(
+#'       Key = "string",
+#'       Value = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$add_tags_to_resource(
@@ -89,6 +102,26 @@ elasticache_add_tags_to_resource <- function(ResourceName, Tags) {
 #' this is not the same thing as an AWS access key ID - you must provide a
 #' valid AWS account number for this parameter.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CacheSecurityGroup = list(
+#'     OwnerId = "string",
+#'     CacheSecurityGroupName = "string",
+#'     Description = "string",
+#'     EC2SecurityGroups = list(
+#'       list(
+#'         Status = "string",
+#'         EC2SecurityGroupName = "string",
+#'         EC2SecurityGroupOwnerId = "string"
+#'       )
+#'     ),
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$authorize_cache_security_group_ingress(
@@ -132,6 +165,30 @@ elasticache_authorize_cache_security_group_ingress <- function(CacheSecurityGrou
 #' @param ReplicationGroupIds The replication group IDs
 #' @param CacheClusterIds The cache cluster IDs
 #' @param ServiceUpdateName &#91;required&#93; The unique ID of the service update
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ProcessedUpdateActions = list(
+#'     list(
+#'       ReplicationGroupId = "string",
+#'       CacheClusterId = "string",
+#'       ServiceUpdateName = "string",
+#'       UpdateActionStatus = "not-applied"|"waiting-to-start"|"in-progress"|"stopping"|"stopped"|"complete"|"scheduling"|"scheduled"|"not-applicable"
+#'     )
+#'   ),
+#'   UnprocessedUpdateActions = list(
+#'     list(
+#'       ReplicationGroupId = "string",
+#'       CacheClusterId = "string",
+#'       ServiceUpdateName = "string",
+#'       ErrorType = "string",
+#'       ErrorMessage = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -181,6 +238,30 @@ elasticache_batch_apply_update_action <- function(ReplicationGroupIds = NULL, Ca
 #' @param CacheClusterIds The cache cluster IDs
 #' @param ServiceUpdateName &#91;required&#93; The unique ID of the service update
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ProcessedUpdateActions = list(
+#'     list(
+#'       ReplicationGroupId = "string",
+#'       CacheClusterId = "string",
+#'       ServiceUpdateName = "string",
+#'       UpdateActionStatus = "not-applied"|"waiting-to-start"|"in-progress"|"stopping"|"stopped"|"complete"|"scheduling"|"scheduled"|"not-applicable"
+#'     )
+#'   ),
+#'   UnprocessedUpdateActions = list(
+#'     list(
+#'       ReplicationGroupId = "string",
+#'       CacheClusterId = "string",
+#'       ServiceUpdateName = "string",
+#'       ErrorType = "string",
+#'       ErrorMessage = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$batch_stop_update_action(
@@ -227,6 +308,96 @@ elasticache_batch_stop_update_action <- function(ReplicationGroupIds = NULL, Cac
 #' is recommended to use this option only to abort the migration and not
 #' recommended when application wants to continue migration to ElastiCache.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ReplicationGroup = list(
+#'     ReplicationGroupId = "string",
+#'     Description = "string",
+#'     GlobalReplicationGroupInfo = list(
+#'       GlobalReplicationGroupId = "string",
+#'       GlobalReplicationGroupMemberRole = "string"
+#'     ),
+#'     Status = "string",
+#'     PendingModifiedValues = list(
+#'       PrimaryClusterId = "string",
+#'       AutomaticFailoverStatus = "enabled"|"disabled",
+#'       Resharding = list(
+#'         SlotMigration = list(
+#'           ProgressPercentage = 123.0
+#'         )
+#'       ),
+#'       AuthTokenStatus = "SETTING"|"ROTATING",
+#'       UserGroups = list(
+#'         UserGroupIdsToAdd = list(
+#'           "string"
+#'         ),
+#'         UserGroupIdsToRemove = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     MemberClusters = list(
+#'       "string"
+#'     ),
+#'     NodeGroups = list(
+#'       list(
+#'         NodeGroupId = "string",
+#'         Status = "string",
+#'         PrimaryEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         ReaderEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         Slots = "string",
+#'         NodeGroupMembers = list(
+#'           list(
+#'             CacheClusterId = "string",
+#'             CacheNodeId = "string",
+#'             ReadEndpoint = list(
+#'               Address = "string",
+#'               Port = 123
+#'             ),
+#'             PreferredAvailabilityZone = "string",
+#'             PreferredOutpostArn = "string",
+#'             CurrentRole = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     SnapshottingClusterId = "string",
+#'     AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'     MultiAZ = "enabled"|"disabled",
+#'     ConfigurationEndpoint = list(
+#'       Address = "string",
+#'       Port = 123
+#'     ),
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     ClusterEnabled = TRUE|FALSE,
+#'     CacheNodeType = "string",
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     AuthTokenLastModifiedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     MemberClustersOutpostArns = list(
+#'       "string"
+#'     ),
+#'     KmsKeyId = "string",
+#'     ARN = "string",
+#'     UserGroupIds = list(
+#'       "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$complete_migration(
@@ -262,10 +433,11 @@ elasticache_complete_migration <- function(ReplicationGroupId, Force = NULL) {
 #' 
 #' This operation is valid for Redis only.
 #' 
-#' Users or groups that have permissions to use the `CopySnapshot`
-#' operation can create their own Amazon S3 buckets and copy snapshots to
-#' it. To control access to your snapshots, use an IAM policy to control
-#' who has the ability to use the `CopySnapshot` operation. For more
+#' Users or groups that have permissions to use the
+#' [`copy_snapshot`][elasticache_copy_snapshot] operation can create their
+#' own Amazon S3 buckets and copy snapshots to it. To control access to
+#' your snapshots, use an IAM policy to control who has the ability to use
+#' the [`copy_snapshot`][elasticache_copy_snapshot] operation. For more
 #' information about using IAM to control the use of ElastiCache
 #' operations, see [Exporting
 #' Snapshots](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html)
@@ -276,21 +448,21 @@ elasticache_complete_migration <- function(ReplicationGroupId, Force = NULL) {
 #' 
 #' **Error Messages**
 #' 
-#' -   **Error Message:** The S3 bucket \%s is outside of the region.
+#' -   **Error Message:** The S3 bucket %s is outside of the region.
 #' 
 #'     **Solution:** Create an Amazon S3 bucket in the same region as your
 #'     snapshot. For more information, see [Step 1: Create an Amazon S3
 #'     Bucket](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-create-s3-bucket)
 #'     in the ElastiCache User Guide.
 #' 
-#' -   **Error Message:** The S3 bucket \%s does not exist.
+#' -   **Error Message:** The S3 bucket %s does not exist.
 #' 
 #'     **Solution:** Create an Amazon S3 bucket in the same region as your
 #'     snapshot. For more information, see [Step 1: Create an Amazon S3
 #'     Bucket](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-create-s3-bucket)
 #'     in the ElastiCache User Guide.
 #' 
-#' -   **Error Message:** The S3 bucket \%s is not owned by the
+#' -   **Error Message:** The S3 bucket %s is not owned by the
 #'     authenticated user.
 #' 
 #'     **Solution:** Create an Amazon S3 bucket in the same region as your
@@ -304,15 +476,15 @@ elasticache_complete_migration <- function(ReplicationGroupId, Force = NULL) {
 #'     **Solution:** Contact your system administrator to get the needed
 #'     permissions.
 #' 
-#' -   **Error Message:** The S3 bucket \%s already contains an object with
-#'     key \%s.
+#' -   **Error Message:** The S3 bucket %s already contains an object with
+#'     key %s.
 #' 
 #'     **Solution:** Give the `TargetSnapshotName` a new and unique value.
 #'     If exporting a snapshot, you could alternatively create a new Amazon
 #'     S3 bucket and use this same value for `TargetSnapshotName`.
 #' 
 #' -   **Error Message:** ElastiCache has not been granted READ permissions
-#'     \%s on the S3 Bucket.
+#'     %s on the S3 Bucket.
 #' 
 #'     **Solution:** Add List and Read permissions on the bucket. For more
 #'     information, see [Step 2: Grant ElastiCache Access to Your Amazon S3
@@ -320,15 +492,15 @@ elasticache_complete_migration <- function(ReplicationGroupId, Force = NULL) {
 #'     in the ElastiCache User Guide.
 #' 
 #' -   **Error Message:** ElastiCache has not been granted WRITE
-#'     permissions \%s on the S3 Bucket.
+#'     permissions %s on the S3 Bucket.
 #' 
 #'     **Solution:** Add Upload/Delete permissions on the bucket. For more
 #'     information, see [Step 2: Grant ElastiCache Access to Your Amazon S3
 #'     Bucket](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access)
 #'     in the ElastiCache User Guide.
 #' 
-#' -   **Error Message:** ElastiCache has not been granted READ\\_ACP
-#'     permissions \%s on the S3 Bucket.
+#' -   **Error Message:** ElastiCache has not been granted READ_ACP
+#'     permissions %s on the S3 Bucket.
 #' 
 #'     **Solution:** Add View Permissions on the bucket. For more
 #'     information, see [Step 2: Grant ElastiCache Access to Your Amazon S3
@@ -356,6 +528,70 @@ elasticache_complete_migration <- function(ReplicationGroupId, Force = NULL) {
 #' Snapshot](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/)
 #' in the *Amazon ElastiCache User Guide*.
 #' @param KmsKeyId The ID of the KMS key used to encrypt the target snapshot.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Snapshot = list(
+#'     SnapshotName = "string",
+#'     ReplicationGroupId = "string",
+#'     ReplicationGroupDescription = "string",
+#'     CacheClusterId = "string",
+#'     SnapshotStatus = "string",
+#'     SnapshotSource = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     NumCacheNodes = 123,
+#'     PreferredAvailabilityZone = "string",
+#'     PreferredOutpostArn = "string",
+#'     CacheClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     TopicArn = "string",
+#'     Port = 123,
+#'     CacheParameterGroupName = "string",
+#'     CacheSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     NumNodeGroups = 123,
+#'     AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'     NodeSnapshots = list(
+#'       list(
+#'         CacheClusterId = "string",
+#'         NodeGroupId = "string",
+#'         CacheNodeId = "string",
+#'         NodeGroupConfiguration = list(
+#'           NodeGroupId = "string",
+#'           Slots = "string",
+#'           ReplicaCount = 123,
+#'           PrimaryAvailabilityZone = "string",
+#'           ReplicaAvailabilityZones = list(
+#'             "string"
+#'           ),
+#'           PrimaryOutpostArn = "string",
+#'           ReplicaOutpostArns = list(
+#'             "string"
+#'           )
+#'         ),
+#'         CacheSize = "string",
+#'         CacheNodeCreateTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         SnapshotCreateTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -671,7 +907,7 @@ elasticache_copy_snapshot <- function(SourceSnapshotName, TargetSnapshotName, Ta
 #' -   Must be at least 16 characters and no more than 128 characters in
 #'     length.
 #' 
-#' -   The only permitted printable special characters are !, &, \\#, $, ^,
+#' -   The only permitted printable special characters are !, &, \#, $, ^,
 #'     &lt;, &gt;, and -. Other printable special characters cannot be used
 #'     in the AUTH token.
 #' 
@@ -681,6 +917,93 @@ elasticache_copy_snapshot <- function(SourceSnapshotName, TargetSnapshotName, Ta
 #' outpost or across multiple outposts.
 #' @param PreferredOutpostArn The outpost ARN in which the cache cluster is created.
 #' @param PreferredOutpostArns The outpost ARNs in which the cache cluster is created.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CacheCluster = list(
+#'     CacheClusterId = "string",
+#'     ConfigurationEndpoint = list(
+#'       Address = "string",
+#'       Port = 123
+#'     ),
+#'     ClientDownloadLandingPage = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     CacheClusterStatus = "string",
+#'     NumCacheNodes = 123,
+#'     PreferredAvailabilityZone = "string",
+#'     PreferredOutpostArn = "string",
+#'     CacheClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       NumCacheNodes = 123,
+#'       CacheNodeIdsToRemove = list(
+#'         "string"
+#'       ),
+#'       EngineVersion = "string",
+#'       CacheNodeType = "string",
+#'       AuthTokenStatus = "SETTING"|"ROTATING"
+#'     ),
+#'     NotificationConfiguration = list(
+#'       TopicArn = "string",
+#'       TopicStatus = "string"
+#'     ),
+#'     CacheSecurityGroups = list(
+#'       list(
+#'         CacheSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     CacheParameterGroup = list(
+#'       CacheParameterGroupName = "string",
+#'       ParameterApplyStatus = "string",
+#'       CacheNodeIdsToReboot = list(
+#'         "string"
+#'       )
+#'     ),
+#'     CacheSubnetGroupName = "string",
+#'     CacheNodes = list(
+#'       list(
+#'         CacheNodeId = "string",
+#'         CacheNodeStatus = "string",
+#'         CacheNodeCreateTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         Endpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         ParameterGroupStatus = "string",
+#'         SourceCacheNodeId = "string",
+#'         CustomerAvailabilityZone = "string",
+#'         CustomerOutpostArn = "string"
+#'       )
+#'     ),
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     SecurityGroups = list(
+#'       list(
+#'         SecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ReplicationGroupId = "string",
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     AuthTokenLastModifiedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -762,7 +1085,7 @@ elasticache_create_cache_cluster <- function(CacheClusterId, ReplicationGroupId 
 #' newly created CacheParameterGroup you can change the values of specific
 #' parameters. For more information, see:
 #' 
-#' -   [ModifyCacheParameterGroup](https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html)
+#' -   [`modify_cache_parameter_group`][elasticache_modify_cache_parameter_group]
 #'     in the ElastiCache API Reference.
 #' 
 #' -   [Parameters and Parameter
@@ -781,6 +1104,20 @@ elasticache_create_cache_cluster <- function(CacheClusterId, ReplicationGroupId 
 #' `redis2.6` | `redis2.8` | `redis3.2` | `redis4.0` | `redis5.0` |
 #' `redis6.x` |
 #' @param Description &#91;required&#93; A user-specified description for the cache parameter group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CacheParameterGroup = list(
+#'     CacheParameterGroupName = "string",
+#'     CacheParameterGroupFamily = "string",
+#'     Description = "string",
+#'     IsGlobal = TRUE|FALSE,
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -821,7 +1158,7 @@ elasticache_create_cache_parameter_group <- function(CacheParameterGroupName, Ca
 #' outside of an Amazon Virtual Private Cloud (Amazon VPC). If you are
 #' creating a cluster inside of a VPC, use a cache subnet group instead.
 #' For more information, see
-#' [CreateCacheSubnetGroup](https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html).
+#' [`create_cache_subnet_group`][elasticache_create_cache_subnet_group].
 #'
 #' @usage
 #' elasticache_create_cache_security_group(CacheSecurityGroupName,
@@ -835,6 +1172,26 @@ elasticache_create_cache_parameter_group <- function(CacheParameterGroupName, Ca
 #' 
 #' Example: `mysecuritygroup`
 #' @param Description &#91;required&#93; A description for the cache security group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CacheSecurityGroup = list(
+#'     OwnerId = "string",
+#'     CacheSecurityGroupName = "string",
+#'     Description = "string",
+#'     EC2SecurityGroups = list(
+#'       list(
+#'         Status = "string",
+#'         EC2SecurityGroupName = "string",
+#'         EC2SecurityGroupOwnerId = "string"
+#'       )
+#'     ),
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -885,6 +1242,30 @@ elasticache_create_cache_security_group <- function(CacheSecurityGroupName, Desc
 #' Example: `mysubnetgroup`
 #' @param CacheSubnetGroupDescription &#91;required&#93; A description for the cache subnet group.
 #' @param SubnetIds &#91;required&#93; A list of VPC subnet IDs for the cache subnet group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CacheSubnetGroup = list(
+#'     CacheSubnetGroupName = "string",
+#'     CacheSubnetGroupDescription = "string",
+#'     VpcId = "string",
+#'     Subnets = list(
+#'       list(
+#'         SubnetIdentifier = "string",
+#'         SubnetAvailabilityZone = list(
+#'           Name = "string"
+#'         ),
+#'         SubnetOutpost = list(
+#'           SubnetOutpostArn = "string"
+#'         )
+#'       )
+#'     ),
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -955,6 +1336,41 @@ elasticache_create_cache_subnet_group <- function(CacheSubnetGroupName, CacheSub
 #' @param GlobalReplicationGroupDescription Provides details of the Global Datastore
 #' @param PrimaryReplicationGroupId &#91;required&#93; The name of the primary cluster that accepts writes and will replicate
 #' updates to the secondary cluster.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   GlobalReplicationGroup = list(
+#'     GlobalReplicationGroupId = "string",
+#'     GlobalReplicationGroupDescription = "string",
+#'     Status = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     Members = list(
+#'       list(
+#'         ReplicationGroupId = "string",
+#'         ReplicationGroupRegion = "string",
+#'         Role = "string",
+#'         AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterEnabled = TRUE|FALSE,
+#'     GlobalNodeGroups = list(
+#'       list(
+#'         GlobalNodeGroupId = "string",
+#'         Slots = "string"
+#'       )
+#'     ),
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1205,7 +1621,9 @@ elasticache_create_global_replication_group <- function(GlobalReplicationGroupId
 #' replication group.
 #' @param EngineVersion The version number of the cache engine to be used for the clusters in
 #' this replication group. To view the supported cache engine versions, use
-#' the `DescribeCacheEngineVersions` operation.
+#' the
+#' [`describe_cache_engine_versions`][elasticache_describe_cache_engine_versions]
+#' operation.
 #' 
 #' **Important:** You can upgrade to a newer engine version (see [Selecting
 #' a Cache Engine and
@@ -1324,7 +1742,7 @@ elasticache_create_global_replication_group <- function(GlobalReplicationGroupId
 #' -   Must be at least 16 characters and no more than 128 characters in
 #'     length.
 #' 
-#' -   The only permitted printable special characters are !, &, \\#, $, ^,
+#' -   The only permitted printable special characters are !, &, \#, $, ^,
 #'     &lt;, &gt;, and -. Other printable special characters cannot be used
 #'     in the AUTH token.
 #' 
@@ -1363,6 +1781,96 @@ elasticache_create_global_replication_group <- function(GlobalReplicationGroupId
 #' Default: `false`
 #' @param KmsKeyId The ID of the KMS key used to encrypt the disk in the cluster.
 #' @param UserGroupIds The list of user groups to associate with the replication group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ReplicationGroup = list(
+#'     ReplicationGroupId = "string",
+#'     Description = "string",
+#'     GlobalReplicationGroupInfo = list(
+#'       GlobalReplicationGroupId = "string",
+#'       GlobalReplicationGroupMemberRole = "string"
+#'     ),
+#'     Status = "string",
+#'     PendingModifiedValues = list(
+#'       PrimaryClusterId = "string",
+#'       AutomaticFailoverStatus = "enabled"|"disabled",
+#'       Resharding = list(
+#'         SlotMigration = list(
+#'           ProgressPercentage = 123.0
+#'         )
+#'       ),
+#'       AuthTokenStatus = "SETTING"|"ROTATING",
+#'       UserGroups = list(
+#'         UserGroupIdsToAdd = list(
+#'           "string"
+#'         ),
+#'         UserGroupIdsToRemove = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     MemberClusters = list(
+#'       "string"
+#'     ),
+#'     NodeGroups = list(
+#'       list(
+#'         NodeGroupId = "string",
+#'         Status = "string",
+#'         PrimaryEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         ReaderEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         Slots = "string",
+#'         NodeGroupMembers = list(
+#'           list(
+#'             CacheClusterId = "string",
+#'             CacheNodeId = "string",
+#'             ReadEndpoint = list(
+#'               Address = "string",
+#'               Port = 123
+#'             ),
+#'             PreferredAvailabilityZone = "string",
+#'             PreferredOutpostArn = "string",
+#'             CurrentRole = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     SnapshottingClusterId = "string",
+#'     AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'     MultiAZ = "enabled"|"disabled",
+#'     ConfigurationEndpoint = list(
+#'       Address = "string",
+#'       Port = 123
+#'     ),
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     ClusterEnabled = TRUE|FALSE,
+#'     CacheNodeType = "string",
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     AuthTokenLastModifiedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     MemberClustersOutpostArns = list(
+#'       "string"
+#'     ),
+#'     KmsKeyId = "string",
+#'     ARN = "string",
+#'     UserGroupIds = list(
+#'       "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1471,6 +1979,70 @@ elasticache_create_replication_group <- function(ReplicationGroupId, Replication
 #' @param SnapshotName &#91;required&#93; A name for the snapshot being created.
 #' @param KmsKeyId The ID of the KMS key used to encrypt the snapshot.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Snapshot = list(
+#'     SnapshotName = "string",
+#'     ReplicationGroupId = "string",
+#'     ReplicationGroupDescription = "string",
+#'     CacheClusterId = "string",
+#'     SnapshotStatus = "string",
+#'     SnapshotSource = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     NumCacheNodes = 123,
+#'     PreferredAvailabilityZone = "string",
+#'     PreferredOutpostArn = "string",
+#'     CacheClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     TopicArn = "string",
+#'     Port = 123,
+#'     CacheParameterGroupName = "string",
+#'     CacheSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     NumNodeGroups = 123,
+#'     AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'     NodeSnapshots = list(
+#'       list(
+#'         CacheClusterId = "string",
+#'         NodeGroupId = "string",
+#'         CacheNodeId = "string",
+#'         NodeGroupConfiguration = list(
+#'           NodeGroupId = "string",
+#'           Slots = "string",
+#'           ReplicaCount = 123,
+#'           PrimaryAvailabilityZone = "string",
+#'           ReplicaAvailabilityZones = list(
+#'             "string"
+#'           ),
+#'           PrimaryOutpostArn = "string",
+#'           ReplicaOutpostArns = list(
+#'             "string"
+#'           )
+#'         ),
+#'         CacheSize = "string",
+#'         CacheNodeCreateTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         SnapshotCreateTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_snapshot(
@@ -1520,6 +2092,26 @@ elasticache_create_snapshot <- function(ReplicationGroupId = NULL, CacheClusterI
 #' @param AccessString &#91;required&#93; Access permissions string used for this user.
 #' @param NoPasswordRequired Indicates a password is not required for this user.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   UserId = "string",
+#'   UserName = "string",
+#'   Status = "string",
+#'   Engine = "string",
+#'   AccessString = "string",
+#'   UserGroupIds = list(
+#'     "string"
+#'   ),
+#'   Authentication = list(
+#'     Type = "password"|"no-password",
+#'     PasswordCount = 123
+#'   ),
+#'   ARN = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_user(
@@ -1567,6 +2159,31 @@ elasticache_create_user <- function(UserId, UserName, Engine, Passwords = NULL, 
 #' @param UserGroupId &#91;required&#93; The ID of the user group.
 #' @param Engine &#91;required&#93; The current supported value is Redis.
 #' @param UserIds The list of user IDs that belong to the user group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   UserGroupId = "string",
+#'   Status = "string",
+#'   Engine = "string",
+#'   UserIds = list(
+#'     "string"
+#'   ),
+#'   PendingChanges = list(
+#'     UserIdsToRemove = list(
+#'       "string"
+#'     ),
+#'     UserIdsToAdd = list(
+#'       "string"
+#'     )
+#'   ),
+#'   ReplicationGroups = list(
+#'     "string"
+#'   ),
+#'   ARN = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1624,6 +2241,41 @@ elasticache_create_user_group <- function(UserGroupId, Engine, UserIds = NULL) {
 #' groups listed by NodeGroupsToRemove from the cluster.
 #' @param ApplyImmediately &#91;required&#93; Indicates that the shard reconfiguration process begins immediately. At
 #' present, the only permitted value for this parameter is true.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   GlobalReplicationGroup = list(
+#'     GlobalReplicationGroupId = "string",
+#'     GlobalReplicationGroupDescription = "string",
+#'     Status = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     Members = list(
+#'       list(
+#'         ReplicationGroupId = "string",
+#'         ReplicationGroupRegion = "string",
+#'         Role = "string",
+#'         AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterEnabled = TRUE|FALSE,
+#'     GlobalNodeGroups = list(
+#'       list(
+#'         GlobalNodeGroupId = "string",
+#'         Slots = "string"
+#'       )
+#'     ),
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1702,6 +2354,96 @@ elasticache_decrease_node_groups_in_global_replication_group <- function(GlobalR
 #' @param ApplyImmediately &#91;required&#93; If `True`, the number of replica nodes is decreased immediately.
 #' `ApplyImmediately=False` is not currently supported.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ReplicationGroup = list(
+#'     ReplicationGroupId = "string",
+#'     Description = "string",
+#'     GlobalReplicationGroupInfo = list(
+#'       GlobalReplicationGroupId = "string",
+#'       GlobalReplicationGroupMemberRole = "string"
+#'     ),
+#'     Status = "string",
+#'     PendingModifiedValues = list(
+#'       PrimaryClusterId = "string",
+#'       AutomaticFailoverStatus = "enabled"|"disabled",
+#'       Resharding = list(
+#'         SlotMigration = list(
+#'           ProgressPercentage = 123.0
+#'         )
+#'       ),
+#'       AuthTokenStatus = "SETTING"|"ROTATING",
+#'       UserGroups = list(
+#'         UserGroupIdsToAdd = list(
+#'           "string"
+#'         ),
+#'         UserGroupIdsToRemove = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     MemberClusters = list(
+#'       "string"
+#'     ),
+#'     NodeGroups = list(
+#'       list(
+#'         NodeGroupId = "string",
+#'         Status = "string",
+#'         PrimaryEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         ReaderEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         Slots = "string",
+#'         NodeGroupMembers = list(
+#'           list(
+#'             CacheClusterId = "string",
+#'             CacheNodeId = "string",
+#'             ReadEndpoint = list(
+#'               Address = "string",
+#'               Port = 123
+#'             ),
+#'             PreferredAvailabilityZone = "string",
+#'             PreferredOutpostArn = "string",
+#'             CurrentRole = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     SnapshottingClusterId = "string",
+#'     AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'     MultiAZ = "enabled"|"disabled",
+#'     ConfigurationEndpoint = list(
+#'       Address = "string",
+#'       Port = 123
+#'     ),
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     ClusterEnabled = TRUE|FALSE,
+#'     CacheNodeType = "string",
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     AuthTokenLastModifiedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     MemberClustersOutpostArns = list(
+#'       "string"
+#'     ),
+#'     KmsKeyId = "string",
+#'     ARN = "string",
+#'     UserGroupIds = list(
+#'       "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$decrease_replica_count(
@@ -1749,11 +2491,12 @@ elasticache_decrease_replica_count <- function(ReplicationGroupId, NewReplicaCou
 #' Deletes a previously provisioned cluster
 #'
 #' @description
-#' Deletes a previously provisioned cluster. `DeleteCacheCluster` deletes
-#' all associated cache nodes, node endpoints and the cluster itself. When
-#' you receive a successful response from this operation, Amazon
-#' ElastiCache immediately begins deleting the cluster; you cannot cancel
-#' or revert this operation.
+#' Deletes a previously provisioned cluster.
+#' [`delete_cache_cluster`][elasticache_delete_cache_cluster] deletes all
+#' associated cache nodes, node endpoints and the cluster itself. When you
+#' receive a successful response from this operation, Amazon ElastiCache
+#' immediately begins deleting the cluster; you cannot cancel or revert
+#' this operation.
 #' 
 #' This operation is not valid for:
 #' 
@@ -1776,6 +2519,93 @@ elasticache_decrease_replica_count <- function(ReplicationGroupId, NewReplicaCou
 #' @param FinalSnapshotIdentifier The user-supplied name of a final cluster snapshot. This is the unique
 #' name that identifies the snapshot. ElastiCache creates the snapshot, and
 #' then deletes the cluster immediately afterward.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CacheCluster = list(
+#'     CacheClusterId = "string",
+#'     ConfigurationEndpoint = list(
+#'       Address = "string",
+#'       Port = 123
+#'     ),
+#'     ClientDownloadLandingPage = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     CacheClusterStatus = "string",
+#'     NumCacheNodes = 123,
+#'     PreferredAvailabilityZone = "string",
+#'     PreferredOutpostArn = "string",
+#'     CacheClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       NumCacheNodes = 123,
+#'       CacheNodeIdsToRemove = list(
+#'         "string"
+#'       ),
+#'       EngineVersion = "string",
+#'       CacheNodeType = "string",
+#'       AuthTokenStatus = "SETTING"|"ROTATING"
+#'     ),
+#'     NotificationConfiguration = list(
+#'       TopicArn = "string",
+#'       TopicStatus = "string"
+#'     ),
+#'     CacheSecurityGroups = list(
+#'       list(
+#'         CacheSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     CacheParameterGroup = list(
+#'       CacheParameterGroupName = "string",
+#'       ParameterApplyStatus = "string",
+#'       CacheNodeIdsToReboot = list(
+#'         "string"
+#'       )
+#'     ),
+#'     CacheSubnetGroupName = "string",
+#'     CacheNodes = list(
+#'       list(
+#'         CacheNodeId = "string",
+#'         CacheNodeStatus = "string",
+#'         CacheNodeCreateTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         Endpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         ParameterGroupStatus = "string",
+#'         SourceCacheNodeId = "string",
+#'         CustomerAvailabilityZone = "string",
+#'         CustomerOutpostArn = "string"
+#'       )
+#'     ),
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     SecurityGroups = list(
+#'       list(
+#'         SecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ReplicationGroupId = "string",
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     AuthTokenLastModifiedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1819,6 +2649,9 @@ elasticache_delete_cache_cluster <- function(CacheClusterId, FinalSnapshotIdenti
 #' The specified cache security group must not be associated with any
 #' clusters.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_cache_parameter_group(
@@ -1860,6 +2693,9 @@ elasticache_delete_cache_parameter_group <- function(CacheParameterGroupName) {
 #' @param CacheSecurityGroupName &#91;required&#93; The name of the cache security group to delete.
 #' 
 #' You cannot delete the default security group.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -1904,6 +2740,9 @@ elasticache_delete_cache_security_group <- function(CacheSecurityGroupName) {
 #' Constraints: Must contain no more than 255 alphanumeric characters or
 #' hyphens.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_cache_subnet_group(
@@ -1931,15 +2770,14 @@ elasticache_delete_cache_subnet_group <- function(CacheSubnetGroupName) {
 }
 .elasticache$operations$delete_cache_subnet_group <- elasticache_delete_cache_subnet_group
 
-#' Deleting a Global Datastore is a two-step process: - First, you must
-#' DisassociateGlobalReplicationGroup to remove the secondary clusters in
-#' the Global Datastore
+#' Deleting a Global Datastore is a two-step process:
 #'
 #' @description
 #' Deleting a Global Datastore is a two-step process:
 #' 
-#' -   First, you must DisassociateGlobalReplicationGroup to remove the
-#'     secondary clusters in the Global Datastore.
+#' -   First, you must
+#'     [`disassociate_global_replication_group`][elasticache_disassociate_global_replication_group]
+#'     to remove the secondary clusters in the Global Datastore.
 #' 
 #' -   Once the Global Datastore contains only the primary cluster, you can
 #'     use DeleteGlobalReplicationGroup API to delete the Global Datastore
@@ -1960,6 +2798,41 @@ elasticache_delete_cache_subnet_group <- function(CacheSubnetGroupName) {
 #' @param GlobalReplicationGroupId &#91;required&#93; The name of the Global Datastore
 #' @param RetainPrimaryReplicationGroup &#91;required&#93; The primary replication group is retained as a standalone replication
 #' group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   GlobalReplicationGroup = list(
+#'     GlobalReplicationGroupId = "string",
+#'     GlobalReplicationGroupDescription = "string",
+#'     Status = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     Members = list(
+#'       list(
+#'         ReplicationGroupId = "string",
+#'         ReplicationGroupRegion = "string",
+#'         Role = "string",
+#'         AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterEnabled = TRUE|FALSE,
+#'     GlobalNodeGroups = list(
+#'       list(
+#'         GlobalNodeGroupId = "string",
+#'         Slots = "string"
+#'       )
+#'     ),
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2018,6 +2891,96 @@ elasticache_delete_global_replication_group <- function(GlobalReplicationGroupId
 #' the final snapshot is taken, the replication group is immediately
 #' deleted.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ReplicationGroup = list(
+#'     ReplicationGroupId = "string",
+#'     Description = "string",
+#'     GlobalReplicationGroupInfo = list(
+#'       GlobalReplicationGroupId = "string",
+#'       GlobalReplicationGroupMemberRole = "string"
+#'     ),
+#'     Status = "string",
+#'     PendingModifiedValues = list(
+#'       PrimaryClusterId = "string",
+#'       AutomaticFailoverStatus = "enabled"|"disabled",
+#'       Resharding = list(
+#'         SlotMigration = list(
+#'           ProgressPercentage = 123.0
+#'         )
+#'       ),
+#'       AuthTokenStatus = "SETTING"|"ROTATING",
+#'       UserGroups = list(
+#'         UserGroupIdsToAdd = list(
+#'           "string"
+#'         ),
+#'         UserGroupIdsToRemove = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     MemberClusters = list(
+#'       "string"
+#'     ),
+#'     NodeGroups = list(
+#'       list(
+#'         NodeGroupId = "string",
+#'         Status = "string",
+#'         PrimaryEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         ReaderEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         Slots = "string",
+#'         NodeGroupMembers = list(
+#'           list(
+#'             CacheClusterId = "string",
+#'             CacheNodeId = "string",
+#'             ReadEndpoint = list(
+#'               Address = "string",
+#'               Port = 123
+#'             ),
+#'             PreferredAvailabilityZone = "string",
+#'             PreferredOutpostArn = "string",
+#'             CurrentRole = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     SnapshottingClusterId = "string",
+#'     AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'     MultiAZ = "enabled"|"disabled",
+#'     ConfigurationEndpoint = list(
+#'       Address = "string",
+#'       Port = 123
+#'     ),
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     ClusterEnabled = TRUE|FALSE,
+#'     CacheNodeType = "string",
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     AuthTokenLastModifiedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     MemberClustersOutpostArns = list(
+#'       "string"
+#'     ),
+#'     KmsKeyId = "string",
+#'     ARN = "string",
+#'     UserGroupIds = list(
+#'       "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_replication_group(
@@ -2061,6 +3024,70 @@ elasticache_delete_replication_group <- function(ReplicationGroupId, RetainPrima
 #'
 #' @param SnapshotName &#91;required&#93; The name of the snapshot to be deleted.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Snapshot = list(
+#'     SnapshotName = "string",
+#'     ReplicationGroupId = "string",
+#'     ReplicationGroupDescription = "string",
+#'     CacheClusterId = "string",
+#'     SnapshotStatus = "string",
+#'     SnapshotSource = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     NumCacheNodes = 123,
+#'     PreferredAvailabilityZone = "string",
+#'     PreferredOutpostArn = "string",
+#'     CacheClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     TopicArn = "string",
+#'     Port = 123,
+#'     CacheParameterGroupName = "string",
+#'     CacheSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     NumNodeGroups = 123,
+#'     AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'     NodeSnapshots = list(
+#'       list(
+#'         CacheClusterId = "string",
+#'         NodeGroupId = "string",
+#'         CacheNodeId = "string",
+#'         NodeGroupConfiguration = list(
+#'           NodeGroupId = "string",
+#'           Slots = "string",
+#'           ReplicaCount = 123,
+#'           PrimaryAvailabilityZone = "string",
+#'           ReplicaAvailabilityZones = list(
+#'             "string"
+#'           ),
+#'           PrimaryOutpostArn = "string",
+#'           ReplicaOutpostArns = list(
+#'             "string"
+#'           )
+#'         ),
+#'         CacheSize = "string",
+#'         CacheNodeCreateTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         SnapshotCreateTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_snapshot(
@@ -2100,6 +3127,26 @@ elasticache_delete_snapshot <- function(SnapshotName) {
 #' elasticache_delete_user(UserId)
 #'
 #' @param UserId &#91;required&#93; The ID of the user.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   UserId = "string",
+#'   UserName = "string",
+#'   Status = "string",
+#'   Engine = "string",
+#'   AccessString = "string",
+#'   UserGroupIds = list(
+#'     "string"
+#'   ),
+#'   Authentication = list(
+#'     Type = "password"|"no-password",
+#'     PasswordCount = 123
+#'   ),
+#'   ARN = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2141,6 +3188,31 @@ elasticache_delete_user <- function(UserId) {
 #' elasticache_delete_user_group(UserGroupId)
 #'
 #' @param UserGroupId &#91;required&#93; The ID of the user group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   UserGroupId = "string",
+#'   Status = "string",
+#'   Engine = "string",
+#'   UserIds = list(
+#'     "string"
+#'   ),
+#'   PendingChanges = list(
+#'     UserIdsToRemove = list(
+#'       "string"
+#'     ),
+#'     UserIdsToAdd = list(
+#'       "string"
+#'     )
+#'   ),
+#'   ReplicationGroups = list(
+#'     "string"
+#'   ),
+#'   ARN = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2223,6 +3295,96 @@ elasticache_delete_user_group <- function(UserGroupId) {
 #' replication group. In practice, this mean Memcached and single node
 #' Redis clusters.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   CacheClusters = list(
+#'     list(
+#'       CacheClusterId = "string",
+#'       ConfigurationEndpoint = list(
+#'         Address = "string",
+#'         Port = 123
+#'       ),
+#'       ClientDownloadLandingPage = "string",
+#'       CacheNodeType = "string",
+#'       Engine = "string",
+#'       EngineVersion = "string",
+#'       CacheClusterStatus = "string",
+#'       NumCacheNodes = 123,
+#'       PreferredAvailabilityZone = "string",
+#'       PreferredOutpostArn = "string",
+#'       CacheClusterCreateTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       PreferredMaintenanceWindow = "string",
+#'       PendingModifiedValues = list(
+#'         NumCacheNodes = 123,
+#'         CacheNodeIdsToRemove = list(
+#'           "string"
+#'         ),
+#'         EngineVersion = "string",
+#'         CacheNodeType = "string",
+#'         AuthTokenStatus = "SETTING"|"ROTATING"
+#'       ),
+#'       NotificationConfiguration = list(
+#'         TopicArn = "string",
+#'         TopicStatus = "string"
+#'       ),
+#'       CacheSecurityGroups = list(
+#'         list(
+#'           CacheSecurityGroupName = "string",
+#'           Status = "string"
+#'         )
+#'       ),
+#'       CacheParameterGroup = list(
+#'         CacheParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         CacheNodeIdsToReboot = list(
+#'           "string"
+#'         )
+#'       ),
+#'       CacheSubnetGroupName = "string",
+#'       CacheNodes = list(
+#'         list(
+#'           CacheNodeId = "string",
+#'           CacheNodeStatus = "string",
+#'           CacheNodeCreateTime = as.POSIXct(
+#'             "2015-01-01"
+#'           ),
+#'           Endpoint = list(
+#'             Address = "string",
+#'             Port = 123
+#'           ),
+#'           ParameterGroupStatus = "string",
+#'           SourceCacheNodeId = "string",
+#'           CustomerAvailabilityZone = "string",
+#'           CustomerOutpostArn = "string"
+#'         )
+#'       ),
+#'       AutoMinorVersionUpgrade = TRUE|FALSE,
+#'       SecurityGroups = list(
+#'         list(
+#'           SecurityGroupId = "string",
+#'           Status = "string"
+#'         )
+#'       ),
+#'       ReplicationGroupId = "string",
+#'       SnapshotRetentionLimit = 123,
+#'       SnapshotWindow = "string",
+#'       AuthTokenEnabled = TRUE|FALSE,
+#'       AuthTokenLastModifiedDate = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       TransitEncryptionEnabled = TRUE|FALSE,
+#'       AtRestEncryptionEnabled = TRUE|FALSE,
+#'       ARN = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_cache_clusters(
@@ -2295,6 +3457,23 @@ elasticache_describe_cache_clusters <- function(CacheClusterId = NULL, MaxRecord
 #' @param DefaultOnly If `true`, specifies that only the default version of the specified
 #' engine or engine and major version combination is to be returned.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   CacheEngineVersions = list(
+#'     list(
+#'       Engine = "string",
+#'       EngineVersion = "string",
+#'       CacheParameterGroupFamily = "string",
+#'       CacheEngineDescription = "string",
+#'       CacheEngineVersionDescription = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_cache_engine_versions(
@@ -2350,6 +3529,23 @@ elasticache_describe_cache_engine_versions <- function(Engine = NULL, EngineVers
 #' pagination of results from this operation. If this parameter is
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   CacheParameterGroups = list(
+#'     list(
+#'       CacheParameterGroupName = "string",
+#'       CacheParameterGroupFamily = "string",
+#'       Description = "string",
+#'       IsGlobal = TRUE|FALSE,
+#'       ARN = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2407,6 +3603,45 @@ elasticache_describe_cache_parameter_groups <- function(CacheParameterGroupName 
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by `MaxRecords`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   Parameters = list(
+#'     list(
+#'       ParameterName = "string",
+#'       ParameterValue = "string",
+#'       Description = "string",
+#'       Source = "string",
+#'       DataType = "string",
+#'       AllowedValues = "string",
+#'       IsModifiable = TRUE|FALSE,
+#'       MinimumEngineVersion = "string",
+#'       ChangeType = "immediate"|"requires-reboot"
+#'     )
+#'   ),
+#'   CacheNodeTypeSpecificParameters = list(
+#'     list(
+#'       ParameterName = "string",
+#'       Description = "string",
+#'       Source = "string",
+#'       DataType = "string",
+#'       AllowedValues = "string",
+#'       IsModifiable = TRUE|FALSE,
+#'       MinimumEngineVersion = "string",
+#'       CacheNodeTypeSpecificValues = list(
+#'         list(
+#'           CacheNodeType = "string",
+#'           Value = "string"
+#'         )
+#'       ),
+#'       ChangeType = "immediate"|"requires-reboot"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_cache_parameters(
@@ -2461,6 +3696,29 @@ elasticache_describe_cache_parameters <- function(CacheParameterGroupName, Sourc
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by `MaxRecords`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   CacheSecurityGroups = list(
+#'     list(
+#'       OwnerId = "string",
+#'       CacheSecurityGroupName = "string",
+#'       Description = "string",
+#'       EC2SecurityGroups = list(
+#'         list(
+#'           Status = "string",
+#'           EC2SecurityGroupName = "string",
+#'           EC2SecurityGroupOwnerId = "string"
+#'         )
+#'       ),
+#'       ARN = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_cache_security_groups(
@@ -2514,6 +3772,33 @@ elasticache_describe_cache_security_groups <- function(CacheSecurityGroupName = 
 #' pagination of results from this operation. If this parameter is
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   CacheSubnetGroups = list(
+#'     list(
+#'       CacheSubnetGroupName = "string",
+#'       CacheSubnetGroupDescription = "string",
+#'       VpcId = "string",
+#'       Subnets = list(
+#'         list(
+#'           SubnetIdentifier = "string",
+#'           SubnetAvailabilityZone = list(
+#'             Name = "string"
+#'           ),
+#'           SubnetOutpost = list(
+#'             SubnetOutpostArn = "string"
+#'           )
+#'         )
+#'       ),
+#'       ARN = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2571,6 +3856,48 @@ elasticache_describe_cache_subnet_groups <- function(CacheSubnetGroupName = NULL
 #' pagination of results from this operation. If this parameter is
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EngineDefaults = list(
+#'     CacheParameterGroupFamily = "string",
+#'     Marker = "string",
+#'     Parameters = list(
+#'       list(
+#'         ParameterName = "string",
+#'         ParameterValue = "string",
+#'         Description = "string",
+#'         Source = "string",
+#'         DataType = "string",
+#'         AllowedValues = "string",
+#'         IsModifiable = TRUE|FALSE,
+#'         MinimumEngineVersion = "string",
+#'         ChangeType = "immediate"|"requires-reboot"
+#'       )
+#'     ),
+#'     CacheNodeTypeSpecificParameters = list(
+#'       list(
+#'         ParameterName = "string",
+#'         Description = "string",
+#'         Source = "string",
+#'         DataType = "string",
+#'         AllowedValues = "string",
+#'         IsModifiable = TRUE|FALSE,
+#'         MinimumEngineVersion = "string",
+#'         CacheNodeTypeSpecificValues = list(
+#'           list(
+#'             CacheNodeType = "string",
+#'             Value = "string"
+#'           )
+#'         ),
+#'         ChangeType = "immediate"|"requires-reboot"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2642,6 +3969,24 @@ elasticache_describe_engine_default_parameters <- function(CacheParameterGroupFa
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by `MaxRecords`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   Events = list(
+#'     list(
+#'       SourceIdentifier = "string",
+#'       SourceType = "cache-cluster"|"cache-parameter-group"|"cache-security-group"|"cache-subnet-group"|"replication-group"|"user"|"user-group",
+#'       Message = "string",
+#'       Date = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_events(
@@ -2700,6 +4045,44 @@ elasticache_describe_events <- function(SourceIdentifier = NULL, SourceType = NU
 #' the value specified by `MaxRecords`.
 #' @param ShowMemberInfo Returns the list of members that comprise the Global Datastore.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   GlobalReplicationGroups = list(
+#'     list(
+#'       GlobalReplicationGroupId = "string",
+#'       GlobalReplicationGroupDescription = "string",
+#'       Status = "string",
+#'       CacheNodeType = "string",
+#'       Engine = "string",
+#'       EngineVersion = "string",
+#'       Members = list(
+#'         list(
+#'           ReplicationGroupId = "string",
+#'           ReplicationGroupRegion = "string",
+#'           Role = "string",
+#'           AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'           Status = "string"
+#'         )
+#'       ),
+#'       ClusterEnabled = TRUE|FALSE,
+#'       GlobalNodeGroups = list(
+#'         list(
+#'           GlobalNodeGroupId = "string",
+#'           Slots = "string"
+#'         )
+#'       ),
+#'       AuthTokenEnabled = TRUE|FALSE,
+#'       TransitEncryptionEnabled = TRUE|FALSE,
+#'       AtRestEncryptionEnabled = TRUE|FALSE,
+#'       ARN = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_global_replication_groups(
@@ -2734,8 +4117,9 @@ elasticache_describe_global_replication_groups <- function(GlobalReplicationGrou
 #'
 #' @description
 #' Returns information about a particular replication group. If no
-#' identifier is specified, `DescribeReplicationGroups` returns information
-#' about all replication groups.
+#' identifier is specified,
+#' [`describe_replication_groups`][elasticache_describe_replication_groups]
+#' returns information about all replication groups.
 #' 
 #' This operation is valid for Redis only.
 #'
@@ -2759,6 +4143,99 @@ elasticache_describe_global_replication_groups <- function(GlobalReplicationGrou
 #' pagination of results from this operation. If this parameter is
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   ReplicationGroups = list(
+#'     list(
+#'       ReplicationGroupId = "string",
+#'       Description = "string",
+#'       GlobalReplicationGroupInfo = list(
+#'         GlobalReplicationGroupId = "string",
+#'         GlobalReplicationGroupMemberRole = "string"
+#'       ),
+#'       Status = "string",
+#'       PendingModifiedValues = list(
+#'         PrimaryClusterId = "string",
+#'         AutomaticFailoverStatus = "enabled"|"disabled",
+#'         Resharding = list(
+#'           SlotMigration = list(
+#'             ProgressPercentage = 123.0
+#'           )
+#'         ),
+#'         AuthTokenStatus = "SETTING"|"ROTATING",
+#'         UserGroups = list(
+#'           UserGroupIdsToAdd = list(
+#'             "string"
+#'           ),
+#'           UserGroupIdsToRemove = list(
+#'             "string"
+#'           )
+#'         )
+#'       ),
+#'       MemberClusters = list(
+#'         "string"
+#'       ),
+#'       NodeGroups = list(
+#'         list(
+#'           NodeGroupId = "string",
+#'           Status = "string",
+#'           PrimaryEndpoint = list(
+#'             Address = "string",
+#'             Port = 123
+#'           ),
+#'           ReaderEndpoint = list(
+#'             Address = "string",
+#'             Port = 123
+#'           ),
+#'           Slots = "string",
+#'           NodeGroupMembers = list(
+#'             list(
+#'               CacheClusterId = "string",
+#'               CacheNodeId = "string",
+#'               ReadEndpoint = list(
+#'                 Address = "string",
+#'                 Port = 123
+#'               ),
+#'               PreferredAvailabilityZone = "string",
+#'               PreferredOutpostArn = "string",
+#'               CurrentRole = "string"
+#'             )
+#'           )
+#'         )
+#'       ),
+#'       SnapshottingClusterId = "string",
+#'       AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'       MultiAZ = "enabled"|"disabled",
+#'       ConfigurationEndpoint = list(
+#'         Address = "string",
+#'         Port = 123
+#'       ),
+#'       SnapshotRetentionLimit = 123,
+#'       SnapshotWindow = "string",
+#'       ClusterEnabled = TRUE|FALSE,
+#'       CacheNodeType = "string",
+#'       AuthTokenEnabled = TRUE|FALSE,
+#'       AuthTokenLastModifiedDate = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       TransitEncryptionEnabled = TRUE|FALSE,
+#'       AtRestEncryptionEnabled = TRUE|FALSE,
+#'       MemberClustersOutpostArns = list(
+#'         "string"
+#'       ),
+#'       KmsKeyId = "string",
+#'       ARN = "string",
+#'       UserGroupIds = list(
+#'         "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2923,6 +4400,38 @@ elasticache_describe_replication_groups <- function(ReplicationGroupId = NULL, M
 #' pagination of results from this operation. If this parameter is
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   ReservedCacheNodes = list(
+#'     list(
+#'       ReservedCacheNodeId = "string",
+#'       ReservedCacheNodesOfferingId = "string",
+#'       CacheNodeType = "string",
+#'       StartTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Duration = 123,
+#'       FixedPrice = 123.0,
+#'       UsagePrice = 123.0,
+#'       CacheNodeCount = 123,
+#'       ProductDescription = "string",
+#'       OfferingType = "string",
+#'       State = "string",
+#'       RecurringCharges = list(
+#'         list(
+#'           RecurringChargeAmount = 123.0,
+#'           RecurringChargeFrequency = "string"
+#'         )
+#'       ),
+#'       ReservationARN = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3092,6 +4601,31 @@ elasticache_describe_reserved_cache_nodes <- function(ReservedCacheNodeId = NULL
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by `MaxRecords`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   ReservedCacheNodesOfferings = list(
+#'     list(
+#'       ReservedCacheNodesOfferingId = "string",
+#'       CacheNodeType = "string",
+#'       Duration = 123,
+#'       FixedPrice = 123.0,
+#'       UsagePrice = 123.0,
+#'       ProductDescription = "string",
+#'       OfferingType = "string",
+#'       RecurringCharges = list(
+#'         list(
+#'           RecurringChargeAmount = 123.0,
+#'           RecurringChargeFrequency = "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_reserved_cache_nodes_offerings(
@@ -3142,6 +4676,36 @@ elasticache_describe_reserved_cache_nodes_offerings <- function(ReservedCacheNod
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by `MaxRecords`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   ServiceUpdates = list(
+#'     list(
+#'       ServiceUpdateName = "string",
+#'       ServiceUpdateReleaseDate = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ServiceUpdateEndDate = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ServiceUpdateSeverity = "critical"|"important"|"medium"|"low",
+#'       ServiceUpdateRecommendedApplyByDate = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ServiceUpdateStatus = "available"|"cancelled"|"expired",
+#'       ServiceUpdateDescription = "string",
+#'       ServiceUpdateType = "security-update",
+#'       Engine = "string",
+#'       EngineVersion = "string",
+#'       AutoUpdateAfterRecommendedApplyByDate = TRUE|FALSE,
+#'       EstimatedUpdateTime = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_service_updates(
@@ -3178,9 +4742,9 @@ elasticache_describe_service_updates <- function(ServiceUpdateName = NULL, Servi
 #'
 #' @description
 #' Returns information about cluster or replication group snapshots. By
-#' default, `DescribeSnapshots` lists all of your snapshots; it can
-#' optionally describe a single snapshot, or just the snapshots associated
-#' with a particular cache cluster.
+#' default, [`describe_snapshots`][elasticache_describe_snapshots] lists
+#' all of your snapshots; it can optionally describe a single snapshot, or
+#' just the snapshots associated with a particular cache cluster.
 #' 
 #' This operation is valid for Redis only.
 #'
@@ -3212,6 +4776,73 @@ elasticache_describe_service_updates <- function(ServiceUpdateName = NULL, Servi
 #' Constraints: minimum 20; maximum 50.
 #' @param ShowNodeGroupConfig A Boolean value which if true, the node group (shard) configuration is
 #' included in the snapshot description.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   Snapshots = list(
+#'     list(
+#'       SnapshotName = "string",
+#'       ReplicationGroupId = "string",
+#'       ReplicationGroupDescription = "string",
+#'       CacheClusterId = "string",
+#'       SnapshotStatus = "string",
+#'       SnapshotSource = "string",
+#'       CacheNodeType = "string",
+#'       Engine = "string",
+#'       EngineVersion = "string",
+#'       NumCacheNodes = 123,
+#'       PreferredAvailabilityZone = "string",
+#'       PreferredOutpostArn = "string",
+#'       CacheClusterCreateTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       PreferredMaintenanceWindow = "string",
+#'       TopicArn = "string",
+#'       Port = 123,
+#'       CacheParameterGroupName = "string",
+#'       CacheSubnetGroupName = "string",
+#'       VpcId = "string",
+#'       AutoMinorVersionUpgrade = TRUE|FALSE,
+#'       SnapshotRetentionLimit = 123,
+#'       SnapshotWindow = "string",
+#'       NumNodeGroups = 123,
+#'       AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'       NodeSnapshots = list(
+#'         list(
+#'           CacheClusterId = "string",
+#'           NodeGroupId = "string",
+#'           CacheNodeId = "string",
+#'           NodeGroupConfiguration = list(
+#'             NodeGroupId = "string",
+#'             Slots = "string",
+#'             ReplicaCount = 123,
+#'             PrimaryAvailabilityZone = "string",
+#'             ReplicaAvailabilityZones = list(
+#'               "string"
+#'             ),
+#'             PrimaryOutpostArn = "string",
+#'             ReplicaOutpostArns = list(
+#'               "string"
+#'             )
+#'           ),
+#'           CacheSize = "string",
+#'           CacheNodeCreateTime = as.POSIXct(
+#'             "2015-01-01"
+#'           ),
+#'           SnapshotCreateTime = as.POSIXct(
+#'             "2015-01-01"
+#'           )
+#'         )
+#'       ),
+#'       KmsKeyId = "string",
+#'       ARN = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3272,6 +4903,91 @@ elasticache_describe_snapshots <- function(ReplicationGroupId = NULL, CacheClust
 #' pagination of results from this operation. If this parameter is
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by `MaxRecords`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   UpdateActions = list(
+#'     list(
+#'       ReplicationGroupId = "string",
+#'       CacheClusterId = "string",
+#'       ServiceUpdateName = "string",
+#'       ServiceUpdateReleaseDate = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ServiceUpdateSeverity = "critical"|"important"|"medium"|"low",
+#'       ServiceUpdateStatus = "available"|"cancelled"|"expired",
+#'       ServiceUpdateRecommendedApplyByDate = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ServiceUpdateType = "security-update",
+#'       UpdateActionAvailableDate = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       UpdateActionStatus = "not-applied"|"waiting-to-start"|"in-progress"|"stopping"|"stopped"|"complete"|"scheduling"|"scheduled"|"not-applicable",
+#'       NodesUpdated = "string",
+#'       UpdateActionStatusModifiedDate = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       SlaMet = "yes"|"no"|"n/a",
+#'       NodeGroupUpdateStatus = list(
+#'         list(
+#'           NodeGroupId = "string",
+#'           NodeGroupMemberUpdateStatus = list(
+#'             list(
+#'               CacheClusterId = "string",
+#'               CacheNodeId = "string",
+#'               NodeUpdateStatus = "not-applied"|"waiting-to-start"|"in-progress"|"stopping"|"stopped"|"complete",
+#'               NodeDeletionDate = as.POSIXct(
+#'                 "2015-01-01"
+#'               ),
+#'               NodeUpdateStartDate = as.POSIXct(
+#'                 "2015-01-01"
+#'               ),
+#'               NodeUpdateEndDate = as.POSIXct(
+#'                 "2015-01-01"
+#'               ),
+#'               NodeUpdateInitiatedBy = "system"|"customer",
+#'               NodeUpdateInitiatedDate = as.POSIXct(
+#'                 "2015-01-01"
+#'               ),
+#'               NodeUpdateStatusModifiedDate = as.POSIXct(
+#'                 "2015-01-01"
+#'               )
+#'             )
+#'           )
+#'         )
+#'       ),
+#'       CacheNodeUpdateStatus = list(
+#'         list(
+#'           CacheNodeId = "string",
+#'           NodeUpdateStatus = "not-applied"|"waiting-to-start"|"in-progress"|"stopping"|"stopped"|"complete",
+#'           NodeDeletionDate = as.POSIXct(
+#'             "2015-01-01"
+#'           ),
+#'           NodeUpdateStartDate = as.POSIXct(
+#'             "2015-01-01"
+#'           ),
+#'           NodeUpdateEndDate = as.POSIXct(
+#'             "2015-01-01"
+#'           ),
+#'           NodeUpdateInitiatedBy = "system"|"customer",
+#'           NodeUpdateInitiatedDate = as.POSIXct(
+#'             "2015-01-01"
+#'           ),
+#'           NodeUpdateStatusModifiedDate = as.POSIXct(
+#'             "2015-01-01"
+#'           )
+#'         )
+#'       ),
+#'       EstimatedUpdateTime = "string",
+#'       Engine = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3341,6 +5057,36 @@ elasticache_describe_update_actions <- function(ServiceUpdateName = NULL, Replic
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by MaxRecords. &gt;
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   UserGroups = list(
+#'     list(
+#'       UserGroupId = "string",
+#'       Status = "string",
+#'       Engine = "string",
+#'       UserIds = list(
+#'         "string"
+#'       ),
+#'       PendingChanges = list(
+#'         UserIdsToRemove = list(
+#'           "string"
+#'         ),
+#'         UserIdsToAdd = list(
+#'           "string"
+#'         )
+#'       ),
+#'       ReplicationGroups = list(
+#'         "string"
+#'       ),
+#'       ARN = "string"
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_user_groups(
@@ -3388,6 +5134,31 @@ elasticache_describe_user_groups <- function(UserGroupId = NULL, MaxRecords = NU
 #' pagination of results from this operation. If this parameter is
 #' specified, the response includes only records beyond the marker, up to
 #' the value specified by MaxRecords. &gt;
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Users = list(
+#'     list(
+#'       UserId = "string",
+#'       UserName = "string",
+#'       Status = "string",
+#'       Engine = "string",
+#'       AccessString = "string",
+#'       UserGroupIds = list(
+#'         "string"
+#'       ),
+#'       Authentication = list(
+#'         Type = "password"|"no-password",
+#'         PasswordCount = 123
+#'       ),
+#'       ARN = "string"
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3446,6 +5217,41 @@ elasticache_describe_users <- function(Engine = NULL, UserId = NULL, Filters = N
 #' @param ReplicationGroupRegion &#91;required&#93; The AWS region of secondary cluster you wish to remove from the Global
 #' Datastore
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   GlobalReplicationGroup = list(
+#'     GlobalReplicationGroupId = "string",
+#'     GlobalReplicationGroupDescription = "string",
+#'     Status = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     Members = list(
+#'       list(
+#'         ReplicationGroupId = "string",
+#'         ReplicationGroupRegion = "string",
+#'         Role = "string",
+#'         AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterEnabled = TRUE|FALSE,
+#'     GlobalNodeGroups = list(
+#'       list(
+#'         GlobalNodeGroupId = "string",
+#'         Slots = "string"
+#'       )
+#'     ),
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$disassociate_global_replication_group(
@@ -3489,6 +5295,41 @@ elasticache_disassociate_global_replication_group <- function(GlobalReplicationG
 #' @param GlobalReplicationGroupId &#91;required&#93; The name of the Global Datastore
 #' @param PrimaryRegion &#91;required&#93; The AWS region of the primary cluster of the Global Datastore
 #' @param PrimaryReplicationGroupId &#91;required&#93; The name of the primary replication group
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   GlobalReplicationGroup = list(
+#'     GlobalReplicationGroupId = "string",
+#'     GlobalReplicationGroupDescription = "string",
+#'     Status = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     Members = list(
+#'       list(
+#'         ReplicationGroupId = "string",
+#'         ReplicationGroupRegion = "string",
+#'         Role = "string",
+#'         AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterEnabled = TRUE|FALSE,
+#'     GlobalNodeGroups = list(
+#'       list(
+#'         GlobalNodeGroupId = "string",
+#'         Slots = "string"
+#'       )
+#'     ),
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3536,6 +5377,41 @@ elasticache_failover_global_replication_group <- function(GlobalReplicationGroup
 #' Datastore
 #' @param ApplyImmediately &#91;required&#93; Indicates that the process begins immediately. At present, the only
 #' permitted value for this parameter is true.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   GlobalReplicationGroup = list(
+#'     GlobalReplicationGroupId = "string",
+#'     GlobalReplicationGroupDescription = "string",
+#'     Status = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     Members = list(
+#'       list(
+#'         ReplicationGroupId = "string",
+#'         ReplicationGroupRegion = "string",
+#'         Role = "string",
+#'         AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterEnabled = TRUE|FALSE,
+#'     GlobalNodeGroups = list(
+#'       list(
+#'         GlobalNodeGroupId = "string",
+#'         Slots = "string"
+#'       )
+#'     ),
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3608,6 +5484,96 @@ elasticache_increase_node_groups_in_global_replication_group <- function(GlobalR
 #' @param ApplyImmediately &#91;required&#93; If `True`, the number of replica nodes is increased immediately.
 #' `ApplyImmediately=False` is not currently supported.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ReplicationGroup = list(
+#'     ReplicationGroupId = "string",
+#'     Description = "string",
+#'     GlobalReplicationGroupInfo = list(
+#'       GlobalReplicationGroupId = "string",
+#'       GlobalReplicationGroupMemberRole = "string"
+#'     ),
+#'     Status = "string",
+#'     PendingModifiedValues = list(
+#'       PrimaryClusterId = "string",
+#'       AutomaticFailoverStatus = "enabled"|"disabled",
+#'       Resharding = list(
+#'         SlotMigration = list(
+#'           ProgressPercentage = 123.0
+#'         )
+#'       ),
+#'       AuthTokenStatus = "SETTING"|"ROTATING",
+#'       UserGroups = list(
+#'         UserGroupIdsToAdd = list(
+#'           "string"
+#'         ),
+#'         UserGroupIdsToRemove = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     MemberClusters = list(
+#'       "string"
+#'     ),
+#'     NodeGroups = list(
+#'       list(
+#'         NodeGroupId = "string",
+#'         Status = "string",
+#'         PrimaryEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         ReaderEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         Slots = "string",
+#'         NodeGroupMembers = list(
+#'           list(
+#'             CacheClusterId = "string",
+#'             CacheNodeId = "string",
+#'             ReadEndpoint = list(
+#'               Address = "string",
+#'               Port = 123
+#'             ),
+#'             PreferredAvailabilityZone = "string",
+#'             PreferredOutpostArn = "string",
+#'             CurrentRole = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     SnapshottingClusterId = "string",
+#'     AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'     MultiAZ = "enabled"|"disabled",
+#'     ConfigurationEndpoint = list(
+#'       Address = "string",
+#'       Port = 123
+#'     ),
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     ClusterEnabled = TRUE|FALSE,
+#'     CacheNodeType = "string",
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     AuthTokenLastModifiedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     MemberClustersOutpostArns = list(
+#'       "string"
+#'     ),
+#'     KmsKeyId = "string",
+#'     ARN = "string",
+#'     UserGroupIds = list(
+#'       "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$increase_replica_count(
@@ -3656,7 +5622,9 @@ elasticache_increase_replica_count <- function(ReplicationGroupId, NewReplicaCou
 #' Lists all available node types that you can scale your Redis cluster's
 #' or replication group's current node type.
 #' 
-#' When you use the `ModifyCacheCluster` or `ModifyReplicationGroup`
+#' When you use the
+#' [`modify_cache_cluster`][elasticache_modify_cache_cluster] or
+#' [`modify_replication_group`][elasticache_modify_replication_group]
 #' operations to scale your cluster or replication group, the value of the
 #' `CacheNodeType` parameter must be one of the node types returned by this
 #' operation.
@@ -3679,6 +5647,19 @@ elasticache_increase_replica_count <- function(ReplicationGroupId, NewReplicaCou
 #' 
 #' You must provide a value for either the `CacheClusterId` or the
 #' `ReplicationGroupId`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ScaleUpModifications = list(
+#'     "string"
+#'   ),
+#'   ScaleDownModifications = list(
+#'     "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3716,8 +5697,9 @@ elasticache_list_allowed_node_type_modifications <- function(CacheClusterId = NU
 #' case-sensitive and the value is optional. You can use cost allocation
 #' tags to categorize and track your AWS costs.
 #' 
-#' If the cluster is not in the *available* state, `ListTagsForResource`
-#' returns an error.
+#' If the cluster is not in the *available* state,
+#' [`list_tags_for_resource`][elasticache_list_tags_for_resource] returns
+#' an error.
 #' 
 #' You can have a maximum of 50 cost allocation tags on an ElastiCache
 #' resource. For more information, see [Monitoring Costs with
@@ -3734,6 +5716,19 @@ elasticache_list_allowed_node_type_modifications <- function(CacheClusterId = NU
 #' For more information about ARNs, see [Amazon Resource Names (ARNs) and
 #' AWS Service
 #' Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TagList = list(
+#'     list(
+#'       Key = "string",
+#'       Value = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3811,8 +5806,9 @@ elasticache_list_tags_for_resource <- function(ResourceName) {
 #' previous pending operation to add more nodes or explicitly cancel the
 #' pending request and retry the new request. To cancel pending operations
 #' to modify the number of cache nodes in a cluster, use the
-#' `ModifyCacheCluster` request and set `NumCacheNodes` equal to the number
-#' of cache nodes currently in the cluster.
+#' [`modify_cache_cluster`][elasticache_modify_cache_cluster] request and
+#' set `NumCacheNodes` equal to the number of cache nodes currently in the
+#' cluster.
 #' @param CacheNodeIdsToRemove A list of cache node IDs to be removed. A node ID is a numeric
 #' identifier (0001, 0002, etc.). This parameter is only valid when
 #' `NumCacheNodes` is less than the existing number of cache nodes. The
@@ -3822,7 +5818,8 @@ elasticache_list_tags_for_resource <- function(ResourceName) {
 #' `NumCacheNodes` in the request.
 #' 
 #' For example: If you have 3 active cache nodes, 7 pending cache nodes,
-#' and the number of cache nodes in this `ModifyCacheCluster` call is 5,
+#' and the number of cache nodes in this
+#' [`modify_cache_cluster`][elasticache_modify_cache_cluster] call is 5,
 #' you must list 2 (7 - 5) cache node IDs to remove.
 #' @param AZMode Specifies whether the new nodes in this Memcached cluster are all
 #' created in a single Availability Zone or created across multiple
@@ -3968,8 +5965,10 @@ elasticache_list_tags_for_resource <- function(ResourceName) {
 #' If `false`, changes to the cluster are applied on the next maintenance
 #' reboot, or the next failure reboot, whichever occurs first.
 #' 
-#' If you perform a `ModifyCacheCluster` before a pending modification is
-#' applied, the pending modification is replaced by the newer modification.
+#' If you perform a
+#' [`modify_cache_cluster`][elasticache_modify_cache_cluster] before a
+#' pending modification is applied, the pending modification is replaced by
+#' the newer modification.
 #' 
 #' Valid values: `true` | `false`
 #' 
@@ -4003,7 +6002,7 @@ elasticache_list_tags_for_resource <- function(ResourceName) {
 #'     length
 #' 
 #' -   Cannot contain any of the following characters: '/', '"', or '@@',
-#'     '\%'
+#'     '%'
 #' 
 #' For more information, see AUTH password at AUTH.
 #' @param AuthTokenUpdateStrategy Specifies the strategy to use to update the AUTH token. This parameter
@@ -4015,6 +6014,93 @@ elasticache_list_tags_for_resource <- function(ResourceName) {
 #' 
 #' For more information, see [Authenticating Users with Redis
 #' AUTH](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CacheCluster = list(
+#'     CacheClusterId = "string",
+#'     ConfigurationEndpoint = list(
+#'       Address = "string",
+#'       Port = 123
+#'     ),
+#'     ClientDownloadLandingPage = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     CacheClusterStatus = "string",
+#'     NumCacheNodes = 123,
+#'     PreferredAvailabilityZone = "string",
+#'     PreferredOutpostArn = "string",
+#'     CacheClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       NumCacheNodes = 123,
+#'       CacheNodeIdsToRemove = list(
+#'         "string"
+#'       ),
+#'       EngineVersion = "string",
+#'       CacheNodeType = "string",
+#'       AuthTokenStatus = "SETTING"|"ROTATING"
+#'     ),
+#'     NotificationConfiguration = list(
+#'       TopicArn = "string",
+#'       TopicStatus = "string"
+#'     ),
+#'     CacheSecurityGroups = list(
+#'       list(
+#'         CacheSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     CacheParameterGroup = list(
+#'       CacheParameterGroupName = "string",
+#'       ParameterApplyStatus = "string",
+#'       CacheNodeIdsToReboot = list(
+#'         "string"
+#'       )
+#'     ),
+#'     CacheSubnetGroupName = "string",
+#'     CacheNodes = list(
+#'       list(
+#'         CacheNodeId = "string",
+#'         CacheNodeStatus = "string",
+#'         CacheNodeCreateTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         Endpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         ParameterGroupStatus = "string",
+#'         SourceCacheNodeId = "string",
+#'         CustomerAvailabilityZone = "string",
+#'         CustomerOutpostArn = "string"
+#'       )
+#'     ),
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     SecurityGroups = list(
+#'       list(
+#'         SecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ReplicationGroupId = "string",
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     AuthTokenLastModifiedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4085,6 +6171,14 @@ elasticache_modify_cache_cluster <- function(CacheClusterId, NumCacheNodes = NUL
 #' must supply at least one parameter name and value; subsequent arguments
 #' are optional. A maximum of 20 parameters may be modified per request.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CacheParameterGroupName = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$modify_cache_parameter_group(
@@ -4136,6 +6230,30 @@ elasticache_modify_cache_parameter_group <- function(CacheParameterGroupName, Pa
 #' Example: `mysubnetgroup`
 #' @param CacheSubnetGroupDescription A description of the cache subnet group.
 #' @param SubnetIds The EC2 subnet IDs for the cache subnet group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CacheSubnetGroup = list(
+#'     CacheSubnetGroupName = "string",
+#'     CacheSubnetGroupDescription = "string",
+#'     VpcId = "string",
+#'     Subnets = list(
+#'       list(
+#'         SubnetIdentifier = "string",
+#'         SubnetAvailabilityZone = list(
+#'           Name = "string"
+#'         ),
+#'         SubnetOutpost = list(
+#'           SubnetOutpostArn = "string"
+#'         )
+#'       )
+#'     ),
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4190,6 +6308,41 @@ elasticache_modify_cache_subnet_group <- function(CacheSubnetGroupName, CacheSub
 #' @param AutomaticFailoverEnabled Determines whether a read replica is automatically promoted to
 #' read/write primary if the existing primary encounters a failure.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   GlobalReplicationGroup = list(
+#'     GlobalReplicationGroupId = "string",
+#'     GlobalReplicationGroupDescription = "string",
+#'     Status = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     Members = list(
+#'       list(
+#'         ReplicationGroupId = "string",
+#'         ReplicationGroupRegion = "string",
+#'         Role = "string",
+#'         AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterEnabled = TRUE|FALSE,
+#'     GlobalNodeGroups = list(
+#'       list(
+#'         GlobalNodeGroupId = "string",
+#'         Slots = "string"
+#'       )
+#'     ),
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$modify_global_replication_group(
@@ -4231,7 +6384,7 @@ elasticache_modify_global_replication_group <- function(GlobalReplicationGroupId
 #'     enabled)](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html)
 #'     in the ElastiCache User Guide
 #' 
-#' -   [ModifyReplicationGroupShardConfiguration](https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html)
+#' -   [`modify_replication_group_shard_configuration`][elasticache_modify_replication_group_shard_configuration]
 #'     in the ElastiCache API Reference
 #' 
 #' This operation is valid for Redis only.
@@ -4363,7 +6516,7 @@ elasticache_modify_global_replication_group <- function(GlobalReplicationGroupId
 #'     length
 #' 
 #' -   Cannot contain any of the following characters: '/', '"', or '@@',
-#'     '\%'
+#'     '%'
 #' 
 #' For more information, see AUTH password at AUTH.
 #' @param AuthTokenUpdateStrategy Specifies the strategy to use to update the AUTH token. This parameter
@@ -4379,6 +6532,96 @@ elasticache_modify_global_replication_group <- function(GlobalReplicationGroupId
 #' @param UserGroupIdsToRemove A list of users groups to remove, meaning the users in the group no
 #' longer can access thereplication group.
 #' @param RemoveUserGroups Removes the user groups that can access this replication group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ReplicationGroup = list(
+#'     ReplicationGroupId = "string",
+#'     Description = "string",
+#'     GlobalReplicationGroupInfo = list(
+#'       GlobalReplicationGroupId = "string",
+#'       GlobalReplicationGroupMemberRole = "string"
+#'     ),
+#'     Status = "string",
+#'     PendingModifiedValues = list(
+#'       PrimaryClusterId = "string",
+#'       AutomaticFailoverStatus = "enabled"|"disabled",
+#'       Resharding = list(
+#'         SlotMigration = list(
+#'           ProgressPercentage = 123.0
+#'         )
+#'       ),
+#'       AuthTokenStatus = "SETTING"|"ROTATING",
+#'       UserGroups = list(
+#'         UserGroupIdsToAdd = list(
+#'           "string"
+#'         ),
+#'         UserGroupIdsToRemove = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     MemberClusters = list(
+#'       "string"
+#'     ),
+#'     NodeGroups = list(
+#'       list(
+#'         NodeGroupId = "string",
+#'         Status = "string",
+#'         PrimaryEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         ReaderEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         Slots = "string",
+#'         NodeGroupMembers = list(
+#'           list(
+#'             CacheClusterId = "string",
+#'             CacheNodeId = "string",
+#'             ReadEndpoint = list(
+#'               Address = "string",
+#'               Port = 123
+#'             ),
+#'             PreferredAvailabilityZone = "string",
+#'             PreferredOutpostArn = "string",
+#'             CurrentRole = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     SnapshottingClusterId = "string",
+#'     AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'     MultiAZ = "enabled"|"disabled",
+#'     ConfigurationEndpoint = list(
+#'       Address = "string",
+#'       Port = 123
+#'     ),
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     ClusterEnabled = TRUE|FALSE,
+#'     CacheNodeType = "string",
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     AuthTokenLastModifiedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     MemberClustersOutpostArns = list(
+#'       "string"
+#'     ),
+#'     KmsKeyId = "string",
+#'     ARN = "string",
+#'     UserGroupIds = list(
+#'       "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4483,6 +6726,96 @@ elasticache_modify_replication_group <- function(ReplicationGroupId, Replication
 #' ElastiCache for Redis will attempt to remove all node groups except
 #' those listed by `NodeGroupsToRetain` from the cluster.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ReplicationGroup = list(
+#'     ReplicationGroupId = "string",
+#'     Description = "string",
+#'     GlobalReplicationGroupInfo = list(
+#'       GlobalReplicationGroupId = "string",
+#'       GlobalReplicationGroupMemberRole = "string"
+#'     ),
+#'     Status = "string",
+#'     PendingModifiedValues = list(
+#'       PrimaryClusterId = "string",
+#'       AutomaticFailoverStatus = "enabled"|"disabled",
+#'       Resharding = list(
+#'         SlotMigration = list(
+#'           ProgressPercentage = 123.0
+#'         )
+#'       ),
+#'       AuthTokenStatus = "SETTING"|"ROTATING",
+#'       UserGroups = list(
+#'         UserGroupIdsToAdd = list(
+#'           "string"
+#'         ),
+#'         UserGroupIdsToRemove = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     MemberClusters = list(
+#'       "string"
+#'     ),
+#'     NodeGroups = list(
+#'       list(
+#'         NodeGroupId = "string",
+#'         Status = "string",
+#'         PrimaryEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         ReaderEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         Slots = "string",
+#'         NodeGroupMembers = list(
+#'           list(
+#'             CacheClusterId = "string",
+#'             CacheNodeId = "string",
+#'             ReadEndpoint = list(
+#'               Address = "string",
+#'               Port = 123
+#'             ),
+#'             PreferredAvailabilityZone = "string",
+#'             PreferredOutpostArn = "string",
+#'             CurrentRole = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     SnapshottingClusterId = "string",
+#'     AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'     MultiAZ = "enabled"|"disabled",
+#'     ConfigurationEndpoint = list(
+#'       Address = "string",
+#'       Port = 123
+#'     ),
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     ClusterEnabled = TRUE|FALSE,
+#'     CacheNodeType = "string",
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     AuthTokenLastModifiedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     MemberClustersOutpostArns = list(
+#'       "string"
+#'     ),
+#'     KmsKeyId = "string",
+#'     ARN = "string",
+#'     UserGroupIds = list(
+#'       "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$modify_replication_group_shard_configuration(
@@ -4541,6 +6874,26 @@ elasticache_modify_replication_group_shard_configuration <- function(Replication
 #' @param Passwords The passwords belonging to the user. You are allowed up to two.
 #' @param NoPasswordRequired Indicates no password is required for the user.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   UserId = "string",
+#'   UserName = "string",
+#'   Status = "string",
+#'   Engine = "string",
+#'   AccessString = "string",
+#'   UserGroupIds = list(
+#'     "string"
+#'   ),
+#'   Authentication = list(
+#'     Type = "password"|"no-password",
+#'     PasswordCount = 123
+#'   ),
+#'   ARN = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$modify_user(
@@ -4586,6 +6939,31 @@ elasticache_modify_user <- function(UserId, AccessString = NULL, AppendAccessStr
 #' @param UserGroupId &#91;required&#93; The ID of the user group.
 #' @param UserIdsToAdd The list of user IDs to add to the user group.
 #' @param UserIdsToRemove The list of user IDs to remove from the user group.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   UserGroupId = "string",
+#'   Status = "string",
+#'   Engine = "string",
+#'   UserIds = list(
+#'     "string"
+#'   ),
+#'   PendingChanges = list(
+#'     UserIdsToRemove = list(
+#'       "string"
+#'     ),
+#'     UserIdsToAdd = list(
+#'       "string"
+#'     )
+#'   ),
+#'   ReplicationGroups = list(
+#'     "string"
+#'   ),
+#'   ARN = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4643,6 +7021,35 @@ elasticache_modify_user_group <- function(UserGroupId, UserIdsToAdd = NULL, User
 #' 
 #' Default: `1`
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ReservedCacheNode = list(
+#'     ReservedCacheNodeId = "string",
+#'     ReservedCacheNodesOfferingId = "string",
+#'     CacheNodeType = "string",
+#'     StartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Duration = 123,
+#'     FixedPrice = 123.0,
+#'     UsagePrice = 123.0,
+#'     CacheNodeCount = 123,
+#'     ProductDescription = "string",
+#'     OfferingType = "string",
+#'     State = "string",
+#'     RecurringCharges = list(
+#'       list(
+#'         RecurringChargeAmount = 123.0,
+#'         RecurringChargeFrequency = "string"
+#'       )
+#'     ),
+#'     ReservationARN = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$purchase_reserved_cache_nodes_offering(
@@ -4685,6 +7092,41 @@ elasticache_purchase_reserved_cache_nodes_offering <- function(ReservedCacheNode
 #'
 #' @param GlobalReplicationGroupId &#91;required&#93; The name of the Global Datastore
 #' @param ApplyImmediately &#91;required&#93; If `True`, redistribution is applied immediately.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   GlobalReplicationGroup = list(
+#'     GlobalReplicationGroupId = "string",
+#'     GlobalReplicationGroupDescription = "string",
+#'     Status = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     Members = list(
+#'       list(
+#'         ReplicationGroupId = "string",
+#'         ReplicationGroupRegion = "string",
+#'         Role = "string",
+#'         AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterEnabled = TRUE|FALSE,
+#'     GlobalNodeGroups = list(
+#'       list(
+#'         GlobalNodeGroupId = "string",
+#'         Slots = "string"
+#'       )
+#'     ),
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4745,6 +7187,93 @@ elasticache_rebalance_slots_in_global_replication_group <- function(GlobalReplic
 #' (0001, 0002, etc.). To reboot an entire cluster, specify all of the
 #' cache node IDs.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CacheCluster = list(
+#'     CacheClusterId = "string",
+#'     ConfigurationEndpoint = list(
+#'       Address = "string",
+#'       Port = 123
+#'     ),
+#'     ClientDownloadLandingPage = "string",
+#'     CacheNodeType = "string",
+#'     Engine = "string",
+#'     EngineVersion = "string",
+#'     CacheClusterStatus = "string",
+#'     NumCacheNodes = 123,
+#'     PreferredAvailabilityZone = "string",
+#'     PreferredOutpostArn = "string",
+#'     CacheClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       NumCacheNodes = 123,
+#'       CacheNodeIdsToRemove = list(
+#'         "string"
+#'       ),
+#'       EngineVersion = "string",
+#'       CacheNodeType = "string",
+#'       AuthTokenStatus = "SETTING"|"ROTATING"
+#'     ),
+#'     NotificationConfiguration = list(
+#'       TopicArn = "string",
+#'       TopicStatus = "string"
+#'     ),
+#'     CacheSecurityGroups = list(
+#'       list(
+#'         CacheSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     CacheParameterGroup = list(
+#'       CacheParameterGroupName = "string",
+#'       ParameterApplyStatus = "string",
+#'       CacheNodeIdsToReboot = list(
+#'         "string"
+#'       )
+#'     ),
+#'     CacheSubnetGroupName = "string",
+#'     CacheNodes = list(
+#'       list(
+#'         CacheNodeId = "string",
+#'         CacheNodeStatus = "string",
+#'         CacheNodeCreateTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         Endpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         ParameterGroupStatus = "string",
+#'         SourceCacheNodeId = "string",
+#'         CustomerAvailabilityZone = "string",
+#'         CustomerOutpostArn = "string"
+#'       )
+#'     ),
+#'     AutoMinorVersionUpgrade = TRUE|FALSE,
+#'     SecurityGroups = list(
+#'       list(
+#'         SecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ReplicationGroupId = "string",
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     AuthTokenLastModifiedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$reboot_cache_cluster(
@@ -4794,6 +7323,19 @@ elasticache_reboot_cache_cluster <- function(CacheClusterId, CacheNodeIdsToReboo
 #' Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 #' @param TagKeys &#91;required&#93; A list of `TagKeys` identifying the tags you want removed from the named
 #' resource.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TagList = list(
+#'     list(
+#'       Key = "string",
+#'       Value = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4850,6 +7392,14 @@ elasticache_remove_tags_from_resource <- function(ResourceName, TagKeys) {
 #' `ResetAllParameters` is `false`, you must specify the name of at least
 #' one parameter to reset.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CacheParameterGroupName = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$reset_cache_parameter_group(
@@ -4901,6 +7451,26 @@ elasticache_reset_cache_parameter_group <- function(CacheParameterGroupName, Res
 #' this is not the same thing as an AWS access key ID - you must provide a
 #' valid AWS account number for this parameter.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CacheSecurityGroup = list(
+#'     OwnerId = "string",
+#'     CacheSecurityGroupName = "string",
+#'     Description = "string",
+#'     EC2SecurityGroups = list(
+#'       list(
+#'         Status = "string",
+#'         EC2SecurityGroupName = "string",
+#'         EC2SecurityGroupOwnerId = "string"
+#'       )
+#'     ),
+#'     ARN = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$revoke_cache_security_group_ingress(
@@ -4943,6 +7513,96 @@ elasticache_revoke_cache_security_group_ingress <- function(CacheSecurityGroupNa
 #' @param CustomerNodeEndpointList &#91;required&#93; List of endpoints from which data should be migrated. For Redis (cluster
 #' mode disabled), list should have only one element.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ReplicationGroup = list(
+#'     ReplicationGroupId = "string",
+#'     Description = "string",
+#'     GlobalReplicationGroupInfo = list(
+#'       GlobalReplicationGroupId = "string",
+#'       GlobalReplicationGroupMemberRole = "string"
+#'     ),
+#'     Status = "string",
+#'     PendingModifiedValues = list(
+#'       PrimaryClusterId = "string",
+#'       AutomaticFailoverStatus = "enabled"|"disabled",
+#'       Resharding = list(
+#'         SlotMigration = list(
+#'           ProgressPercentage = 123.0
+#'         )
+#'       ),
+#'       AuthTokenStatus = "SETTING"|"ROTATING",
+#'       UserGroups = list(
+#'         UserGroupIdsToAdd = list(
+#'           "string"
+#'         ),
+#'         UserGroupIdsToRemove = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     MemberClusters = list(
+#'       "string"
+#'     ),
+#'     NodeGroups = list(
+#'       list(
+#'         NodeGroupId = "string",
+#'         Status = "string",
+#'         PrimaryEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         ReaderEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         Slots = "string",
+#'         NodeGroupMembers = list(
+#'           list(
+#'             CacheClusterId = "string",
+#'             CacheNodeId = "string",
+#'             ReadEndpoint = list(
+#'               Address = "string",
+#'               Port = 123
+#'             ),
+#'             PreferredAvailabilityZone = "string",
+#'             PreferredOutpostArn = "string",
+#'             CurrentRole = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     SnapshottingClusterId = "string",
+#'     AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'     MultiAZ = "enabled"|"disabled",
+#'     ConfigurationEndpoint = list(
+#'       Address = "string",
+#'       Port = 123
+#'     ),
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     ClusterEnabled = TRUE|FALSE,
+#'     CacheNodeType = "string",
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     AuthTokenLastModifiedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     MemberClustersOutpostArns = list(
+#'       "string"
+#'     ),
+#'     KmsKeyId = "string",
+#'     ARN = "string",
+#'     UserGroupIds = list(
+#'       "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$start_migration(
@@ -4981,9 +7641,10 @@ elasticache_start_migration <- function(ReplicationGroupId, CustomerNodeEndpoint
 #' replication group (called cluster in the console)
 #'
 #' @description
-#' Represents the input of a `TestFailover` operation which test automatic
-#' failover on a specified node group (called shard in the console) in a
-#' replication group (called cluster in the console).
+#' Represents the input of a [`test_failover`][elasticache_test_failover]
+#' operation which test automatic failover on a specified node group
+#' (called shard in the console) in a replication group (called cluster in
+#' the console).
 #' 
 #' **Note the following**
 #' 
@@ -5005,18 +7666,18 @@ elasticache_start_migration <- function(ReplicationGroupId, CustomerNodeEndpoint
 #'     events, listed here in order of occurrance:
 #' 
 #'     1.  Replication group message:
-#'         `Test Failover API called for node group &lt;node-group-id&gt;`
+#'         `Test Failover API called for node group <node-group-id>`
 #' 
 #'     2.  Cache cluster message:
-#'         `Failover from primary node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed`
+#'         `Failover from primary node <primary-node-id> to replica node <node-id> completed`
 #' 
 #'     3.  Replication group message:
-#'         `Failover from primary node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed`
+#'         `Failover from primary node <primary-node-id> to replica node <node-id> completed`
 #' 
-#'     4.  Cache cluster message: `Recovering cache nodes &lt;node-id&gt;`
+#'     4.  Cache cluster message: `Recovering cache nodes <node-id>`
 #' 
 #'     5.  Cache cluster message:
-#'         `Finished recovery for cache nodes &lt;node-id&gt;`
+#'         `Finished recovery for cache nodes <node-id>`
 #' 
 #'     For more information see:
 #' 
@@ -5024,8 +7685,8 @@ elasticache_start_migration <- function(ReplicationGroupId, CustomerNodeEndpoint
 #'         Events](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ECEvents.Viewing.html)
 #'         in the *ElastiCache User Guide*
 #' 
-#'     -   [DescribeEvents](https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html)
-#'         in the ElastiCache API Reference
+#'     -   [`describe_events`][elasticache_describe_events] in the
+#'         ElastiCache API Reference
 #' 
 #' Also see, [Testing
 #' Multi-AZ](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html#auto-failover-test)
@@ -5040,6 +7701,96 @@ elasticache_start_migration <- function(ReplicationGroupId, CustomerNodeEndpoint
 #' replication group on which automatic failover is to be tested. You may
 #' test automatic failover on up to 5 node groups in any rolling 24-hour
 #' period.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ReplicationGroup = list(
+#'     ReplicationGroupId = "string",
+#'     Description = "string",
+#'     GlobalReplicationGroupInfo = list(
+#'       GlobalReplicationGroupId = "string",
+#'       GlobalReplicationGroupMemberRole = "string"
+#'     ),
+#'     Status = "string",
+#'     PendingModifiedValues = list(
+#'       PrimaryClusterId = "string",
+#'       AutomaticFailoverStatus = "enabled"|"disabled",
+#'       Resharding = list(
+#'         SlotMigration = list(
+#'           ProgressPercentage = 123.0
+#'         )
+#'       ),
+#'       AuthTokenStatus = "SETTING"|"ROTATING",
+#'       UserGroups = list(
+#'         UserGroupIdsToAdd = list(
+#'           "string"
+#'         ),
+#'         UserGroupIdsToRemove = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     MemberClusters = list(
+#'       "string"
+#'     ),
+#'     NodeGroups = list(
+#'       list(
+#'         NodeGroupId = "string",
+#'         Status = "string",
+#'         PrimaryEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         ReaderEndpoint = list(
+#'           Address = "string",
+#'           Port = 123
+#'         ),
+#'         Slots = "string",
+#'         NodeGroupMembers = list(
+#'           list(
+#'             CacheClusterId = "string",
+#'             CacheNodeId = "string",
+#'             ReadEndpoint = list(
+#'               Address = "string",
+#'               Port = 123
+#'             ),
+#'             PreferredAvailabilityZone = "string",
+#'             PreferredOutpostArn = "string",
+#'             CurrentRole = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     SnapshottingClusterId = "string",
+#'     AutomaticFailover = "enabled"|"disabled"|"enabling"|"disabling",
+#'     MultiAZ = "enabled"|"disabled",
+#'     ConfigurationEndpoint = list(
+#'       Address = "string",
+#'       Port = 123
+#'     ),
+#'     SnapshotRetentionLimit = 123,
+#'     SnapshotWindow = "string",
+#'     ClusterEnabled = TRUE|FALSE,
+#'     CacheNodeType = "string",
+#'     AuthTokenEnabled = TRUE|FALSE,
+#'     AuthTokenLastModifiedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TransitEncryptionEnabled = TRUE|FALSE,
+#'     AtRestEncryptionEnabled = TRUE|FALSE,
+#'     MemberClustersOutpostArns = list(
+#'       "string"
+#'     ),
+#'     KmsKeyId = "string",
+#'     ARN = "string",
+#'     UserGroupIds = list(
+#'       "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```

@@ -12,6 +12,12 @@ rds_modify_db_cluster_parameter_group(DBClusterParameterGroupName,
 
 \item{Parameters}{[required] A list of parameters in the DB cluster parameter group to modify.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  DBClusterParameterGroupName = "string"
+)
+}
+}
 \description{
 Modifies the parameters of a DB cluster parameter group. To modify more
 than one parameter, submit a list of the following: \code{ParameterName},
@@ -34,8 +40,9 @@ important for parameters that are critical when creating the default
 database for a DB cluster, such as the character set for the default
 database defined by the \code{character_set_database} parameter. You can use
 the \emph{Parameter Groups} option of the Amazon RDS console or the
-\code{DescribeDBClusterParameters} action to verify that your DB cluster
-parameter group has been created or modified.
+\code{\link[=rds_describe_db_cluster_parameters]{describe_db_cluster_parameters}}
+action to verify that your DB cluster parameter group has been created
+or modified.
 
 If the modified DB cluster parameter group is used by an Aurora
 Serverless cluster, Aurora applies the update immediately. The cluster

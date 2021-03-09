@@ -1,6 +1,6 @@
 Package: paws.database
 Title: Amazon Web Services Database Services
-Version: 0.1.10
+Version: 0.1.11
 Authors@R: 
     c(person(given = "David",
              family = "Kretch",
@@ -38,10 +38,10 @@ Collate: 'dax_service.R' 'dax_interfaces.R' 'dax_operations.R'
         'simpledb_service.R' 'simpledb_interfaces.R'
         'simpledb_operations.R'
 NeedsCompilation: no
-Packaged: 2021-01-16 20:18:49 UTC; david.kretch
+Packaged: 2021-03-09 02:20:26 UTC; david.kretch
 Author: David Kretch [aut, cre],
   Adam Banker [aut],
   Amazon.com, Inc. [cph]
 Maintainer: David Kretch <david.kretch@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-01-16 20:50:02 UTC
+Date/Publication: 2021-03-09 16:40:02 UTC

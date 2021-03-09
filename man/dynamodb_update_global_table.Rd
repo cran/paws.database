@@ -11,6 +11,42 @@ dynamodb_update_global_table(GlobalTableName, ReplicaUpdates)
 
 \item{ReplicaUpdates}{[required] A list of Regions that should be added or removed from the global table.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  GlobalTableDescription = list(
+    ReplicationGroup = list(
+      list(
+        RegionName = "string",
+        ReplicaStatus = "CREATING"|"CREATION_FAILED"|"UPDATING"|"DELETING"|"ACTIVE"|"REGION_DISABLED"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS",
+        ReplicaStatusDescription = "string",
+        ReplicaStatusPercentProgress = "string",
+        KMSMasterKeyId = "string",
+        ProvisionedThroughputOverride = list(
+          ReadCapacityUnits = 123
+        ),
+        GlobalSecondaryIndexes = list(
+          list(
+            IndexName = "string",
+            ProvisionedThroughputOverride = list(
+              ReadCapacityUnits = 123
+            )
+          )
+        ),
+        ReplicaInaccessibleDateTime = as.POSIXct(
+          "2015-01-01"
+        )
+      )
+    ),
+    GlobalTableArn = "string",
+    CreationDateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    GlobalTableStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING",
+    GlobalTableName = "string"
+  )
+)
+}
+}
 \description{
 Adds or removes replicas in the specified global table. The global table
 must already exist to be able to use this operation. Any replica to be
@@ -18,9 +54,10 @@ added must be empty, have the same name as the global table, have the
 same key schema, have DynamoDB Streams enabled, and have the same
 provisioned and maximum write capacity units.
 
-Although you can use \code{UpdateGlobalTable} to add replicas and remove
-replicas in a single request, for simplicity we recommend that you issue
-separate requests for adding or removing replicas.
+Although you can use
+\code{\link[=dynamodb_update_global_table]{update_global_table}} to add replicas
+and remove replicas in a single request, for simplicity we recommend
+that you issue separate requests for adding or removing replicas.
 
 If global secondary indexes are specified, then the following conditions
 must also be met:

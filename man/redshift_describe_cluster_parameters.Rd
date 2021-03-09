@@ -30,11 +30,31 @@ Default: \code{100}
 Constraints: minimum 20, maximum 100.}
 
 \item{Marker}{An optional parameter that specifies the starting point to return a set
-of response records. When the results of a DescribeClusterParameters
+of response records. When the results of a
+\code{\link[=redshift_describe_cluster_parameters]{describe_cluster_parameters}}
 request exceed the value specified in \code{MaxRecords}, AWS returns a value
 in the \code{Marker} field of the response. You can retrieve the next set of
 response records by providing the returned marker value in the \code{Marker}
 parameter and retrying the request.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Parameters = list(
+    list(
+      ParameterName = "string",
+      ParameterValue = "string",
+      Description = "string",
+      Source = "string",
+      DataType = "string",
+      AllowedValues = "string",
+      ApplyType = "static"|"dynamic",
+      IsModifiable = TRUE|FALSE,
+      MinimumEngineVersion = "string"
+    )
+  ),
+  Marker = "string"
+)
+}
 }
 \description{
 Returns a detailed list of parameters contained within the specified
@@ -44,8 +64,9 @@ value, whether the parameter value is modifiable, and so on.
 
 You can specify \emph{source} filter to retrieve parameters of only specific
 type. For example, to retrieve parameters that were modified by a user
-action such as from ModifyClusterParameterGroup, you can specify
-\emph{source} equal to \emph{user}.
+action such as from
+\code{\link[=redshift_modify_cluster_parameter_group]{modify_cluster_parameter_group}},
+you can specify \emph{source} equal to \emph{user}.
 
 For more information about parameters and parameter groups, go to
 \href{https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html}{Amazon Redshift Parameter Groups}

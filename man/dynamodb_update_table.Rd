@@ -43,7 +43,7 @@ global secondary index.
 }
 
 You can create or delete only one global secondary index per
-\code{UpdateTable} operation.
+\code{\link[=dynamodb_update_table]{update_table}} operation.
 
 For more information, see \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html}{Managing Global Secondary Indexes}
 in the \emph{Amazon DynamoDB Developer Guide}.}
@@ -62,6 +62,157 @@ table.
 This property only applies to \href{https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html}{Version 2019.11.21}
 of global tables.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  TableDescription = list(
+    AttributeDefinitions = list(
+      list(
+        AttributeName = "string",
+        AttributeType = "S"|"N"|"B"
+      )
+    ),
+    TableName = "string",
+    KeySchema = list(
+      list(
+        AttributeName = "string",
+        KeyType = "HASH"|"RANGE"
+      )
+    ),
+    TableStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS"|"ARCHIVING"|"ARCHIVED",
+    CreationDateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    ProvisionedThroughput = list(
+      LastIncreaseDateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      LastDecreaseDateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      NumberOfDecreasesToday = 123,
+      ReadCapacityUnits = 123,
+      WriteCapacityUnits = 123
+    ),
+    TableSizeBytes = 123,
+    ItemCount = 123,
+    TableArn = "string",
+    TableId = "string",
+    BillingModeSummary = list(
+      BillingMode = "PROVISIONED"|"PAY_PER_REQUEST",
+      LastUpdateToPayPerRequestDateTime = as.POSIXct(
+        "2015-01-01"
+      )
+    ),
+    LocalSecondaryIndexes = list(
+      list(
+        IndexName = "string",
+        KeySchema = list(
+          list(
+            AttributeName = "string",
+            KeyType = "HASH"|"RANGE"
+          )
+        ),
+        Projection = list(
+          ProjectionType = "ALL"|"KEYS_ONLY"|"INCLUDE",
+          NonKeyAttributes = list(
+            "string"
+          )
+        ),
+        IndexSizeBytes = 123,
+        ItemCount = 123,
+        IndexArn = "string"
+      )
+    ),
+    GlobalSecondaryIndexes = list(
+      list(
+        IndexName = "string",
+        KeySchema = list(
+          list(
+            AttributeName = "string",
+            KeyType = "HASH"|"RANGE"
+          )
+        ),
+        Projection = list(
+          ProjectionType = "ALL"|"KEYS_ONLY"|"INCLUDE",
+          NonKeyAttributes = list(
+            "string"
+          )
+        ),
+        IndexStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE",
+        Backfilling = TRUE|FALSE,
+        ProvisionedThroughput = list(
+          LastIncreaseDateTime = as.POSIXct(
+            "2015-01-01"
+          ),
+          LastDecreaseDateTime = as.POSIXct(
+            "2015-01-01"
+          ),
+          NumberOfDecreasesToday = 123,
+          ReadCapacityUnits = 123,
+          WriteCapacityUnits = 123
+        ),
+        IndexSizeBytes = 123,
+        ItemCount = 123,
+        IndexArn = "string"
+      )
+    ),
+    StreamSpecification = list(
+      StreamEnabled = TRUE|FALSE,
+      StreamViewType = "NEW_IMAGE"|"OLD_IMAGE"|"NEW_AND_OLD_IMAGES"|"KEYS_ONLY"
+    ),
+    LatestStreamLabel = "string",
+    LatestStreamArn = "string",
+    GlobalTableVersion = "string",
+    Replicas = list(
+      list(
+        RegionName = "string",
+        ReplicaStatus = "CREATING"|"CREATION_FAILED"|"UPDATING"|"DELETING"|"ACTIVE"|"REGION_DISABLED"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS",
+        ReplicaStatusDescription = "string",
+        ReplicaStatusPercentProgress = "string",
+        KMSMasterKeyId = "string",
+        ProvisionedThroughputOverride = list(
+          ReadCapacityUnits = 123
+        ),
+        GlobalSecondaryIndexes = list(
+          list(
+            IndexName = "string",
+            ProvisionedThroughputOverride = list(
+              ReadCapacityUnits = 123
+            )
+          )
+        ),
+        ReplicaInaccessibleDateTime = as.POSIXct(
+          "2015-01-01"
+        )
+      )
+    ),
+    RestoreSummary = list(
+      SourceBackupArn = "string",
+      SourceTableArn = "string",
+      RestoreDateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      RestoreInProgress = TRUE|FALSE
+    ),
+    SSEDescription = list(
+      Status = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|"UPDATING",
+      SSEType = "AES256"|"KMS",
+      KMSMasterKeyArn = "string",
+      InaccessibleEncryptionDateTime = as.POSIXct(
+        "2015-01-01"
+      )
+    ),
+    ArchivalSummary = list(
+      ArchivalDateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      ArchivalReason = "string",
+      ArchivalBackupArn = "string"
+    )
+  )
+)
+}
+}
 \description{
 Modifies the provisioned throughput settings, global secondary indexes,
 or DynamoDB Streams settings for a given table.
@@ -72,15 +223,16 @@ You can only perform one of the following operations at once:
 \item Enable or disable DynamoDB Streams on the table.
 \item Remove a global secondary index from the table.
 \item Create a new global secondary index on the table. After the index
-begins backfilling, you can use \code{UpdateTable} to perform other
-operations.
+begins backfilling, you can use
+\code{\link[=dynamodb_update_table]{update_table}} to perform other operations.
 }
 
-\code{UpdateTable} is an asynchronous operation; while it is executing, the
-table status changes from \code{ACTIVE} to \code{UPDATING}. While it is
-\code{UPDATING}, you cannot issue another \code{UpdateTable} request. When the
-table returns to the \code{ACTIVE} state, the \code{UpdateTable} operation is
-complete.
+\code{\link[=dynamodb_update_table]{update_table}} is an asynchronous operation;
+while it is executing, the table status changes from \code{ACTIVE} to
+\code{UPDATING}. While it is \code{UPDATING}, you cannot issue another
+\code{\link[=dynamodb_update_table]{update_table}} request. When the table returns
+to the \code{ACTIVE} state, the \code{\link[=dynamodb_update_table]{update_table}}
+operation is complete.
 }
 \section{Request syntax}{
 \preformatted{svc$update_table(

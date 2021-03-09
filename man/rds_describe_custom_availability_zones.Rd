@@ -23,9 +23,30 @@ Default: 100
 Constraints: Minimum 20, maximum 100.}
 
 \item{Marker}{An optional pagination token provided by a previous
-\code{DescribeCustomAvailabilityZones} request. If this parameter is
-specified, the response includes only records beyond the marker, up to
-the value specified by \code{MaxRecords}.}
+\code{\link[=rds_describe_custom_availability_zones]{describe_custom_availability_zones}}
+request. If this parameter is specified, the response includes only
+records beyond the marker, up to the value specified by \code{MaxRecords}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Marker = "string",
+  CustomAvailabilityZones = list(
+    list(
+      CustomAvailabilityZoneId = "string",
+      CustomAvailabilityZoneName = "string",
+      CustomAvailabilityZoneStatus = "string",
+      VpnDetails = list(
+        VpnId = "string",
+        VpnTunnelOriginatorIP = "string",
+        VpnGatewayIp = "string",
+        VpnPSK = "string",
+        VpnName = "string",
+        VpnState = "string"
+      )
+    )
+  )
+)
+}
 }
 \description{
 Returns information about custom Availability Zones (AZs).

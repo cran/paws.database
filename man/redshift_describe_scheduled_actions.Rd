@@ -25,7 +25,8 @@ disabled scheduled actions.}
 \item{Filters}{List of scheduled action filters.}
 
 \item{Marker}{An optional parameter that specifies the starting point to return a set
-of response records. When the results of a DescribeScheduledActions
+of response records. When the results of a
+\code{\link[=redshift_describe_scheduled_actions]{describe_scheduled_actions}}
 request exceed the value specified in \code{MaxRecords}, AWS returns a value
 in the \code{Marker} field of the response. You can retrieve the next set of
 response records by providing the returned marker value in the \code{Marker}
@@ -40,6 +41,47 @@ returned marker value.
 Default: \code{100}
 
 Constraints: minimum 20, maximum 100.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Marker = "string",
+  ScheduledActions = list(
+    list(
+      ScheduledActionName = "string",
+      TargetAction = list(
+        ResizeCluster = list(
+          ClusterIdentifier = "string",
+          ClusterType = "string",
+          NodeType = "string",
+          NumberOfNodes = 123,
+          Classic = TRUE|FALSE
+        ),
+        PauseCluster = list(
+          ClusterIdentifier = "string"
+        ),
+        ResumeCluster = list(
+          ClusterIdentifier = "string"
+        )
+      ),
+      Schedule = "string",
+      IamRole = "string",
+      ScheduledActionDescription = "string",
+      State = "ACTIVE"|"DISABLED",
+      NextInvocations = list(
+        as.POSIXct(
+          "2015-01-01"
+        )
+      ),
+      StartTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      EndTime = as.POSIXct(
+        "2015-01-01"
+      )
+    )
+  )
+)
+}
 }
 \description{
 Describes properties of scheduled actions.

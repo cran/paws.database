@@ -456,8 +456,8 @@ Multi-AZ deployment.}
 
 \item{EngineVersion}{The version number of the database engine to use.
 
-For a list of valid engine versions, use the \code{DescribeDBEngineVersions}
-action.
+For a list of valid engine versions, use the
+\code{\link[=rds_describe_db_engine_versions]{describe_db_engine_versions}} action.
 
 The following are the database engines and links to information about
 the major and minor versions that are available with Amazon RDS. Not
@@ -526,7 +526,7 @@ associated with the specified CharacterSet.
 \strong{Amazon Aurora}
 
 Not applicable. The character set is managed by the DB cluster. For more
-information, see \code{CreateDBCluster}.}
+information, see \code{\link[=rds_create_db_cluster]{create_db_cluster}}.}
 
 \item{NcharCharacterSetName}{The name of the NCHAR character set for the Oracle DB instance.}
 
@@ -599,7 +599,7 @@ different AWS account, specify the key ARN or alias ARN.
 \strong{Amazon Aurora}
 
 Not applicable. The AWS KMS key identifier is managed by the DB cluster.
-For more information, see \code{CreateDBCluster}.
+For more information, see \code{\link[=rds_create_db_cluster]{create_db_cluster}}.
 
 If \code{StorageEncrypted} is enabled, and you do not specify a value for the
 \code{KmsKeyId} parameter, then Amazon RDS uses your default CMK. There is a
@@ -724,9 +724,10 @@ information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/US
 \strong{Amazon Aurora}
 
 Not applicable. You can enable or disable deletion protection for the DB
-cluster. For more information, see \code{CreateDBCluster}. DB instances in a
-DB cluster can be deleted even when deletion protection is enabled for
-the DB cluster.}
+cluster. For more information, see
+\code{\link[=rds_create_db_cluster]{create_db_cluster}}. DB instances in a DB
+cluster can be deleted even when deletion protection is enabled for the
+DB cluster.}
 
 \item{MaxAllocatedStorage}{The upper limit to which Amazon RDS can automatically scale the storage
 of the DB instance.}
@@ -744,6 +745,195 @@ in the \emph{Amazon RDS User Guide}.
 
 For more information about CoIPs, see \href{https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing}{Customer-owned IP addresses}
 in the \emph{AWS Outposts User Guide}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  DBInstance = list(
+    DBInstanceIdentifier = "string",
+    DBInstanceClass = "string",
+    Engine = "string",
+    DBInstanceStatus = "string",
+    MasterUsername = "string",
+    DBName = "string",
+    Endpoint = list(
+      Address = "string",
+      Port = 123,
+      HostedZoneId = "string"
+    ),
+    AllocatedStorage = 123,
+    InstanceCreateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    PreferredBackupWindow = "string",
+    BackupRetentionPeriod = 123,
+    DBSecurityGroups = list(
+      list(
+        DBSecurityGroupName = "string",
+        Status = "string"
+      )
+    ),
+    VpcSecurityGroups = list(
+      list(
+        VpcSecurityGroupId = "string",
+        Status = "string"
+      )
+    ),
+    DBParameterGroups = list(
+      list(
+        DBParameterGroupName = "string",
+        ParameterApplyStatus = "string"
+      )
+    ),
+    AvailabilityZone = "string",
+    DBSubnetGroup = list(
+      DBSubnetGroupName = "string",
+      DBSubnetGroupDescription = "string",
+      VpcId = "string",
+      SubnetGroupStatus = "string",
+      Subnets = list(
+        list(
+          SubnetIdentifier = "string",
+          SubnetAvailabilityZone = list(
+            Name = "string"
+          ),
+          SubnetOutpost = list(
+            Arn = "string"
+          ),
+          SubnetStatus = "string"
+        )
+      ),
+      DBSubnetGroupArn = "string"
+    ),
+    PreferredMaintenanceWindow = "string",
+    PendingModifiedValues = list(
+      DBInstanceClass = "string",
+      AllocatedStorage = 123,
+      MasterUserPassword = "string",
+      Port = 123,
+      BackupRetentionPeriod = 123,
+      MultiAZ = TRUE|FALSE,
+      EngineVersion = "string",
+      LicenseModel = "string",
+      Iops = 123,
+      DBInstanceIdentifier = "string",
+      StorageType = "string",
+      CACertificateIdentifier = "string",
+      DBSubnetGroupName = "string",
+      PendingCloudwatchLogsExports = list(
+        LogTypesToEnable = list(
+          "string"
+        ),
+        LogTypesToDisable = list(
+          "string"
+        )
+      ),
+      ProcessorFeatures = list(
+        list(
+          Name = "string",
+          Value = "string"
+        )
+      ),
+      IAMDatabaseAuthenticationEnabled = TRUE|FALSE
+    ),
+    LatestRestorableTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    MultiAZ = TRUE|FALSE,
+    EngineVersion = "string",
+    AutoMinorVersionUpgrade = TRUE|FALSE,
+    ReadReplicaSourceDBInstanceIdentifier = "string",
+    ReadReplicaDBInstanceIdentifiers = list(
+      "string"
+    ),
+    ReadReplicaDBClusterIdentifiers = list(
+      "string"
+    ),
+    ReplicaMode = "open-read-only"|"mounted",
+    LicenseModel = "string",
+    Iops = 123,
+    OptionGroupMemberships = list(
+      list(
+        OptionGroupName = "string",
+        Status = "string"
+      )
+    ),
+    CharacterSetName = "string",
+    NcharCharacterSetName = "string",
+    SecondaryAvailabilityZone = "string",
+    PubliclyAccessible = TRUE|FALSE,
+    StatusInfos = list(
+      list(
+        StatusType = "string",
+        Normal = TRUE|FALSE,
+        Status = "string",
+        Message = "string"
+      )
+    ),
+    StorageType = "string",
+    TdeCredentialArn = "string",
+    DbInstancePort = 123,
+    DBClusterIdentifier = "string",
+    StorageEncrypted = TRUE|FALSE,
+    KmsKeyId = "string",
+    DbiResourceId = "string",
+    CACertificateIdentifier = "string",
+    DomainMemberships = list(
+      list(
+        Domain = "string",
+        Status = "string",
+        FQDN = "string",
+        IAMRoleName = "string"
+      )
+    ),
+    CopyTagsToSnapshot = TRUE|FALSE,
+    MonitoringInterval = 123,
+    EnhancedMonitoringResourceArn = "string",
+    MonitoringRoleArn = "string",
+    PromotionTier = 123,
+    DBInstanceArn = "string",
+    Timezone = "string",
+    IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+    PerformanceInsightsEnabled = TRUE|FALSE,
+    PerformanceInsightsKMSKeyId = "string",
+    PerformanceInsightsRetentionPeriod = 123,
+    EnabledCloudwatchLogsExports = list(
+      "string"
+    ),
+    ProcessorFeatures = list(
+      list(
+        Name = "string",
+        Value = "string"
+      )
+    ),
+    DeletionProtection = TRUE|FALSE,
+    AssociatedRoles = list(
+      list(
+        RoleArn = "string",
+        FeatureName = "string",
+        Status = "string"
+      )
+    ),
+    ListenerEndpoint = list(
+      Address = "string",
+      Port = 123,
+      HostedZoneId = "string"
+    ),
+    MaxAllocatedStorage = 123,
+    TagList = list(
+      list(
+        Key = "string",
+        Value = "string"
+      )
+    ),
+    DBInstanceAutomatedBackupsReplications = list(
+      list(
+        DBInstanceAutomatedBackupsArn = "string"
+      )
+    ),
+    CustomerOwnedIpEnabled = TRUE|FALSE
+  )
+)
+}
 }
 \description{
 Creates a new DB instance.

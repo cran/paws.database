@@ -19,6 +19,18 @@ Valid values are: \code{memcached1.4} | \code{memcached1.5} | \code{memcached1.6
 
 \item{Description}{[required] A user-specified description for the cache parameter group.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  CacheParameterGroup = list(
+    CacheParameterGroupName = "string",
+    CacheParameterGroupFamily = "string",
+    Description = "string",
+    IsGlobal = TRUE|FALSE,
+    ARN = "string"
+  )
+)
+}
+}
 \description{
 Creates a new Amazon ElastiCache cache parameter group. An ElastiCache
 cache parameter group is a collection of parameters and their values
@@ -30,7 +42,7 @@ parameter group for the CacheParameterGroupFamily. To customize the
 newly created CacheParameterGroup you can change the values of specific
 parameters. For more information, see:
 \itemize{
-\item \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html}{ModifyCacheParameterGroup}
+\item \code{\link[=elasticache_modify_cache_parameter_group]{modify_cache_parameter_group}}
 in the ElastiCache API Reference.
 \item \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html}{Parameters and Parameter Groups}
 in the ElastiCache User Guide.

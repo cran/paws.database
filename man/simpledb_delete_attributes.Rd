@@ -9,26 +9,39 @@ simpledb_delete_attributes(DomainName, ItemName, Attributes, Expected)
 \arguments{
 \item{DomainName}{[required] The name of the domain in which to perform the operation.}
 
-\item{ItemName}{[required] The name of the item. Similar to rows on a spreadsheet, items represent individual objects that contain one or more value-attribute pairs.}
+\item{ItemName}{[required] The name of the item. Similar to rows on a spreadsheet, items represent
+individual objects that contain one or more value-attribute pairs.}
 
-\item{Attributes}{A list of Attributes. Similar to columns on a spreadsheet, attributes represent categories of data that can be assigned to items.}
+\item{Attributes}{A list of Attributes. Similar to columns on a spreadsheet, attributes
+represent categories of data that can be assigned to items.}
 
-\item{Expected}{The update condition which, if specified, determines whether the specified attributes will be deleted or not. The update condition must be satisfied in order for this request to be processed and the attributes to be deleted.}
+\item{Expected}{The update condition which, if specified, determines whether the
+specified attributes will be deleted or not. The update condition must
+be satisfied in order for this request to be processed and the
+attributes to be deleted.}
+}
+\value{
+An empty list.
 }
 \description{
 Deletes one or more attributes associated with an item. If all
 attributes of the item are deleted, the item is deleted.
 
-If \code{DeleteAttributes} is called without being passed any attributes or
-values specified, all the attributes for the item are deleted.
+If \code{\link[=simpledb_delete_attributes]{delete_attributes}} is called without
+being passed any attributes or values specified, all the attributes for
+the item are deleted.
 
-\code{DeleteAttributes} is an idempotent operation; running it multiple times
-on the same item or attribute does not result in an error response.
+\code{\link[=simpledb_delete_attributes]{delete_attributes}} is an idempotent
+operation; running it multiple times on the same item or attribute does
+not result in an error response.
 
 Because Amazon SimpleDB makes multiple copies of item data and uses an
-eventual consistency update model, performing a GetAttributes or Select
-operation (read) immediately after a \code{DeleteAttributes} or PutAttributes
-operation (write) might not return updated item data.
+eventual consistency update model, performing a
+\code{\link[=simpledb_get_attributes]{get_attributes}} or
+\code{\link[=simpledb_select]{select}} operation (read) immediately after a
+\code{\link[=simpledb_delete_attributes]{delete_attributes}} or
+\code{\link[=simpledb_put_attributes]{put_attributes}} operation (write) might not
+return updated item data.
 }
 \section{Request syntax}{
 \preformatted{svc$delete_attributes(

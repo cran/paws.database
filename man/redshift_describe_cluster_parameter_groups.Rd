@@ -25,11 +25,11 @@ Constraints: minimum 20, maximum 100.}
 
 \item{Marker}{An optional parameter that specifies the starting point to return a set
 of response records. When the results of a
-DescribeClusterParameterGroups request exceed the value specified in
-\code{MaxRecords}, AWS returns a value in the \code{Marker} field of the response.
-You can retrieve the next set of response records by providing the
-returned marker value in the \code{Marker} parameter and retrying the
-request.}
+\code{\link[=redshift_describe_cluster_parameter_groups]{describe_cluster_parameter_groups}}
+request exceed the value specified in \code{MaxRecords}, AWS returns a value
+in the \code{Marker} field of the response. You can retrieve the next set of
+response records by providing the returned marker value in the \code{Marker}
+parameter and retrying the request.}
 
 \item{TagKeys}{A tag key or keys for which you want to return all matching cluster
 parameter groups that are associated with the specified key or keys. For
@@ -46,6 +46,25 @@ tagged with values called \code{admin} and \code{test}. If you specify both of
 these tag values in the request, Amazon Redshift returns a response with
 the parameter groups that have either or both of these tag values
 associated with them.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Marker = "string",
+  ParameterGroups = list(
+    list(
+      ParameterGroupName = "string",
+      ParameterGroupFamily = "string",
+      Description = "string",
+      Tags = list(
+        list(
+          Key = "string",
+          Value = "string"
+        )
+      )
+    )
+  )
+)
+}
 }
 \description{
 Returns a list of Amazon Redshift parameter groups, including parameter

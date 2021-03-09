@@ -24,9 +24,32 @@ Default: 100
 Constraints: Minimum 20, maximum 100.}
 
 \item{Marker}{An optional pagination token provided by a previous
-\code{DescribeEngineDefaultClusterParameters} request. If this parameter is
-specified, the response includes only records beyond the marker, up to
-the value specified by \code{MaxRecords}.}
+\code{\link[=neptune_describe_engine_default_cluster_parameters]{describe_engine_default_cluster_parameters}}
+request. If this parameter is specified, the response includes only
+records beyond the marker, up to the value specified by \code{MaxRecords}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  EngineDefaults = list(
+    DBParameterGroupFamily = "string",
+    Marker = "string",
+    Parameters = list(
+      list(
+        ParameterName = "string",
+        ParameterValue = "string",
+        Description = "string",
+        Source = "string",
+        ApplyType = "string",
+        DataType = "string",
+        AllowedValues = "string",
+        IsModifiable = TRUE|FALSE,
+        MinimumEngineVersion = "string",
+        ApplyMethod = "immediate"|"pending-reboot"
+      )
+    )
+  )
+)
+}
 }
 \description{
 Returns the default engine and system parameter information for the

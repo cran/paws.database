@@ -51,17 +51,17 @@ Constraint: Must be compatible with the engine of the source}
 To list all of the available engine versions for \code{aurora} (for MySQL
 5.6-compatible Aurora), use the following command:
 
-\verb{aws rds describe-db-engine-versions --engine aurora --query "DBEngineVersions\\\[\\\].EngineVersion"}
+\verb{aws rds describe-db-engine-versions --engine aurora --query "DBEngineVersions[].EngineVersion"}
 
 To list all of the available engine versions for \code{aurora-mysql} (for
 MySQL 5.7-compatible Aurora), use the following command:
 
-\verb{aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions\\\[\\\].EngineVersion"}
+\verb{aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"}
 
 To list all of the available engine versions for \code{aurora-postgresql},
 use the following command:
 
-\verb{aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions\\\[\\\].EngineVersion"}
+\verb{aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions[].EngineVersion"}
 
 If you aren't using the default engine version, then you must specify
 the engine version.
@@ -180,6 +180,139 @@ in the \emph{Amazon RDS User Guide}.}
 \item{DomainIAMRoleName}{Specify the name of the IAM role to be used when making API calls to the
 Directory Service.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  DBCluster = list(
+    AllocatedStorage = 123,
+    AvailabilityZones = list(
+      "string"
+    ),
+    BackupRetentionPeriod = 123,
+    CharacterSetName = "string",
+    DatabaseName = "string",
+    DBClusterIdentifier = "string",
+    DBClusterParameterGroup = "string",
+    DBSubnetGroup = "string",
+    Status = "string",
+    PercentProgress = "string",
+    EarliestRestorableTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    Endpoint = "string",
+    ReaderEndpoint = "string",
+    CustomEndpoints = list(
+      "string"
+    ),
+    MultiAZ = TRUE|FALSE,
+    Engine = "string",
+    EngineVersion = "string",
+    LatestRestorableTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    Port = 123,
+    MasterUsername = "string",
+    DBClusterOptionGroupMemberships = list(
+      list(
+        DBClusterOptionGroupName = "string",
+        Status = "string"
+      )
+    ),
+    PreferredBackupWindow = "string",
+    PreferredMaintenanceWindow = "string",
+    ReplicationSourceIdentifier = "string",
+    ReadReplicaIdentifiers = list(
+      "string"
+    ),
+    DBClusterMembers = list(
+      list(
+        DBInstanceIdentifier = "string",
+        IsClusterWriter = TRUE|FALSE,
+        DBClusterParameterGroupStatus = "string",
+        PromotionTier = 123
+      )
+    ),
+    VpcSecurityGroups = list(
+      list(
+        VpcSecurityGroupId = "string",
+        Status = "string"
+      )
+    ),
+    HostedZoneId = "string",
+    StorageEncrypted = TRUE|FALSE,
+    KmsKeyId = "string",
+    DbClusterResourceId = "string",
+    DBClusterArn = "string",
+    AssociatedRoles = list(
+      list(
+        RoleArn = "string",
+        Status = "string",
+        FeatureName = "string"
+      )
+    ),
+    IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+    CloneGroupId = "string",
+    ClusterCreateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    EarliestBacktrackTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    BacktrackWindow = 123,
+    BacktrackConsumedChangeRecords = 123,
+    EnabledCloudwatchLogsExports = list(
+      "string"
+    ),
+    Capacity = 123,
+    EngineMode = "string",
+    ScalingConfigurationInfo = list(
+      MinCapacity = 123,
+      MaxCapacity = 123,
+      AutoPause = TRUE|FALSE,
+      SecondsUntilAutoPause = 123,
+      TimeoutAction = "string"
+    ),
+    DeletionProtection = TRUE|FALSE,
+    HttpEndpointEnabled = TRUE|FALSE,
+    ActivityStreamMode = "sync"|"async",
+    ActivityStreamStatus = "stopped"|"starting"|"started"|"stopping",
+    ActivityStreamKmsKeyId = "string",
+    ActivityStreamKinesisStreamName = "string",
+    CopyTagsToSnapshot = TRUE|FALSE,
+    CrossAccountClone = TRUE|FALSE,
+    DomainMemberships = list(
+      list(
+        Domain = "string",
+        Status = "string",
+        FQDN = "string",
+        IAMRoleName = "string"
+      )
+    ),
+    TagList = list(
+      list(
+        Key = "string",
+        Value = "string"
+      )
+    ),
+    GlobalWriteForwardingStatus = "enabled"|"disabled"|"enabling"|"disabling"|"unknown",
+    GlobalWriteForwardingRequested = TRUE|FALSE,
+    PendingModifiedValues = list(
+      PendingCloudwatchLogsExports = list(
+        LogTypesToEnable = list(
+          "string"
+        ),
+        LogTypesToDisable = list(
+          "string"
+        )
+      ),
+      DBClusterIdentifier = "string",
+      MasterUserPassword = "string",
+      IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+      EngineVersion = "string"
+    )
+  )
+)
+}
+}
 \description{
 Creates a new DB cluster from a DB snapshot or DB cluster snapshot. This
 action only applies to Aurora DB clusters.
@@ -189,11 +322,13 @@ configuration. If you don't specify a security group, the new DB cluster
 is associated with the default security group.
 
 This action only restores the DB cluster, not the DB instances for that
-DB cluster. You must invoke the \code{CreateDBInstance} action to create DB
+DB cluster. You must invoke the
+\code{\link[=rds_create_db_instance]{create_db_instance}} action to create DB
 instances for the restored DB cluster, specifying the identifier of the
 restored DB cluster in \code{DBClusterIdentifier}. You can create DB
-instances only after the \code{RestoreDBClusterFromSnapshot} action has
-completed and the DB cluster is available.
+instances only after the
+\code{\link[=rds_restore_db_cluster_from_snapshot]{restore_db_cluster_from_snapshot}}
+action has completed and the DB cluster is available.
 
 For more information on Amazon Aurora, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html}{What Is Amazon Aurora?}
 in the \emph{Amazon Aurora User Guide.}

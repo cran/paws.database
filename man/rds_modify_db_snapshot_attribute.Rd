@@ -17,7 +17,8 @@ To manage authorization for other AWS accounts to copy or restore a
 manual DB snapshot, set this value to \code{restore}.
 
 To view the list of attributes available to modify, use the
-DescribeDBSnapshotAttributes API action.}
+\code{\link[=rds_describe_db_snapshot_attributes]{describe_db_snapshot_attributes}}
+API action.}
 
 \item{ValuesToAdd}{A list of DB snapshot attributes to add to the attribute specified by
 \code{AttributeName}.
@@ -37,6 +38,22 @@ identifiers, or \code{all} to remove authorization for any AWS account to
 copy or restore the DB snapshot. If you specify \code{all}, an AWS account
 whose account ID is explicitly added to the \code{restore} attribute can
 still copy or restore the manual DB snapshot.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  DBSnapshotAttributesResult = list(
+    DBSnapshotIdentifier = "string",
+    DBSnapshotAttributes = list(
+      list(
+        AttributeName = "string",
+        AttributeValues = list(
+          "string"
+        )
+      )
+    )
+  )
+)
+}
 }
 \description{
 Adds an attribute and values to, or removes an attribute and values
@@ -58,8 +75,9 @@ case.
 
 To view which AWS accounts have access to copy or restore a manual DB
 snapshot, or whether a manual DB snapshot public or private, use the
-DescribeDBSnapshotAttributes API action. The accounts are returned as
-values for the \code{restore} attribute.
+\code{\link[=rds_describe_db_snapshot_attributes]{describe_db_snapshot_attributes}}
+API action. The accounts are returned as values for the \code{restore}
+attribute.
 }
 \section{Request syntax}{
 \preformatted{svc$modify_db_snapshot_attribute(

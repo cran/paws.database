@@ -101,7 +101,8 @@ the DB instance doesn't permit it.
 When the DB instance isn't publicly accessible, it is an internal DB
 instance with a DNS name that resolves to a private IP address.
 
-For more information, see CreateDBInstance.}
+For more information, see
+\code{\link[=rds_create_db_instance]{create_db_instance}}.}
 
 \item{AutoMinorVersionUpgrade}{A value that indicates whether minor version upgrades are applied
 automatically to the DB instance during the maintenance window.}
@@ -250,6 +251,195 @@ in the \emph{Amazon RDS User Guide}.
 For more information about CoIPs, see \href{https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing}{Customer-owned IP addresses}
 in the \emph{AWS Outposts User Guide}.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  DBInstance = list(
+    DBInstanceIdentifier = "string",
+    DBInstanceClass = "string",
+    Engine = "string",
+    DBInstanceStatus = "string",
+    MasterUsername = "string",
+    DBName = "string",
+    Endpoint = list(
+      Address = "string",
+      Port = 123,
+      HostedZoneId = "string"
+    ),
+    AllocatedStorage = 123,
+    InstanceCreateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    PreferredBackupWindow = "string",
+    BackupRetentionPeriod = 123,
+    DBSecurityGroups = list(
+      list(
+        DBSecurityGroupName = "string",
+        Status = "string"
+      )
+    ),
+    VpcSecurityGroups = list(
+      list(
+        VpcSecurityGroupId = "string",
+        Status = "string"
+      )
+    ),
+    DBParameterGroups = list(
+      list(
+        DBParameterGroupName = "string",
+        ParameterApplyStatus = "string"
+      )
+    ),
+    AvailabilityZone = "string",
+    DBSubnetGroup = list(
+      DBSubnetGroupName = "string",
+      DBSubnetGroupDescription = "string",
+      VpcId = "string",
+      SubnetGroupStatus = "string",
+      Subnets = list(
+        list(
+          SubnetIdentifier = "string",
+          SubnetAvailabilityZone = list(
+            Name = "string"
+          ),
+          SubnetOutpost = list(
+            Arn = "string"
+          ),
+          SubnetStatus = "string"
+        )
+      ),
+      DBSubnetGroupArn = "string"
+    ),
+    PreferredMaintenanceWindow = "string",
+    PendingModifiedValues = list(
+      DBInstanceClass = "string",
+      AllocatedStorage = 123,
+      MasterUserPassword = "string",
+      Port = 123,
+      BackupRetentionPeriod = 123,
+      MultiAZ = TRUE|FALSE,
+      EngineVersion = "string",
+      LicenseModel = "string",
+      Iops = 123,
+      DBInstanceIdentifier = "string",
+      StorageType = "string",
+      CACertificateIdentifier = "string",
+      DBSubnetGroupName = "string",
+      PendingCloudwatchLogsExports = list(
+        LogTypesToEnable = list(
+          "string"
+        ),
+        LogTypesToDisable = list(
+          "string"
+        )
+      ),
+      ProcessorFeatures = list(
+        list(
+          Name = "string",
+          Value = "string"
+        )
+      ),
+      IAMDatabaseAuthenticationEnabled = TRUE|FALSE
+    ),
+    LatestRestorableTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    MultiAZ = TRUE|FALSE,
+    EngineVersion = "string",
+    AutoMinorVersionUpgrade = TRUE|FALSE,
+    ReadReplicaSourceDBInstanceIdentifier = "string",
+    ReadReplicaDBInstanceIdentifiers = list(
+      "string"
+    ),
+    ReadReplicaDBClusterIdentifiers = list(
+      "string"
+    ),
+    ReplicaMode = "open-read-only"|"mounted",
+    LicenseModel = "string",
+    Iops = 123,
+    OptionGroupMemberships = list(
+      list(
+        OptionGroupName = "string",
+        Status = "string"
+      )
+    ),
+    CharacterSetName = "string",
+    NcharCharacterSetName = "string",
+    SecondaryAvailabilityZone = "string",
+    PubliclyAccessible = TRUE|FALSE,
+    StatusInfos = list(
+      list(
+        StatusType = "string",
+        Normal = TRUE|FALSE,
+        Status = "string",
+        Message = "string"
+      )
+    ),
+    StorageType = "string",
+    TdeCredentialArn = "string",
+    DbInstancePort = 123,
+    DBClusterIdentifier = "string",
+    StorageEncrypted = TRUE|FALSE,
+    KmsKeyId = "string",
+    DbiResourceId = "string",
+    CACertificateIdentifier = "string",
+    DomainMemberships = list(
+      list(
+        Domain = "string",
+        Status = "string",
+        FQDN = "string",
+        IAMRoleName = "string"
+      )
+    ),
+    CopyTagsToSnapshot = TRUE|FALSE,
+    MonitoringInterval = 123,
+    EnhancedMonitoringResourceArn = "string",
+    MonitoringRoleArn = "string",
+    PromotionTier = 123,
+    DBInstanceArn = "string",
+    Timezone = "string",
+    IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+    PerformanceInsightsEnabled = TRUE|FALSE,
+    PerformanceInsightsKMSKeyId = "string",
+    PerformanceInsightsRetentionPeriod = 123,
+    EnabledCloudwatchLogsExports = list(
+      "string"
+    ),
+    ProcessorFeatures = list(
+      list(
+        Name = "string",
+        Value = "string"
+      )
+    ),
+    DeletionProtection = TRUE|FALSE,
+    AssociatedRoles = list(
+      list(
+        RoleArn = "string",
+        FeatureName = "string",
+        Status = "string"
+      )
+    ),
+    ListenerEndpoint = list(
+      Address = "string",
+      Port = 123,
+      HostedZoneId = "string"
+    ),
+    MaxAllocatedStorage = 123,
+    TagList = list(
+      list(
+        Key = "string",
+        Value = "string"
+      )
+    ),
+    DBInstanceAutomatedBackupsReplications = list(
+      list(
+        DBInstanceAutomatedBackupsArn = "string"
+      )
+    ),
+    CustomerOwnedIpEnabled = TRUE|FALSE
+  )
+)
+}
+}
 \description{
 Restores a DB instance to an arbitrary point in time. You can restore to
 any point in time before the time identified by the LatestRestorableTime
@@ -265,7 +455,8 @@ is associated with mirroring; in this case, the instance becomes a
 mirrored deployment and not a single-AZ deployment.
 
 This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For
-Aurora, use \code{RestoreDBClusterToPointInTime}.
+Aurora, use
+\code{\link[=rds_restore_db_cluster_to_point_in_time]{restore_db_cluster_to_point_in_time}}.
 }
 \section{Request syntax}{
 \preformatted{svc$restore_db_instance_to_point_in_time(

@@ -27,7 +27,8 @@ Valid Values:
 
 \item{EngineVersion}{[required] The version number of the database engine to use.
 
-For a list of valid engine versions, call DescribeDBEngineVersions.
+For a list of valid engine versions, call
+\code{\link[=rds_describe_db_engine_versions]{describe_db_engine_versions}}.
 
 The following are the database engines and links to information about
 the major and minor versions. The list only includes DB engines that
@@ -47,6 +48,21 @@ Example:
 with the specified DB engine.
 
 Example: \code{WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso}}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  InstallationMediaId = "string",
+  CustomAvailabilityZoneId = "string",
+  Engine = "string",
+  EngineVersion = "string",
+  EngineInstallationMediaPath = "string",
+  OSInstallationMediaPath = "string",
+  Status = "string",
+  FailureCause = list(
+    Message = "string"
+  )
+)
+}
 }
 \description{
 Imports the installation media for a DB engine that requires an

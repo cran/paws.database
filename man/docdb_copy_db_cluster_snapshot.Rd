@@ -59,9 +59,10 @@ If you copy an unencrypted cluster snapshot and specify a value for the
 \code{KmsKeyId} parameter, an error is returned.}
 
 \item{PreSignedUrl}{The URL that contains a Signature Version 4 signed request for the
-\code{CopyDBClusterSnapshot} API action in the AWS Region that contains the
-source cluster snapshot to copy. You must use the \code{PreSignedUrl}
-parameter when copying a cluster snapshot from another AWS Region.
+\code{\link[=docdb_copy_db_cluster_snapshot]{copy_db_cluster_snapshot}} API action
+in the AWS Region that contains the source cluster snapshot to copy. You
+must use the \code{PreSignedUrl} parameter when copying a cluster snapshot
+from another AWS Region.
 
 If you are using an AWS SDK tool or the AWS CLI, you can specify
 \code{SourceRegion} (or \code{--source-region} for the AWS CLI) instead of
@@ -70,9 +71,10 @@ autogenerates a pre-signed URL that is a valid request for the operation
 that can be executed in the source AWS Region.
 
 The presigned URL must be a valid request for the
-\code{CopyDBClusterSnapshot} API action that can be executed in the source
-AWS Region that contains the cluster snapshot to be copied. The
-presigned URL request must contain the following parameter values:
+\code{\link[=docdb_copy_db_cluster_snapshot]{copy_db_cluster_snapshot}} API action
+that can be executed in the source AWS Region that contains the cluster
+snapshot to be copied. The presigned URL request must contain the
+following parameter values:
 \itemize{
 \item \code{SourceRegion} - The ID of the region that contains the snapshot to
 be copied.
@@ -91,6 +93,36 @@ cluster snapshot to be created. This parameter isn't case sensitive.
 target cluster snapshot, and otherwise \code{false}. The default is \code{false}.}
 
 \item{Tags}{The tags to be assigned to the cluster snapshot.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  DBClusterSnapshot = list(
+    AvailabilityZones = list(
+      "string"
+    ),
+    DBClusterSnapshotIdentifier = "string",
+    DBClusterIdentifier = "string",
+    SnapshotCreateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    Engine = "string",
+    Status = "string",
+    Port = 123,
+    VpcId = "string",
+    ClusterCreateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    MasterUsername = "string",
+    EngineVersion = "string",
+    SnapshotType = "string",
+    PercentProgress = 123,
+    StorageEncrypted = TRUE|FALSE,
+    KmsKeyId = "string",
+    DBClusterSnapshotArn = "string",
+    SourceDBClusterSnapshotArn = "string"
+  )
+)
+}
 }
 \description{
 Copies a snapshot of a cluster.

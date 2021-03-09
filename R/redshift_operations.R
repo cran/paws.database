@@ -20,7 +20,36 @@ NULL
 #' exchanged.
 #' @param TargetReservedNodeOfferingId &#91;required&#93; The unique identifier of the DC2 Reserved Node offering to be used for
 #' the exchange. You can obtain the value for the parameter by calling
-#' GetReservedNodeExchangeOfferings
+#' [`get_reserved_node_exchange_offerings`][redshift_get_reserved_node_exchange_offerings]
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ExchangedReservedNode = list(
+#'     ReservedNodeId = "string",
+#'     ReservedNodeOfferingId = "string",
+#'     NodeType = "string",
+#'     StartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Duration = 123,
+#'     FixedPrice = 123.0,
+#'     UsagePrice = 123.0,
+#'     CurrencyCode = "string",
+#'     NodeCount = 123,
+#'     State = "string",
+#'     OfferingType = "string",
+#'     RecurringCharges = list(
+#'       list(
+#'         RecurringChargeAmount = 123.0,
+#'         RecurringChargeFrequency = "string"
+#'       )
+#'     ),
+#'     ReservedNodeOfferingType = "Regular"|"Upgradable"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -91,6 +120,48 @@ redshift_accept_reserved_node_exchange <- function(ReservedNodeId, TargetReserve
 #' 
 #' Example: `111122223333`
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ClusterSecurityGroup = list(
+#'     ClusterSecurityGroupName = "string",
+#'     Description = "string",
+#'     EC2SecurityGroups = list(
+#'       list(
+#'         Status = "string",
+#'         EC2SecurityGroupName = "string",
+#'         EC2SecurityGroupOwnerId = "string",
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     IPRanges = list(
+#'       list(
+#'         Status = "string",
+#'         CIDRIP = "string",
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$authorize_cluster_security_group_ingress(
@@ -147,6 +218,67 @@ redshift_authorize_cluster_security_group_ingress <- function(ClusterSecurityGro
 #' 
 #' To share a snapshot with AWS support, specify amazon-redshift-support.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Snapshot = list(
+#'     SnapshotIdentifier = "string",
+#'     ClusterIdentifier = "string",
+#'     SnapshotCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Status = "string",
+#'     Port = 123,
+#'     AvailabilityZone = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MasterUsername = "string",
+#'     ClusterVersion = "string",
+#'     EngineFullVersion = "string",
+#'     SnapshotType = "string",
+#'     NodeType = "string",
+#'     NumberOfNodes = 123,
+#'     DBName = "string",
+#'     VpcId = "string",
+#'     Encrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     EncryptedWithHSM = TRUE|FALSE,
+#'     AccountsWithRestoreAccess = list(
+#'       list(
+#'         AccountId = "string",
+#'         AccountAlias = "string"
+#'       )
+#'     ),
+#'     OwnerAccount = "string",
+#'     TotalBackupSizeInMegaBytes = 123.0,
+#'     ActualIncrementalBackupSizeInMegaBytes = 123.0,
+#'     BackupProgressInMegaBytes = 123.0,
+#'     CurrentBackupRateInMegaBytesPerSecond = 123.0,
+#'     EstimatedSecondsToCompletion = 123,
+#'     ElapsedTimeInSeconds = 123,
+#'     SourceRegion = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     RestorableNodeTypes = list(
+#'       "string"
+#'     ),
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     MaintenanceTrackName = "string",
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRemainingDays = 123,
+#'     SnapshotRetentionStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$authorize_snapshot_access(
@@ -185,6 +317,24 @@ redshift_authorize_snapshot_access <- function(SnapshotIdentifier, SnapshotClust
 #' redshift_batch_delete_cluster_snapshots(Identifiers)
 #'
 #' @param Identifiers &#91;required&#93; A list of identifiers for the snapshots that you want to delete.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Resources = list(
+#'     "string"
+#'   ),
+#'   Errors = list(
+#'     list(
+#'       SnapshotIdentifier = "string",
+#'       SnapshotClusterIdentifier = "string",
+#'       FailureCode = "string",
+#'       FailureReason = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -240,6 +390,24 @@ redshift_batch_delete_cluster_snapshots <- function(Identifiers) {
 #' @param Force A boolean value indicating whether to override an exception if the
 #' retention period has passed.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Resources = list(
+#'     "string"
+#'   ),
+#'   Errors = list(
+#'     list(
+#'       SnapshotIdentifier = "string",
+#'       SnapshotClusterIdentifier = "string",
+#'       FailureCode = "string",
+#'       FailureReason = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$batch_modify_cluster_snapshots(
@@ -281,6 +449,35 @@ redshift_batch_modify_cluster_snapshots <- function(SnapshotIdentifierList, Manu
 #'
 #' @param ClusterIdentifier &#91;required&#93; The unique identifier for the cluster that you want to cancel a resize
 #' operation for.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TargetNodeType = "string",
+#'   TargetNumberOfNodes = 123,
+#'   TargetClusterType = "string",
+#'   Status = "string",
+#'   ImportTablesCompleted = list(
+#'     "string"
+#'   ),
+#'   ImportTablesInProgress = list(
+#'     "string"
+#'   ),
+#'   ImportTablesNotStarted = list(
+#'     "string"
+#'   ),
+#'   AvgResizeRateInMegaBytesPerSecond = 123.0,
+#'   TotalResizeDataInMegaBytes = 123,
+#'   ProgressInMegaBytes = 123,
+#'   ElapsedTimeInSeconds = 123,
+#'   EstimatedTimeToCompletionInSeconds = 123,
+#'   ResizeType = "string",
+#'   Message = "string",
+#'   TargetEncryptionType = "string",
+#'   DataTransferProgressPercent = 123.0
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -367,6 +564,67 @@ redshift_cancel_resize <- function(ClusterIdentifier) {
 #' The value must be either -1 or an integer between 1 and 3,653.
 #' 
 #' The default value is -1.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Snapshot = list(
+#'     SnapshotIdentifier = "string",
+#'     ClusterIdentifier = "string",
+#'     SnapshotCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Status = "string",
+#'     Port = 123,
+#'     AvailabilityZone = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MasterUsername = "string",
+#'     ClusterVersion = "string",
+#'     EngineFullVersion = "string",
+#'     SnapshotType = "string",
+#'     NodeType = "string",
+#'     NumberOfNodes = 123,
+#'     DBName = "string",
+#'     VpcId = "string",
+#'     Encrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     EncryptedWithHSM = TRUE|FALSE,
+#'     AccountsWithRestoreAccess = list(
+#'       list(
+#'         AccountId = "string",
+#'         AccountAlias = "string"
+#'       )
+#'     ),
+#'     OwnerAccount = "string",
+#'     TotalBackupSizeInMegaBytes = 123.0,
+#'     ActualIncrementalBackupSizeInMegaBytes = 123.0,
+#'     BackupProgressInMegaBytes = 123.0,
+#'     CurrentBackupRateInMegaBytesPerSecond = 123.0,
+#'     EstimatedSecondsToCompletion = 123,
+#'     ElapsedTimeInSeconds = 123,
+#'     SourceRegion = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     RestorableNodeTypes = list(
+#'       "string"
+#'     ),
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     MaintenanceTrackName = "string",
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRemainingDays = 123,
+#'     SnapshotRetentionStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -560,7 +818,7 @@ redshift_copy_cluster_snapshot <- function(SourceSnapshotIdentifier, SourceSnaps
 #' @param AutomatedSnapshotRetentionPeriod The number of days that automated snapshots are retained. If the value
 #' is 0, automated snapshots are disabled. Even if automated snapshots are
 #' disabled, you can still create manual snapshots when you want with
-#' CreateClusterSnapshot.
+#' [`create_cluster_snapshot`][redshift_create_cluster_snapshot].
 #' 
 #' Default: `1`
 #' 
@@ -654,6 +912,168 @@ redshift_copy_cluster_snapshot <- function(SourceSnapshotIdentifier, SourceSnaps
 #' @param AvailabilityZoneRelocation The option to enable relocation for an Amazon Redshift cluster between
 #' Availability Zones after the cluster is created.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_cluster(
@@ -730,7 +1150,8 @@ redshift_create_cluster <- function(DBName = NULL, ClusterIdentifier, ClusterTyp
 #' Creating parameter groups is independent of creating clusters. You can
 #' associate a cluster with a parameter group when you create the cluster.
 #' You can also associate an existing cluster with a parameter group after
-#' the cluster is created by using ModifyCluster.
+#' the cluster is created by using
+#' [`modify_cluster`][redshift_modify_cluster].
 #' 
 #' Parameters in the parameter group define specific behavior that applies
 #' to the databases you create on the cluster. For more information about
@@ -759,14 +1180,32 @@ redshift_create_cluster <- function(DBName = NULL, ClusterIdentifier, ClusterTyp
 #' applies. The cluster engine version determines the set of parameters.
 #' 
 #' To get a list of valid parameter group family names, you can call
-#' DescribeClusterParameterGroups. By default, Amazon Redshift returns a
-#' list of all the parameter groups that are owned by your AWS account,
-#' including the default parameter groups for each Amazon Redshift engine
-#' version. The parameter group family names associated with the default
-#' parameter groups provide you the valid values. For example, a valid
-#' family name is "redshift-1.0".
+#' [`describe_cluster_parameter_groups`][redshift_describe_cluster_parameter_groups].
+#' By default, Amazon Redshift returns a list of all the parameter groups
+#' that are owned by your AWS account, including the default parameter
+#' groups for each Amazon Redshift engine version. The parameter group
+#' family names associated with the default parameter groups provide you
+#' the valid values. For example, a valid family name is "redshift-1.0".
 #' @param Description &#91;required&#93; A description of the parameter group.
 #' @param Tags A list of tag instances.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ClusterParameterGroup = list(
+#'     ParameterGroupName = "string",
+#'     ParameterGroupFamily = "string",
+#'     Description = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -833,6 +1272,48 @@ redshift_create_cluster_parameter_group <- function(ParameterGroupName, Paramete
 #' Example: `examplesecuritygroup`
 #' @param Description &#91;required&#93; A description for the security group.
 #' @param Tags A list of tag instances.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ClusterSecurityGroup = list(
+#'     ClusterSecurityGroupName = "string",
+#'     Description = "string",
+#'     EC2SecurityGroups = list(
+#'       list(
+#'         Status = "string",
+#'         EC2SecurityGroupName = "string",
+#'         EC2SecurityGroupOwnerId = "string",
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     IPRanges = list(
+#'       list(
+#'         Status = "string",
+#'         CIDRIP = "string",
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -906,6 +1387,67 @@ redshift_create_cluster_security_group <- function(ClusterSecurityGroupName, Des
 #' The default value is -1.
 #' @param Tags A list of tag instances.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Snapshot = list(
+#'     SnapshotIdentifier = "string",
+#'     ClusterIdentifier = "string",
+#'     SnapshotCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Status = "string",
+#'     Port = 123,
+#'     AvailabilityZone = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MasterUsername = "string",
+#'     ClusterVersion = "string",
+#'     EngineFullVersion = "string",
+#'     SnapshotType = "string",
+#'     NodeType = "string",
+#'     NumberOfNodes = 123,
+#'     DBName = "string",
+#'     VpcId = "string",
+#'     Encrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     EncryptedWithHSM = TRUE|FALSE,
+#'     AccountsWithRestoreAccess = list(
+#'       list(
+#'         AccountId = "string",
+#'         AccountAlias = "string"
+#'       )
+#'     ),
+#'     OwnerAccount = "string",
+#'     TotalBackupSizeInMegaBytes = 123.0,
+#'     ActualIncrementalBackupSizeInMegaBytes = 123.0,
+#'     BackupProgressInMegaBytes = 123.0,
+#'     CurrentBackupRateInMegaBytesPerSecond = 123.0,
+#'     EstimatedSecondsToCompletion = 123,
+#'     ElapsedTimeInSeconds = 123,
+#'     SourceRegion = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     RestorableNodeTypes = list(
+#'       "string"
+#'     ),
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     MaintenanceTrackName = "string",
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRemainingDays = 123,
+#'     SnapshotRetentionStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_cluster_snapshot(
@@ -974,6 +1516,39 @@ redshift_create_cluster_snapshot <- function(SnapshotIdentifier, ClusterIdentifi
 #' @param SubnetIds &#91;required&#93; An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a
 #' single request.
 #' @param Tags A list of tag instances.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ClusterSubnetGroup = list(
+#'     ClusterSubnetGroupName = "string",
+#'     Description = "string",
+#'     VpcId = "string",
+#'     SubnetGroupStatus = "string",
+#'     Subnets = list(
+#'       list(
+#'         SubnetIdentifier = "string",
+#'         SubnetAvailabilityZone = list(
+#'           Name = "string",
+#'           SupportedPlatforms = list(
+#'             list(
+#'               Name = "string"
+#'             )
+#'           )
+#'         ),
+#'         SubnetStatus = "string"
+#'       )
+#'     ),
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1087,6 +1662,37 @@ redshift_create_cluster_subnet_group <- function(ClusterSubnetGroupName, Descrip
 #' `false` to create the subscription but not activate it.
 #' @param Tags A list of tag instances.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EventSubscription = list(
+#'     CustomerAwsId = "string",
+#'     CustSubscriptionId = "string",
+#'     SnsTopicArn = "string",
+#'     Status = "string",
+#'     SubscriptionCreationTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     SourceType = "string",
+#'     SourceIdsList = list(
+#'       "string"
+#'     ),
+#'     EventCategoriesList = list(
+#'       "string"
+#'     ),
+#'     Severity = "string",
+#'     Enabled = TRUE|FALSE,
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_event_subscription(
@@ -1156,6 +1762,23 @@ redshift_create_event_subscription <- function(SubscriptionName, SnsTopicArn, So
 #' keys.
 #' @param Tags A list of tag instances.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   HsmClientCertificate = list(
+#'     HsmClientCertificateIdentifier = "string",
+#'     HsmClientCertificatePublicKey = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_hsm_client_certificate(
@@ -1222,6 +1845,25 @@ redshift_create_hsm_client_certificate <- function(HsmClientCertificateIdentifie
 #' server.pem.
 #' @param Tags A list of tag instances.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   HsmConfiguration = list(
+#'     HsmConfigurationIdentifier = "string",
+#'     Description = "string",
+#'     HsmIpAddress = "string",
+#'     HsmPartitionName = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_hsm_configuration(
@@ -1265,7 +1907,8 @@ redshift_create_hsm_configuration <- function(HsmConfigurationIdentifier, Descri
 #' @description
 #' Creates a scheduled action. A scheduled action contains a schedule and
 #' an Amazon Redshift API action. For example, you can create a schedule of
-#' when to run the `ResizeCluster` API operation.
+#' when to run the [`resize_cluster`][redshift_resize_cluster] API
+#' operation.
 #'
 #' @usage
 #' redshift_create_scheduled_action(ScheduledActionName, TargetAction,
@@ -1291,6 +1934,44 @@ redshift_create_hsm_configuration <- function(HsmConfigurationIdentifier, Descri
 #' @param Enable If true, the schedule is enabled. If false, the scheduled action does
 #' not trigger. For more information about `state` of the scheduled action,
 #' see ScheduledAction.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ScheduledActionName = "string",
+#'   TargetAction = list(
+#'     ResizeCluster = list(
+#'       ClusterIdentifier = "string",
+#'       ClusterType = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       Classic = TRUE|FALSE
+#'     ),
+#'     PauseCluster = list(
+#'       ClusterIdentifier = "string"
+#'     ),
+#'     ResumeCluster = list(
+#'       ClusterIdentifier = "string"
+#'     )
+#'   ),
+#'   Schedule = "string",
+#'   IamRole = "string",
+#'   ScheduledActionDescription = "string",
+#'   State = "ACTIVE"|"DISABLED",
+#'   NextInvocations = list(
+#'     as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   ),
+#'   StartTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   EndTime = as.POSIXct(
+#'     "2015-01-01"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1381,6 +2062,23 @@ redshift_create_scheduled_action <- function(ScheduledActionName, TargetAction, 
 #' used.
 #' @param Tags A list of tag instances.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   SnapshotCopyGrant = list(
+#'     SnapshotCopyGrantName = "string",
+#'     KmsKeyId = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_snapshot_copy_grant(
@@ -1434,6 +2132,36 @@ redshift_create_snapshot_copy_grant <- function(SnapshotCopyGrantName, KmsKeyId 
 #' @param Tags An optional set of tags you can use to search for the schedule.
 #' @param DryRun 
 #' @param NextInvocations 
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ScheduleDefinitions = list(
+#'     "string"
+#'   ),
+#'   ScheduleIdentifier = "string",
+#'   ScheduleDescription = "string",
+#'   Tags = list(
+#'     list(
+#'       Key = "string",
+#'       Value = "string"
+#'     )
+#'   ),
+#'   NextInvocations = list(
+#'     as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   ),
+#'   AssociatedClusterCount = 123,
+#'   AssociatedClusters = list(
+#'     list(
+#'       ClusterIdentifier = "string",
+#'       ScheduleAssociationState = "MODIFYING"|"ACTIVE"|"FAILED"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1498,6 +2226,9 @@ redshift_create_snapshot_schedule <- function(ScheduleDefinitions = NULL, Schedu
 #' tags with a space. For example,
 #' `--tags "Key"="owner","Value"="admin" "Key"="environment","Value"="test" "Key"="version","Value"="1.0"`.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_tags(
@@ -1559,6 +2290,26 @@ redshift_create_tags <- function(ResourceName, Tags) {
 #' UsageLimit.
 #' @param Tags A list of tag instances.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   UsageLimitId = "string",
+#'   ClusterIdentifier = "string",
+#'   FeatureType = "spectrum"|"concurrency-scaling",
+#'   LimitType = "time"|"data-scanned",
+#'   Amount = 123,
+#'   Period = "daily"|"weekly"|"monthly",
+#'   BreachAction = "log"|"emit-metric"|"disable",
+#'   Tags = list(
+#'     list(
+#'       Key = "string",
+#'       Value = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_usage_limit(
@@ -1603,10 +2354,11 @@ redshift_create_usage_limit <- function(ClusterIdentifier, FeatureType, LimitTyp
 #' @description
 #' Deletes a previously provisioned cluster without its final snapshot
 #' being created. A successful response from the web service indicates that
-#' the request was received correctly. Use DescribeClusters to monitor the
-#' status of the deletion. The delete operation cannot be canceled or
-#' reverted once submitted. For more information about managing clusters,
-#' go to [Amazon Redshift
+#' the request was received correctly. Use
+#' [`describe_clusters`][redshift_describe_clusters] to monitor the status
+#' of the deletion. The delete operation cannot be canceled or reverted
+#' once submitted. For more information about managing clusters, go to
+#' [Amazon Redshift
 #' Clusters](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
 #' in the *Amazon Redshift Cluster Management Guide*.
 #' 
@@ -1664,6 +2416,168 @@ redshift_create_usage_limit <- function(ClusterIdentifier, FeatureType, LimitTyp
 #' 
 #' The default value is -1.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_cluster(
@@ -1712,6 +2626,9 @@ redshift_delete_cluster <- function(ClusterIdentifier, SkipFinalClusterSnapshot 
 #' 
 #' -   Cannot delete a default cluster parameter group.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_cluster_parameter_group(
@@ -1756,6 +2673,9 @@ redshift_delete_cluster_parameter_group <- function(ParameterGroupName) {
 #' redshift_delete_cluster_security_group(ClusterSecurityGroupName)
 #'
 #' @param ClusterSecurityGroupName &#91;required&#93; The name of the cluster security group to be deleted.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -1813,6 +2733,67 @@ redshift_delete_cluster_security_group <- function(ClusterSecurityGroupName) {
 #' 
 #' Constraints: Must be the name of valid cluster.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Snapshot = list(
+#'     SnapshotIdentifier = "string",
+#'     ClusterIdentifier = "string",
+#'     SnapshotCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Status = "string",
+#'     Port = 123,
+#'     AvailabilityZone = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MasterUsername = "string",
+#'     ClusterVersion = "string",
+#'     EngineFullVersion = "string",
+#'     SnapshotType = "string",
+#'     NodeType = "string",
+#'     NumberOfNodes = 123,
+#'     DBName = "string",
+#'     VpcId = "string",
+#'     Encrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     EncryptedWithHSM = TRUE|FALSE,
+#'     AccountsWithRestoreAccess = list(
+#'       list(
+#'         AccountId = "string",
+#'         AccountAlias = "string"
+#'       )
+#'     ),
+#'     OwnerAccount = "string",
+#'     TotalBackupSizeInMegaBytes = 123.0,
+#'     ActualIncrementalBackupSizeInMegaBytes = 123.0,
+#'     BackupProgressInMegaBytes = 123.0,
+#'     CurrentBackupRateInMegaBytesPerSecond = 123.0,
+#'     EstimatedSecondsToCompletion = 123,
+#'     ElapsedTimeInSeconds = 123,
+#'     SourceRegion = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     RestorableNodeTypes = list(
+#'       "string"
+#'     ),
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     MaintenanceTrackName = "string",
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRemainingDays = 123,
+#'     SnapshotRetentionStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_cluster_snapshot(
@@ -1850,6 +2831,9 @@ redshift_delete_cluster_snapshot <- function(SnapshotIdentifier, SnapshotCluster
 #' redshift_delete_cluster_subnet_group(ClusterSubnetGroupName)
 #'
 #' @param ClusterSubnetGroupName &#91;required&#93; The name of the cluster subnet group name to be deleted.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -1889,6 +2873,9 @@ redshift_delete_cluster_subnet_group <- function(ClusterSubnetGroupName) {
 #' @param SubscriptionName &#91;required&#93; The name of the Amazon Redshift event notification subscription to be
 #' deleted.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_event_subscription(
@@ -1925,6 +2912,9 @@ redshift_delete_event_subscription <- function(SubscriptionName) {
 #' redshift_delete_hsm_client_certificate(HsmClientCertificateIdentifier)
 #'
 #' @param HsmClientCertificateIdentifier &#91;required&#93; The identifier of the HSM client certificate to be deleted.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -1963,6 +2953,9 @@ redshift_delete_hsm_client_certificate <- function(HsmClientCertificateIdentifie
 #'
 #' @param HsmConfigurationIdentifier &#91;required&#93; The identifier of the Amazon Redshift HSM configuration to be deleted.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_hsm_configuration(
@@ -1999,6 +2992,9 @@ redshift_delete_hsm_configuration <- function(HsmConfigurationIdentifier) {
 #' redshift_delete_scheduled_action(ScheduledActionName)
 #'
 #' @param ScheduledActionName &#91;required&#93; The name of the scheduled action to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -2037,6 +3033,9 @@ redshift_delete_scheduled_action <- function(ScheduledActionName) {
 #'
 #' @param SnapshotCopyGrantName &#91;required&#93; The name of the snapshot copy grant to delete.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_snapshot_copy_grant(
@@ -2073,6 +3072,9 @@ redshift_delete_snapshot_copy_grant <- function(SnapshotCopyGrantName) {
 #' redshift_delete_snapshot_schedule(ScheduleIdentifier)
 #'
 #' @param ScheduleIdentifier &#91;required&#93; A unique identifier of the snapshot schedule to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -2114,6 +3116,9 @@ redshift_delete_snapshot_schedule <- function(ScheduleIdentifier) {
 #' tags. For example, `arn:aws:redshift:us-east-2:123456789:cluster:t1`.
 #' @param TagKeys &#91;required&#93; The tag key that you want to delete.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_tags(
@@ -2154,6 +3159,9 @@ redshift_delete_tags <- function(ResourceName, TagKeys) {
 #'
 #' @param UsageLimitId &#91;required&#93; The identifier of the usage limit to delete.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_usage_limit(
@@ -2190,6 +3198,23 @@ redshift_delete_usage_limit <- function(UsageLimitId) {
 #' redshift_describe_account_attributes(AttributeNames)
 #'
 #' @param AttributeNames A list of attribute names.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AccountAttributes = list(
+#'     list(
+#'       AttributeName = "string",
+#'       AttributeValues = list(
+#'         list(
+#'           AttributeValue = "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2243,14 +3268,40 @@ redshift_describe_account_attributes <- function(AttributeNames = NULL) {
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point for returning a
 #' set of response records. When the results of a
-#' `DescribeClusterDbRevisions` request exceed the value specified in
-#' `MaxRecords`, Amazon Redshift returns a value in the `marker` field of
-#' the response. You can retrieve the next set of response records by
-#' providing the returned `marker` value in the `marker` parameter and
-#' retrying the request.
+#' [`describe_cluster_db_revisions`][redshift_describe_cluster_db_revisions]
+#' request exceed the value specified in `MaxRecords`, Amazon Redshift
+#' returns a value in the `marker` field of the response. You can retrieve
+#' the next set of response records by providing the returned `marker`
+#' value in the `marker` parameter and retrying the request.
 #' 
 #' Constraints: You can specify either the `ClusterIdentifier` parameter,
 #' or the `marker` parameter, but not both.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   ClusterDbRevisions = list(
+#'     list(
+#'       ClusterIdentifier = "string",
+#'       CurrentDatabaseRevision = "string",
+#'       DatabaseRevisionReleaseDate = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       RevisionTargets = list(
+#'         list(
+#'           DatabaseRevision = "string",
+#'           Description = "string",
+#'           DatabaseRevisionReleaseDate = as.POSIXct(
+#'             "2015-01-01"
+#'           )
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2324,11 +3375,11 @@ redshift_describe_cluster_db_revisions <- function(ClusterIdentifier = NULL, Max
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
 #' of response records. When the results of a
-#' DescribeClusterParameterGroups request exceed the value specified in
-#' `MaxRecords`, AWS returns a value in the `Marker` field of the response.
-#' You can retrieve the next set of response records by providing the
-#' returned marker value in the `Marker` parameter and retrying the
-#' request.
+#' [`describe_cluster_parameter_groups`][redshift_describe_cluster_parameter_groups]
+#' request exceed the value specified in `MaxRecords`, AWS returns a value
+#' in the `Marker` field of the response. You can retrieve the next set of
+#' response records by providing the returned marker value in the `Marker`
+#' parameter and retrying the request.
 #' @param TagKeys A tag key or keys for which you want to return all matching cluster
 #' parameter groups that are associated with the specified key or keys. For
 #' example, suppose that you have parameter groups that are tagged with
@@ -2343,6 +3394,27 @@ redshift_describe_cluster_db_revisions <- function(ClusterIdentifier = NULL, Max
 #' these tag values in the request, Amazon Redshift returns a response with
 #' the parameter groups that have either or both of these tag values
 #' associated with them.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   ParameterGroups = list(
+#'     list(
+#'       ParameterGroupName = "string",
+#'       ParameterGroupFamily = "string",
+#'       Description = "string",
+#'       Tags = list(
+#'         list(
+#'           Key = "string",
+#'           Value = "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2390,8 +3462,9 @@ redshift_describe_cluster_parameter_groups <- function(ParameterGroupName = NULL
 #' 
 #' You can specify *source* filter to retrieve parameters of only specific
 #' type. For example, to retrieve parameters that were modified by a user
-#' action such as from ModifyClusterParameterGroup, you can specify
-#' *source* equal to *user*.
+#' action such as from
+#' [`modify_cluster_parameter_group`][redshift_modify_cluster_parameter_group],
+#' you can specify *source* equal to *user*.
 #' 
 #' For more information about parameters and parameter groups, go to
 #' [Amazon Redshift Parameter
@@ -2420,11 +3493,33 @@ redshift_describe_cluster_parameter_groups <- function(ParameterGroupName = NULL
 #' 
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
-#' of response records. When the results of a DescribeClusterParameters
+#' of response records. When the results of a
+#' [`describe_cluster_parameters`][redshift_describe_cluster_parameters]
 #' request exceed the value specified in `MaxRecords`, AWS returns a value
 #' in the `Marker` field of the response. You can retrieve the next set of
 #' response records by providing the returned marker value in the `Marker`
 #' parameter and retrying the request.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Parameters = list(
+#'     list(
+#'       ParameterName = "string",
+#'       ParameterValue = "string",
+#'       Description = "string",
+#'       Source = "string",
+#'       DataType = "string",
+#'       AllowedValues = "string",
+#'       ApplyType = "static"|"dynamic",
+#'       IsModifiable = TRUE|FALSE,
+#'       MinimumEngineVersion = "string"
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2497,7 +3592,8 @@ redshift_describe_cluster_parameters <- function(ParameterGroupName, Source = NU
 #' 
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
-#' of response records. When the results of a DescribeClusterSecurityGroups
+#' of response records. When the results of a
+#' [`describe_cluster_security_groups`][redshift_describe_cluster_security_groups]
 #' request exceed the value specified in `MaxRecords`, AWS returns a value
 #' in the `Marker` field of the response. You can retrieve the next set of
 #' response records by providing the returned marker value in the `Marker`
@@ -2518,6 +3614,51 @@ redshift_describe_cluster_parameters <- function(ParameterGroupName, Source = NU
 #' these tag values in the request, Amazon Redshift returns a response with
 #' the security groups that have either or both of these tag values
 #' associated with them.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   ClusterSecurityGroups = list(
+#'     list(
+#'       ClusterSecurityGroupName = "string",
+#'       Description = "string",
+#'       EC2SecurityGroups = list(
+#'         list(
+#'           Status = "string",
+#'           EC2SecurityGroupName = "string",
+#'           EC2SecurityGroupOwnerId = "string",
+#'           Tags = list(
+#'             list(
+#'               Key = "string",
+#'               Value = "string"
+#'             )
+#'           )
+#'         )
+#'       ),
+#'       IPRanges = list(
+#'         list(
+#'           Status = "string",
+#'           CIDRIP = "string",
+#'           Tags = list(
+#'             list(
+#'               Key = "string",
+#'               Value = "string"
+#'             )
+#'           )
+#'         )
+#'       ),
+#'       Tags = list(
+#'         list(
+#'           Key = "string",
+#'           Value = "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2611,7 +3752,8 @@ redshift_describe_cluster_security_groups <- function(ClusterSecurityGroupName =
 #' 
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
-#' of response records. When the results of a DescribeClusterSnapshots
+#' of response records. When the results of a
+#' [`describe_cluster_snapshots`][redshift_describe_cluster_snapshots]
 #' request exceed the value specified in `MaxRecords`, AWS returns a value
 #' in the `Marker` field of the response. You can retrieve the next set of
 #' response records by providing the returned marker value in the `Marker`
@@ -2651,6 +3793,70 @@ redshift_describe_cluster_security_groups <- function(ClusterSecurityGroupName =
 #' -   If `ClusterExists` is set to `false` and `ClusterIdentifier` is
 #'     specified for an existing cluster, no snapshots are returned.
 #' @param SortingEntities 
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   Snapshots = list(
+#'     list(
+#'       SnapshotIdentifier = "string",
+#'       ClusterIdentifier = "string",
+#'       SnapshotCreateTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Status = "string",
+#'       Port = 123,
+#'       AvailabilityZone = "string",
+#'       ClusterCreateTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       MasterUsername = "string",
+#'       ClusterVersion = "string",
+#'       EngineFullVersion = "string",
+#'       SnapshotType = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       DBName = "string",
+#'       VpcId = "string",
+#'       Encrypted = TRUE|FALSE,
+#'       KmsKeyId = "string",
+#'       EncryptedWithHSM = TRUE|FALSE,
+#'       AccountsWithRestoreAccess = list(
+#'         list(
+#'           AccountId = "string",
+#'           AccountAlias = "string"
+#'         )
+#'       ),
+#'       OwnerAccount = "string",
+#'       TotalBackupSizeInMegaBytes = 123.0,
+#'       ActualIncrementalBackupSizeInMegaBytes = 123.0,
+#'       BackupProgressInMegaBytes = 123.0,
+#'       CurrentBackupRateInMegaBytesPerSecond = 123.0,
+#'       EstimatedSecondsToCompletion = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       SourceRegion = "string",
+#'       Tags = list(
+#'         list(
+#'           Key = "string",
+#'           Value = "string"
+#'         )
+#'       ),
+#'       RestorableNodeTypes = list(
+#'         "string"
+#'       ),
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       ManualSnapshotRemainingDays = 123,
+#'       SnapshotRetentionStartTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2737,7 +3943,8 @@ redshift_describe_cluster_snapshots <- function(ClusterIdentifier = NULL, Snapsh
 #' 
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
-#' of response records. When the results of a DescribeClusterSubnetGroups
+#' of response records. When the results of a
+#' [`describe_cluster_subnet_groups`][redshift_describe_cluster_subnet_groups]
 #' request exceed the value specified in `MaxRecords`, AWS returns a value
 #' in the `Marker` field of the response. You can retrieve the next set of
 #' response records by providing the returned marker value in the `Marker`
@@ -2755,6 +3962,42 @@ redshift_describe_cluster_snapshots <- function(ClusterIdentifier = NULL, Snapsh
 #' values in the request, Amazon Redshift returns a response with the
 #' subnet groups that have either or both of these tag values associated
 #' with them.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   ClusterSubnetGroups = list(
+#'     list(
+#'       ClusterSubnetGroupName = "string",
+#'       Description = "string",
+#'       VpcId = "string",
+#'       SubnetGroupStatus = "string",
+#'       Subnets = list(
+#'         list(
+#'           SubnetIdentifier = "string",
+#'           SubnetAvailabilityZone = list(
+#'             Name = "string",
+#'             SupportedPlatforms = list(
+#'               list(
+#'                 Name = "string"
+#'               )
+#'             )
+#'           ),
+#'           SubnetStatus = "string"
+#'         )
+#'       ),
+#'       Tags = list(
+#'         list(
+#'           Key = "string",
+#'           Value = "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2803,11 +4046,37 @@ redshift_describe_cluster_subnet_groups <- function(ClusterSubnetGroupName = NUL
 #' @param MaintenanceTrackName The name of the maintenance track.
 #' @param MaxRecords An integer value for the maximum number of maintenance tracks to return.
 #' @param Marker An optional parameter that specifies the starting point to return a set
-#' of response records. When the results of a `DescribeClusterTracks`
-#' request exceed the value specified in `MaxRecords`, Amazon Redshift
-#' returns a value in the `Marker` field of the response. You can retrieve
-#' the next set of response records by providing the returned marker value
-#' in the `Marker` parameter and retrying the request.
+#' of response records. When the results of a
+#' [`describe_cluster_tracks`][redshift_describe_cluster_tracks] request
+#' exceed the value specified in `MaxRecords`, Amazon Redshift returns a
+#' value in the `Marker` field of the response. You can retrieve the next
+#' set of response records by providing the returned marker value in the
+#' `Marker` parameter and retrying the request.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   MaintenanceTracks = list(
+#'     list(
+#'       MaintenanceTrackName = "string",
+#'       DatabaseVersion = "string",
+#'       UpdateTargets = list(
+#'         list(
+#'           MaintenanceTrackName = "string",
+#'           DatabaseVersion = "string",
+#'           SupportedOperations = list(
+#'             list(
+#'               OperationName = "string"
+#'             )
+#'           )
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2875,11 +4144,27 @@ redshift_describe_cluster_tracks <- function(MaintenanceTrackName = NULL, MaxRec
 #' 
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
-#' of response records. When the results of a DescribeClusterVersions
+#' of response records. When the results of a
+#' [`describe_cluster_versions`][redshift_describe_cluster_versions]
 #' request exceed the value specified in `MaxRecords`, AWS returns a value
 #' in the `Marker` field of the response. You can retrieve the next set of
 #' response records by providing the returned marker value in the `Marker`
 #' parameter and retrying the request.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   ClusterVersions = list(
+#'     list(
+#'       ClusterVersion = "string",
+#'       ClusterParameterGroupFamily = "string",
+#'       Description = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2952,11 +4237,12 @@ redshift_describe_cluster_versions <- function(ClusterVersion = NULL, ClusterPar
 #' 
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
-#' of response records. When the results of a DescribeClusters request
-#' exceed the value specified in `MaxRecords`, AWS returns a value in the
-#' `Marker` field of the response. You can retrieve the next set of
-#' response records by providing the returned marker value in the `Marker`
-#' parameter and retrying the request.
+#' of response records. When the results of a
+#' [`describe_clusters`][redshift_describe_clusters] request exceed the
+#' value specified in `MaxRecords`, AWS returns a value in the `Marker`
+#' field of the response. You can retrieve the next set of response records
+#' by providing the returned marker value in the `Marker` parameter and
+#' retrying the request.
 #' 
 #' Constraints: You can specify either the **ClusterIdentifier** parameter
 #' or the **Marker** parameter, but not both.
@@ -2972,6 +4258,171 @@ redshift_describe_cluster_versions <- function(ClusterVersion = NULL, ClusterPar
 #' `admin` and `test`. If you specify both of these tag values in the
 #' request, Amazon Redshift returns a response with the clusters that have
 #' either or both of these tag values associated with them.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   Clusters = list(
+#'     list(
+#'       ClusterIdentifier = "string",
+#'       NodeType = "string",
+#'       ClusterStatus = "string",
+#'       ClusterAvailabilityStatus = "string",
+#'       ModifyStatus = "string",
+#'       MasterUsername = "string",
+#'       DBName = "string",
+#'       Endpoint = list(
+#'         Address = "string",
+#'         Port = 123,
+#'         VpcEndpoints = list(
+#'           list(
+#'             VpcEndpointId = "string"
+#'           )
+#'         )
+#'       ),
+#'       ClusterCreateTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       ClusterSecurityGroups = list(
+#'         list(
+#'           ClusterSecurityGroupName = "string",
+#'           Status = "string"
+#'         )
+#'       ),
+#'       VpcSecurityGroups = list(
+#'         list(
+#'           VpcSecurityGroupId = "string",
+#'           Status = "string"
+#'         )
+#'       ),
+#'       ClusterParameterGroups = list(
+#'         list(
+#'           ParameterGroupName = "string",
+#'           ParameterApplyStatus = "string",
+#'           ClusterParameterStatusList = list(
+#'             list(
+#'               ParameterName = "string",
+#'               ParameterApplyStatus = "string",
+#'               ParameterApplyErrorDescription = "string"
+#'             )
+#'           )
+#'         )
+#'       ),
+#'       ClusterSubnetGroupName = "string",
+#'       VpcId = "string",
+#'       AvailabilityZone = "string",
+#'       PreferredMaintenanceWindow = "string",
+#'       PendingModifiedValues = list(
+#'         MasterUserPassword = "string",
+#'         NodeType = "string",
+#'         NumberOfNodes = 123,
+#'         ClusterType = "string",
+#'         ClusterVersion = "string",
+#'         AutomatedSnapshotRetentionPeriod = 123,
+#'         ClusterIdentifier = "string",
+#'         PubliclyAccessible = TRUE|FALSE,
+#'         EnhancedVpcRouting = TRUE|FALSE,
+#'         MaintenanceTrackName = "string",
+#'         EncryptionType = "string"
+#'       ),
+#'       ClusterVersion = "string",
+#'       AllowVersionUpgrade = TRUE|FALSE,
+#'       NumberOfNodes = 123,
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       Encrypted = TRUE|FALSE,
+#'       RestoreStatus = list(
+#'         Status = "string",
+#'         CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'         SnapshotSizeInMegaBytes = 123,
+#'         ProgressInMegaBytes = 123,
+#'         ElapsedTimeInSeconds = 123,
+#'         EstimatedTimeToCompletionInSeconds = 123
+#'       ),
+#'       DataTransferProgress = list(
+#'         Status = "string",
+#'         CurrentRateInMegaBytesPerSecond = 123.0,
+#'         TotalDataInMegaBytes = 123,
+#'         DataTransferredInMegaBytes = 123,
+#'         EstimatedTimeToCompletionInSeconds = 123,
+#'         ElapsedTimeInSeconds = 123
+#'       ),
+#'       HsmStatus = list(
+#'         HsmClientCertificateIdentifier = "string",
+#'         HsmConfigurationIdentifier = "string",
+#'         Status = "string"
+#'       ),
+#'       ClusterSnapshotCopyStatus = list(
+#'         DestinationRegion = "string",
+#'         RetentionPeriod = 123,
+#'         ManualSnapshotRetentionPeriod = 123,
+#'         SnapshotCopyGrantName = "string"
+#'       ),
+#'       ClusterPublicKey = "string",
+#'       ClusterNodes = list(
+#'         list(
+#'           NodeRole = "string",
+#'           PrivateIPAddress = "string",
+#'           PublicIPAddress = "string"
+#'         )
+#'       ),
+#'       ElasticIpStatus = list(
+#'         ElasticIp = "string",
+#'         Status = "string"
+#'       ),
+#'       ClusterRevisionNumber = "string",
+#'       Tags = list(
+#'         list(
+#'           Key = "string",
+#'           Value = "string"
+#'         )
+#'       ),
+#'       KmsKeyId = "string",
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       IamRoles = list(
+#'         list(
+#'           IamRoleArn = "string",
+#'           ApplyStatus = "string"
+#'         )
+#'       ),
+#'       PendingActions = list(
+#'         "string"
+#'       ),
+#'       MaintenanceTrackName = "string",
+#'       ElasticResizeNumberOfNodeOptions = "string",
+#'       DeferredMaintenanceWindows = list(
+#'         list(
+#'           DeferMaintenanceIdentifier = "string",
+#'           DeferMaintenanceStartTime = as.POSIXct(
+#'             "2015-01-01"
+#'           ),
+#'           DeferMaintenanceEndTime = as.POSIXct(
+#'             "2015-01-01"
+#'           )
+#'         )
+#'       ),
+#'       SnapshotScheduleIdentifier = "string",
+#'       SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'       ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'       NextMaintenanceWindowStartTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ResizeInfo = list(
+#'         ResizeType = "string",
+#'         AllowCancelResize = TRUE|FALSE
+#'       ),
+#'       AvailabilityZoneRelocationStatus = "string",
+#'       ClusterNamespaceArn = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3036,11 +4487,35 @@ redshift_describe_clusters <- function(ClusterIdentifier = NULL, MaxRecords = NU
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
 #' of response records. When the results of a
-#' DescribeDefaultClusterParameters request exceed the value specified in
-#' `MaxRecords`, AWS returns a value in the `Marker` field of the response.
-#' You can retrieve the next set of response records by providing the
-#' returned marker value in the `Marker` parameter and retrying the
-#' request.
+#' [`describe_default_cluster_parameters`][redshift_describe_default_cluster_parameters]
+#' request exceed the value specified in `MaxRecords`, AWS returns a value
+#' in the `Marker` field of the response. You can retrieve the next set of
+#' response records by providing the returned marker value in the `Marker`
+#' parameter and retrying the request.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DefaultClusterParameters = list(
+#'     ParameterGroupFamily = "string",
+#'     Marker = "string",
+#'     Parameters = list(
+#'       list(
+#'         ParameterName = "string",
+#'         ParameterValue = "string",
+#'         Description = "string",
+#'         Source = "string",
+#'         DataType = "string",
+#'         AllowedValues = "string",
+#'         ApplyType = "static"|"dynamic",
+#'         IsModifiable = TRUE|FALSE,
+#'         MinimumEngineVersion = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3088,6 +4563,28 @@ redshift_describe_default_cluster_parameters <- function(ParameterGroupFamily, M
 #' 
 #' Valid values: cluster, cluster-snapshot, cluster-parameter-group,
 #' cluster-security-group, and scheduled-action.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EventCategoriesMapList = list(
+#'     list(
+#'       SourceType = "string",
+#'       Events = list(
+#'         list(
+#'           EventId = "string",
+#'           EventCategories = list(
+#'             "string"
+#'           ),
+#'           EventDescription = "string",
+#'           Severity = "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3170,6 +4667,40 @@ redshift_describe_event_categories <- function(SourceType = NULL) {
 #' these tag values in the request, Amazon Redshift returns a response with
 #' the subscriptions that have either or both of these tag values
 #' associated with them.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   EventSubscriptionsList = list(
+#'     list(
+#'       CustomerAwsId = "string",
+#'       CustSubscriptionId = "string",
+#'       SnsTopicArn = "string",
+#'       Status = "string",
+#'       SubscriptionCreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       SourceType = "string",
+#'       SourceIdsList = list(
+#'         "string"
+#'       ),
+#'       EventCategoriesList = list(
+#'         "string"
+#'       ),
+#'       Severity = "string",
+#'       Enabled = TRUE|FALSE,
+#'       Tags = list(
+#'         list(
+#'           Key = "string",
+#'           Value = "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3281,11 +4812,35 @@ redshift_describe_event_subscriptions <- function(SubscriptionName = NULL, MaxRe
 #' 
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
-#' of response records. When the results of a DescribeEvents request exceed
-#' the value specified in `MaxRecords`, AWS returns a value in the `Marker`
-#' field of the response. You can retrieve the next set of response records
-#' by providing the returned marker value in the `Marker` parameter and
+#' of response records. When the results of a
+#' [`describe_events`][redshift_describe_events] request exceed the value
+#' specified in `MaxRecords`, AWS returns a value in the `Marker` field of
+#' the response. You can retrieve the next set of response records by
+#' providing the returned marker value in the `Marker` parameter and
 #' retrying the request.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   Events = list(
+#'     list(
+#'       SourceIdentifier = "string",
+#'       SourceType = "cluster"|"cluster-parameter-group"|"cluster-security-group"|"cluster-snapshot"|"scheduled-action",
+#'       Message = "string",
+#'       EventCategories = list(
+#'         "string"
+#'       ),
+#'       Severity = "string",
+#'       Date = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EventId = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3359,7 +4914,8 @@ redshift_describe_events <- function(SourceIdentifier = NULL, SourceType = NULL,
 #' 
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
-#' of response records. When the results of a DescribeHsmClientCertificates
+#' of response records. When the results of a
+#' [`describe_hsm_client_certificates`][redshift_describe_hsm_client_certificates]
 #' request exceed the value specified in `MaxRecords`, AWS returns a value
 #' in the `Marker` field of the response. You can retrieve the next set of
 #' response records by providing the returned marker value in the `Marker`
@@ -3378,6 +4934,26 @@ redshift_describe_events <- function(SourceIdentifier = NULL, SourceType = NULL,
 #' these tag values in the request, Amazon Redshift returns a response with
 #' the HSM client certificates that have either or both of these tag values
 #' associated with them.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   HsmClientCertificates = list(
+#'     list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmClientCertificatePublicKey = "string",
+#'       Tags = list(
+#'         list(
+#'           Key = "string",
+#'           Value = "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3449,7 +5025,8 @@ redshift_describe_hsm_client_certificates <- function(HsmClientCertificateIdenti
 #' 
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
-#' of response records. When the results of a DescribeHsmConfigurations
+#' of response records. When the results of a
+#' [`describe_hsm_configurations`][redshift_describe_hsm_configurations]
 #' request exceed the value specified in `MaxRecords`, AWS returns a value
 #' in the `Marker` field of the response. You can retrieve the next set of
 #' response records by providing the returned marker value in the `Marker`
@@ -3468,6 +5045,28 @@ redshift_describe_hsm_client_certificates <- function(HsmClientCertificateIdenti
 #' these tag values in the request, Amazon Redshift returns a response with
 #' the HSM configurations that have either or both of these tag values
 #' associated with them.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   HsmConfigurations = list(
+#'     list(
+#'       HsmConfigurationIdentifier = "string",
+#'       Description = "string",
+#'       HsmIpAddress = "string",
+#'       HsmPartitionName = "string",
+#'       Tags = list(
+#'         list(
+#'           Key = "string",
+#'           Value = "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3517,6 +5116,23 @@ redshift_describe_hsm_configurations <- function(HsmConfigurationIdentifier = NU
 #' @param ClusterIdentifier &#91;required&#93; The identifier of the cluster from which to get the logging status.
 #' 
 #' Example: `examplecluster`
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   LoggingEnabled = TRUE|FALSE,
+#'   BucketName = "string",
+#'   S3KeyPrefix = "string",
+#'   LastSuccessfulDeliveryTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastFailureTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastFailureMessage = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3573,11 +5189,11 @@ redshift_describe_logging_status <- function(ClusterIdentifier) {
 #' @param Filters A set of name, operator, and value items to filter the results.
 #' @param Marker An optional parameter that specifies the starting point to return a set
 #' of response records. When the results of a
-#' DescribeNodeConfigurationOptions request exceed the value specified in
-#' `MaxRecords`, AWS returns a value in the `Marker` field of the response.
-#' You can retrieve the next set of response records by providing the
-#' returned marker value in the `Marker` parameter and retrying the
-#' request.
+#' [`describe_node_configuration_options`][redshift_describe_node_configuration_options]
+#' request exceed the value specified in `MaxRecords`, AWS returns a value
+#' in the `Marker` field of the response. You can retrieve the next set of
+#' response records by providing the returned marker value in the `Marker`
+#' parameter and retrying the request.
 #' @param MaxRecords The maximum number of response records to return in each call. If the
 #' number of remaining response records exceeds the specified `MaxRecords`
 #' value, a value is returned in a `marker` field of the response. You can
@@ -3587,6 +5203,22 @@ redshift_describe_logging_status <- function(ClusterIdentifier) {
 #' Default: `500`
 #' 
 #' Constraints: minimum 100, maximum 500.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   NodeConfigurationOptionList = list(
+#'     list(
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       EstimatedDiskUtilizationPercent = 123.0,
+#'       Mode = "standard"|"high-performance"
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3653,7 +5285,7 @@ redshift_describe_node_configuration_options <- function(ActionType, ClusterIden
 #' Default: All versions.
 #' 
 #' Constraints: Must be one of the version returned from
-#' DescribeClusterVersions.
+#' [`describe_cluster_versions`][redshift_describe_cluster_versions].
 #' @param NodeType The node type filter value. Specify this parameter to show only the
 #' available offerings matching the specified node type.
 #' @param MaxRecords The maximum number of response records to return in each call. If the
@@ -3667,11 +5299,36 @@ redshift_describe_node_configuration_options <- function(ActionType, ClusterIden
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
 #' of response records. When the results of a
-#' DescribeOrderableClusterOptions request exceed the value specified in
-#' `MaxRecords`, AWS returns a value in the `Marker` field of the response.
-#' You can retrieve the next set of response records by providing the
-#' returned marker value in the `Marker` parameter and retrying the
-#' request.
+#' [`describe_orderable_cluster_options`][redshift_describe_orderable_cluster_options]
+#' request exceed the value specified in `MaxRecords`, AWS returns a value
+#' in the `Marker` field of the response. You can retrieve the next set of
+#' response records by providing the returned marker value in the `Marker`
+#' parameter and retrying the request.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   OrderableClusterOptions = list(
+#'     list(
+#'       ClusterVersion = "string",
+#'       ClusterType = "string",
+#'       NodeType = "string",
+#'       AvailabilityZones = list(
+#'         list(
+#'           Name = "string",
+#'           SupportedPlatforms = list(
+#'             list(
+#'               Name = "string"
+#'             )
+#'           )
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3714,8 +5371,9 @@ redshift_describe_orderable_cluster_options <- function(ClusterVersion = NULL, N
 #' recurring costs of reserving the node and duration the node will be
 #' reserved for you. These descriptions help you determine which reserve
 #' node offering you want to purchase. You then use the unique offering ID
-#' in you call to PurchaseReservedNodeOffering to reserve one or more nodes
-#' for your Amazon Redshift cluster.
+#' in you call to
+#' [`purchase_reserved_node_offering`][redshift_purchase_reserved_node_offering]
+#' to reserve one or more nodes for your Amazon Redshift cluster.
 #' 
 #' For more information about reserved node offerings, go to [Purchasing
 #' Reserved
@@ -3737,11 +5395,38 @@ redshift_describe_orderable_cluster_options <- function(ClusterVersion = NULL, N
 #' 
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
-#' of response records. When the results of a DescribeReservedNodeOfferings
+#' of response records. When the results of a
+#' [`describe_reserved_node_offerings`][redshift_describe_reserved_node_offerings]
 #' request exceed the value specified in `MaxRecords`, AWS returns a value
 #' in the `Marker` field of the response. You can retrieve the next set of
 #' response records by providing the returned marker value in the `Marker`
 #' parameter and retrying the request.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   ReservedNodeOfferings = list(
+#'     list(
+#'       ReservedNodeOfferingId = "string",
+#'       NodeType = "string",
+#'       Duration = 123,
+#'       FixedPrice = 123.0,
+#'       UsagePrice = 123.0,
+#'       CurrencyCode = "string",
+#'       OfferingType = "string",
+#'       RecurringCharges = list(
+#'         list(
+#'           RecurringChargeAmount = 123.0,
+#'           RecurringChargeFrequency = "string"
+#'         )
+#'       ),
+#'       ReservedNodeOfferingType = "Regular"|"Upgradable"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3791,11 +5476,44 @@ redshift_describe_reserved_node_offerings <- function(ReservedNodeOfferingId = N
 #' 
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
-#' of response records. When the results of a DescribeReservedNodes request
+#' of response records. When the results of a
+#' [`describe_reserved_nodes`][redshift_describe_reserved_nodes] request
 #' exceed the value specified in `MaxRecords`, AWS returns a value in the
 #' `Marker` field of the response. You can retrieve the next set of
 #' response records by providing the returned marker value in the `Marker`
 #' parameter and retrying the request.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   ReservedNodes = list(
+#'     list(
+#'       ReservedNodeId = "string",
+#'       ReservedNodeOfferingId = "string",
+#'       NodeType = "string",
+#'       StartTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Duration = 123,
+#'       FixedPrice = 123.0,
+#'       UsagePrice = 123.0,
+#'       CurrencyCode = "string",
+#'       NodeCount = 123,
+#'       State = "string",
+#'       OfferingType = "string",
+#'       RecurringCharges = list(
+#'         list(
+#'           RecurringChargeAmount = 123.0,
+#'           RecurringChargeFrequency = "string"
+#'         )
+#'       ),
+#'       ReservedNodeOfferingType = "Regular"|"Upgradable"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3836,8 +5554,9 @@ redshift_describe_reserved_nodes <- function(ReservedNodeId = NULL, MaxRecords =
 #' was initiated and completed, the status of the resize remains as
 #' `SUCCEEDED` until the next resize.
 #' 
-#' A resize operation can be requested using ModifyCluster and specifying a
-#' different number or type of nodes for the cluster.
+#' A resize operation can be requested using
+#' [`modify_cluster`][redshift_modify_cluster] and specifying a different
+#' number or type of nodes for the cluster.
 #'
 #' @usage
 #' redshift_describe_resize(ClusterIdentifier)
@@ -3847,6 +5566,35 @@ redshift_describe_reserved_nodes <- function(ReservedNodeId = NULL, MaxRecords =
 #' 
 #' By default, resize operations for all clusters defined for an AWS
 #' account are returned.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TargetNodeType = "string",
+#'   TargetNumberOfNodes = 123,
+#'   TargetClusterType = "string",
+#'   Status = "string",
+#'   ImportTablesCompleted = list(
+#'     "string"
+#'   ),
+#'   ImportTablesInProgress = list(
+#'     "string"
+#'   ),
+#'   ImportTablesNotStarted = list(
+#'     "string"
+#'   ),
+#'   AvgResizeRateInMegaBytesPerSecond = 123.0,
+#'   TotalResizeDataInMegaBytes = 123,
+#'   ProgressInMegaBytes = 123,
+#'   ElapsedTimeInSeconds = 123,
+#'   EstimatedTimeToCompletionInSeconds = 123,
+#'   ResizeType = "string",
+#'   Message = "string",
+#'   TargetEncryptionType = "string",
+#'   DataTransferProgressPercent = 123.0
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3895,7 +5643,8 @@ redshift_describe_resize <- function(ClusterIdentifier) {
 #' disabled scheduled actions.
 #' @param Filters List of scheduled action filters.
 #' @param Marker An optional parameter that specifies the starting point to return a set
-#' of response records. When the results of a DescribeScheduledActions
+#' of response records. When the results of a
+#' [`describe_scheduled_actions`][redshift_describe_scheduled_actions]
 #' request exceed the value specified in `MaxRecords`, AWS returns a value
 #' in the `Marker` field of the response. You can retrieve the next set of
 #' response records by providing the returned marker value in the `Marker`
@@ -3909,6 +5658,49 @@ redshift_describe_resize <- function(ClusterIdentifier) {
 #' Default: `100`
 #' 
 #' Constraints: minimum 20, maximum 100.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   ScheduledActions = list(
+#'     list(
+#'       ScheduledActionName = "string",
+#'       TargetAction = list(
+#'         ResizeCluster = list(
+#'           ClusterIdentifier = "string",
+#'           ClusterType = "string",
+#'           NodeType = "string",
+#'           NumberOfNodes = 123,
+#'           Classic = TRUE|FALSE
+#'         ),
+#'         PauseCluster = list(
+#'           ClusterIdentifier = "string"
+#'         ),
+#'         ResumeCluster = list(
+#'           ClusterIdentifier = "string"
+#'         )
+#'       ),
+#'       Schedule = "string",
+#'       IamRole = "string",
+#'       ScheduledActionDescription = "string",
+#'       State = "ACTIVE"|"DISABLED",
+#'       NextInvocations = list(
+#'         as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       ),
+#'       StartTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4003,6 +5795,26 @@ redshift_describe_scheduled_actions <- function(ScheduledActionName = NULL, Targ
 #' request, Amazon Redshift returns a response with all resources that have
 #' either or both of these tag values associated with them.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   SnapshotCopyGrants = list(
+#'     list(
+#'       SnapshotCopyGrantName = "string",
+#'       KmsKeyId = "string",
+#'       Tags = list(
+#'         list(
+#'           Key = "string",
+#'           Value = "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_snapshot_copy_grants(
@@ -4064,6 +5876,41 @@ redshift_describe_snapshot_copy_grants <- function(SnapshotCopyGrantName = NULL,
 #' retrieve the next set of records by retrying the command with the
 #' returned `marker` value.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   SnapshotSchedules = list(
+#'     list(
+#'       ScheduleDefinitions = list(
+#'         "string"
+#'       ),
+#'       ScheduleIdentifier = "string",
+#'       ScheduleDescription = "string",
+#'       Tags = list(
+#'         list(
+#'           Key = "string",
+#'           Value = "string"
+#'         )
+#'       ),
+#'       NextInvocations = list(
+#'         as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       ),
+#'       AssociatedClusterCount = 123,
+#'       AssociatedClusters = list(
+#'         list(
+#'           ClusterIdentifier = "string",
+#'           ScheduleAssociationState = "MODIFYING"|"ACTIVE"|"FAILED"
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_snapshot_schedules(
@@ -4110,6 +5957,15 @@ redshift_describe_snapshot_schedules <- function(ClusterIdentifier = NULL, Sched
 #'
 
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TotalBackupSizeInMegaBytes = 123.0,
+#'   TotalProvisionedStorageInMegaBytes = 123.0
+#' )
+#' ```
+#'
 
 #'
 #' @keywords internal
@@ -4137,12 +5993,14 @@ redshift_describe_storage <- function() {
 #'
 #' @description
 #' Lists the status of one or more table restore requests made using the
-#' RestoreTableFromClusterSnapshot API action. If you don't specify a value
-#' for the `TableRestoreRequestId` parameter, then
-#' `DescribeTableRestoreStatus` returns the status of all table restore
-#' requests ordered by the date and time of the request in ascending order.
-#' Otherwise `DescribeTableRestoreStatus` returns the status of the table
-#' specified by `TableRestoreRequestId`.
+#' [`restore_table_from_cluster_snapshot`][redshift_restore_table_from_cluster_snapshot]
+#' API action. If you don't specify a value for the `TableRestoreRequestId`
+#' parameter, then
+#' [`describe_table_restore_status`][redshift_describe_table_restore_status]
+#' returns the status of all table restore requests ordered by the date and
+#' time of the request in ascending order. Otherwise
+#' [`describe_table_restore_status`][redshift_describe_table_restore_status]
+#' returns the status of the table specified by `TableRestoreRequestId`.
 #'
 #' @usage
 #' redshift_describe_table_restore_status(ClusterIdentifier,
@@ -4151,16 +6009,45 @@ redshift_describe_storage <- function() {
 #' @param ClusterIdentifier The Amazon Redshift cluster that the table is being restored to.
 #' @param TableRestoreRequestId The identifier of the table restore request to return status for. If you
 #' don't specify a `TableRestoreRequestId` value, then
-#' `DescribeTableRestoreStatus` returns the status of all in-progress table
-#' restore requests.
+#' [`describe_table_restore_status`][redshift_describe_table_restore_status]
+#' returns the status of all in-progress table restore requests.
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a pagination token
 #' called a marker is included in the response so that the remaining
 #' results can be retrieved.
 #' @param Marker An optional pagination token provided by a previous
-#' `DescribeTableRestoreStatus` request. If this parameter is specified,
-#' the response includes only records beyond the marker, up to the value
-#' specified by the `MaxRecords` parameter.
+#' [`describe_table_restore_status`][redshift_describe_table_restore_status]
+#' request. If this parameter is specified, the response includes only
+#' records beyond the marker, up to the value specified by the `MaxRecords`
+#' parameter.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TableRestoreStatusDetails = list(
+#'     list(
+#'       TableRestoreRequestId = "string",
+#'       Status = "PENDING"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"CANCELED",
+#'       Message = "string",
+#'       RequestTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ProgressInMegaBytes = 123,
+#'       TotalDataInMegaBytes = 123,
+#'       ClusterIdentifier = "string",
+#'       SnapshotIdentifier = "string",
+#'       SourceDatabaseName = "string",
+#'       SourceSchemaName = "string",
+#'       SourceTableName = "string",
+#'       TargetDatabaseName = "string",
+#'       TargetSchemaName = "string",
+#'       NewTableName = "string"
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4199,7 +6086,8 @@ redshift_describe_table_restore_status <- function(ClusterIdentifier = NULL, Tab
 #' specifying an ARN, or you can return all tags for a given type of
 #' resource, such as clusters, snapshots, and so on.
 #' 
-#' The following are limitations for `DescribeTags`:
+#' The following are limitations for
+#' [`describe_tags`][redshift_describe_tags]:
 #' 
 #' -   You cannot specify an ARN and a resource-type value together in the
 #'     same request.
@@ -4278,6 +6166,24 @@ redshift_describe_table_restore_status <- function(ClusterIdentifier = NULL, Tab
 #' request, Amazon Redshift returns a response with all resources that have
 #' either or both of these tag values associated with them.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TaggedResources = list(
+#'     list(
+#'       Tag = list(
+#'         Key = "string",
+#'         Value = "string"
+#'       ),
+#'       ResourceName = "string",
+#'       ResourceType = "string"
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_tags(
@@ -4353,11 +6259,12 @@ redshift_describe_tags <- function(ResourceName = NULL, ResourceType = NULL, Max
 #' 
 #' Constraints: minimum 20, maximum 100.
 #' @param Marker An optional parameter that specifies the starting point to return a set
-#' of response records. When the results of a DescribeUsageLimits request
-#' exceed the value specified in `MaxRecords`, AWS returns a value in the
-#' `Marker` field of the response. You can retrieve the next set of
-#' response records by providing the returned marker value in the `Marker`
-#' parameter and retrying the request.
+#' of response records. When the results of a
+#' [`describe_usage_limits`][redshift_describe_usage_limits] request exceed
+#' the value specified in `MaxRecords`, AWS returns a value in the `Marker`
+#' field of the response. You can retrieve the next set of response records
+#' by providing the returned marker value in the `Marker` parameter and
+#' retrying the request.
 #' @param TagKeys A tag key or keys for which you want to return all matching usage limit
 #' objects that are associated with the specified key or keys. For example,
 #' suppose that you have parameter groups that are tagged with keys called
@@ -4371,6 +6278,31 @@ redshift_describe_tags <- function(ResourceName = NULL, ResourceType = NULL, Max
 #' these tag values in the request, Amazon Redshift returns a response with
 #' the usage limit objects that have either or both of these tag values
 #' associated with them.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   UsageLimits = list(
+#'     list(
+#'       UsageLimitId = "string",
+#'       ClusterIdentifier = "string",
+#'       FeatureType = "spectrum"|"concurrency-scaling",
+#'       LimitType = "time"|"data-scanned",
+#'       Amount = 123,
+#'       Period = "daily"|"weekly"|"monthly",
+#'       BreachAction = "log"|"emit-metric"|"disable",
+#'       Tags = list(
+#'         list(
+#'           Key = "string",
+#'           Value = "string"
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   Marker = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4423,6 +6355,23 @@ redshift_describe_usage_limits <- function(UsageLimitId = NULL, ClusterIdentifie
 #' 
 #' Example: `examplecluster`
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   LoggingEnabled = TRUE|FALSE,
+#'   BucketName = "string",
+#'   S3KeyPrefix = "string",
+#'   LastSuccessfulDeliveryTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastFailureTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastFailureMessage = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$disable_logging(
@@ -4458,9 +6407,10 @@ redshift_disable_logging <- function(ClusterIdentifier) {
 #' region for a specified cluster.
 #' 
 #' If your cluster and its snapshots are encrypted using a customer master
-#' key (CMK) from AWS KMS, use DeleteSnapshotCopyGrant to delete the grant
-#' that grants Amazon Redshift permission to the CMK in the destination
-#' region.
+#' key (CMK) from AWS KMS, use
+#' [`delete_snapshot_copy_grant`][redshift_delete_snapshot_copy_grant] to
+#' delete the grant that grants Amazon Redshift permission to the CMK in
+#' the destination region.
 #'
 #' @usage
 #' redshift_disable_snapshot_copy(ClusterIdentifier)
@@ -4470,6 +6420,168 @@ redshift_disable_logging <- function(ClusterIdentifier) {
 #' 
 #' Constraints: Must be the valid name of an existing cluster that has
 #' cross-region snapshot copy enabled.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4538,6 +6650,23 @@ redshift_disable_snapshot_copy <- function(ClusterIdentifier) {
 #' 
 #'     -   x7f or larger
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   LoggingEnabled = TRUE|FALSE,
+#'   BucketName = "string",
+#'   S3KeyPrefix = "string",
+#'   LastSuccessfulDeliveryTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastFailureTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastFailureMessage = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$enable_logging(
@@ -4601,6 +6730,168 @@ redshift_enable_logging <- function(ClusterIdentifier, BucketName, S3KeyPrefix =
 #' value is -1, the manual snapshot is retained indefinitely.
 #' 
 #' The value must be either -1 or an integer between 1 and 3,653.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4746,6 +7037,18 @@ redshift_enable_snapshot_copy <- function(ClusterIdentifier, DestinationRegion, 
 #'     Words](https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
 #'     in the Amazon Redshift Database Developer Guide.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DbUser = "string",
+#'   DbPassword = "string",
+#'   Expiration = as.POSIXct(
+#'     "2015-01-01"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$get_cluster_credentials(
@@ -4797,6 +7100,32 @@ redshift_get_cluster_credentials <- function(DbUser, DbName = NULL, ClusterIdent
 #' retrieve.
 #' @param Marker A value that indicates the starting point for the next set of
 #' ReservedNodeOfferings.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Marker = "string",
+#'   ReservedNodeOfferings = list(
+#'     list(
+#'       ReservedNodeOfferingId = "string",
+#'       NodeType = "string",
+#'       Duration = 123,
+#'       FixedPrice = 123.0,
+#'       UsagePrice = 123.0,
+#'       CurrencyCode = "string",
+#'       OfferingType = "string",
+#'       RecurringCharges = list(
+#'         list(
+#'           RecurringChargeAmount = 123.0,
+#'           RecurringChargeFrequency = "string"
+#'         )
+#'       ),
+#'       ReservedNodeOfferingType = "Regular"|"Upgradable"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4866,8 +7195,8 @@ redshift_get_reserved_node_exchange_offerings <- function(ReservedNodeId, MaxRec
 #' into a read-only mode. After Amazon Redshift provisions a new cluster
 #' based on your resize requirements, there will be outage for a period
 #' while the old cluster is deleted and your connection is switched to the
-#' new cluster. You can use DescribeResize to track the progress of the
-#' resize request.
+#' new cluster. You can use [`describe_resize`][redshift_describe_resize]
+#' to track the progress of the resize request.
 #' 
 #' Valid Values: ` multi-node | single-node `
 #' @param NodeType The new node type of the cluster. If you specify a new node type, you
@@ -4932,7 +7261,7 @@ redshift_get_reserved_node_exchange_offerings <- function(ReservedNodeId, MaxRec
 #'     (single quote), " (double quote), \\, /, @@, or space.
 #' @param ClusterParameterGroupName The name of the cluster parameter group to apply to this cluster. This
 #' change is applied only after the cluster is rebooted. To reboot a
-#' cluster use RebootCluster.
+#' cluster use [`reboot_cluster`][redshift_reboot_cluster].
 #' 
 #' Default: Uses existing setting.
 #' 
@@ -4941,7 +7270,7 @@ redshift_get_reserved_node_exchange_offerings <- function(ReservedNodeId, MaxRec
 #' @param AutomatedSnapshotRetentionPeriod The number of days that automated snapshots are retained. If the value
 #' is 0, automated snapshots are disabled. Even if automated snapshots are
 #' disabled, you can still create manual snapshots when you want with
-#' CreateClusterSnapshot.
+#' [`create_cluster_snapshot`][redshift_create_cluster_snapshot].
 #' 
 #' If you decrease the automated snapshot retention period from its current
 #' value, existing automated snapshots that fall outside of the new
@@ -5049,6 +7378,168 @@ redshift_get_reserved_node_exchange_offerings <- function(ReservedNodeId, MaxRec
 #' target Availability Zone.
 #' @param Port The option to change the port of an Amazon Redshift cluster.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$modify_cluster(
@@ -5118,7 +7609,171 @@ redshift_modify_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeT
 #' 
 #' Example: `examplecluster`
 #' @param RevisionTarget &#91;required&#93; The identifier of the database revision. You can retrieve this value
-#' from the response to the DescribeClusterDbRevisions request.
+#' from the response to the
+#' [`describe_cluster_db_revisions`][redshift_describe_cluster_db_revisions]
+#' request.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5169,6 +7824,168 @@ redshift_modify_cluster_db_revision <- function(ClusterIdentifier, RevisionTarge
 #' @param RemoveIamRoles Zero or more IAM roles in ARN format to disassociate from the cluster.
 #' You can disassociate up to 10 IAM roles from a single cluster in a
 #' single request.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5223,6 +8040,168 @@ redshift_modify_cluster_iam_roles <- function(ClusterIdentifier, AddIamRoles = N
 #' @param DeferMaintenanceDuration An integer indicating the duration of the maintenance window in days. If
 #' you specify a duration, you can't specify an end time. The duration must
 #' be 45 days or less.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5282,7 +8261,16 @@ redshift_modify_cluster_maintenance <- function(ClusterIdentifier, DeferMaintena
 #' parameter are optional.
 #' 
 #' For the workload management (WLM) configuration, you must supply all the
-#' name-value pairs in the wlm\\_json\\_configuration parameter.
+#' name-value pairs in the wlm_json_configuration parameter.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ParameterGroupName = "string",
+#'   ParameterGroupStatus = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5347,6 +8335,67 @@ redshift_modify_cluster_parameter_group <- function(ParameterGroupName, Paramete
 #' @param Force A Boolean option to override an exception if the retention period has
 #' already passed.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Snapshot = list(
+#'     SnapshotIdentifier = "string",
+#'     ClusterIdentifier = "string",
+#'     SnapshotCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Status = "string",
+#'     Port = 123,
+#'     AvailabilityZone = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MasterUsername = "string",
+#'     ClusterVersion = "string",
+#'     EngineFullVersion = "string",
+#'     SnapshotType = "string",
+#'     NodeType = "string",
+#'     NumberOfNodes = 123,
+#'     DBName = "string",
+#'     VpcId = "string",
+#'     Encrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     EncryptedWithHSM = TRUE|FALSE,
+#'     AccountsWithRestoreAccess = list(
+#'       list(
+#'         AccountId = "string",
+#'         AccountAlias = "string"
+#'       )
+#'     ),
+#'     OwnerAccount = "string",
+#'     TotalBackupSizeInMegaBytes = 123.0,
+#'     ActualIncrementalBackupSizeInMegaBytes = 123.0,
+#'     BackupProgressInMegaBytes = 123.0,
+#'     CurrentBackupRateInMegaBytesPerSecond = 123.0,
+#'     EstimatedSecondsToCompletion = 123,
+#'     ElapsedTimeInSeconds = 123,
+#'     SourceRegion = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     RestorableNodeTypes = list(
+#'       "string"
+#'     ),
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     MaintenanceTrackName = "string",
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRemainingDays = 123,
+#'     SnapshotRetentionStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$modify_cluster_snapshot(
@@ -5391,6 +8440,9 @@ redshift_modify_cluster_snapshot <- function(SnapshotIdentifier, ManualSnapshotR
 #' associate with the cluster.
 #' @param DisassociateSchedule A boolean to indicate whether to remove the assoiciation between the
 #' cluster and the schedule.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -5437,6 +8489,39 @@ redshift_modify_cluster_snapshot_schedule <- function(ClusterIdentifier, Schedul
 #' @param Description A text description of the subnet group to be modified.
 #' @param SubnetIds &#91;required&#93; An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a
 #' single request.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ClusterSubnetGroup = list(
+#'     ClusterSubnetGroupName = "string",
+#'     Description = "string",
+#'     VpcId = "string",
+#'     SubnetGroupStatus = "string",
+#'     Subnets = list(
+#'       list(
+#'         SubnetIdentifier = "string",
+#'         SubnetAvailabilityZone = list(
+#'           Name = "string",
+#'           SupportedPlatforms = list(
+#'             list(
+#'               Name = "string"
+#'             )
+#'           )
+#'         ),
+#'         SubnetStatus = "string"
+#'       )
+#'     ),
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5510,6 +8595,37 @@ redshift_modify_cluster_subnet_group <- function(ClusterSubnetGroupName, Descrip
 #' @param Enabled A Boolean value indicating if the subscription is enabled. `true`
 #' indicates the subscription is enabled
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EventSubscription = list(
+#'     CustomerAwsId = "string",
+#'     CustSubscriptionId = "string",
+#'     SnsTopicArn = "string",
+#'     Status = "string",
+#'     SubscriptionCreationTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     SourceType = "string",
+#'     SourceIdsList = list(
+#'       "string"
+#'     ),
+#'     EventCategoriesList = list(
+#'       "string"
+#'     ),
+#'     Severity = "string",
+#'     Enabled = TRUE|FALSE,
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$modify_event_subscription(
@@ -5571,6 +8687,44 @@ redshift_modify_event_subscription <- function(SubscriptionName, SnsTopicArn = N
 #' this parameter, see ScheduledAction.
 #' @param Enable A modified enable flag of the scheduled action. If true, the scheduled
 #' action is active. If false, the scheduled action is disabled.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ScheduledActionName = "string",
+#'   TargetAction = list(
+#'     ResizeCluster = list(
+#'       ClusterIdentifier = "string",
+#'       ClusterType = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       Classic = TRUE|FALSE
+#'     ),
+#'     PauseCluster = list(
+#'       ClusterIdentifier = "string"
+#'     ),
+#'     ResumeCluster = list(
+#'       ClusterIdentifier = "string"
+#'     )
+#'   ),
+#'   Schedule = "string",
+#'   IamRole = "string",
+#'   ScheduledActionDescription = "string",
+#'   State = "ACTIVE"|"DISABLED",
+#'   NextInvocations = list(
+#'     as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   ),
+#'   StartTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   EndTime = as.POSIXct(
+#'     "2015-01-01"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5672,6 +8826,168 @@ redshift_modify_scheduled_action <- function(ScheduledActionName, TargetAction =
 #' @param Manual Indicates whether to apply the snapshot retention period to newly copied
 #' manual snapshots instead of automated snapshots.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$modify_snapshot_copy_retention_period(
@@ -5715,6 +9031,36 @@ redshift_modify_snapshot_copy_retention_period <- function(ClusterIdentifier, Re
 #' @param ScheduleDefinitions &#91;required&#93; An updated list of schedule definitions. A schedule definition is made
 #' up of schedule expressions, for example, "cron(30 12 *)" or "rate(12
 #' hours)".
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ScheduleDefinitions = list(
+#'     "string"
+#'   ),
+#'   ScheduleIdentifier = "string",
+#'   ScheduleDescription = "string",
+#'   Tags = list(
+#'     list(
+#'       Key = "string",
+#'       Value = "string"
+#'     )
+#'   ),
+#'   NextInvocations = list(
+#'     as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   ),
+#'   AssociatedClusterCount = 123,
+#'   AssociatedClusters = list(
+#'     list(
+#'       ClusterIdentifier = "string",
+#'       ScheduleAssociationState = "MODIFYING"|"ACTIVE"|"FAILED"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5761,6 +9107,26 @@ redshift_modify_snapshot_schedule <- function(ScheduleIdentifier, ScheduleDefini
 #' @param BreachAction The new action that Amazon Redshift takes when the limit is reached. For
 #' more information about this parameter, see UsageLimit.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   UsageLimitId = "string",
+#'   ClusterIdentifier = "string",
+#'   FeatureType = "spectrum"|"concurrency-scaling",
+#'   LimitType = "time"|"data-scanned",
+#'   Amount = 123,
+#'   Period = "daily"|"weekly"|"monthly",
+#'   BreachAction = "log"|"emit-metric"|"disable",
+#'   Tags = list(
+#'     list(
+#'       Key = "string",
+#'       Value = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$modify_usage_limit(
@@ -5800,6 +9166,168 @@ redshift_modify_usage_limit <- function(UsageLimitId, Amount = NULL, BreachActio
 #'
 #' @param ClusterIdentifier &#91;required&#93; The identifier of the cluster to be paused.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$pause_cluster(
@@ -5832,10 +9360,11 @@ redshift_pause_cluster <- function(ClusterIdentifier) {
 #' @description
 #' Allows you to purchase reserved nodes. Amazon Redshift offers a
 #' predefined set of reserved node offerings. You can purchase one or more
-#' of the offerings. You can call the DescribeReservedNodeOfferings API to
-#' obtain the available reserved node offerings. You can call this API by
-#' providing a specific reserved node offering and the number of nodes you
-#' want to reserve.
+#' of the offerings. You can call the
+#' [`describe_reserved_node_offerings`][redshift_describe_reserved_node_offerings]
+#' API to obtain the available reserved node offerings. You can call this
+#' API by providing a specific reserved node offering and the number of
+#' nodes you want to reserve.
 #' 
 #' For more information about reserved node offerings, go to [Purchasing
 #' Reserved
@@ -5851,6 +9380,35 @@ redshift_pause_cluster <- function(ClusterIdentifier) {
 #' @param NodeCount The number of reserved nodes that you want to purchase.
 #' 
 #' Default: `1`
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ReservedNode = list(
+#'     ReservedNodeId = "string",
+#'     ReservedNodeOfferingId = "string",
+#'     NodeType = "string",
+#'     StartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Duration = 123,
+#'     FixedPrice = 123.0,
+#'     UsagePrice = 123.0,
+#'     CurrencyCode = "string",
+#'     NodeCount = 123,
+#'     State = "string",
+#'     OfferingType = "string",
+#'     RecurringCharges = list(
+#'       list(
+#'         RecurringChargeAmount = 123.0,
+#'         RecurringChargeFrequency = "string"
+#'       )
+#'     ),
+#'     ReservedNodeOfferingType = "Regular"|"Upgradable"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5886,9 +9444,9 @@ redshift_purchase_reserved_node_offering <- function(ReservedNodeOfferingId, Nod
 #' Reboots a cluster. This action is taken as soon as possible. It results
 #' in a momentary outage to the cluster, during which the cluster status is
 #' set to `rebooting`. A cluster event is created when the reboot is
-#' completed. Any pending cluster modifications (see ModifyCluster) are
-#' applied at this reboot. For more information about managing clusters, go
-#' to [Amazon Redshift
+#' completed. Any pending cluster modifications (see
+#' [`modify_cluster`][redshift_modify_cluster]) are applied at this reboot.
+#' For more information about managing clusters, go to [Amazon Redshift
 #' Clusters](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
 #' in the *Amazon Redshift Cluster Management Guide*.
 #'
@@ -5896,6 +9454,168 @@ redshift_purchase_reserved_node_offering <- function(ReservedNodeOfferingId, Nod
 #' redshift_reboot_cluster(ClusterIdentifier)
 #'
 #' @param ClusterIdentifier &#91;required&#93; The cluster identifier.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5949,6 +9669,15 @@ redshift_reboot_cluster <- function(ClusterIdentifier) {
 #' 
 #' Constraints: A maximum of 20 parameters can be reset in a single
 #' request.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ParameterGroupName = "string",
+#'   ParameterGroupStatus = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -6039,6 +9768,168 @@ redshift_reset_cluster_parameter_group <- function(ParameterGroupName, ResetAllP
 #' classic resize process. If you don't provide this parameter or set the
 #' value to `false`, the resize type is elastic.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$resize_cluster(
@@ -6078,10 +9969,10 @@ redshift_resize_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeT
 #' original cluster from which the snapshot was created, except that the
 #' new cluster is created with the default cluster security and parameter
 #' groups. After Amazon Redshift creates the cluster, you can use the
-#' ModifyCluster API to associate a different security group and different
-#' parameter group with the restored cluster. If you are using a DS node
-#' type, you can also choose to change to another DS node type of the same
-#' size during restore.
+#' [`modify_cluster`][redshift_modify_cluster] API to associate a different
+#' security group and different parameter group with the restored cluster.
+#' If you are using a DS node type, you can also choose to change to
+#' another DS node type of the same size during restore.
 #' 
 #' If you restore a cluster into a VPC, you must provide a cluster subnet
 #' group where you want the cluster restored.
@@ -6195,7 +10086,7 @@ redshift_resize_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeT
 #' @param AutomatedSnapshotRetentionPeriod The number of days that automated snapshots are retained. If the value
 #' is 0, automated snapshots are disabled. Even if automated snapshots are
 #' disabled, you can still create manual snapshots when you want with
-#' CreateClusterSnapshot.
+#' [`create_cluster_snapshot`][redshift_create_cluster_snapshot].
 #' 
 #' Default: The value selected for the cluster from which the snapshot was
 #' taken.
@@ -6250,6 +10141,168 @@ redshift_resize_cluster <- function(ClusterIdentifier, ClusterType = NULL, NodeT
 #' @param NumberOfNodes The number of nodes specified when provisioning the restored cluster.
 #' @param AvailabilityZoneRelocation The option to enable relocation for an Amazon Redshift cluster between
 #' Availability Zones after the cluster is restored.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -6317,16 +10370,20 @@ redshift_restore_from_cluster_snapshot <- function(ClusterIdentifier, SnapshotId
 #' You must create the new table within the Amazon Redshift cluster that
 #' the snapshot was taken from.
 #' 
-#' You cannot use `RestoreTableFromClusterSnapshot` to restore a table with
-#' the same name as an existing table in an Amazon Redshift cluster. That
-#' is, you cannot overwrite an existing table in a cluster with a restored
-#' table. If you want to replace your original table with a new, restored
-#' table, then rename or drop your original table before you call
-#' `RestoreTableFromClusterSnapshot`. When you have renamed your original
-#' table, then you can pass the original name of the table as the
-#' `NewTableName` parameter value in the call to
-#' `RestoreTableFromClusterSnapshot`. This way, you can replace the
-#' original table with the table created from the snapshot.
+#' You cannot use
+#' [`restore_table_from_cluster_snapshot`][redshift_restore_table_from_cluster_snapshot]
+#' to restore a table with the same name as an existing table in an Amazon
+#' Redshift cluster. That is, you cannot overwrite an existing table in a
+#' cluster with a restored table. If you want to replace your original
+#' table with a new, restored table, then rename or drop your original
+#' table before you call
+#' [`restore_table_from_cluster_snapshot`][redshift_restore_table_from_cluster_snapshot].
+#' When you have renamed your original table, then you can pass the
+#' original name of the table as the `NewTableName` parameter value in the
+#' call to
+#' [`restore_table_from_cluster_snapshot`][redshift_restore_table_from_cluster_snapshot].
+#' This way, you can replace the original table with the table created from
+#' the snapshot.
 #'
 #' @usage
 #' redshift_restore_table_from_cluster_snapshot(ClusterIdentifier,
@@ -6345,6 +10402,31 @@ redshift_restore_from_cluster_snapshot <- function(ClusterIdentifier, SnapshotId
 #' @param TargetDatabaseName The name of the database to restore the table to.
 #' @param TargetSchemaName The name of the schema to restore the table to.
 #' @param NewTableName &#91;required&#93; The name of the table to create as a result of the current request.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TableRestoreStatus = list(
+#'     TableRestoreRequestId = "string",
+#'     Status = "PENDING"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"CANCELED",
+#'     Message = "string",
+#'     RequestTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ProgressInMegaBytes = 123,
+#'     TotalDataInMegaBytes = 123,
+#'     ClusterIdentifier = "string",
+#'     SnapshotIdentifier = "string",
+#'     SourceDatabaseName = "string",
+#'     SourceSchemaName = "string",
+#'     SourceTableName = "string",
+#'     TargetDatabaseName = "string",
+#'     TargetSchemaName = "string",
+#'     NewTableName = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -6390,6 +10472,168 @@ redshift_restore_table_from_cluster_snapshot <- function(ClusterIdentifier, Snap
 #'
 #' @param ClusterIdentifier &#91;required&#93; The identifier of the cluster to be resumed.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$resume_cluster(
@@ -6423,8 +10667,10 @@ redshift_resume_cluster <- function(ClusterIdentifier) {
 #' @description
 #' Revokes an ingress rule in an Amazon Redshift security group for a
 #' previously authorized IP range or Amazon EC2 security group. To add an
-#' ingress rule, see AuthorizeClusterSecurityGroupIngress. For information
-#' about managing security groups, go to [Amazon Redshift Cluster Security
+#' ingress rule, see
+#' [`authorize_cluster_security_group_ingress`][redshift_authorize_cluster_security_group_ingress].
+#' For information about managing security groups, go to [Amazon Redshift
+#' Cluster Security
 #' Groups](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 #' in the *Amazon Redshift Cluster Management Guide*.
 #'
@@ -6447,6 +10693,48 @@ redshift_resume_cluster <- function(ClusterIdentifier) {
 #' provided.
 #' 
 #' Example: `111122223333`
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ClusterSecurityGroup = list(
+#'     ClusterSecurityGroupName = "string",
+#'     Description = "string",
+#'     EC2SecurityGroups = list(
+#'       list(
+#'         Status = "string",
+#'         EC2SecurityGroupName = "string",
+#'         EC2SecurityGroupOwnerId = "string",
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     IPRanges = list(
+#'       list(
+#'         Status = "string",
+#'         CIDRIP = "string",
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -6503,6 +10791,67 @@ redshift_revoke_cluster_security_group_ingress <- function(ClusterSecurityGroupN
 #' @param AccountWithRestoreAccess &#91;required&#93; The identifier of the AWS customer account that can no longer restore
 #' the specified snapshot.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Snapshot = list(
+#'     SnapshotIdentifier = "string",
+#'     ClusterIdentifier = "string",
+#'     SnapshotCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     Status = "string",
+#'     Port = 123,
+#'     AvailabilityZone = "string",
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MasterUsername = "string",
+#'     ClusterVersion = "string",
+#'     EngineFullVersion = "string",
+#'     SnapshotType = "string",
+#'     NodeType = "string",
+#'     NumberOfNodes = 123,
+#'     DBName = "string",
+#'     VpcId = "string",
+#'     Encrypted = TRUE|FALSE,
+#'     KmsKeyId = "string",
+#'     EncryptedWithHSM = TRUE|FALSE,
+#'     AccountsWithRestoreAccess = list(
+#'       list(
+#'         AccountId = "string",
+#'         AccountAlias = "string"
+#'       )
+#'     ),
+#'     OwnerAccount = "string",
+#'     TotalBackupSizeInMegaBytes = 123.0,
+#'     ActualIncrementalBackupSizeInMegaBytes = 123.0,
+#'     BackupProgressInMegaBytes = 123.0,
+#'     CurrentBackupRateInMegaBytesPerSecond = 123.0,
+#'     EstimatedSecondsToCompletion = 123,
+#'     ElapsedTimeInSeconds = 123,
+#'     SourceRegion = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     RestorableNodeTypes = list(
+#'       "string"
+#'     ),
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     MaintenanceTrackName = "string",
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRemainingDays = 123,
+#'     SnapshotRetentionStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$revoke_snapshot_access(
@@ -6545,6 +10894,168 @@ redshift_revoke_snapshot_access <- function(SnapshotIdentifier, SnapshotClusterI
 #' 
 #' Constraints: Must be the name of valid cluster that has encryption
 #' enabled.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Cluster = list(
+#'     ClusterIdentifier = "string",
+#'     NodeType = "string",
+#'     ClusterStatus = "string",
+#'     ClusterAvailabilityStatus = "string",
+#'     ModifyStatus = "string",
+#'     MasterUsername = "string",
+#'     DBName = "string",
+#'     Endpoint = list(
+#'       Address = "string",
+#'       Port = 123,
+#'       VpcEndpoints = list(
+#'         list(
+#'           VpcEndpointId = "string"
+#'         )
+#'       )
+#'     ),
+#'     ClusterCreateTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     AutomatedSnapshotRetentionPeriod = 123,
+#'     ManualSnapshotRetentionPeriod = 123,
+#'     ClusterSecurityGroups = list(
+#'       list(
+#'         ClusterSecurityGroupName = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     VpcSecurityGroups = list(
+#'       list(
+#'         VpcSecurityGroupId = "string",
+#'         Status = "string"
+#'       )
+#'     ),
+#'     ClusterParameterGroups = list(
+#'       list(
+#'         ParameterGroupName = "string",
+#'         ParameterApplyStatus = "string",
+#'         ClusterParameterStatusList = list(
+#'           list(
+#'             ParameterName = "string",
+#'             ParameterApplyStatus = "string",
+#'             ParameterApplyErrorDescription = "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     ClusterSubnetGroupName = "string",
+#'     VpcId = "string",
+#'     AvailabilityZone = "string",
+#'     PreferredMaintenanceWindow = "string",
+#'     PendingModifiedValues = list(
+#'       MasterUserPassword = "string",
+#'       NodeType = "string",
+#'       NumberOfNodes = 123,
+#'       ClusterType = "string",
+#'       ClusterVersion = "string",
+#'       AutomatedSnapshotRetentionPeriod = 123,
+#'       ClusterIdentifier = "string",
+#'       PubliclyAccessible = TRUE|FALSE,
+#'       EnhancedVpcRouting = TRUE|FALSE,
+#'       MaintenanceTrackName = "string",
+#'       EncryptionType = "string"
+#'     ),
+#'     ClusterVersion = "string",
+#'     AllowVersionUpgrade = TRUE|FALSE,
+#'     NumberOfNodes = 123,
+#'     PubliclyAccessible = TRUE|FALSE,
+#'     Encrypted = TRUE|FALSE,
+#'     RestoreStatus = list(
+#'       Status = "string",
+#'       CurrentRestoreRateInMegaBytesPerSecond = 123.0,
+#'       SnapshotSizeInMegaBytes = 123,
+#'       ProgressInMegaBytes = 123,
+#'       ElapsedTimeInSeconds = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123
+#'     ),
+#'     DataTransferProgress = list(
+#'       Status = "string",
+#'       CurrentRateInMegaBytesPerSecond = 123.0,
+#'       TotalDataInMegaBytes = 123,
+#'       DataTransferredInMegaBytes = 123,
+#'       EstimatedTimeToCompletionInSeconds = 123,
+#'       ElapsedTimeInSeconds = 123
+#'     ),
+#'     HsmStatus = list(
+#'       HsmClientCertificateIdentifier = "string",
+#'       HsmConfigurationIdentifier = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterSnapshotCopyStatus = list(
+#'       DestinationRegion = "string",
+#'       RetentionPeriod = 123,
+#'       ManualSnapshotRetentionPeriod = 123,
+#'       SnapshotCopyGrantName = "string"
+#'     ),
+#'     ClusterPublicKey = "string",
+#'     ClusterNodes = list(
+#'       list(
+#'         NodeRole = "string",
+#'         PrivateIPAddress = "string",
+#'         PublicIPAddress = "string"
+#'       )
+#'     ),
+#'     ElasticIpStatus = list(
+#'       ElasticIp = "string",
+#'       Status = "string"
+#'     ),
+#'     ClusterRevisionNumber = "string",
+#'     Tags = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     ),
+#'     KmsKeyId = "string",
+#'     EnhancedVpcRouting = TRUE|FALSE,
+#'     IamRoles = list(
+#'       list(
+#'         IamRoleArn = "string",
+#'         ApplyStatus = "string"
+#'       )
+#'     ),
+#'     PendingActions = list(
+#'       "string"
+#'     ),
+#'     MaintenanceTrackName = "string",
+#'     ElasticResizeNumberOfNodeOptions = "string",
+#'     DeferredMaintenanceWindows = list(
+#'       list(
+#'         DeferMaintenanceIdentifier = "string",
+#'         DeferMaintenanceStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         DeferMaintenanceEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         )
+#'       )
+#'     ),
+#'     SnapshotScheduleIdentifier = "string",
+#'     SnapshotScheduleState = "MODIFYING"|"ACTIVE"|"FAILED",
+#'     ExpectedNextSnapshotScheduleTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpectedNextSnapshotScheduleTimeStatus = "string",
+#'     NextMaintenanceWindowStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ResizeInfo = list(
+#'       ResizeType = "string",
+#'       AllowCancelResize = TRUE|FALSE
+#'     ),
+#'     AvailabilityZoneRelocationStatus = "string",
+#'     ClusterNamespaceArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```

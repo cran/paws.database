@@ -24,14 +24,38 @@ Constraints: minimum 20, maximum 100.}
 
 \item{Marker}{An optional parameter that specifies the starting point for returning a
 set of response records. When the results of a
-\code{DescribeClusterDbRevisions} request exceed the value specified in
-\code{MaxRecords}, Amazon Redshift returns a value in the \code{marker} field of
-the response. You can retrieve the next set of response records by
-providing the returned \code{marker} value in the \code{marker} parameter and
-retrying the request.
+\code{\link[=redshift_describe_cluster_db_revisions]{describe_cluster_db_revisions}}
+request exceed the value specified in \code{MaxRecords}, Amazon Redshift
+returns a value in the \code{marker} field of the response. You can retrieve
+the next set of response records by providing the returned \code{marker}
+value in the \code{marker} parameter and retrying the request.
 
 Constraints: You can specify either the \code{ClusterIdentifier} parameter,
 or the \code{marker} parameter, but not both.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Marker = "string",
+  ClusterDbRevisions = list(
+    list(
+      ClusterIdentifier = "string",
+      CurrentDatabaseRevision = "string",
+      DatabaseRevisionReleaseDate = as.POSIXct(
+        "2015-01-01"
+      ),
+      RevisionTargets = list(
+        list(
+          DatabaseRevision = "string",
+          Description = "string",
+          DatabaseRevisionReleaseDate = as.POSIXct(
+            "2015-01-01"
+          )
+        )
+      )
+    )
+  )
+)
+}
 }
 \description{
 Returns an array of \code{ClusterDbRevision} objects.

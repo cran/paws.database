@@ -47,8 +47,9 @@ previous pending operation to add nodes. The customer can modify the
 previous pending operation to add more nodes or explicitly cancel the
 pending request and retry the new request. To cancel pending operations
 to modify the number of cache nodes in a cluster, use the
-\code{ModifyCacheCluster} request and set \code{NumCacheNodes} equal to the number
-of cache nodes currently in the cluster.}
+\code{\link[=elasticache_modify_cache_cluster]{modify_cache_cluster}} request and
+set \code{NumCacheNodes} equal to the number of cache nodes currently in the
+cluster.}
 
 \item{CacheNodeIdsToRemove}{A list of cache node IDs to be removed. A node ID is a numeric
 identifier (0001, 0002, etc.). This parameter is only valid when
@@ -59,7 +60,8 @@ pending cache nodes, whichever is greater, and the value of
 \code{NumCacheNodes} in the request.
 
 For example: If you have 3 active cache nodes, 7 pending cache nodes,
-and the number of cache nodes in this \code{ModifyCacheCluster} call is 5,
+and the number of cache nodes in this
+\code{\link[=elasticache_modify_cache_cluster]{modify_cache_cluster}} call is 5,
 you must list 2 (7 - 5) cache node IDs to remove.}
 
 \item{AZMode}{Specifies whether the new nodes in this Memcached cluster are all
@@ -201,8 +203,10 @@ cluster.
 If \code{false}, changes to the cluster are applied on the next maintenance
 reboot, or the next failure reboot, whichever occurs first.
 
-If you perform a \code{ModifyCacheCluster} before a pending modification is
-applied, the pending modification is replaced by the newer modification.
+If you perform a
+\code{\link[=elasticache_modify_cache_cluster]{modify_cache_cluster}} before a
+pending modification is applied, the pending modification is replaced by
+the newer modification.
 
 Valid values: \code{true} | \code{false}
 
@@ -238,7 +242,7 @@ parameter. Password constraints:
 \item Must be at least 16 characters and no more than 128 characters in
 length
 \item Cannot contain any of the following characters: '/', '"', or '@',
-'\\%'
+'\%'
 }
 
 For more information, see AUTH password at AUTH.}
@@ -251,6 +255,91 @@ must be specified with the \code{auth-token} parameter. Possible values:
 }
 
 For more information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html}{Authenticating Users with Redis AUTH}}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  CacheCluster = list(
+    CacheClusterId = "string",
+    ConfigurationEndpoint = list(
+      Address = "string",
+      Port = 123
+    ),
+    ClientDownloadLandingPage = "string",
+    CacheNodeType = "string",
+    Engine = "string",
+    EngineVersion = "string",
+    CacheClusterStatus = "string",
+    NumCacheNodes = 123,
+    PreferredAvailabilityZone = "string",
+    PreferredOutpostArn = "string",
+    CacheClusterCreateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    PreferredMaintenanceWindow = "string",
+    PendingModifiedValues = list(
+      NumCacheNodes = 123,
+      CacheNodeIdsToRemove = list(
+        "string"
+      ),
+      EngineVersion = "string",
+      CacheNodeType = "string",
+      AuthTokenStatus = "SETTING"|"ROTATING"
+    ),
+    NotificationConfiguration = list(
+      TopicArn = "string",
+      TopicStatus = "string"
+    ),
+    CacheSecurityGroups = list(
+      list(
+        CacheSecurityGroupName = "string",
+        Status = "string"
+      )
+    ),
+    CacheParameterGroup = list(
+      CacheParameterGroupName = "string",
+      ParameterApplyStatus = "string",
+      CacheNodeIdsToReboot = list(
+        "string"
+      )
+    ),
+    CacheSubnetGroupName = "string",
+    CacheNodes = list(
+      list(
+        CacheNodeId = "string",
+        CacheNodeStatus = "string",
+        CacheNodeCreateTime = as.POSIXct(
+          "2015-01-01"
+        ),
+        Endpoint = list(
+          Address = "string",
+          Port = 123
+        ),
+        ParameterGroupStatus = "string",
+        SourceCacheNodeId = "string",
+        CustomerAvailabilityZone = "string",
+        CustomerOutpostArn = "string"
+      )
+    ),
+    AutoMinorVersionUpgrade = TRUE|FALSE,
+    SecurityGroups = list(
+      list(
+        SecurityGroupId = "string",
+        Status = "string"
+      )
+    ),
+    ReplicationGroupId = "string",
+    SnapshotRetentionLimit = 123,
+    SnapshotWindow = "string",
+    AuthTokenEnabled = TRUE|FALSE,
+    AuthTokenLastModifiedDate = as.POSIXct(
+      "2015-01-01"
+    ),
+    TransitEncryptionEnabled = TRUE|FALSE,
+    AtRestEncryptionEnabled = TRUE|FALSE,
+    ARN = "string"
+  )
+)
+}
 }
 \description{
 Modifies the settings for a cluster. You can use this operation to

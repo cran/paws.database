@@ -131,6 +131,85 @@ DBClusterParameterGroup.
 enabled. The database can't be deleted when deletion protection is
 enabled. By default, deletion protection is disabled.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  DBCluster = list(
+    AllocatedStorage = 123,
+    AvailabilityZones = list(
+      "string"
+    ),
+    BackupRetentionPeriod = 123,
+    CharacterSetName = "string",
+    DatabaseName = "string",
+    DBClusterIdentifier = "string",
+    DBClusterParameterGroup = "string",
+    DBSubnetGroup = "string",
+    Status = "string",
+    PercentProgress = "string",
+    EarliestRestorableTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    Endpoint = "string",
+    ReaderEndpoint = "string",
+    MultiAZ = TRUE|FALSE,
+    Engine = "string",
+    EngineVersion = "string",
+    LatestRestorableTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    Port = 123,
+    MasterUsername = "string",
+    DBClusterOptionGroupMemberships = list(
+      list(
+        DBClusterOptionGroupName = "string",
+        Status = "string"
+      )
+    ),
+    PreferredBackupWindow = "string",
+    PreferredMaintenanceWindow = "string",
+    ReplicationSourceIdentifier = "string",
+    ReadReplicaIdentifiers = list(
+      "string"
+    ),
+    DBClusterMembers = list(
+      list(
+        DBInstanceIdentifier = "string",
+        IsClusterWriter = TRUE|FALSE,
+        DBClusterParameterGroupStatus = "string",
+        PromotionTier = 123
+      )
+    ),
+    VpcSecurityGroups = list(
+      list(
+        VpcSecurityGroupId = "string",
+        Status = "string"
+      )
+    ),
+    HostedZoneId = "string",
+    StorageEncrypted = TRUE|FALSE,
+    KmsKeyId = "string",
+    DbClusterResourceId = "string",
+    DBClusterArn = "string",
+    AssociatedRoles = list(
+      list(
+        RoleArn = "string",
+        Status = "string",
+        FeatureName = "string"
+      )
+    ),
+    IAMDatabaseAuthenticationEnabled = TRUE|FALSE,
+    CloneGroupId = "string",
+    ClusterCreateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    EnabledCloudwatchLogsExports = list(
+      "string"
+    ),
+    DeletionProtection = TRUE|FALSE
+  )
+)
+}
+}
 \description{
 Restores a DB cluster to an arbitrary point in time. Users can restore
 to any point in time before \code{LatestRestorableTime} for up to
@@ -140,11 +219,13 @@ cluster, except that the new DB cluster is created with the default DB
 security group.
 
 This action only restores the DB cluster, not the DB instances for that
-DB cluster. You must invoke the CreateDBInstance action to create DB
+DB cluster. You must invoke the
+\code{\link[=neptune_create_db_instance]{create_db_instance}} action to create DB
 instances for the restored DB cluster, specifying the identifier of the
 restored DB cluster in \code{DBClusterIdentifier}. You can create DB
-instances only after the \code{RestoreDBClusterToPointInTime} action has
-completed and the DB cluster is available.
+instances only after the
+\code{\link[=neptune_restore_db_cluster_to_point_in_time]{restore_db_cluster_to_point_in_time}}
+action has completed and the DB cluster is available.
 }
 \section{Request syntax}{
 \preformatted{svc$restore_db_cluster_to_point_in_time(
