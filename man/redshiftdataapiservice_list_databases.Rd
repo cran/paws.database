@@ -23,7 +23,8 @@ credentials.}
 using either Secrets Manager or temporary credentials.}
 
 \item{DbUser}{The database user name. This parameter is required when connecting to a
-cluster and authenticating using temporary credentials.}
+cluster as a database user and authenticating using temporary
+credentials.}
 
 \item{MaxResults}{The maximum number of databases to return in the response. If more
 databases exist than fit in one response, then \code{NextToken} is returned
@@ -39,13 +40,13 @@ retrieved for the request.}
 \item{SecretArn}{The name or ARN of the secret that enables access to the database. This
 parameter is required when authenticating using Secrets Manager.}
 
-\item{WorkgroupName}{The serverless workgroup name. This parameter is required when
-connecting to a serverless workgroup and authenticating using either
-Secrets Manager or temporary credentials.}
+\item{WorkgroupName}{The serverless workgroup name or Amazon Resource Name (ARN). This
+parameter is required when connecting to a serverless workgroup and
+authenticating using either Secrets Manager or temporary credentials.}
 }
 \description{
 List the databases in a cluster. A token is returned to page through the database list. Depending on the authorization method, use one of the following combinations of request parameters:
 
-See \url{https://paws-r.github.io/docs/redshiftdataapiservice/list_databases.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/redshiftdataapiservice_list_databases/} for full documentation.
 }
 \keyword{internal}

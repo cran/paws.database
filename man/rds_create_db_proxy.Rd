@@ -29,7 +29,7 @@ determines which database network protocol the proxy recognizes when it
 interprets network traffic to and from the database. For Aurora MySQL,
 RDS for MariaDB, and RDS for MySQL databases, specify \code{MYSQL}. For
 Aurora PostgreSQL and RDS for PostgreSQL databases, specify
-\code{POSTGRESQL}.}
+\code{POSTGRESQL}. For RDS for Microsoft SQL Server, specify \code{SQLSERVER}.}
 
 \item{Auth}{[required] The authorization mechanism that the proxy uses.}
 
@@ -62,6 +62,6 @@ choosing with the proxy.}
 \description{
 Creates a new DB proxy.
 
-See \url{https://paws-r.github.io/docs/rds/create_db_proxy.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/rds_create_db_proxy/} for full documentation.
 }
 \keyword{internal}

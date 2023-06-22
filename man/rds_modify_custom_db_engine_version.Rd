@@ -12,7 +12,8 @@ rds_modify_custom_db_engine_version(
 )
 }
 \arguments{
-\item{Engine}{[required] The DB engine. The only supported value is \code{custom-oracle-ee}.}
+\item{Engine}{[required] The DB engine. The only supported values are \code{custom-oracle-ee} and
+\code{custom-oracle-ee-cdb}.}
 
 \item{EngineVersion}{[required] The custom engine version (CEV) that you want to modify. This option is
 required for RDS Custom for Oracle, but optional for Amazon RDS. The
@@ -44,6 +45,6 @@ automated backup.}
 \description{
 Modifies the status of a custom engine version (CEV). You can find CEVs to modify by calling \code{\link[=rds_describe_db_engine_versions]{describe_db_engine_versions}}.
 
-See \url{https://paws-r.github.io/docs/rds/modify_custom_db_engine_version.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/rds_modify_custom_db_engine_version/} for full documentation.
 }
 \keyword{internal}

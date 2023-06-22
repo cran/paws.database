@@ -12,11 +12,11 @@ list of tags, for example
 \code{arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster} or
 \code{arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot}.
 
-For more information about ARNs, see \href{https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html}{Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces}.}
+For more information about ARNs, see \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html}{Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces}.}
 }
 \description{
 Lists all tags currently on a named resource.
 
-See \url{https://paws-r.github.io/docs/elasticache/list_tags_for_resource.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/elasticache_list_tags_for_resource/} for full documentation.
 }
 \keyword{internal}

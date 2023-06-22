@@ -8,17 +8,17 @@ NULL
 #' @description
 #' A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. For more information, see [Resource-level permissions](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html).
 #'
-#' See [https://paws-r.github.io/docs/elasticache/add_tags_to_resource.html](https://paws-r.github.io/docs/elasticache/add_tags_to_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_add_tags_to_resource/](https://www.paws-r-sdk.com/docs/elasticache_add_tags_to_resource/) for full documentation.
 #'
 #' @param ResourceName &#91;required&#93; The Amazon Resource Name (ARN) of the resource to which the tags are to
 #' be added, for example
 #' `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or
 #' `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
 #' ElastiCache resources are *cluster* and *snapshot*.
-#'
+#' 
 #' For more information about ARNs, see [Amazon Resource Names (ARNs) and
 #' Amazon Service
-#' Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+#' Namespaces](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html).
 #' @param Tags &#91;required&#93; A list of tags to be added to this resource. A tag is a key-value pair.
 #' A tag key must be accompanied by a tag value, although null is accepted.
 #'
@@ -47,7 +47,7 @@ elasticache_add_tags_to_resource <- function(ResourceName, Tags) {
 #' @description
 #' Allows network ingress to a cache security group. Applications using ElastiCache must be running on Amazon EC2, and Amazon EC2 security groups are used as the authorization mechanism.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/authorize_cache_security_group_ingress.html](https://paws-r.github.io/docs/elasticache/authorize_cache_security_group_ingress.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_authorize_cache_security_group_ingress/](https://www.paws-r-sdk.com/docs/elasticache_authorize_cache_security_group_ingress/) for full documentation.
 #'
 #' @param CacheSecurityGroupName &#91;required&#93; The cache security group that allows network ingress.
 #' @param EC2SecurityGroupName &#91;required&#93; The Amazon EC2 security group to be authorized for ingress to the cache
@@ -81,7 +81,7 @@ elasticache_authorize_cache_security_group_ingress <- function(CacheSecurityGrou
 #' @description
 #' Apply the service update. For more information on service updates and applying them, see [Applying Service Updates](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/).
 #'
-#' See [https://paws-r.github.io/docs/elasticache/batch_apply_update_action.html](https://paws-r.github.io/docs/elasticache/batch_apply_update_action.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_batch_apply_update_action/](https://www.paws-r-sdk.com/docs/elasticache_batch_apply_update_action/) for full documentation.
 #'
 #' @param ReplicationGroupIds The replication group IDs
 #' @param CacheClusterIds The cache cluster IDs
@@ -112,7 +112,7 @@ elasticache_batch_apply_update_action <- function(ReplicationGroupIds = NULL, Ca
 #' @description
 #' Stop the service update. For more information on service updates and stopping them, see [Stopping Service Updates](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/).
 #'
-#' See [https://paws-r.github.io/docs/elasticache/batch_stop_update_action.html](https://paws-r.github.io/docs/elasticache/batch_stop_update_action.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_batch_stop_update_action/](https://www.paws-r-sdk.com/docs/elasticache_batch_stop_update_action/) for full documentation.
 #'
 #' @param ReplicationGroupIds The replication group IDs
 #' @param CacheClusterIds The cache cluster IDs
@@ -143,7 +143,7 @@ elasticache_batch_stop_update_action <- function(ReplicationGroupIds = NULL, Cac
 #' @description
 #' Complete the migration of data.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/complete_migration.html](https://paws-r.github.io/docs/elasticache/complete_migration.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_complete_migration/](https://www.paws-r-sdk.com/docs/elasticache_complete_migration/) for full documentation.
 #'
 #' @param ReplicationGroupId &#91;required&#93; The ID of the replication group to which data is being migrated.
 #' @param Force Forces the migration to stop without ensuring that data is in sync. It
@@ -175,7 +175,7 @@ elasticache_complete_migration <- function(ReplicationGroupId, Force = NULL) {
 #' @description
 #' Makes a copy of an existing snapshot.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/copy_snapshot.html](https://paws-r.github.io/docs/elasticache/copy_snapshot.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_copy_snapshot/](https://www.paws-r-sdk.com/docs/elasticache_copy_snapshot/) for full documentation.
 #'
 #' @param SourceSnapshotName &#91;required&#93; The name of an existing snapshot from which to make a copy.
 #' @param TargetSnapshotName &#91;required&#93; A name for the snapshot copy. ElastiCache does not permit overwriting a
@@ -183,13 +183,13 @@ elasticache_complete_migration <- function(ReplicationGroupId, Force = NULL) {
 #' ElastiCache or an Amazon S3 bucket if exporting.
 #' @param TargetBucket The Amazon S3 bucket to which the snapshot is exported. This parameter
 #' is used only when exporting a snapshot for external access.
-#'
+#' 
 #' When using this parameter to export a snapshot, be sure Amazon
 #' ElastiCache has the needed permissions to this S3 bucket. For more
 #' information, see [Step 2: Grant ElastiCache Access to Your Amazon S3
 #' Bucket](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access)
 #' in the *Amazon ElastiCache User Guide*.
-#'
+#' 
 #' For more information, see [Exporting a
 #' Snapshot](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html)
 #' in the *Amazon ElastiCache User Guide*.
@@ -222,178 +222,178 @@ elasticache_copy_snapshot <- function(SourceSnapshotName, TargetSnapshotName, Ta
 #' @description
 #' Creates a cluster. All nodes in the cluster run the same protocol-compliant cache engine software, either Memcached or Redis.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/create_cache_cluster.html](https://paws-r.github.io/docs/elasticache/create_cache_cluster.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_create_cache_cluster/](https://www.paws-r-sdk.com/docs/elasticache_create_cache_cluster/) for full documentation.
 #'
 #' @param CacheClusterId &#91;required&#93; The node group (shard) identifier. This parameter is stored as a
 #' lowercase string.
-#'
+#' 
 #' **Constraints:**
-#'
+#' 
 #' -   A name must contain from 1 to 50 alphanumeric characters or hyphens.
-#'
+#' 
 #' -   The first character must be a letter.
-#'
+#' 
 #' -   A name cannot end with a hyphen or contain two consecutive hyphens.
 #' @param ReplicationGroupId The ID of the replication group to which this cluster should belong. If
 #' this parameter is specified, the cluster is added to the specified
 #' replication group as a read replica; otherwise, the cluster is a
 #' standalone primary that is not part of any replication group.
-#'
+#' 
 #' If the specified replication group is Multi-AZ enabled and the
 #' Availability Zone is not specified, the cluster is created in
 #' Availability Zones that provide the best spread of read replicas across
 #' Availability Zones.
-#'
+#' 
 #' This parameter is only valid if the `Engine` parameter is `redis`.
 #' @param AZMode Specifies whether the nodes in this Memcached cluster are created in a
 #' single Availability Zone or created across multiple Availability Zones
 #' in the cluster's region.
-#'
+#' 
 #' This parameter is only supported for Memcached clusters.
-#'
+#' 
 #' If the `AZMode` and `PreferredAvailabilityZones` are not specified,
 #' ElastiCache assumes `single-az` mode.
 #' @param PreferredAvailabilityZone The EC2 Availability Zone in which the cluster is created.
-#'
+#' 
 #' All nodes belonging to this cluster are placed in the preferred
 #' Availability Zone. If you want to create your nodes across multiple
 #' Availability Zones, use `PreferredAvailabilityZones`.
-#'
+#' 
 #' Default: System chosen Availability Zone.
 #' @param PreferredAvailabilityZones A list of the Availability Zones in which cache nodes are created. The
 #' order of the zones in the list is not important.
-#'
+#' 
 #' This option is only supported on Memcached.
-#'
+#' 
 #' If you are creating your cluster in an Amazon VPC (recommended) you can
 #' only locate nodes in Availability Zones that are associated with the
 #' subnets in the selected subnet group.
-#'
+#' 
 #' The number of Availability Zones listed must equal the value of
 #' `NumCacheNodes`.
-#'
+#' 
 #' If you want all the nodes in the same Availability Zone, use
 #' `PreferredAvailabilityZone` instead, or repeat the Availability Zone
 #' multiple times in the list.
-#'
+#' 
 #' Default: System chosen Availability Zones.
 #' @param NumCacheNodes The initial number of cache nodes that the cluster has.
-#'
+#' 
 #' For clusters running Redis, this value must be 1. For clusters running
 #' Memcached, this value must be between 1 and 40.
-#'
+#' 
 #' If you need more than 40 nodes for your Memcached cluster, please fill
 #' out the ElastiCache Limit Increase Request form at
 #' http://aws.amazon.com/contact-us/elasticache-node-limit-request/.
 #' @param CacheNodeType The compute and memory capacity of the nodes in the node group (shard).
-#'
+#' 
 #' The following node types are supported by ElastiCache. Generally
 #' speaking, the current generation types provide more memory and
 #' computational power at lower cost when compared to their equivalent
 #' previous generation counterparts.
-#'
+#' 
 #' -   General purpose:
-#'
+#' 
 #'     -   Current generation:
-#'
+#' 
 #'         **M6g node types** (available only for Redis engine version
 #'         5.0.6 onward and for Memcached engine version 1.5.16 onward):
 #'         `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
 #'         `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
 #'         `cache.m6g.16xlarge`
-#'
+#' 
 #'         For region availability, see [Supported Node
 #'         Types](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-#'
+#' 
 #'         **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
 #'         `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
 #'         `cache.m5.24xlarge`
-#'
+#' 
 #'         **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
 #'         `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
-#'
+#' 
 #'         **T4g node types** (available only for Redis engine version
 #'         5.0.6 onward and Memcached engine version 1.5.16 onward):
 #'         `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
-#'
+#' 
 #'         **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
 #'         `cache.t3.medium`
-#'
+#' 
 #'         **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
 #'         `cache.t2.medium`
-#'
+#' 
 #'     -   Previous generation: (not recommended. Existing clusters are
 #'         still supported but creation of new clusters is not supported
 #'         for these types.)
-#'
+#' 
 #'         **T1 node types:** `cache.t1.micro`
-#'
+#' 
 #'         **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
 #'         `cache.m1.large`, `cache.m1.xlarge`
-#'
+#' 
 #'         **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
 #'         `cache.m3.xlarge`, `cache.m3.2xlarge`
-#'
+#' 
 #' -   Compute optimized:
-#'
+#' 
 #'     -   Previous generation: (not recommended. Existing clusters are
 #'         still supported but creation of new clusters is not supported
 #'         for these types.)
-#'
+#' 
 #'         **C1 node types:** `cache.c1.xlarge`
-#'
+#' 
 #' -   Memory optimized:
-#'
+#' 
 #'     -   Current generation:
-#'
+#' 
 #'         **R6g node types** (available only for Redis engine version
 #'         5.0.6 onward and for Memcached engine version 1.5.16 onward).
-#'
+#' 
 #'         `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
 #'         `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
 #'         `cache.r6g.16xlarge`
-#'
+#' 
 #'         For region availability, see [Supported Node
 #'         Types](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-#'
+#' 
 #'         **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
 #'         `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
 #'         `cache.r5.24xlarge`
-#'
+#' 
 #'         **R4 node types:** `cache.r4.large`, `cache.r4.xlarge`,
 #'         `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
 #'         `cache.r4.16xlarge`
-#'
+#' 
 #'     -   Previous generation: (not recommended. Existing clusters are
 #'         still supported but creation of new clusters is not supported
 #'         for these types.)
-#'
+#' 
 #'         **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
 #'         `cache.m2.4xlarge`
-#'
+#' 
 #'         **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
 #'         `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
-#'
+#' 
 #' **Additional node type info**
-#'
+#' 
 #' -   All current generation instance types are created in Amazon VPC by
 #'     default.
-#'
+#' 
 #' -   Redis append-only files (AOF) are not supported for T1 or T2
 #'     instances.
-#'
+#' 
 #' -   Redis Multi-AZ with automatic failover is not supported on T1
 #'     instances.
-#'
+#' 
 #' -   Redis configuration variables `appendonly` and `appendfsync` are not
 #'     supported on Redis version 2.8.22 and later.
 #' @param Engine The name of the cache engine to be used for this cluster.
-#'
+#' 
 #' Valid values for this parameter are: `memcached` | `redis`
 #' @param EngineVersion The version number of the cache engine to be used for this cluster. To
 #' view the supported cache engine versions, use the
 #' DescribeCacheEngineVersions operation.
-#'
+#' 
 #' **Important:** You can upgrade to a newer engine version (see [Selecting
 #' a Cache Engine and
 #' Version](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement)),
@@ -405,20 +405,20 @@ elasticache_copy_snapshot <- function(SourceSnapshotName, TargetSnapshotName, Ta
 #' engine is used. You cannot use any parameter group which has
 #' `cluster-enabled='yes'` when creating a cluster.
 #' @param CacheSubnetGroupName The name of the subnet group to be used for the cluster.
-#'
+#' 
 #' Use this parameter only when you are creating a cluster in an Amazon
 #' Virtual Private Cloud (Amazon VPC).
-#'
+#' 
 #' If you're going to launch your cluster in an Amazon VPC, you need to
 #' create a subnet group before you start creating a cluster. For more
 #' information, see [Subnets and Subnet
 #' Groups](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html).
 #' @param CacheSecurityGroupNames A list of security group names to associate with this cluster.
-#'
+#' 
 #' Use this parameter only when you are creating a cluster outside of an
 #' Amazon Virtual Private Cloud (Amazon VPC).
 #' @param SecurityGroupIds One or more VPC security groups associated with the cluster.
-#'
+#' 
 #' Use this parameter only when you are creating a cluster in an Amazon
 #' Virtual Private Cloud (Amazon VPC).
 #' @param Tags A list of tags to be added to this resource.
@@ -426,14 +426,14 @@ elasticache_copy_snapshot <- function(SourceSnapshotName, TargetSnapshotName, Ta
 #' that uniquely identifies a Redis RDB snapshot file stored in Amazon S3.
 #' The snapshot file is used to populate the node group (shard). The Amazon
 #' S3 object name in the ARN cannot contain any commas.
-#'
+#' 
 #' This parameter is only valid if the `Engine` parameter is `redis`.
-#'
+#' 
 #' Example of an Amazon S3 ARN: `arn:aws:s3:::my_bucket/snapshot1.rdb`
 #' @param SnapshotName The name of a Redis snapshot from which to restore data into the new
 #' node group (shard). The snapshot status changes to `restoring` while the
 #' new node group (shard) is being created.
-#'
+#' 
 #' This parameter is only valid if the `Engine` parameter is `redis`.
 #' @param PreferredMaintenanceWindow Specifies the weekly time range during which maintenance on the cluster
 #' is performed. It is specified as a range in the format
@@ -442,7 +442,7 @@ elasticache_copy_snapshot <- function(SourceSnapshotName, TargetSnapshotName, Ta
 #' @param Port The port number on which each of the cache nodes accepts connections.
 #' @param NotificationTopicArn The Amazon Resource Name (ARN) of the Amazon Simple Notification Service
 #' (SNS) topic to which notifications are sent.
-#'
+#' 
 #' The Amazon SNS topic owner must be the same as the cluster owner.
 #' @param AutoMinorVersionUpgrade  If you are running Redis engine version 6.0 or later, set this
 #' parameter to yes if you want to opt-in to the next auto minor version
@@ -451,34 +451,34 @@ elasticache_copy_snapshot <- function(SourceSnapshotName, TargetSnapshotName, Ta
 #' before deleting them. For example, if you set `SnapshotRetentionLimit`
 #' to 5, a snapshot taken today is retained for 5 days before being
 #' deleted.
-#'
+#' 
 #' This parameter is only valid if the `Engine` parameter is `redis`.
-#'
+#' 
 #' Default: 0 (i.e., automatic backups are disabled for this cache
 #' cluster).
 #' @param SnapshotWindow The daily time range (in UTC) during which ElastiCache begins taking a
 #' daily snapshot of your node group (shard).
-#'
+#' 
 #' Example: `05:00-09:00`
-#'
+#' 
 #' If you do not specify this parameter, ElastiCache automatically chooses
 #' an appropriate time range.
-#'
+#' 
 #' This parameter is only valid if the `Engine` parameter is `redis`.
 #' @param AuthToken **Reserved parameter.** The password used to access a password protected
 #' server.
-#'
+#' 
 #' Password constraints:
-#'
+#' 
 #' -   Must be only printable ASCII characters.
-#'
+#' 
 #' -   Must be at least 16 characters and no more than 128 characters in
 #'     length.
-#'
+#' 
 #' -   The only permitted printable special characters are !, &, #, $, ^,
 #'     \<, \>, and -. Other printable special characters cannot be used in
 #'     the AUTH token.
-#'
+#' 
 #' For more information, see [AUTH
 #' password](https://redis.io/commands/auth/) at
 #' http://redis.io/commands/AUTH.
@@ -487,25 +487,27 @@ elasticache_copy_snapshot <- function(SourceSnapshotName, TargetSnapshotName, Ta
 #' @param PreferredOutpostArn The outpost ARN in which the cache cluster is created.
 #' @param PreferredOutpostArns The outpost ARNs in which the cache cluster is created.
 #' @param LogDeliveryConfigurations Specifies the destination, format and type of the logs.
-#' @param TransitEncryptionEnabled A flag that enables in-transit encryption when set to true. You cannot
-#' modify the value of `TransitEncryptionEnabled` after the cluster is
-#' created. To enable in-transit encryption on a cluster you must set
-#' `TransitEncryptionEnabled` to true when you create a cluster.
-#'
-#' **Required:** Only available when creating a cache cluster in an Amazon
-#' VPC using Memcached version `1.6.12` or later.
+#' @param TransitEncryptionEnabled A flag that enables in-transit encryption when set to true.
+#' @param NetworkType Must be either `ipv4` | `ipv6` | `dual_stack`. IPv6 is supported for
+#' workloads using Redis engine version 6.2 onward or Memcached engine
+#' version 1.6.6 on all instances built on the [Nitro
+#' system](https://aws.amazon.com/ec2/nitro/).
+#' @param IpDiscovery The network type you choose when modifying a cluster, either `ipv4` |
+#' `ipv6`. IPv6 is supported for workloads using Redis engine version 6.2
+#' onward or Memcached engine version 1.6.6 on all instances built on the
+#' [Nitro system](https://aws.amazon.com/ec2/nitro/).
 #'
 #' @keywords internal
 #'
 #' @rdname elasticache_create_cache_cluster
-elasticache_create_cache_cluster <- function(CacheClusterId, ReplicationGroupId = NULL, AZMode = NULL, PreferredAvailabilityZone = NULL, PreferredAvailabilityZones = NULL, NumCacheNodes = NULL, CacheNodeType = NULL, Engine = NULL, EngineVersion = NULL, CacheParameterGroupName = NULL, CacheSubnetGroupName = NULL, CacheSecurityGroupNames = NULL, SecurityGroupIds = NULL, Tags = NULL, SnapshotArns = NULL, SnapshotName = NULL, PreferredMaintenanceWindow = NULL, Port = NULL, NotificationTopicArn = NULL, AutoMinorVersionUpgrade = NULL, SnapshotRetentionLimit = NULL, SnapshotWindow = NULL, AuthToken = NULL, OutpostMode = NULL, PreferredOutpostArn = NULL, PreferredOutpostArns = NULL, LogDeliveryConfigurations = NULL, TransitEncryptionEnabled = NULL) {
+elasticache_create_cache_cluster <- function(CacheClusterId, ReplicationGroupId = NULL, AZMode = NULL, PreferredAvailabilityZone = NULL, PreferredAvailabilityZones = NULL, NumCacheNodes = NULL, CacheNodeType = NULL, Engine = NULL, EngineVersion = NULL, CacheParameterGroupName = NULL, CacheSubnetGroupName = NULL, CacheSecurityGroupNames = NULL, SecurityGroupIds = NULL, Tags = NULL, SnapshotArns = NULL, SnapshotName = NULL, PreferredMaintenanceWindow = NULL, Port = NULL, NotificationTopicArn = NULL, AutoMinorVersionUpgrade = NULL, SnapshotRetentionLimit = NULL, SnapshotWindow = NULL, AuthToken = NULL, OutpostMode = NULL, PreferredOutpostArn = NULL, PreferredOutpostArns = NULL, LogDeliveryConfigurations = NULL, TransitEncryptionEnabled = NULL, NetworkType = NULL, IpDiscovery = NULL) {
   op <- new_operation(
     name = "CreateCacheCluster",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .elasticache$create_cache_cluster_input(CacheClusterId = CacheClusterId, ReplicationGroupId = ReplicationGroupId, AZMode = AZMode, PreferredAvailabilityZone = PreferredAvailabilityZone, PreferredAvailabilityZones = PreferredAvailabilityZones, NumCacheNodes = NumCacheNodes, CacheNodeType = CacheNodeType, Engine = Engine, EngineVersion = EngineVersion, CacheParameterGroupName = CacheParameterGroupName, CacheSubnetGroupName = CacheSubnetGroupName, CacheSecurityGroupNames = CacheSecurityGroupNames, SecurityGroupIds = SecurityGroupIds, Tags = Tags, SnapshotArns = SnapshotArns, SnapshotName = SnapshotName, PreferredMaintenanceWindow = PreferredMaintenanceWindow, Port = Port, NotificationTopicArn = NotificationTopicArn, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, SnapshotRetentionLimit = SnapshotRetentionLimit, SnapshotWindow = SnapshotWindow, AuthToken = AuthToken, OutpostMode = OutpostMode, PreferredOutpostArn = PreferredOutpostArn, PreferredOutpostArns = PreferredOutpostArns, LogDeliveryConfigurations = LogDeliveryConfigurations, TransitEncryptionEnabled = TransitEncryptionEnabled)
+  input <- .elasticache$create_cache_cluster_input(CacheClusterId = CacheClusterId, ReplicationGroupId = ReplicationGroupId, AZMode = AZMode, PreferredAvailabilityZone = PreferredAvailabilityZone, PreferredAvailabilityZones = PreferredAvailabilityZones, NumCacheNodes = NumCacheNodes, CacheNodeType = CacheNodeType, Engine = Engine, EngineVersion = EngineVersion, CacheParameterGroupName = CacheParameterGroupName, CacheSubnetGroupName = CacheSubnetGroupName, CacheSecurityGroupNames = CacheSecurityGroupNames, SecurityGroupIds = SecurityGroupIds, Tags = Tags, SnapshotArns = SnapshotArns, SnapshotName = SnapshotName, PreferredMaintenanceWindow = PreferredMaintenanceWindow, Port = Port, NotificationTopicArn = NotificationTopicArn, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, SnapshotRetentionLimit = SnapshotRetentionLimit, SnapshotWindow = SnapshotWindow, AuthToken = AuthToken, OutpostMode = OutpostMode, PreferredOutpostArn = PreferredOutpostArn, PreferredOutpostArns = PreferredOutpostArns, LogDeliveryConfigurations = LogDeliveryConfigurations, TransitEncryptionEnabled = TransitEncryptionEnabled, NetworkType = NetworkType, IpDiscovery = IpDiscovery)
   output <- .elasticache$create_cache_cluster_output()
   config <- get_config()
   svc <- .elasticache$service(config)
@@ -520,15 +522,15 @@ elasticache_create_cache_cluster <- function(CacheClusterId, ReplicationGroupId 
 #' @description
 #' Creates a new Amazon ElastiCache cache parameter group. An ElastiCache cache parameter group is a collection of parameters and their values that are applied to all of the nodes in any cluster or replication group using the CacheParameterGroup.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/create_cache_parameter_group.html](https://paws-r.github.io/docs/elasticache/create_cache_parameter_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_create_cache_parameter_group/](https://www.paws-r-sdk.com/docs/elasticache_create_cache_parameter_group/) for full documentation.
 #'
 #' @param CacheParameterGroupName &#91;required&#93; A user-specified name for the cache parameter group.
 #' @param CacheParameterGroupFamily &#91;required&#93; The name of the cache parameter group family that the cache parameter
 #' group can be used with.
-#'
+#' 
 #' Valid values are: `memcached1.4` | `memcached1.5` | `memcached1.6` |
 #' `redis2.6` | `redis2.8` | `redis3.2` | `redis4.0` | `redis5.0` |
-#' `redis6.x`
+#' `redis6.x` | `redis7`
 #' @param Description &#91;required&#93; A user-specified description for the cache parameter group.
 #' @param Tags A list of tags to be added to this resource. A tag is a key-value pair.
 #' A tag key must be accompanied by a tag value, although null is accepted.
@@ -558,14 +560,14 @@ elasticache_create_cache_parameter_group <- function(CacheParameterGroupName, Ca
 #' @description
 #' Creates a new cache security group. Use a cache security group to control access to one or more clusters.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/create_cache_security_group.html](https://paws-r.github.io/docs/elasticache/create_cache_security_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_create_cache_security_group/](https://www.paws-r-sdk.com/docs/elasticache_create_cache_security_group/) for full documentation.
 #'
 #' @param CacheSecurityGroupName &#91;required&#93; A name for the cache security group. This value is stored as a lowercase
 #' string.
-#'
+#' 
 #' Constraints: Must contain no more than 255 alphanumeric characters.
 #' Cannot be the word "Default".
-#'
+#' 
 #' Example: `mysecuritygroup`
 #' @param Description &#91;required&#93; A description for the cache security group.
 #' @param Tags A list of tags to be added to this resource. A tag is a key-value pair.
@@ -596,14 +598,14 @@ elasticache_create_cache_security_group <- function(CacheSecurityGroupName, Desc
 #' @description
 #' Creates a new cache subnet group.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/create_cache_subnet_group.html](https://paws-r.github.io/docs/elasticache/create_cache_subnet_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_create_cache_subnet_group/](https://www.paws-r-sdk.com/docs/elasticache_create_cache_subnet_group/) for full documentation.
 #'
 #' @param CacheSubnetGroupName &#91;required&#93; A name for the cache subnet group. This value is stored as a lowercase
 #' string.
-#'
+#' 
 #' Constraints: Must contain no more than 255 alphanumeric characters or
 #' hyphens.
-#'
+#' 
 #' Example: `mysubnetgroup`
 #' @param CacheSubnetGroupDescription &#91;required&#93; A description for the cache subnet group.
 #' @param SubnetIds &#91;required&#93; A list of VPC subnet IDs for the cache subnet group.
@@ -636,7 +638,7 @@ elasticache_create_cache_subnet_group <- function(CacheSubnetGroupName, CacheSub
 #' @description
 #' Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see [Replication Across Regions Using Global Datastore](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html).
 #'
-#' See [https://paws-r.github.io/docs/elasticache/create_global_replication_group.html](https://paws-r.github.io/docs/elasticache/create_global_replication_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_create_global_replication_group/](https://www.paws-r-sdk.com/docs/elasticache_create_global_replication_group/) for full documentation.
 #'
 #' @param GlobalReplicationGroupIdSuffix &#91;required&#93; The suffix name of a Global datastore. Amazon ElastiCache automatically
 #' applies a prefix to the Global datastore ID when it is created. Each
@@ -645,7 +647,7 @@ elasticache_create_cache_subnet_group <- function(CacheSubnetGroupName, CacheSub
 #' suffix name you provide. The suffix, combined with the auto-generated
 #' prefix, guarantees uniqueness of the Global datastore name across
 #' multiple regions.
-#'
+#' 
 #' For a full list of Amazon Regions and their respective Global datastore
 #' iD prefixes, see [Using the Amazon CLI with Global
 #' datastores](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html)
@@ -680,68 +682,68 @@ elasticache_create_global_replication_group <- function(GlobalReplicationGroupId
 #' @description
 #' Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/create_replication_group.html](https://paws-r.github.io/docs/elasticache/create_replication_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_create_replication_group/](https://www.paws-r-sdk.com/docs/elasticache_create_replication_group/) for full documentation.
 #'
 #' @param ReplicationGroupId &#91;required&#93; The replication group identifier. This parameter is stored as a
 #' lowercase string.
-#'
+#' 
 #' Constraints:
-#'
+#' 
 #' -   A name must contain from 1 to 40 alphanumeric characters or hyphens.
-#'
+#' 
 #' -   The first character must be a letter.
-#'
+#' 
 #' -   A name cannot end with a hyphen or contain two consecutive hyphens.
 #' @param ReplicationGroupDescription &#91;required&#93; A user-created description for the replication group.
 #' @param GlobalReplicationGroupId The name of the Global datastore
 #' @param PrimaryClusterId The identifier of the cluster that serves as the primary for this
 #' replication group. This cluster must already exist and have a status of
 #' `available`.
-#'
+#' 
 #' This parameter is not required if `NumCacheClusters`, `NumNodeGroups`,
 #' or `ReplicasPerNodeGroup` is specified.
 #' @param AutomaticFailoverEnabled Specifies whether a read-only replica is automatically promoted to
 #' read/write primary if the existing primary fails.
-#'
+#' 
 #' `AutomaticFailoverEnabled` must be enabled for Redis (cluster mode
 #' enabled) replication groups.
-#'
+#' 
 #' Default: false
 #' @param MultiAZEnabled A flag indicating if you have Multi-AZ enabled to enhance fault
 #' tolerance. For more information, see [Minimizing Downtime:
 #' Multi-AZ](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html).
 #' @param NumCacheClusters The number of clusters this replication group initially has.
-#'
+#' 
 #' This parameter is not used if there is more than one node group (shard).
 #' You should use `ReplicasPerNodeGroup` instead.
-#'
+#' 
 #' If `AutomaticFailoverEnabled` is `true`, the value of this parameter
 #' must be at least 2. If `AutomaticFailoverEnabled` is `false` you can
 #' omit this parameter (it will default to 1), or you can explicitly set it
 #' to a value between 2 and 6.
-#'
+#' 
 #' The maximum permitted value for `NumCacheClusters` is 6 (1 primary plus
 #' 5 replicas).
 #' @param PreferredCacheClusterAZs A list of EC2 Availability Zones in which the replication group's
 #' clusters are created. The order of the Availability Zones in the list is
 #' the order in which clusters are allocated. The primary cluster is
 #' created in the first AZ in the list.
-#'
+#' 
 #' This parameter is not used if there is more than one node group (shard).
 #' You should use `NodeGroupConfiguration` instead.
-#'
+#' 
 #' If you are creating your replication group in an Amazon VPC
 #' (recommended), you can only locate clusters in Availability Zones
 #' associated with the subnets in the selected subnet group.
-#'
+#' 
 #' The number of Availability Zones listed must equal the value of
 #' `NumCacheClusters`.
-#'
+#' 
 #' Default: system chosen Availability Zones.
 #' @param NumNodeGroups An optional parameter that specifies the number of node groups (shards)
 #' for this Redis (cluster mode enabled) replication group. For Redis
 #' (cluster mode disabled) either omit this parameter or set it to 1.
-#'
+#' 
 #' Default: 1
 #' @param ReplicasPerNodeGroup An optional parameter that specifies the number of replica nodes in each
 #' node group (shard). Valid values are 0 to 5.
@@ -749,7 +751,7 @@ elasticache_create_global_replication_group <- function(GlobalReplicationGroupId
 #' (shard) configuration has the following members:
 #' `PrimaryAvailabilityZone`, `ReplicaAvailabilityZones`, `ReplicaCount`,
 #' and `Slots`.
-#'
+#' 
 #' If you're creating a Redis (cluster mode disabled) or a Redis (cluster
 #' mode enabled) replication group, you can use this parameter to
 #' individually configure each node group (shard), or you can omit this
@@ -758,126 +760,115 @@ elasticache_create_global_replication_group <- function(GlobalReplicationGroupId
 #' (shard) using this parameter because you must specify the slots for each
 #' node group.
 #' @param CacheNodeType The compute and memory capacity of the nodes in the node group (shard).
-#'
+#' 
 #' The following node types are supported by ElastiCache. Generally
 #' speaking, the current generation types provide more memory and
 #' computational power at lower cost when compared to their equivalent
 #' previous generation counterparts.
-#'
+#' 
 #' -   General purpose:
-#'
+#' 
 #'     -   Current generation:
-#'
+#' 
 #'         **M6g node types** (available only for Redis engine version
 #'         5.0.6 onward and for Memcached engine version 1.5.16 onward):
 #'         `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
 #'         `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
 #'         `cache.m6g.16xlarge`
-#'
+#' 
 #'         For region availability, see [Supported Node
 #'         Types](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-#'
+#' 
 #'         **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
 #'         `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
 #'         `cache.m5.24xlarge`
-#'
+#' 
 #'         **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
 #'         `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
-#'
+#' 
 #'         **T4g node types** (available only for Redis engine version
 #'         5.0.6 onward and Memcached engine version 1.5.16 onward):
 #'         `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
-#'
+#' 
 #'         **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
 #'         `cache.t3.medium`
-#'
+#' 
 #'         **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
 #'         `cache.t2.medium`
-#'
+#' 
 #'     -   Previous generation: (not recommended. Existing clusters are
 #'         still supported but creation of new clusters is not supported
 #'         for these types.)
-#'
+#' 
 #'         **T1 node types:** `cache.t1.micro`
-#'
+#' 
 #'         **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
 #'         `cache.m1.large`, `cache.m1.xlarge`
-#'
+#' 
 #'         **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
 #'         `cache.m3.xlarge`, `cache.m3.2xlarge`
-#'
+#' 
 #' -   Compute optimized:
-#'
+#' 
 #'     -   Previous generation: (not recommended. Existing clusters are
 #'         still supported but creation of new clusters is not supported
 #'         for these types.)
-#'
+#' 
 #'         **C1 node types:** `cache.c1.xlarge`
-#'
-#' -   Memory optimized with data tiering:
-#'
-#'     -   Current generation:
-#'
-#'         **R6gd node types** (available only for Redis engine version 6.2
-#'         onward).
-#'
-#'         `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
-#'         `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
-#'         `cache.r6gd.16xlarge`
-#'
+#' 
 #' -   Memory optimized:
-#'
+#' 
 #'     -   Current generation:
-#'
+#' 
 #'         **R6g node types** (available only for Redis engine version
 #'         5.0.6 onward and for Memcached engine version 1.5.16 onward).
-#'
+#' 
 #'         `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
 #'         `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
 #'         `cache.r6g.16xlarge`
-#'
+#' 
 #'         For region availability, see [Supported Node
 #'         Types](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-#'
+#' 
 #'         **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
 #'         `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
 #'         `cache.r5.24xlarge`
-#'
+#' 
 #'         **R4 node types:** `cache.r4.large`, `cache.r4.xlarge`,
 #'         `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
 #'         `cache.r4.16xlarge`
-#'
+#' 
 #'     -   Previous generation: (not recommended. Existing clusters are
 #'         still supported but creation of new clusters is not supported
 #'         for these types.)
-#'
+#' 
 #'         **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
 #'         `cache.m2.4xlarge`
-#'
+#' 
 #'         **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
 #'         `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
-#'
+#' 
 #' **Additional node type info**
-#'
+#' 
 #' -   All current generation instance types are created in Amazon VPC by
 #'     default.
-#'
+#' 
 #' -   Redis append-only files (AOF) are not supported for T1 or T2
 #'     instances.
-#'
+#' 
 #' -   Redis Multi-AZ with automatic failover is not supported on T1
 #'     instances.
-#'
+#' 
 #' -   Redis configuration variables `appendonly` and `appendfsync` are not
 #'     supported on Redis version 2.8.22 and later.
 #' @param Engine The name of the cache engine to be used for the clusters in this
-#' replication group. Must be Redis.
+#' replication group. The value must be set to `Redis`.
 #' @param EngineVersion The version number of the cache engine to be used for the clusters in
 #' this replication group. To view the supported cache engine versions, use
 #' the
 #' [`describe_cache_engine_versions`][elasticache_describe_cache_engine_versions]
 #' operation.
-#'
+#' 
 #' **Important:** You can upgrade to a newer engine version (see [Selecting
 #' a Cache Engine and
 #' Version](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement))
@@ -888,18 +879,18 @@ elasticache_create_global_replication_group <- function(GlobalReplicationGroupId
 #' @param CacheParameterGroupName The name of the parameter group to associate with this replication
 #' group. If this argument is omitted, the default cache parameter group
 #' for the specified engine is used.
-#'
+#' 
 #' If you are running Redis version 3.2.4 or later, only one node group
 #' (shard), and want to use a default parameter group, we recommend that
 #' you specify the parameter group by name.
-#'
+#' 
 #' -   To create a Redis (cluster mode disabled) replication group, use
 #'     `CacheParameterGroupName=default.redis3.2`.
-#'
+#' 
 #' -   To create a Redis (cluster mode enabled) replication group, use
 #'     `CacheParameterGroupName=default.redis3.2.cluster.on`.
 #' @param CacheSubnetGroupName The name of the cache subnet group to be used for the replication group.
-#'
+#' 
 #' If you're going to launch your cluster in an Amazon VPC, you need to
 #' create a subnet group before you start creating a cluster. For more
 #' information, see [Subnets and Subnet
@@ -908,7 +899,7 @@ elasticache_create_global_replication_group <- function(GlobalReplicationGroupId
 #' group.
 #' @param SecurityGroupIds One or more Amazon VPC security groups associated with this replication
 #' group.
-#'
+#' 
 #' Use this parameter only when you are creating a replication group in an
 #' Amazon Virtual Private Cloud (Amazon VPC).
 #' @param Tags A list of tags to be added to this resource. Tags are comma-separated
@@ -924,7 +915,7 @@ elasticache_create_global_replication_group <- function(GlobalReplicationGroupId
 #' *NumNodeGroups* or the number of node groups configured by
 #' *NodeGroupConfiguration* regardless of the number of ARNs specified
 #' here.
-#'
+#' 
 #' Example of an Amazon S3 ARN: `arn:aws:s3:::my_bucket/snapshot1.rdb`
 #' @param SnapshotName The name of a snapshot from which to restore data into the new
 #' replication group. The snapshot status changes to `restoring` while the
@@ -933,34 +924,34 @@ elasticache_create_global_replication_group <- function(GlobalReplicationGroupId
 #' is performed. It is specified as a range in the format
 #' ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window
 #' is a 60 minute period. Valid values for `ddd` are:
-#'
+#' 
 #' Specifies the weekly time range during which maintenance on the cluster
 #' is performed. It is specified as a range in the format
 #' ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window
 #' is a 60 minute period.
-#'
+#' 
 #' Valid values for `ddd` are:
-#'
+#' 
 #' -   `sun`
-#'
+#' 
 #' -   `mon`
-#'
+#' 
 #' -   `tue`
-#'
+#' 
 #' -   `wed`
-#'
+#' 
 #' -   `thu`
-#'
+#' 
 #' -   `fri`
-#'
+#' 
 #' -   `sat`
-#'
+#' 
 #' Example: `sun:23:00-mon:01:30`
 #' @param Port The port number on which each member of the replication group accepts
 #' connections.
 #' @param NotificationTopicArn The Amazon Resource Name (ARN) of the Amazon Simple Notification Service
 #' (SNS) topic to which notifications are sent.
-#'
+#' 
 #' The Amazon SNS topic owner must be the same as the cluster owner.
 #' @param AutoMinorVersionUpgrade  If you are running Redis engine version 6.0 or later, set this
 #' parameter to yes if you want to opt-in to the next auto minor version
@@ -969,68 +960,64 @@ elasticache_create_global_replication_group <- function(GlobalReplicationGroupId
 #' before deleting them. For example, if you set `SnapshotRetentionLimit`
 #' to 5, a snapshot that was taken today is retained for 5 days before
 #' being deleted.
-#'
+#' 
 #' Default: 0 (i.e., automatic backups are disabled for this cluster).
 #' @param SnapshotWindow The daily time range (in UTC) during which ElastiCache begins taking a
 #' daily snapshot of your node group (shard).
-#'
+#' 
 #' Example: `05:00-09:00`
-#'
+#' 
 #' If you do not specify this parameter, ElastiCache automatically chooses
 #' an appropriate time range.
 #' @param AuthToken **Reserved parameter.** The password used to access a password protected
 #' server.
-#'
+#' 
 #' `AuthToken` can be specified only on replication groups where
 #' `TransitEncryptionEnabled` is `true`.
-#'
+#' 
 #' For HIPAA compliance, you must specify `TransitEncryptionEnabled` as
 #' `true`, an `AuthToken`, and a `CacheSubnetGroup`.
-#'
+#' 
 #' Password constraints:
-#'
+#' 
 #' -   Must be only printable ASCII characters.
-#'
+#' 
 #' -   Must be at least 16 characters and no more than 128 characters in
 #'     length.
-#'
+#' 
 #' -   The only permitted printable special characters are !, &, #, $, ^,
 #'     \<, \>, and -. Other printable special characters cannot be used in
 #'     the AUTH token.
-#'
+#' 
 #' For more information, see [AUTH
 #' password](https://redis.io/commands/auth/) at
 #' http://redis.io/commands/AUTH.
 #' @param TransitEncryptionEnabled A flag that enables in-transit encryption when set to `true`.
-#'
-#' You cannot modify the value of `TransitEncryptionEnabled` after the
-#' cluster is created. To enable in-transit encryption on a cluster you
-#' must set `TransitEncryptionEnabled` to `true` when you create a cluster.
-#'
+#' 
 #' This parameter is valid only if the `Engine` parameter is `redis`, the
 #' `EngineVersion` parameter is `3.2.6`, `4.x` or later, and the cluster is
 #' being created in an Amazon VPC.
-#'
+#' 
 #' If you enable in-transit encryption, you must also specify a value for
 #' `CacheSubnetGroup`.
-#'
+#' 
 #' **Required:** Only available when creating a replication group in an
 #' Amazon VPC using redis version `3.2.6`, `4.x` or later.
-#'
+#' 
 #' Default: `false`
-#'
+#' 
 #' For HIPAA compliance, you must specify `TransitEncryptionEnabled` as
 #' `true`, an `AuthToken`, and a `CacheSubnetGroup`.
 #' @param AtRestEncryptionEnabled A flag that enables encryption at rest when set to `true`.
-#'
+#' 
 #' You cannot modify the value of `AtRestEncryptionEnabled` after the
 #' replication group is created. To enable encryption at rest on a
 #' replication group you must set `AtRestEncryptionEnabled` to `true` when
 #' you create the replication group.
-#'
+#' 
 #' **Required:** Only available when creating a replication group in an
 #' Amazon VPC using redis version `3.2.6`, `4.x` or later.
-#'
+#' 
 #' Default: `false`
 #' @param KmsKeyId The ID of the KMS key used to encrypt the disk in the cluster.
 #' @param UserGroupIds The user group to associate with the replication group.
@@ -1039,18 +1026,46 @@ elasticache_create_global_replication_group <- function(GlobalReplicationGroupId
 #' groups using the r6gd node type. This parameter must be set to true when
 #' using r6gd nodes. For more information, see [Data
 #' tiering](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html).
+#' @param NetworkType Must be either `ipv4` | `ipv6` | `dual_stack`. IPv6 is supported for
+#' workloads using Redis engine version 6.2 onward or Memcached engine
+#' version 1.6.6 on all instances built on the [Nitro
+#' system](https://aws.amazon.com/ec2/nitro/).
+#' @param IpDiscovery The network type you choose when creating a replication group, either
+#' `ipv4` | `ipv6`. IPv6 is supported for workloads using Redis engine
+#' version 6.2 onward or Memcached engine version 1.6.6 on all instances
+#' built on the [Nitro system](https://aws.amazon.com/ec2/nitro/).
+#' @param TransitEncryptionMode A setting that allows you to migrate your clients to use in-transit
+#' encryption, with no downtime.
+#' 
+#' When setting `TransitEncryptionEnabled` to `true`, you can set your
+#' `TransitEncryptionMode` to `preferred` in the same request, to allow
+#' both encrypted and unencrypted connections at the same time. Once you
+#' migrate all your Redis clients to use encrypted connections you can
+#' modify the value to `required` to allow encrypted connections only.
+#' 
+#' Setting `TransitEncryptionMode` to `required` is a two-step process that
+#' requires you to first set the `TransitEncryptionMode` to `preferred`,
+#' after that you can set `TransitEncryptionMode` to `required`.
+#' 
+#' This process will not trigger the replacement of the replication group.
+#' @param ClusterMode Enabled or Disabled. To modify cluster mode from Disabled to Enabled,
+#' you must first set the cluster mode to Compatible. Compatible mode
+#' allows your Redis clients to connect using both cluster mode enabled and
+#' cluster mode disabled. After you migrate all Redis clients to use
+#' cluster mode enabled, you can then complete cluster mode configuration
+#' and set the cluster mode to Enabled.
 #'
 #' @keywords internal
 #'
 #' @rdname elasticache_create_replication_group
-elasticache_create_replication_group <- function(ReplicationGroupId, ReplicationGroupDescription, GlobalReplicationGroupId = NULL, PrimaryClusterId = NULL, AutomaticFailoverEnabled = NULL, MultiAZEnabled = NULL, NumCacheClusters = NULL, PreferredCacheClusterAZs = NULL, NumNodeGroups = NULL, ReplicasPerNodeGroup = NULL, NodeGroupConfiguration = NULL, CacheNodeType = NULL, Engine = NULL, EngineVersion = NULL, CacheParameterGroupName = NULL, CacheSubnetGroupName = NULL, CacheSecurityGroupNames = NULL, SecurityGroupIds = NULL, Tags = NULL, SnapshotArns = NULL, SnapshotName = NULL, PreferredMaintenanceWindow = NULL, Port = NULL, NotificationTopicArn = NULL, AutoMinorVersionUpgrade = NULL, SnapshotRetentionLimit = NULL, SnapshotWindow = NULL, AuthToken = NULL, TransitEncryptionEnabled = NULL, AtRestEncryptionEnabled = NULL, KmsKeyId = NULL, UserGroupIds = NULL, LogDeliveryConfigurations = NULL, DataTieringEnabled = NULL) {
+elasticache_create_replication_group <- function(ReplicationGroupId, ReplicationGroupDescription, GlobalReplicationGroupId = NULL, PrimaryClusterId = NULL, AutomaticFailoverEnabled = NULL, MultiAZEnabled = NULL, NumCacheClusters = NULL, PreferredCacheClusterAZs = NULL, NumNodeGroups = NULL, ReplicasPerNodeGroup = NULL, NodeGroupConfiguration = NULL, CacheNodeType = NULL, Engine = NULL, EngineVersion = NULL, CacheParameterGroupName = NULL, CacheSubnetGroupName = NULL, CacheSecurityGroupNames = NULL, SecurityGroupIds = NULL, Tags = NULL, SnapshotArns = NULL, SnapshotName = NULL, PreferredMaintenanceWindow = NULL, Port = NULL, NotificationTopicArn = NULL, AutoMinorVersionUpgrade = NULL, SnapshotRetentionLimit = NULL, SnapshotWindow = NULL, AuthToken = NULL, TransitEncryptionEnabled = NULL, AtRestEncryptionEnabled = NULL, KmsKeyId = NULL, UserGroupIds = NULL, LogDeliveryConfigurations = NULL, DataTieringEnabled = NULL, NetworkType = NULL, IpDiscovery = NULL, TransitEncryptionMode = NULL, ClusterMode = NULL) {
   op <- new_operation(
     name = "CreateReplicationGroup",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .elasticache$create_replication_group_input(ReplicationGroupId = ReplicationGroupId, ReplicationGroupDescription = ReplicationGroupDescription, GlobalReplicationGroupId = GlobalReplicationGroupId, PrimaryClusterId = PrimaryClusterId, AutomaticFailoverEnabled = AutomaticFailoverEnabled, MultiAZEnabled = MultiAZEnabled, NumCacheClusters = NumCacheClusters, PreferredCacheClusterAZs = PreferredCacheClusterAZs, NumNodeGroups = NumNodeGroups, ReplicasPerNodeGroup = ReplicasPerNodeGroup, NodeGroupConfiguration = NodeGroupConfiguration, CacheNodeType = CacheNodeType, Engine = Engine, EngineVersion = EngineVersion, CacheParameterGroupName = CacheParameterGroupName, CacheSubnetGroupName = CacheSubnetGroupName, CacheSecurityGroupNames = CacheSecurityGroupNames, SecurityGroupIds = SecurityGroupIds, Tags = Tags, SnapshotArns = SnapshotArns, SnapshotName = SnapshotName, PreferredMaintenanceWindow = PreferredMaintenanceWindow, Port = Port, NotificationTopicArn = NotificationTopicArn, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, SnapshotRetentionLimit = SnapshotRetentionLimit, SnapshotWindow = SnapshotWindow, AuthToken = AuthToken, TransitEncryptionEnabled = TransitEncryptionEnabled, AtRestEncryptionEnabled = AtRestEncryptionEnabled, KmsKeyId = KmsKeyId, UserGroupIds = UserGroupIds, LogDeliveryConfigurations = LogDeliveryConfigurations, DataTieringEnabled = DataTieringEnabled)
+  input <- .elasticache$create_replication_group_input(ReplicationGroupId = ReplicationGroupId, ReplicationGroupDescription = ReplicationGroupDescription, GlobalReplicationGroupId = GlobalReplicationGroupId, PrimaryClusterId = PrimaryClusterId, AutomaticFailoverEnabled = AutomaticFailoverEnabled, MultiAZEnabled = MultiAZEnabled, NumCacheClusters = NumCacheClusters, PreferredCacheClusterAZs = PreferredCacheClusterAZs, NumNodeGroups = NumNodeGroups, ReplicasPerNodeGroup = ReplicasPerNodeGroup, NodeGroupConfiguration = NodeGroupConfiguration, CacheNodeType = CacheNodeType, Engine = Engine, EngineVersion = EngineVersion, CacheParameterGroupName = CacheParameterGroupName, CacheSubnetGroupName = CacheSubnetGroupName, CacheSecurityGroupNames = CacheSecurityGroupNames, SecurityGroupIds = SecurityGroupIds, Tags = Tags, SnapshotArns = SnapshotArns, SnapshotName = SnapshotName, PreferredMaintenanceWindow = PreferredMaintenanceWindow, Port = Port, NotificationTopicArn = NotificationTopicArn, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, SnapshotRetentionLimit = SnapshotRetentionLimit, SnapshotWindow = SnapshotWindow, AuthToken = AuthToken, TransitEncryptionEnabled = TransitEncryptionEnabled, AtRestEncryptionEnabled = AtRestEncryptionEnabled, KmsKeyId = KmsKeyId, UserGroupIds = UserGroupIds, LogDeliveryConfigurations = LogDeliveryConfigurations, DataTieringEnabled = DataTieringEnabled, NetworkType = NetworkType, IpDiscovery = IpDiscovery, TransitEncryptionMode = TransitEncryptionMode, ClusterMode = ClusterMode)
   output <- .elasticache$create_replication_group_output()
   config <- get_config()
   svc <- .elasticache$service(config)
@@ -1066,7 +1081,7 @@ elasticache_create_replication_group <- function(ReplicationGroupId, Replication
 #' @description
 #' Creates a copy of an entire cluster or replication group at a specific moment in time.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/create_snapshot.html](https://paws-r.github.io/docs/elasticache/create_snapshot.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_create_snapshot/](https://www.paws-r-sdk.com/docs/elasticache_create_snapshot/) for full documentation.
 #'
 #' @param ReplicationGroupId The identifier of an existing replication group. The snapshot is created
 #' from this replication group.
@@ -1102,7 +1117,7 @@ elasticache_create_snapshot <- function(ReplicationGroupId = NULL, CacheClusterI
 #' @description
 #' For Redis engine version 6.0 onwards: Creates a Redis user. For more information, see [Using Role Based Access Control (RBAC)](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html).
 #'
-#' See [https://paws-r.github.io/docs/elasticache/create_user.html](https://paws-r.github.io/docs/elasticache/create_user.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_create_user/](https://www.paws-r-sdk.com/docs/elasticache_create_user/) for full documentation.
 #'
 #' @param UserId &#91;required&#93; The ID of the user.
 #' @param UserName &#91;required&#93; The username of the user.
@@ -1113,18 +1128,19 @@ elasticache_create_snapshot <- function(ReplicationGroupId = NULL, CacheClusterI
 #' @param NoPasswordRequired Indicates a password is not required for this user.
 #' @param Tags A list of tags to be added to this resource. A tag is a key-value pair.
 #' A tag key must be accompanied by a tag value, although null is accepted.
+#' @param AuthenticationMode Specifies how to authenticate the user.
 #'
 #' @keywords internal
 #'
 #' @rdname elasticache_create_user
-elasticache_create_user <- function(UserId, UserName, Engine, Passwords = NULL, AccessString, NoPasswordRequired = NULL, Tags = NULL) {
+elasticache_create_user <- function(UserId, UserName, Engine, Passwords = NULL, AccessString, NoPasswordRequired = NULL, Tags = NULL, AuthenticationMode = NULL) {
   op <- new_operation(
     name = "CreateUser",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .elasticache$create_user_input(UserId = UserId, UserName = UserName, Engine = Engine, Passwords = Passwords, AccessString = AccessString, NoPasswordRequired = NoPasswordRequired, Tags = Tags)
+  input <- .elasticache$create_user_input(UserId = UserId, UserName = UserName, Engine = Engine, Passwords = Passwords, AccessString = AccessString, NoPasswordRequired = NoPasswordRequired, Tags = Tags, AuthenticationMode = AuthenticationMode)
   output <- .elasticache$create_user_output()
   config <- get_config()
   svc <- .elasticache$service(config)
@@ -1139,7 +1155,7 @@ elasticache_create_user <- function(UserId, UserName, Engine, Passwords = NULL, 
 #' @description
 #' For Redis engine version 6.0 onwards: Creates a Redis user group. For more information, see [Using Role Based Access Control (RBAC)](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html)
 #'
-#' See [https://paws-r.github.io/docs/elasticache/create_user_group.html](https://paws-r.github.io/docs/elasticache/create_user_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_create_user_group/](https://www.paws-r-sdk.com/docs/elasticache_create_user_group/) for full documentation.
 #'
 #' @param UserGroupId &#91;required&#93; The ID of the user group.
 #' @param Engine &#91;required&#93; The current supported value is Redis.
@@ -1172,7 +1188,7 @@ elasticache_create_user_group <- function(UserGroupId, Engine, UserIds = NULL, T
 #' @description
 #' Decreases the number of node groups in a Global datastore
 #'
-#' See [https://paws-r.github.io/docs/elasticache/decrease_node_groups_in_global_replication_group.html](https://paws-r.github.io/docs/elasticache/decrease_node_groups_in_global_replication_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_decrease_node_groups_in_global_replication_group/](https://www.paws-r-sdk.com/docs/elasticache_decrease_node_groups_in_global_replication_group/) for full documentation.
 #'
 #' @param GlobalReplicationGroupId &#91;required&#93; The name of the Global datastore
 #' @param NodeGroupCount &#91;required&#93; The number of node groups (shards) that results from the modification of
@@ -1218,7 +1234,7 @@ elasticache_decrease_node_groups_in_global_replication_group <- function(GlobalR
 #' @description
 #' Dynamically decreases the number of replicas in a Redis (cluster mode disabled) replication group or the number of replica nodes in one or more node groups (shards) of a Redis (cluster mode enabled) replication group. This operation is performed with no cluster down time.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/decrease_replica_count.html](https://paws-r.github.io/docs/elasticache/decrease_replica_count.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_decrease_replica_count/](https://www.paws-r-sdk.com/docs/elasticache_decrease_replica_count/) for full documentation.
 #'
 #' @param ReplicationGroupId &#91;required&#93; The id of the replication group from which you want to remove replica
 #' nodes.
@@ -1227,15 +1243,15 @@ elasticache_decrease_node_groups_in_global_replication_group <- function(GlobalR
 #' the number of replica nodes in the replication group. For Redis (cluster
 #' mode enabled) replication groups, this is the number of replica nodes in
 #' each of the replication group's node groups.
-#'
+#' 
 #' The minimum number of replicas in a shard or replication group is:
-#'
+#' 
 #' -   Redis (cluster mode disabled)
-#'
+#' 
 #'     -   If Multi-AZ is enabled: 1
-#'
+#' 
 #'     -   If Multi-AZ is not enabled: 0
-#'
+#' 
 #' -   Redis (cluster mode enabled): 0 (though you will not be able to
 #'     failover to a replica if your primary node fails)
 #' @param ReplicaConfiguration A list of `ConfigureShard` objects that can be used to configure each
@@ -1272,7 +1288,7 @@ elasticache_decrease_replica_count <- function(ReplicationGroupId, NewReplicaCou
 #' @description
 #' Deletes a previously provisioned cluster. [`delete_cache_cluster`][elasticache_delete_cache_cluster] deletes all associated cache nodes, node endpoints and the cluster itself. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the cluster; you cannot cancel or revert this operation.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/delete_cache_cluster.html](https://paws-r.github.io/docs/elasticache/delete_cache_cluster.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_delete_cache_cluster/](https://www.paws-r-sdk.com/docs/elasticache_delete_cache_cluster/) for full documentation.
 #'
 #' @param CacheClusterId &#91;required&#93; The cluster identifier for the cluster to be deleted. This parameter is
 #' not case sensitive.
@@ -1305,10 +1321,10 @@ elasticache_delete_cache_cluster <- function(CacheClusterId, FinalSnapshotIdenti
 #' @description
 #' Deletes the specified cache parameter group. You cannot delete a cache parameter group if it is associated with any cache clusters. You cannot delete the default cache parameter groups in your account.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/delete_cache_parameter_group.html](https://paws-r.github.io/docs/elasticache/delete_cache_parameter_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_delete_cache_parameter_group/](https://www.paws-r-sdk.com/docs/elasticache_delete_cache_parameter_group/) for full documentation.
 #'
 #' @param CacheParameterGroupName &#91;required&#93; The name of the cache parameter group to delete.
-#'
+#' 
 #' The specified cache security group must not be associated with any
 #' clusters.
 #'
@@ -1337,10 +1353,10 @@ elasticache_delete_cache_parameter_group <- function(CacheParameterGroupName) {
 #' @description
 #' Deletes a cache security group.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/delete_cache_security_group.html](https://paws-r.github.io/docs/elasticache/delete_cache_security_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_delete_cache_security_group/](https://www.paws-r-sdk.com/docs/elasticache_delete_cache_security_group/) for full documentation.
 #'
 #' @param CacheSecurityGroupName &#91;required&#93; The name of the cache security group to delete.
-#'
+#' 
 #' You cannot delete the default security group.
 #'
 #' @keywords internal
@@ -1368,10 +1384,10 @@ elasticache_delete_cache_security_group <- function(CacheSecurityGroupName) {
 #' @description
 #' Deletes a cache subnet group.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/delete_cache_subnet_group.html](https://paws-r.github.io/docs/elasticache/delete_cache_subnet_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_delete_cache_subnet_group/](https://www.paws-r-sdk.com/docs/elasticache_delete_cache_subnet_group/) for full documentation.
 #'
 #' @param CacheSubnetGroupName &#91;required&#93; The name of the cache subnet group to delete.
-#'
+#' 
 #' Constraints: Must contain no more than 255 alphanumeric characters or
 #' hyphens.
 #'
@@ -1400,7 +1416,7 @@ elasticache_delete_cache_subnet_group <- function(CacheSubnetGroupName) {
 #' @description
 #' Deleting a Global datastore is a two-step process:
 #'
-#' See [https://paws-r.github.io/docs/elasticache/delete_global_replication_group.html](https://paws-r.github.io/docs/elasticache/delete_global_replication_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_delete_global_replication_group/](https://www.paws-r-sdk.com/docs/elasticache_delete_global_replication_group/) for full documentation.
 #'
 #' @param GlobalReplicationGroupId &#91;required&#93; The name of the Global datastore
 #' @param RetainPrimaryReplicationGroup &#91;required&#93; The primary replication group is retained as a standalone replication
@@ -1431,7 +1447,7 @@ elasticache_delete_global_replication_group <- function(GlobalReplicationGroupId
 #' @description
 #' Deletes an existing replication group. By default, this operation deletes the entire replication group, including the primary/primaries and all of the read replicas. If the replication group has only one primary, you can optionally delete only the read replicas, while retaining the primary by setting `RetainPrimaryCluster=true`.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/delete_replication_group.html](https://paws-r.github.io/docs/elasticache/delete_replication_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_delete_replication_group/](https://www.paws-r-sdk.com/docs/elasticache_delete_replication_group/) for full documentation.
 #'
 #' @param ReplicationGroupId &#91;required&#93; The identifier for the cluster to be deleted. This parameter is not case
 #' sensitive.
@@ -1468,7 +1484,7 @@ elasticache_delete_replication_group <- function(ReplicationGroupId, RetainPrima
 #' @description
 #' Deletes an existing snapshot. When you receive a successful response from this operation, ElastiCache immediately begins deleting the snapshot; you cannot cancel or revert this operation.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/delete_snapshot.html](https://paws-r.github.io/docs/elasticache/delete_snapshot.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_delete_snapshot/](https://www.paws-r-sdk.com/docs/elasticache_delete_snapshot/) for full documentation.
 #'
 #' @param SnapshotName &#91;required&#93; The name of the snapshot to be deleted.
 #'
@@ -1497,7 +1513,7 @@ elasticache_delete_snapshot <- function(SnapshotName) {
 #' @description
 #' For Redis engine version 6.0 onwards: Deletes a user. The user will be removed from all user groups and in turn removed from all replication groups. For more information, see [Using Role Based Access Control (RBAC)](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html).
 #'
-#' See [https://paws-r.github.io/docs/elasticache/delete_user.html](https://paws-r.github.io/docs/elasticache/delete_user.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_delete_user/](https://www.paws-r-sdk.com/docs/elasticache_delete_user/) for full documentation.
 #'
 #' @param UserId &#91;required&#93; The ID of the user.
 #'
@@ -1526,7 +1542,7 @@ elasticache_delete_user <- function(UserId) {
 #' @description
 #' For Redis engine version 6.0 onwards: Deletes a user group. The user group must first be disassociated from the replication group before it can be deleted. For more information, see [Using Role Based Access Control (RBAC)](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html).
 #'
-#' See [https://paws-r.github.io/docs/elasticache/delete_user_group.html](https://paws-r.github.io/docs/elasticache/delete_user_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_delete_user_group/](https://www.paws-r-sdk.com/docs/elasticache_delete_user_group/) for full documentation.
 #'
 #' @param UserGroupId &#91;required&#93; The ID of the user group.
 #'
@@ -1557,7 +1573,7 @@ elasticache_delete_user_group <- function(UserGroupId) {
 #' @description
 #' Returns information about all provisioned clusters if no cluster identifier is specified, or about a specific cache cluster if a cluster identifier is supplied.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_cache_clusters.html](https://paws-r.github.io/docs/elasticache/describe_cache_clusters.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_cache_clusters/](https://www.paws-r-sdk.com/docs/elasticache_describe_cache_clusters/) for full documentation.
 #'
 #' @param CacheClusterId The user-supplied cluster identifier. If this parameter is specified,
 #' only information about that specific cluster is returned. This parameter
@@ -1565,9 +1581,9 @@ elasticache_delete_user_group <- function(UserGroupId) {
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a marker is
 #' included in the response so that the remaining results can be retrieved.
-#'
+#' 
 #' Default: 100
-#'
+#' 
 #' Constraints: minimum 20; maximum 100.
 #' @param Marker An optional marker returned from a prior request. Use this marker for
 #' pagination of results from this operation. If this parameter is
@@ -1605,32 +1621,32 @@ elasticache_describe_cache_clusters <- function(CacheClusterId = NULL, MaxRecord
 #' @description
 #' Returns a list of the available cache engines and their versions.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_cache_engine_versions.html](https://paws-r.github.io/docs/elasticache/describe_cache_engine_versions.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_cache_engine_versions/](https://www.paws-r-sdk.com/docs/elasticache_describe_cache_engine_versions/) for full documentation.
 #'
 #' @param Engine The cache engine to return. Valid values: `memcached` | `redis`
 #' @param EngineVersion The cache engine version to return.
-#'
+#' 
 #' Example: `1.4.14`
 #' @param CacheParameterGroupFamily The name of a specific cache parameter group family to return details
 #' for.
-#'
+#' 
 #' Valid values are: `memcached1.4` | `memcached1.5` | `memcached1.6` |
 #' `redis2.6` | `redis2.8` | `redis3.2` | `redis4.0` | `redis5.0` |
-#' `redis6.x` | `redis6.2`
-#'
+#' `redis6.x` | `redis6.2` | `redis7`
+#' 
 #' Constraints:
-#'
+#' 
 #' -   Must be 1 to 255 alphanumeric characters
-#'
+#' 
 #' -   First character must be a letter
-#'
+#' 
 #' -   Cannot end with a hyphen or contain two consecutive hyphens
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a marker is
 #' included in the response so that the remaining results can be retrieved.
-#'
+#' 
 #' Default: 100
-#'
+#' 
 #' Constraints: minimum 20; maximum 100.
 #' @param Marker An optional marker returned from a prior request. Use this marker for
 #' pagination of results from this operation. If this parameter is
@@ -1664,15 +1680,15 @@ elasticache_describe_cache_engine_versions <- function(Engine = NULL, EngineVers
 #' @description
 #' Returns a list of cache parameter group descriptions. If a cache parameter group name is specified, the list contains only the descriptions for that group.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_cache_parameter_groups.html](https://paws-r.github.io/docs/elasticache/describe_cache_parameter_groups.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_cache_parameter_groups/](https://www.paws-r-sdk.com/docs/elasticache_describe_cache_parameter_groups/) for full documentation.
 #'
 #' @param CacheParameterGroupName The name of a specific cache parameter group to return details for.
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a marker is
 #' included in the response so that the remaining results can be retrieved.
-#'
+#' 
 #' Default: 100
-#'
+#' 
 #' Constraints: minimum 20; maximum 100.
 #' @param Marker An optional marker returned from a prior request. Use this marker for
 #' pagination of results from this operation. If this parameter is
@@ -1705,18 +1721,18 @@ elasticache_describe_cache_parameter_groups <- function(CacheParameterGroupName 
 #' @description
 #' Returns the detailed parameter list for a particular cache parameter group.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_cache_parameters.html](https://paws-r.github.io/docs/elasticache/describe_cache_parameters.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_cache_parameters/](https://www.paws-r-sdk.com/docs/elasticache_describe_cache_parameters/) for full documentation.
 #'
 #' @param CacheParameterGroupName &#91;required&#93; The name of a specific cache parameter group to return details for.
 #' @param Source The parameter types to return.
-#'
+#' 
 #' Valid values: `user` | `system` | `engine-default`
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a marker is
 #' included in the response so that the remaining results can be retrieved.
-#'
+#' 
 #' Default: 100
-#'
+#' 
 #' Constraints: minimum 20; maximum 100.
 #' @param Marker An optional marker returned from a prior request. Use this marker for
 #' pagination of results from this operation. If this parameter is
@@ -1748,15 +1764,15 @@ elasticache_describe_cache_parameters <- function(CacheParameterGroupName, Sourc
 #' @description
 #' Returns a list of cache security group descriptions. If a cache security group name is specified, the list contains only the description of that group. This applicable only when you have ElastiCache in Classic setup
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_cache_security_groups.html](https://paws-r.github.io/docs/elasticache/describe_cache_security_groups.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_cache_security_groups/](https://www.paws-r-sdk.com/docs/elasticache_describe_cache_security_groups/) for full documentation.
 #'
 #' @param CacheSecurityGroupName The name of the cache security group to return details for.
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a marker is
 #' included in the response so that the remaining results can be retrieved.
-#'
+#' 
 #' Default: 100
-#'
+#' 
 #' Constraints: minimum 20; maximum 100.
 #' @param Marker An optional marker returned from a prior request. Use this marker for
 #' pagination of results from this operation. If this parameter is
@@ -1788,15 +1804,15 @@ elasticache_describe_cache_security_groups <- function(CacheSecurityGroupName = 
 #' @description
 #' Returns a list of cache subnet group descriptions. If a subnet group name is specified, the list contains only the description of that group. This is applicable only when you have ElastiCache in VPC setup. All ElastiCache clusters now launch in VPC by default.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_cache_subnet_groups.html](https://paws-r.github.io/docs/elasticache/describe_cache_subnet_groups.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_cache_subnet_groups/](https://www.paws-r-sdk.com/docs/elasticache_describe_cache_subnet_groups/) for full documentation.
 #'
 #' @param CacheSubnetGroupName The name of the cache subnet group to return details for.
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a marker is
 #' included in the response so that the remaining results can be retrieved.
-#'
+#' 
 #' Default: 100
-#'
+#' 
 #' Constraints: minimum 20; maximum 100.
 #' @param Marker An optional marker returned from a prior request. Use this marker for
 #' pagination of results from this operation. If this parameter is
@@ -1829,19 +1845,19 @@ elasticache_describe_cache_subnet_groups <- function(CacheSubnetGroupName = NULL
 #' @description
 #' Returns the default engine and system parameter information for the specified cache engine.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_engine_default_parameters.html](https://paws-r.github.io/docs/elasticache/describe_engine_default_parameters.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_engine_default_parameters/](https://www.paws-r-sdk.com/docs/elasticache_describe_engine_default_parameters/) for full documentation.
 #'
 #' @param CacheParameterGroupFamily &#91;required&#93; The name of the cache parameter group family.
-#'
+#' 
 #' Valid values are: `memcached1.4` | `memcached1.5` | `memcached1.6` |
 #' `redis2.6` | `redis2.8` | `redis3.2` | `redis4.0` | `redis5.0` |
-#' `redis6.x` | `redis6.2`
+#' `redis6.x` | `redis6.2` | `redis7`
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a marker is
 #' included in the response so that the remaining results can be retrieved.
-#'
+#' 
 #' Default: 100
-#'
+#' 
 #' Constraints: minimum 20; maximum 100.
 #' @param Marker An optional marker returned from a prior request. Use this marker for
 #' pagination of results from this operation. If this parameter is
@@ -1874,7 +1890,7 @@ elasticache_describe_engine_default_parameters <- function(CacheParameterGroupFa
 #' @description
 #' Returns events related to clusters, cache security groups, and cache parameter groups. You can obtain events specific to a particular cluster, cache security group, or cache parameter group by providing the name as a parameter.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_events.html](https://paws-r.github.io/docs/elasticache/describe_events.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_events/](https://www.paws-r-sdk.com/docs/elasticache_describe_events/) for full documentation.
 #'
 #' @param SourceIdentifier The identifier of the event source for which events are returned. If not
 #' specified, all sources are included in the response.
@@ -1882,19 +1898,19 @@ elasticache_describe_engine_default_parameters <- function(CacheParameterGroupFa
 #' events are returned.
 #' @param StartTime The beginning of the time interval to retrieve events for, specified in
 #' ISO 8601 format.
-#'
+#' 
 #' **Example:** 2017-03-30T07:03:49.555Z
 #' @param EndTime The end of the time interval for which to retrieve events, specified in
 #' ISO 8601 format.
-#'
+#' 
 #' **Example:** 2017-03-30T07:03:49.555Z
 #' @param Duration The number of minutes worth of events to retrieve.
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a marker is
 #' included in the response so that the remaining results can be retrieved.
-#'
+#' 
 #' Default: 100
-#'
+#' 
 #' Constraints: minimum 20; maximum 100.
 #' @param Marker An optional marker returned from a prior request. Use this marker for
 #' pagination of results from this operation. If this parameter is
@@ -1926,7 +1942,7 @@ elasticache_describe_events <- function(SourceIdentifier = NULL, SourceType = NU
 #' @description
 #' Returns information about a particular global replication group. If no identifier is specified, returns information about all Global datastores.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_global_replication_groups.html](https://paws-r.github.io/docs/elasticache/describe_global_replication_groups.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_global_replication_groups/](https://www.paws-r-sdk.com/docs/elasticache_describe_global_replication_groups/) for full documentation.
 #'
 #' @param GlobalReplicationGroupId The name of the Global datastore
 #' @param MaxRecords The maximum number of records to include in the response. If more
@@ -1963,19 +1979,19 @@ elasticache_describe_global_replication_groups <- function(GlobalReplicationGrou
 #' @description
 #' Returns information about a particular replication group. If no identifier is specified, [`describe_replication_groups`][elasticache_describe_replication_groups] returns information about all replication groups.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_replication_groups.html](https://paws-r.github.io/docs/elasticache/describe_replication_groups.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_replication_groups/](https://www.paws-r-sdk.com/docs/elasticache_describe_replication_groups/) for full documentation.
 #'
 #' @param ReplicationGroupId The identifier for the replication group to be described. This parameter
 #' is not case sensitive.
-#'
+#' 
 #' If you do not specify this parameter, information about all replication
 #' groups is returned.
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a marker is
 #' included in the response so that the remaining results can be retrieved.
-#'
+#' 
 #' Default: 100
-#'
+#' 
 #' Constraints: minimum 20; maximum 100.
 #' @param Marker An optional marker returned from a prior request. Use this marker for
 #' pagination of results from this operation. If this parameter is
@@ -2008,7 +2024,7 @@ elasticache_describe_replication_groups <- function(ReplicationGroupId = NULL, M
 #' @description
 #' Returns information about reserved cache nodes for this account, or about a specified reserved cache node.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_reserved_cache_nodes.html](https://paws-r.github.io/docs/elasticache/describe_reserved_cache_nodes.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_reserved_cache_nodes/](https://www.paws-r-sdk.com/docs/elasticache_describe_reserved_cache_nodes/) for full documentation.
 #'
 #' @param ReservedCacheNodeId The reserved cache node identifier filter value. Use this parameter to
 #' show only the reservation that matches the specified reservation ID.
@@ -2016,135 +2032,124 @@ elasticache_describe_replication_groups <- function(ReplicationGroupId = NULL, M
 #' purchased reservations matching the specified offering identifier.
 #' @param CacheNodeType The cache node type filter value. Use this parameter to show only those
 #' reservations matching the specified cache node type.
-#'
+#' 
 #' The following node types are supported by ElastiCache. Generally
 #' speaking, the current generation types provide more memory and
 #' computational power at lower cost when compared to their equivalent
 #' previous generation counterparts.
-#'
+#' 
 #' -   General purpose:
-#'
+#' 
 #'     -   Current generation:
-#'
-#'         **M6g node types:** (available only for Redis engine version
+#' 
+#'         **M6g node types** (available only for Redis engine version
 #'         5.0.6 onward and for Memcached engine version 1.5.16 onward):
 #'         `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
 #'         `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
 #'         `cache.m6g.16xlarge`
-#'
+#' 
 #'         For region availability, see [Supported Node
 #'         Types](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-#'
+#' 
 #'         **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
 #'         `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
 #'         `cache.m5.24xlarge`
-#'
+#' 
 #'         **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
 #'         `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
-#'
+#' 
 #'         **T4g node types** (available only for Redis engine version
-#'         5.0.6 onward and for Memcached engine version 1.5.16 onward):
+#'         5.0.6 onward and Memcached engine version 1.5.16 onward):
 #'         `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
-#'
+#' 
 #'         **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
 #'         `cache.t3.medium`
-#'
+#' 
 #'         **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
 #'         `cache.t2.medium`
-#'
+#' 
 #'     -   Previous generation: (not recommended. Existing clusters are
 #'         still supported but creation of new clusters is not supported
 #'         for these types.)
-#'
+#' 
 #'         **T1 node types:** `cache.t1.micro`
-#'
+#' 
 #'         **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
 #'         `cache.m1.large`, `cache.m1.xlarge`
-#'
+#' 
 #'         **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
 #'         `cache.m3.xlarge`, `cache.m3.2xlarge`
-#'
+#' 
 #' -   Compute optimized:
-#'
+#' 
 #'     -   Previous generation: (not recommended. Existing clusters are
 #'         still supported but creation of new clusters is not supported
 #'         for these types.)
-#'
+#' 
 #'         **C1 node types:** `cache.c1.xlarge`
-#'
-#' -   Memory optimized with data tiering:
-#'
-#'     -   Current generation:
-#'
-#'         **R6gd node types** (available only for Redis engine version 6.2
-#'         onward).
-#'
-#'         `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
-#'         `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
-#'         `cache.r6gd.16xlarge`
-#'
+#' 
 #' -   Memory optimized:
-#'
+#' 
 #'     -   Current generation:
-#'
+#' 
 #'         **R6g node types** (available only for Redis engine version
 #'         5.0.6 onward and for Memcached engine version 1.5.16 onward).
-#'
+#' 
 #'         `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
 #'         `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
 #'         `cache.r6g.16xlarge`
-#'
+#' 
 #'         For region availability, see [Supported Node
 #'         Types](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-#'
+#' 
 #'         **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
 #'         `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
 #'         `cache.r5.24xlarge`
-#'
+#' 
 #'         **R4 node types:** `cache.r4.large`, `cache.r4.xlarge`,
 #'         `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
 #'         `cache.r4.16xlarge`
-#'
+#' 
 #'     -   Previous generation: (not recommended. Existing clusters are
 #'         still supported but creation of new clusters is not supported
 #'         for these types.)
-#'
+#' 
 #'         **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
 #'         `cache.m2.4xlarge`
-#'
+#' 
 #'         **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
 #'         `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
-#'
+#' 
 #' **Additional node type info**
-#'
+#' 
 #' -   All current generation instance types are created in Amazon VPC by
 #'     default.
-#'
+#' 
 #' -   Redis append-only files (AOF) are not supported for T1 or T2
 #'     instances.
-#'
+#' 
 #' -   Redis Multi-AZ with automatic failover is not supported on T1
 #'     instances.
-#'
+#' 
 #' -   Redis configuration variables `appendonly` and `appendfsync` are not
 #'     supported on Redis version 2.8.22 and later.
 #' @param Duration The duration filter value, specified in years or seconds. Use this
 #' parameter to show only reservations for this duration.
-#'
+#' 
 #' Valid Values: `1 | 3 | 31536000 | 94608000`
 #' @param ProductDescription The product description filter value. Use this parameter to show only
 #' those reservations matching the specified product description.
 #' @param OfferingType The offering type filter value. Use this parameter to show only the
 #' available offerings matching the specified offering type.
-#'
+#' 
 #' Valid values:
 #' `"Light Utilization"|"Medium Utilization"|"Heavy Utilization"|"All Upfront"|"Partial Upfront"| "No Upfront"`
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a marker is
 #' included in the response so that the remaining results can be retrieved.
-#'
+#' 
 #' Default: 100
-#'
+#' 
 #' Constraints: minimum 20; maximum 100.
 #' @param Marker An optional marker returned from a prior request. Use this marker for
 #' pagination of results from this operation. If this parameter is
@@ -2176,144 +2181,133 @@ elasticache_describe_reserved_cache_nodes <- function(ReservedCacheNodeId = NULL
 #' @description
 #' Lists available reserved cache node offerings.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_reserved_cache_nodes_offerings.html](https://paws-r.github.io/docs/elasticache/describe_reserved_cache_nodes_offerings.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_reserved_cache_nodes_offerings/](https://www.paws-r-sdk.com/docs/elasticache_describe_reserved_cache_nodes_offerings/) for full documentation.
 #'
 #' @param ReservedCacheNodesOfferingId The offering identifier filter value. Use this parameter to show only
 #' the available offering that matches the specified reservation
 #' identifier.
-#'
+#' 
 #' Example: `438012d3-4052-4cc7-b2e3-8d3372e0e706`
 #' @param CacheNodeType The cache node type filter value. Use this parameter to show only the
 #' available offerings matching the specified cache node type.
-#'
+#' 
 #' The following node types are supported by ElastiCache. Generally
 #' speaking, the current generation types provide more memory and
 #' computational power at lower cost when compared to their equivalent
 #' previous generation counterparts.
-#'
+#' 
 #' -   General purpose:
-#'
+#' 
 #'     -   Current generation:
-#'
-#'         **M6g node types:** (available only for Redis engine version
-#'         5.0.6 onward and for Memcached engine version 1.5.16 onward)
+#' 
+#'         **M6g node types** (available only for Redis engine version
+#'         5.0.6 onward and for Memcached engine version 1.5.16 onward):
 #'         `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
 #'         `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
 #'         `cache.m6g.16xlarge`
-#'
+#' 
 #'         For region availability, see [Supported Node
 #'         Types](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-#'
+#' 
 #'         **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
 #'         `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
 #'         `cache.m5.24xlarge`
-#'
+#' 
 #'         **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
 #'         `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
-#'
+#' 
 #'         **T4g node types** (available only for Redis engine version
-#'         5.0.6 onward and for Memcached engine version 1.5.16 onward):
+#'         5.0.6 onward and Memcached engine version 1.5.16 onward):
 #'         `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
-#'
+#' 
 #'         **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
 #'         `cache.t3.medium`
-#'
+#' 
 #'         **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
 #'         `cache.t2.medium`
-#'
+#' 
 #'     -   Previous generation: (not recommended. Existing clusters are
 #'         still supported but creation of new clusters is not supported
 #'         for these types.)
-#'
+#' 
 #'         **T1 node types:** `cache.t1.micro`
-#'
+#' 
 #'         **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
 #'         `cache.m1.large`, `cache.m1.xlarge`
-#'
+#' 
 #'         **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
 #'         `cache.m3.xlarge`, `cache.m3.2xlarge`
-#'
+#' 
 #' -   Compute optimized:
-#'
+#' 
 #'     -   Previous generation: (not recommended. Existing clusters are
 #'         still supported but creation of new clusters is not supported
 #'         for these types.)
-#'
+#' 
 #'         **C1 node types:** `cache.c1.xlarge`
-#'
-#' -   Memory optimized with data tiering:
-#'
-#'     -   Current generation:
-#'
-#'         **R6gd node types** (available only for Redis engine version 6.2
-#'         onward).
-#'
-#'         `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
-#'         `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
-#'         `cache.r6gd.16xlarge`
-#'
+#' 
 #' -   Memory optimized:
-#'
+#' 
 #'     -   Current generation:
-#'
+#' 
 #'         **R6g node types** (available only for Redis engine version
 #'         5.0.6 onward and for Memcached engine version 1.5.16 onward).
-#'
+#' 
 #'         `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
 #'         `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
 #'         `cache.r6g.16xlarge`
-#'
+#' 
 #'         For region availability, see [Supported Node
 #'         Types](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-#'
+#' 
 #'         **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
 #'         `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
 #'         `cache.r5.24xlarge`
-#'
+#' 
 #'         **R4 node types:** `cache.r4.large`, `cache.r4.xlarge`,
 #'         `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
 #'         `cache.r4.16xlarge`
-#'
+#' 
 #'     -   Previous generation: (not recommended. Existing clusters are
 #'         still supported but creation of new clusters is not supported
 #'         for these types.)
-#'
+#' 
 #'         **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
 #'         `cache.m2.4xlarge`
-#'
+#' 
 #'         **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
 #'         `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
-#'
+#' 
 #' **Additional node type info**
-#'
+#' 
 #' -   All current generation instance types are created in Amazon VPC by
 #'     default.
-#'
+#' 
 #' -   Redis append-only files (AOF) are not supported for T1 or T2
 #'     instances.
-#'
+#' 
 #' -   Redis Multi-AZ with automatic failover is not supported on T1
 #'     instances.
-#'
+#' 
 #' -   Redis configuration variables `appendonly` and `appendfsync` are not
 #'     supported on Redis version 2.8.22 and later.
 #' @param Duration Duration filter value, specified in years or seconds. Use this parameter
 #' to show only reservations for a given duration.
-#'
+#' 
 #' Valid Values: `1 | 3 | 31536000 | 94608000`
 #' @param ProductDescription The product description filter value. Use this parameter to show only
 #' the available offerings matching the specified product description.
 #' @param OfferingType The offering type filter value. Use this parameter to show only the
 #' available offerings matching the specified offering type.
-#'
+#' 
 #' Valid Values:
 #' `"Light Utilization"|"Medium Utilization"|"Heavy Utilization" |"All Upfront"|"Partial Upfront"| "No Upfront"`
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a marker is
 #' included in the response so that the remaining results can be retrieved.
-#'
+#' 
 #' Default: 100
-#'
+#' 
 #' Constraints: minimum 20; maximum 100.
 #' @param Marker An optional marker returned from a prior request. Use this marker for
 #' pagination of results from this operation. If this parameter is
@@ -2345,7 +2339,7 @@ elasticache_describe_reserved_cache_nodes_offerings <- function(ReservedCacheNod
 #' @description
 #' Returns details of the service updates
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_service_updates.html](https://paws-r.github.io/docs/elasticache/describe_service_updates.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_service_updates/](https://www.paws-r-sdk.com/docs/elasticache_describe_service_updates/) for full documentation.
 #'
 #' @param ServiceUpdateName The unique ID of the service update
 #' @param ServiceUpdateStatus The status of the service update
@@ -2380,7 +2374,7 @@ elasticache_describe_service_updates <- function(ServiceUpdateName = NULL, Servi
 #' @description
 #' Returns information about cluster or replication group snapshots. By default, [`describe_snapshots`][elasticache_describe_snapshots] lists all of your snapshots; it can optionally describe a single snapshot, or just the snapshots associated with a particular cache cluster.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_snapshots.html](https://paws-r.github.io/docs/elasticache/describe_snapshots.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_snapshots/](https://www.paws-r-sdk.com/docs/elasticache_describe_snapshots/) for full documentation.
 #'
 #' @param ReplicationGroupId A user-supplied replication group identifier. If this parameter is
 #' specified, only snapshots associated with that specific replication
@@ -2400,9 +2394,9 @@ elasticache_describe_service_updates <- function(ServiceUpdateName = NULL, Servi
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a marker is
 #' included in the response so that the remaining results can be retrieved.
-#'
+#' 
 #' Default: 50
-#'
+#' 
 #' Constraints: minimum 20; maximum 50.
 #' @param ShowNodeGroupConfig A Boolean value which if true, the node group (shard) configuration is
 #' included in the snapshot description.
@@ -2432,7 +2426,7 @@ elasticache_describe_snapshots <- function(ReplicationGroupId = NULL, CacheClust
 #' @description
 #' Returns details of the update actions
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_update_actions.html](https://paws-r.github.io/docs/elasticache/describe_update_actions.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_update_actions/](https://www.paws-r-sdk.com/docs/elasticache_describe_update_actions/) for full documentation.
 #'
 #' @param ServiceUpdateName The unique ID of the service update
 #' @param ReplicationGroupIds The replication group IDs
@@ -2475,7 +2469,7 @@ elasticache_describe_update_actions <- function(ServiceUpdateName = NULL, Replic
 #' @description
 #' Returns a list of user groups.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_user_groups.html](https://paws-r.github.io/docs/elasticache/describe_user_groups.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_user_groups/](https://www.paws-r-sdk.com/docs/elasticache_describe_user_groups/) for full documentation.
 #'
 #' @param UserGroupId The ID of the user group.
 #' @param MaxRecords The maximum number of records to include in the response. If more
@@ -2511,7 +2505,7 @@ elasticache_describe_user_groups <- function(UserGroupId = NULL, MaxRecords = NU
 #' @description
 #' Returns a list of users.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/describe_users.html](https://paws-r.github.io/docs/elasticache/describe_users.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_describe_users/](https://www.paws-r-sdk.com/docs/elasticache_describe_users/) for full documentation.
 #'
 #' @param Engine The Redis engine.
 #' @param UserId The ID of the user.
@@ -2550,7 +2544,7 @@ elasticache_describe_users <- function(Engine = NULL, UserId = NULL, Filters = N
 #' @description
 #' Remove a secondary cluster from the Global datastore using the Global datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that Amazon region.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/disassociate_global_replication_group.html](https://paws-r.github.io/docs/elasticache/disassociate_global_replication_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_disassociate_global_replication_group/](https://www.paws-r-sdk.com/docs/elasticache_disassociate_global_replication_group/) for full documentation.
 #'
 #' @param GlobalReplicationGroupId &#91;required&#93; The name of the Global datastore
 #' @param ReplicationGroupId &#91;required&#93; The name of the secondary cluster you wish to remove from the Global
@@ -2578,12 +2572,12 @@ elasticache_disassociate_global_replication_group <- function(GlobalReplicationG
 }
 .elasticache$operations$disassociate_global_replication_group <- elasticache_disassociate_global_replication_group
 
-#' Used to failover the primary region to a selected secondary region
+#' Used to failover the primary region to a secondary region
 #'
 #' @description
-#' Used to failover the primary region to a selected secondary region. The selected secondary region will become primary, and all other clusters will become secondary.
+#' Used to failover the primary region to a secondary region. The secondary region will become primary, and all other clusters will become secondary.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/failover_global_replication_group.html](https://paws-r.github.io/docs/elasticache/failover_global_replication_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_failover_global_replication_group/](https://www.paws-r-sdk.com/docs/elasticache_failover_global_replication_group/) for full documentation.
 #'
 #' @param GlobalReplicationGroupId &#91;required&#93; The name of the Global datastore
 #' @param PrimaryRegion &#91;required&#93; The Amazon region of the primary cluster of the Global datastore
@@ -2614,7 +2608,7 @@ elasticache_failover_global_replication_group <- function(GlobalReplicationGroup
 #' @description
 #' Increase the number of node groups in the Global datastore
 #'
-#' See [https://paws-r.github.io/docs/elasticache/increase_node_groups_in_global_replication_group.html](https://paws-r.github.io/docs/elasticache/increase_node_groups_in_global_replication_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_increase_node_groups_in_global_replication_group/](https://www.paws-r-sdk.com/docs/elasticache_increase_node_groups_in_global_replication_group/) for full documentation.
 #'
 #' @param GlobalReplicationGroupId &#91;required&#93; The name of the Global datastore
 #' @param NodeGroupCount &#91;required&#93; The number of node groups you wish to add
@@ -2652,7 +2646,7 @@ elasticache_increase_node_groups_in_global_replication_group <- function(GlobalR
 #' @description
 #' Dynamically increases the number of replicas in a Redis (cluster mode disabled) replication group or the number of replica nodes in one or more node groups (shards) of a Redis (cluster mode enabled) replication group. This operation is performed with no cluster down time.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/increase_replica_count.html](https://paws-r.github.io/docs/elasticache/increase_replica_count.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_increase_replica_count/](https://www.paws-r-sdk.com/docs/elasticache_increase_replica_count/) for full documentation.
 #'
 #' @param ReplicationGroupId &#91;required&#93; The id of the replication group to which you want to add replica nodes.
 #' @param NewReplicaCount The number of read replica nodes you want at the completion of this
@@ -2693,20 +2687,20 @@ elasticache_increase_replica_count <- function(ReplicationGroupId, NewReplicaCou
 #' @description
 #' Lists all available node types that you can scale your Redis cluster's or replication group's current node type.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/list_allowed_node_type_modifications.html](https://paws-r.github.io/docs/elasticache/list_allowed_node_type_modifications.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_list_allowed_node_type_modifications/](https://www.paws-r-sdk.com/docs/elasticache_list_allowed_node_type_modifications/) for full documentation.
 #'
 #' @param CacheClusterId The name of the cluster you want to scale up to a larger node instanced
 #' type. ElastiCache uses the cluster id to identify the current node type
 #' of this cluster and from that to create a list of node types you can
 #' scale up to.
-#'
+#' 
 #' You must provide a value for either the `CacheClusterId` or the
 #' `ReplicationGroupId`.
 #' @param ReplicationGroupId The name of the replication group want to scale up to a larger node
 #' type. ElastiCache uses the replication group id to identify the current
 #' node type being used by this replication group, and from that to create
 #' a list of node types you can scale up to.
-#'
+#' 
 #' You must provide a value for either the `CacheClusterId` or the
 #' `ReplicationGroupId`.
 #'
@@ -2735,16 +2729,16 @@ elasticache_list_allowed_node_type_modifications <- function(CacheClusterId = NU
 #' @description
 #' Lists all tags currently on a named resource.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/list_tags_for_resource.html](https://paws-r.github.io/docs/elasticache/list_tags_for_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_list_tags_for_resource/](https://www.paws-r-sdk.com/docs/elasticache_list_tags_for_resource/) for full documentation.
 #'
 #' @param ResourceName &#91;required&#93; The Amazon Resource Name (ARN) of the resource for which you want the
 #' list of tags, for example
 #' `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or
 #' `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
-#'
+#' 
 #' For more information about ARNs, see [Amazon Resource Names (ARNs) and
 #' Amazon Web Services Service
-#' Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+#' Namespaces](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html).
 #'
 #' @keywords internal
 #'
@@ -2771,7 +2765,7 @@ elasticache_list_tags_for_resource <- function(ResourceName) {
 #' @description
 #' Modifies the settings for a cluster. You can use this operation to change one or more cluster configuration parameters by specifying the parameters and the new values.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/modify_cache_cluster.html](https://paws-r.github.io/docs/elasticache/modify_cache_cluster.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_modify_cache_cluster/](https://www.paws-r-sdk.com/docs/elasticache_modify_cache_cluster/) for full documentation.
 #'
 #' @param CacheClusterId &#91;required&#93; The cluster identifier. This value is stored as a lowercase string.
 #' @param NumCacheNodes The number of cache nodes that the cluster should have. If the value for
@@ -2781,16 +2775,16 @@ elasticache_list_tags_for_resource <- function(ResourceName) {
 #' existing cache nodes, nodes are removed. If the value is equal to the
 #' number of current cache nodes, any pending add or remove requests are
 #' canceled.
-#'
+#' 
 #' If you are removing cache nodes, you must use the `CacheNodeIdsToRemove`
 #' parameter to provide the IDs of the specific cache nodes to remove.
-#'
+#' 
 #' For clusters running Redis, this value must be 1. For clusters running
 #' Memcached, this value must be between 1 and 40.
-#'
+#' 
 #' Adding or removing Memcached cache nodes can be applied immediately or
 #' as a pending operation (see `ApplyImmediately`).
-#'
+#' 
 #' A pending operation to modify the number of cache nodes in a cluster
 #' during its maintenance window, whether by adding or removing nodes in
 #' accordance with the scale out architecture, is not queued. The
@@ -2816,7 +2810,7 @@ elasticache_list_tags_for_resource <- function(ResourceName) {
 #' difference between the existing number of cache nodes in the cluster or
 #' pending cache nodes, whichever is greater, and the value of
 #' `NumCacheNodes` in the request.
-#'
+#' 
 #' For example: If you have 3 active cache nodes, 7 pending cache nodes,
 #' and the number of cache nodes in this
 #' [`modify_cache_cluster`][elasticache_modify_cache_cluster] call is 5,
@@ -2824,130 +2818,130 @@ elasticache_list_tags_for_resource <- function(ResourceName) {
 #' @param AZMode Specifies whether the new nodes in this Memcached cluster are all
 #' created in a single Availability Zone or created across multiple
 #' Availability Zones.
-#'
+#' 
 #' Valid values: `single-az` | `cross-az`.
-#'
+#' 
 #' This option is only supported for Memcached clusters.
-#'
+#' 
 #' You cannot specify `single-az` if the Memcached cluster already has
 #' cache nodes in different Availability Zones. If `cross-az` is specified,
 #' existing Memcached nodes remain in their current Availability Zone.
-#'
+#' 
 #' Only newly created nodes are located in different Availability Zones.
 #' @param NewAvailabilityZones This option is only supported on Memcached clusters.
-#'
+#' 
 #' The list of Availability Zones where the new Memcached cache nodes are
 #' created.
-#'
+#' 
 #' This parameter is only valid when `NumCacheNodes` in the request is
 #' greater than the sum of the number of active cache nodes and the number
 #' of cache nodes pending creation (which may be zero). The number of
 #' Availability Zones supplied in this list must match the cache nodes
 #' being added in this request.
-#'
+#' 
 #' Scenarios:
-#'
+#' 
 #' -   **Scenario 1:** You have 3 active nodes and wish to add 2 nodes.
 #'     Specify `NumCacheNodes=5` (3 + 2) and optionally specify two
 #'     Availability Zones for the two new nodes.
-#'
+#' 
 #' -   **Scenario 2:** You have 3 active nodes and 2 nodes pending creation
 #'     (from the scenario 1 call) and want to add 1 more node. Specify
 #'     `NumCacheNodes=6` ((3 + 2) + 1) and optionally specify an
 #'     Availability Zone for the new node.
-#'
+#' 
 #' -   **Scenario 3:** You want to cancel all pending operations. Specify
 #'     `NumCacheNodes=3` to cancel all pending operations.
-#'
+#' 
 #' The Availability Zone placement of nodes pending creation cannot be
 #' modified. If you wish to cancel any nodes pending creation, add 0 nodes
 #' by setting `NumCacheNodes` to the number of current nodes.
-#'
+#' 
 #' If `cross-az` is specified, existing Memcached nodes remain in their
 #' current Availability Zone. Only newly created nodes can be located in
 #' different Availability Zones. For guidance on how to move existing
 #' Memcached nodes to different Availability Zones, see the **Availability
 #' Zone Considerations** section of [Cache Node Considerations for
 #' Memcached](https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html).
-#'
+#' 
 #' **Impact of new add/remove requests upon pending requests**
-#'
+#' 
 #' -   Scenario-1
-#'
+#' 
 #'     -   Pending Action: Delete
-#'
+#' 
 #'     -   New Request: Delete
-#'
+#' 
 #'     -   Result: The new delete, pending or immediate, replaces the
 #'         pending delete.
-#'
+#' 
 #' -   Scenario-2
-#'
+#' 
 #'     -   Pending Action: Delete
-#'
+#' 
 #'     -   New Request: Create
-#'
+#' 
 #'     -   Result: The new create, pending or immediate, replaces the
 #'         pending delete.
-#'
+#' 
 #' -   Scenario-3
-#'
+#' 
 #'     -   Pending Action: Create
-#'
+#' 
 #'     -   New Request: Delete
-#'
+#' 
 #'     -   Result: The new delete, pending or immediate, replaces the
 #'         pending create.
-#'
+#' 
 #' -   Scenario-4
-#'
+#' 
 #'     -   Pending Action: Create
-#'
+#' 
 #'     -   New Request: Create
-#'
+#' 
 #'     -   Result: The new create is added to the pending create.
-#'
+#' 
 #'         **Important:** If the new create request is **Apply
 #'         Immediately - Yes**, all creates are performed immediately. If
 #'         the new create request is **Apply Immediately - No**, all
 #'         creates are pending.
 #' @param CacheSecurityGroupNames A list of cache security group names to authorize on this cluster. This
 #' change is asynchronously applied as soon as possible.
-#'
+#' 
 #' You can use this parameter only with clusters that are created outside
 #' of an Amazon Virtual Private Cloud (Amazon VPC).
-#'
+#' 
 #' Constraints: Must contain no more than 255 alphanumeric characters. Must
 #' not be "Default".
 #' @param SecurityGroupIds Specifies the VPC Security Groups associated with the cluster.
-#'
+#' 
 #' This parameter can be used only with clusters that are created in an
 #' Amazon Virtual Private Cloud (Amazon VPC).
 #' @param PreferredMaintenanceWindow Specifies the weekly time range during which maintenance on the cluster
 #' is performed. It is specified as a range in the format
 #' ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window
 #' is a 60 minute period.
-#'
+#' 
 #' Valid values for `ddd` are:
-#'
+#' 
 #' -   `sun`
-#'
+#' 
 #' -   `mon`
-#'
+#' 
 #' -   `tue`
-#'
+#' 
 #' -   `wed`
-#'
+#' 
 #' -   `thu`
-#'
+#' 
 #' -   `fri`
-#'
+#' 
 #' -   `sat`
-#'
+#' 
 #' Example: `sun:23:00-mon:01:30`
 #' @param NotificationTopicArn The Amazon Resource Name (ARN) of the Amazon SNS topic to which
 #' notifications are sent.
-#'
+#' 
 #' The Amazon SNS topic owner must be same as the cluster owner.
 #' @param CacheParameterGroupName The name of the cache parameter group to apply to this cluster. This
 #' change is asynchronously applied as soon as possible for parameters when
@@ -2955,26 +2949,26 @@ elasticache_list_tags_for_resource <- function(ResourceName) {
 #' request.
 #' @param NotificationTopicStatus The status of the Amazon SNS notification topic. Notifications are sent
 #' only if the status is `active`.
-#'
+#' 
 #' Valid values: `active` | `inactive`
 #' @param ApplyImmediately If `true`, this parameter causes the modifications in this request and
 #' any pending modifications to be applied, asynchronously and as soon as
 #' possible, regardless of the `PreferredMaintenanceWindow` setting for the
 #' cluster.
-#'
+#' 
 #' If `false`, changes to the cluster are applied on the next maintenance
 #' reboot, or the next failure reboot, whichever occurs first.
-#'
+#' 
 #' If you perform a
 #' [`modify_cache_cluster`][elasticache_modify_cache_cluster] before a
 #' pending modification is applied, the pending modification is replaced by
 #' the newer modification.
-#'
+#' 
 #' Valid values: `true` | `false`
-#'
+#' 
 #' Default: `false`
 #' @param EngineVersion The upgraded version of the cache engine to be run on the cache nodes.
-#'
+#' 
 #' **Important:** You can upgrade to a newer engine version (see [Selecting
 #' a Cache Engine and
 #' Version](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement)),
@@ -2988,7 +2982,7 @@ elasticache_list_tags_for_resource <- function(ResourceName) {
 #' snapshots before deleting them. For example, if you set
 #' `SnapshotRetentionLimit` to 5, a snapshot that was taken today is
 #' retained for 5 days before being deleted.
-#'
+#' 
 #' If the value of `SnapshotRetentionLimit` is set to zero (0), backups are
 #' turned off.
 #' @param SnapshotWindow The daily time range (in UTC) during which ElastiCache begins taking a
@@ -2997,39 +2991,43 @@ elasticache_list_tags_for_resource <- function(ResourceName) {
 #' @param AuthToken Reserved parameter. The password used to access a password protected
 #' server. This parameter must be specified with the `auth-token-update`
 #' parameter. Password constraints:
-#'
+#' 
 #' -   Must be only printable ASCII characters
-#'
+#' 
 #' -   Must be at least 16 characters and no more than 128 characters in
 #'     length
-#'
+#' 
 #' -   Cannot contain any of the following characters: '/', '"', or '@@',
 #'     '%'
-#'
+#' 
 #' For more information, see AUTH password at
 #' [AUTH](https://redis.io/commands/auth/).
 #' @param AuthTokenUpdateStrategy Specifies the strategy to use to update the AUTH token. This parameter
 #' must be specified with the `auth-token` parameter. Possible values:
-#'
+#' 
 #' -   Rotate
-#'
+#' 
 #' -   Set
-#'
+#' 
 #' For more information, see [Authenticating Users with Redis
 #' AUTH](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
 #' @param LogDeliveryConfigurations Specifies the destination, format and type of the logs.
+#' @param IpDiscovery The network type you choose when modifying a cluster, either `ipv4` |
+#' `ipv6`. IPv6 is supported for workloads using Redis engine version 6.2
+#' onward or Memcached engine version 1.6.6 on all instances built on the
+#' [Nitro system](https://aws.amazon.com/ec2/nitro/).
 #'
 #' @keywords internal
 #'
 #' @rdname elasticache_modify_cache_cluster
-elasticache_modify_cache_cluster <- function(CacheClusterId, NumCacheNodes = NULL, CacheNodeIdsToRemove = NULL, AZMode = NULL, NewAvailabilityZones = NULL, CacheSecurityGroupNames = NULL, SecurityGroupIds = NULL, PreferredMaintenanceWindow = NULL, NotificationTopicArn = NULL, CacheParameterGroupName = NULL, NotificationTopicStatus = NULL, ApplyImmediately = NULL, EngineVersion = NULL, AutoMinorVersionUpgrade = NULL, SnapshotRetentionLimit = NULL, SnapshotWindow = NULL, CacheNodeType = NULL, AuthToken = NULL, AuthTokenUpdateStrategy = NULL, LogDeliveryConfigurations = NULL) {
+elasticache_modify_cache_cluster <- function(CacheClusterId, NumCacheNodes = NULL, CacheNodeIdsToRemove = NULL, AZMode = NULL, NewAvailabilityZones = NULL, CacheSecurityGroupNames = NULL, SecurityGroupIds = NULL, PreferredMaintenanceWindow = NULL, NotificationTopicArn = NULL, CacheParameterGroupName = NULL, NotificationTopicStatus = NULL, ApplyImmediately = NULL, EngineVersion = NULL, AutoMinorVersionUpgrade = NULL, SnapshotRetentionLimit = NULL, SnapshotWindow = NULL, CacheNodeType = NULL, AuthToken = NULL, AuthTokenUpdateStrategy = NULL, LogDeliveryConfigurations = NULL, IpDiscovery = NULL) {
   op <- new_operation(
     name = "ModifyCacheCluster",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .elasticache$modify_cache_cluster_input(CacheClusterId = CacheClusterId, NumCacheNodes = NumCacheNodes, CacheNodeIdsToRemove = CacheNodeIdsToRemove, AZMode = AZMode, NewAvailabilityZones = NewAvailabilityZones, CacheSecurityGroupNames = CacheSecurityGroupNames, SecurityGroupIds = SecurityGroupIds, PreferredMaintenanceWindow = PreferredMaintenanceWindow, NotificationTopicArn = NotificationTopicArn, CacheParameterGroupName = CacheParameterGroupName, NotificationTopicStatus = NotificationTopicStatus, ApplyImmediately = ApplyImmediately, EngineVersion = EngineVersion, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, SnapshotRetentionLimit = SnapshotRetentionLimit, SnapshotWindow = SnapshotWindow, CacheNodeType = CacheNodeType, AuthToken = AuthToken, AuthTokenUpdateStrategy = AuthTokenUpdateStrategy, LogDeliveryConfigurations = LogDeliveryConfigurations)
+  input <- .elasticache$modify_cache_cluster_input(CacheClusterId = CacheClusterId, NumCacheNodes = NumCacheNodes, CacheNodeIdsToRemove = CacheNodeIdsToRemove, AZMode = AZMode, NewAvailabilityZones = NewAvailabilityZones, CacheSecurityGroupNames = CacheSecurityGroupNames, SecurityGroupIds = SecurityGroupIds, PreferredMaintenanceWindow = PreferredMaintenanceWindow, NotificationTopicArn = NotificationTopicArn, CacheParameterGroupName = CacheParameterGroupName, NotificationTopicStatus = NotificationTopicStatus, ApplyImmediately = ApplyImmediately, EngineVersion = EngineVersion, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, SnapshotRetentionLimit = SnapshotRetentionLimit, SnapshotWindow = SnapshotWindow, CacheNodeType = CacheNodeType, AuthToken = AuthToken, AuthTokenUpdateStrategy = AuthTokenUpdateStrategy, LogDeliveryConfigurations = LogDeliveryConfigurations, IpDiscovery = IpDiscovery)
   output <- .elasticache$modify_cache_cluster_output()
   config <- get_config()
   svc <- .elasticache$service(config)
@@ -3044,7 +3042,7 @@ elasticache_modify_cache_cluster <- function(CacheClusterId, NumCacheNodes = NUL
 #' @description
 #' Modifies the parameters of a cache parameter group. You can modify up to 20 parameters in a single request by submitting a list parameter name and value pairs.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/modify_cache_parameter_group.html](https://paws-r.github.io/docs/elasticache/modify_cache_parameter_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_modify_cache_parameter_group/](https://www.paws-r-sdk.com/docs/elasticache_modify_cache_parameter_group/) for full documentation.
 #'
 #' @param CacheParameterGroupName &#91;required&#93; The name of the cache parameter group to modify.
 #' @param ParameterNameValues &#91;required&#93; An array of parameter names and values for the parameter update. You
@@ -3076,14 +3074,14 @@ elasticache_modify_cache_parameter_group <- function(CacheParameterGroupName, Pa
 #' @description
 #' Modifies an existing cache subnet group.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/modify_cache_subnet_group.html](https://paws-r.github.io/docs/elasticache/modify_cache_subnet_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_modify_cache_subnet_group/](https://www.paws-r-sdk.com/docs/elasticache_modify_cache_subnet_group/) for full documentation.
 #'
 #' @param CacheSubnetGroupName &#91;required&#93; The name for the cache subnet group. This value is stored as a lowercase
 #' string.
-#'
+#' 
 #' Constraints: Must contain no more than 255 alphanumeric characters or
 #' hyphens.
-#'
+#' 
 #' Example: `mysubnetgroup`
 #' @param CacheSubnetGroupDescription A description of the cache subnet group.
 #' @param SubnetIds The EC2 subnet IDs for the cache subnet group.
@@ -3113,7 +3111,7 @@ elasticache_modify_cache_subnet_group <- function(CacheSubnetGroupName, CacheSub
 #' @description
 #' Modifies the settings for a Global datastore.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/modify_global_replication_group.html](https://paws-r.github.io/docs/elasticache/modify_global_replication_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_modify_global_replication_group/](https://www.paws-r-sdk.com/docs/elasticache_modify_global_replication_group/) for full documentation.
 #'
 #' @param GlobalReplicationGroupId &#91;required&#93; The name of the Global datastore
 #' @param ApplyImmediately &#91;required&#93; This parameter causes the modifications in this request and any pending
@@ -3155,7 +3153,7 @@ elasticache_modify_global_replication_group <- function(GlobalReplicationGroupId
 #' @description
 #' Modifies the settings for a replication group.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/modify_replication_group.html](https://paws-r.github.io/docs/elasticache/modify_replication_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_modify_replication_group/](https://www.paws-r-sdk.com/docs/elasticache_modify_replication_group/) for full documentation.
 #'
 #' @param ReplicationGroupId &#91;required&#93; The identifier of the replication group to modify.
 #' @param ReplicationGroupDescription A description for the replication group. Maximum length is 255
@@ -3169,50 +3167,50 @@ elasticache_modify_global_replication_group <- function(GlobalReplicationGroupId
 #' enabled) replication groups.
 #' @param AutomaticFailoverEnabled Determines whether a read replica is automatically promoted to
 #' read/write primary if the existing primary encounters a failure.
-#'
+#' 
 #' Valid values: `true` | `false`
 #' @param MultiAZEnabled A flag to indicate MultiAZ is enabled.
 #' @param NodeGroupId Deprecated. This parameter is not used.
 #' @param CacheSecurityGroupNames A list of cache security group names to authorize for the clusters in
 #' this replication group. This change is asynchronously applied as soon as
 #' possible.
-#'
+#' 
 #' This parameter can be used only with replication group containing
 #' clusters running outside of an Amazon Virtual Private Cloud (Amazon
 #' VPC).
-#'
+#' 
 #' Constraints: Must contain no more than 255 alphanumeric characters. Must
 #' not be `Default`.
 #' @param SecurityGroupIds Specifies the VPC Security Groups associated with the clusters in the
 #' replication group.
-#'
+#' 
 #' This parameter can be used only with replication group containing
 #' clusters running in an Amazon Virtual Private Cloud (Amazon VPC).
 #' @param PreferredMaintenanceWindow Specifies the weekly time range during which maintenance on the cluster
 #' is performed. It is specified as a range in the format
 #' ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window
 #' is a 60 minute period.
-#'
+#' 
 #' Valid values for `ddd` are:
-#'
+#' 
 #' -   `sun`
-#'
+#' 
 #' -   `mon`
-#'
+#' 
 #' -   `tue`
-#'
+#' 
 #' -   `wed`
-#'
+#' 
 #' -   `thu`
-#'
+#' 
 #' -   `fri`
-#'
+#' 
 #' -   `sat`
-#'
+#' 
 #' Example: `sun:23:00-mon:01:30`
 #' @param NotificationTopicArn The Amazon Resource Name (ARN) of the Amazon SNS topic to which
 #' notifications are sent.
-#'
+#' 
 #' The Amazon SNS topic owner must be same as the replication group owner.
 #' @param CacheParameterGroupName The name of the cache parameter group to apply to all of the clusters in
 #' this replication group. This change is asynchronously applied as soon as
@@ -3220,23 +3218,23 @@ elasticache_modify_global_replication_group <- function(GlobalReplicationGroupId
 #' specified as `true` for this request.
 #' @param NotificationTopicStatus The status of the Amazon SNS notification topic for the replication
 #' group. Notifications are sent only if the status is `active`.
-#'
+#' 
 #' Valid values: `active` | `inactive`
 #' @param ApplyImmediately If `true`, this parameter causes the modifications in this request and
 #' any pending modifications to be applied, asynchronously and as soon as
 #' possible, regardless of the `PreferredMaintenanceWindow` setting for the
 #' replication group.
-#'
+#' 
 #' If `false`, changes to the nodes in the replication group are applied on
 #' the next maintenance reboot, or the next failure reboot, whichever
 #' occurs first.
-#'
+#' 
 #' Valid values: `true` | `false`
-#'
+#' 
 #' Default: `false`
 #' @param EngineVersion The upgraded version of the cache engine to be run on the clusters in
 #' the replication group.
-#'
+#' 
 #' **Important:** You can upgrade to a newer engine version (see [Selecting
 #' a Cache Engine and
 #' Version](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement)),
@@ -3250,15 +3248,15 @@ elasticache_modify_global_replication_group <- function(GlobalReplicationGroupId
 #' (shard) snapshots before deleting them. For example, if you set
 #' `SnapshotRetentionLimit` to 5, a snapshot that was taken today is
 #' retained for 5 days before being deleted.
-#'
+#' 
 #' **Important** If the value of SnapshotRetentionLimit is set to zero (0),
 #' backups are turned off.
 #' @param SnapshotWindow The daily time range (in UTC) during which ElastiCache begins taking a
 #' daily snapshot of the node group (shard) specified by
 #' `SnapshottingClusterId`.
-#'
+#' 
 #' Example: `05:00-09:00`
-#'
+#' 
 #' If you do not specify this parameter, ElastiCache automatically chooses
 #' an appropriate time range.
 #' @param CacheNodeType A valid cache node type that you want to scale this replication group
@@ -3266,24 +3264,24 @@ elasticache_modify_global_replication_group <- function(GlobalReplicationGroupId
 #' @param AuthToken Reserved parameter. The password used to access a password protected
 #' server. This parameter must be specified with the
 #' `auth-token-update-strategy ` parameter. Password constraints:
-#'
+#' 
 #' -   Must be only printable ASCII characters
-#'
+#' 
 #' -   Must be at least 16 characters and no more than 128 characters in
 #'     length
-#'
+#' 
 #' -   Cannot contain any of the following characters: '/', '"', or '@@',
 #'     '%'
-#'
+#' 
 #' For more information, see AUTH password at
 #' [AUTH](https://redis.io/commands/auth/).
 #' @param AuthTokenUpdateStrategy Specifies the strategy to use to update the AUTH token. This parameter
 #' must be specified with the `auth-token` parameter. Possible values:
-#'
+#' 
 #' -   Rotate
-#'
+#' 
 #' -   Set
-#'
+#' 
 #' For more information, see [Authenticating Users with Redis
 #' AUTH](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
 #' @param UserGroupIdsToAdd The ID of the user group you are associating with the replication group.
@@ -3292,18 +3290,44 @@ elasticache_modify_global_replication_group <- function(GlobalReplicationGroupId
 #' group.
 #' @param RemoveUserGroups Removes the user group associated with this replication group.
 #' @param LogDeliveryConfigurations Specifies the destination, format and type of the logs.
+#' @param IpDiscovery The network type you choose when modifying a cluster, either `ipv4` |
+#' `ipv6`. IPv6 is supported for workloads using Redis engine version 6.2
+#' onward or Memcached engine version 1.6.6 on all instances built on the
+#' [Nitro system](https://aws.amazon.com/ec2/nitro/).
+#' @param TransitEncryptionEnabled A flag that enables in-transit encryption when set to true. If you are
+#' enabling in-transit encryption for an existing cluster, you must also
+#' set `TransitEncryptionMode` to `preferred`.
+#' @param TransitEncryptionMode A setting that allows you to migrate your clients to use in-transit
+#' encryption, with no downtime.
+#' 
+#' You must set `TransitEncryptionEnabled` to `true`, for your existing
+#' cluster, and set `TransitEncryptionMode` to `preferred` in the same
+#' request to allow both encrypted and unencrypted connections at the same
+#' time. Once you migrate all your Redis clients to use encrypted
+#' connections you can set the value to `required` to allow encrypted
+#' connections only.
+#' 
+#' Setting `TransitEncryptionMode` to `required` is a two-step process that
+#' requires you to first set the `TransitEncryptionMode` to `preferred`,
+#' after that you can set `TransitEncryptionMode` to `required`.
+#' @param ClusterMode Enabled or Disabled. To modify cluster mode from Disabled to Enabled,
+#' you must first set the cluster mode to Compatible. Compatible mode
+#' allows your Redis clients to connect using both cluster mode enabled and
+#' cluster mode disabled. After you migrate all Redis clients to use
+#' cluster mode enabled, you can then complete cluster mode configuration
+#' and set the cluster mode to Enabled.
 #'
 #' @keywords internal
 #'
 #' @rdname elasticache_modify_replication_group
-elasticache_modify_replication_group <- function(ReplicationGroupId, ReplicationGroupDescription = NULL, PrimaryClusterId = NULL, SnapshottingClusterId = NULL, AutomaticFailoverEnabled = NULL, MultiAZEnabled = NULL, NodeGroupId = NULL, CacheSecurityGroupNames = NULL, SecurityGroupIds = NULL, PreferredMaintenanceWindow = NULL, NotificationTopicArn = NULL, CacheParameterGroupName = NULL, NotificationTopicStatus = NULL, ApplyImmediately = NULL, EngineVersion = NULL, AutoMinorVersionUpgrade = NULL, SnapshotRetentionLimit = NULL, SnapshotWindow = NULL, CacheNodeType = NULL, AuthToken = NULL, AuthTokenUpdateStrategy = NULL, UserGroupIdsToAdd = NULL, UserGroupIdsToRemove = NULL, RemoveUserGroups = NULL, LogDeliveryConfigurations = NULL) {
+elasticache_modify_replication_group <- function(ReplicationGroupId, ReplicationGroupDescription = NULL, PrimaryClusterId = NULL, SnapshottingClusterId = NULL, AutomaticFailoverEnabled = NULL, MultiAZEnabled = NULL, NodeGroupId = NULL, CacheSecurityGroupNames = NULL, SecurityGroupIds = NULL, PreferredMaintenanceWindow = NULL, NotificationTopicArn = NULL, CacheParameterGroupName = NULL, NotificationTopicStatus = NULL, ApplyImmediately = NULL, EngineVersion = NULL, AutoMinorVersionUpgrade = NULL, SnapshotRetentionLimit = NULL, SnapshotWindow = NULL, CacheNodeType = NULL, AuthToken = NULL, AuthTokenUpdateStrategy = NULL, UserGroupIdsToAdd = NULL, UserGroupIdsToRemove = NULL, RemoveUserGroups = NULL, LogDeliveryConfigurations = NULL, IpDiscovery = NULL, TransitEncryptionEnabled = NULL, TransitEncryptionMode = NULL, ClusterMode = NULL) {
   op <- new_operation(
     name = "ModifyReplicationGroup",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .elasticache$modify_replication_group_input(ReplicationGroupId = ReplicationGroupId, ReplicationGroupDescription = ReplicationGroupDescription, PrimaryClusterId = PrimaryClusterId, SnapshottingClusterId = SnapshottingClusterId, AutomaticFailoverEnabled = AutomaticFailoverEnabled, MultiAZEnabled = MultiAZEnabled, NodeGroupId = NodeGroupId, CacheSecurityGroupNames = CacheSecurityGroupNames, SecurityGroupIds = SecurityGroupIds, PreferredMaintenanceWindow = PreferredMaintenanceWindow, NotificationTopicArn = NotificationTopicArn, CacheParameterGroupName = CacheParameterGroupName, NotificationTopicStatus = NotificationTopicStatus, ApplyImmediately = ApplyImmediately, EngineVersion = EngineVersion, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, SnapshotRetentionLimit = SnapshotRetentionLimit, SnapshotWindow = SnapshotWindow, CacheNodeType = CacheNodeType, AuthToken = AuthToken, AuthTokenUpdateStrategy = AuthTokenUpdateStrategy, UserGroupIdsToAdd = UserGroupIdsToAdd, UserGroupIdsToRemove = UserGroupIdsToRemove, RemoveUserGroups = RemoveUserGroups, LogDeliveryConfigurations = LogDeliveryConfigurations)
+  input <- .elasticache$modify_replication_group_input(ReplicationGroupId = ReplicationGroupId, ReplicationGroupDescription = ReplicationGroupDescription, PrimaryClusterId = PrimaryClusterId, SnapshottingClusterId = SnapshottingClusterId, AutomaticFailoverEnabled = AutomaticFailoverEnabled, MultiAZEnabled = MultiAZEnabled, NodeGroupId = NodeGroupId, CacheSecurityGroupNames = CacheSecurityGroupNames, SecurityGroupIds = SecurityGroupIds, PreferredMaintenanceWindow = PreferredMaintenanceWindow, NotificationTopicArn = NotificationTopicArn, CacheParameterGroupName = CacheParameterGroupName, NotificationTopicStatus = NotificationTopicStatus, ApplyImmediately = ApplyImmediately, EngineVersion = EngineVersion, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, SnapshotRetentionLimit = SnapshotRetentionLimit, SnapshotWindow = SnapshotWindow, CacheNodeType = CacheNodeType, AuthToken = AuthToken, AuthTokenUpdateStrategy = AuthTokenUpdateStrategy, UserGroupIdsToAdd = UserGroupIdsToAdd, UserGroupIdsToRemove = UserGroupIdsToRemove, RemoveUserGroups = RemoveUserGroups, LogDeliveryConfigurations = LogDeliveryConfigurations, IpDiscovery = IpDiscovery, TransitEncryptionEnabled = TransitEncryptionEnabled, TransitEncryptionMode = TransitEncryptionMode, ClusterMode = ClusterMode)
   output <- .elasticache$modify_replication_group_output()
   config <- get_config()
   svc <- .elasticache$service(config)
@@ -3320,7 +3344,7 @@ elasticache_modify_replication_group <- function(ReplicationGroupId, Replication
 #' @description
 #' Modifies a replication group's shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among existing shards.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/modify_replication_group_shard_configuration.html](https://paws-r.github.io/docs/elasticache/modify_replication_group_shard_configuration.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_modify_replication_group_shard_configuration/](https://www.paws-r-sdk.com/docs/elasticache_modify_replication_group_shard_configuration/) for full documentation.
 #'
 #' @param ReplicationGroupId &#91;required&#93; The name of the Redis (cluster mode enabled) cluster (replication group)
 #' on which the shards are to be configured.
@@ -3328,28 +3352,28 @@ elasticache_modify_replication_group <- function(ReplicationGroupId, Replication
 #' the shard configuration.
 #' @param ApplyImmediately &#91;required&#93; Indicates that the shard reconfiguration process begins immediately. At
 #' present, the only permitted value for this parameter is `true`.
-#'
+#' 
 #' Value: true
 #' @param ReshardingConfiguration Specifies the preferred availability zones for each node group in the
 #' cluster. If the value of `NodeGroupCount` is greater than the current
 #' number of node groups (shards), you can use this parameter to specify
 #' the preferred availability zones of the cluster's shards. If you omit
 #' this parameter ElastiCache selects availability zones for you.
-#'
+#' 
 #' You can specify this parameter only if the value of `NodeGroupCount` is
 #' greater than the current number of node groups (shards).
 #' @param NodeGroupsToRemove If the value of `NodeGroupCount` is less than the current number of node
 #' groups (shards), then either `NodeGroupsToRemove` or
 #' `NodeGroupsToRetain` is required. `NodeGroupsToRemove` is a list of
 #' `NodeGroupId`s to remove from the cluster.
-#'
+#' 
 #' ElastiCache for Redis will attempt to remove all node groups listed by
 #' `NodeGroupsToRemove` from the cluster.
 #' @param NodeGroupsToRetain If the value of `NodeGroupCount` is less than the current number of node
 #' groups (shards), then either `NodeGroupsToRemove` or
 #' `NodeGroupsToRetain` is required. `NodeGroupsToRetain` is a list of
 #' `NodeGroupId`s to retain in the cluster.
-#'
+#' 
 #' ElastiCache for Redis will attempt to remove all node groups except
 #' those listed by `NodeGroupsToRetain` from the cluster.
 #'
@@ -3378,25 +3402,26 @@ elasticache_modify_replication_group_shard_configuration <- function(Replication
 #' @description
 #' Changes user password(s) and/or access string.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/modify_user.html](https://paws-r.github.io/docs/elasticache/modify_user.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_modify_user/](https://www.paws-r-sdk.com/docs/elasticache_modify_user/) for full documentation.
 #'
 #' @param UserId &#91;required&#93; The ID of the user.
 #' @param AccessString Access permissions string used for this user.
 #' @param AppendAccessString Adds additional user permissions to the access string.
 #' @param Passwords The passwords belonging to the user. You are allowed up to two.
 #' @param NoPasswordRequired Indicates no password is required for the user.
+#' @param AuthenticationMode Specifies how to authenticate the user.
 #'
 #' @keywords internal
 #'
 #' @rdname elasticache_modify_user
-elasticache_modify_user <- function(UserId, AccessString = NULL, AppendAccessString = NULL, Passwords = NULL, NoPasswordRequired = NULL) {
+elasticache_modify_user <- function(UserId, AccessString = NULL, AppendAccessString = NULL, Passwords = NULL, NoPasswordRequired = NULL, AuthenticationMode = NULL) {
   op <- new_operation(
     name = "ModifyUser",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .elasticache$modify_user_input(UserId = UserId, AccessString = AccessString, AppendAccessString = AppendAccessString, Passwords = Passwords, NoPasswordRequired = NoPasswordRequired)
+  input <- .elasticache$modify_user_input(UserId = UserId, AccessString = AccessString, AppendAccessString = AppendAccessString, Passwords = Passwords, NoPasswordRequired = NoPasswordRequired, AuthenticationMode = AuthenticationMode)
   output <- .elasticache$modify_user_output()
   config <- get_config()
   svc <- .elasticache$service(config)
@@ -3411,7 +3436,7 @@ elasticache_modify_user <- function(UserId, AccessString = NULL, AppendAccessStr
 #' @description
 #' Changes the list of users that belong to the user group.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/modify_user_group.html](https://paws-r.github.io/docs/elasticache/modify_user_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_modify_user_group/](https://www.paws-r-sdk.com/docs/elasticache_modify_user_group/) for full documentation.
 #'
 #' @param UserGroupId &#91;required&#93; The ID of the user group.
 #' @param UserIdsToAdd The list of user IDs to add to the user group.
@@ -3442,20 +3467,20 @@ elasticache_modify_user_group <- function(UserGroupId, UserIdsToAdd = NULL, User
 #' @description
 #' Allows you to purchase a reserved cache node offering. Reserved nodes are not eligible for cancellation and are non-refundable. For more information, see [Managing Costs with Reserved Nodes](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/) for Redis or [Managing Costs with Reserved Nodes](https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/) for Memcached.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/purchase_reserved_cache_nodes_offering.html](https://paws-r.github.io/docs/elasticache/purchase_reserved_cache_nodes_offering.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_purchase_reserved_cache_nodes_offering/](https://www.paws-r-sdk.com/docs/elasticache_purchase_reserved_cache_nodes_offering/) for full documentation.
 #'
 #' @param ReservedCacheNodesOfferingId &#91;required&#93; The ID of the reserved cache node offering to purchase.
-#'
+#' 
 #' Example: `438012d3-4052-4cc7-b2e3-8d3372e0e706`
 #' @param ReservedCacheNodeId A customer-specified identifier to track this reservation.
-#'
+#' 
 #' The Reserved Cache Node ID is an unique customer-specified identifier to
 #' track this reservation. If this parameter is not specified, ElastiCache
 #' automatically generates an identifier for the reservation.
-#'
+#' 
 #' Example: myreservationID
 #' @param CacheNodeCount The number of cache node instances to reserve.
-#'
+#' 
 #' Default: `1`
 #' @param Tags A list of tags to be added to this resource. A tag is a key-value pair.
 #' A tag key must be accompanied by a tag value, although null is accepted.
@@ -3486,7 +3511,7 @@ elasticache_purchase_reserved_cache_nodes_offering <- function(ReservedCacheNode
 #' @description
 #' Redistribute slots to ensure uniform distribution across existing shards in the cluster.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/rebalance_slots_in_global_replication_group.html](https://paws-r.github.io/docs/elasticache/rebalance_slots_in_global_replication_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_rebalance_slots_in_global_replication_group/](https://www.paws-r-sdk.com/docs/elasticache_rebalance_slots_in_global_replication_group/) for full documentation.
 #'
 #' @param GlobalReplicationGroupId &#91;required&#93; The name of the Global datastore
 #' @param ApplyImmediately &#91;required&#93; If `True`, redistribution is applied immediately.
@@ -3516,7 +3541,7 @@ elasticache_rebalance_slots_in_global_replication_group <- function(GlobalReplic
 #' @description
 #' Reboots some, or all, of the cache nodes within a provisioned cluster. This operation applies any modified cache parameter groups to the cluster. The reboot operation takes place as soon as possible, and results in a momentary outage to the cluster. During the reboot, the cluster status is set to REBOOTING.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/reboot_cache_cluster.html](https://paws-r.github.io/docs/elasticache/reboot_cache_cluster.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_reboot_cache_cluster/](https://www.paws-r-sdk.com/docs/elasticache_reboot_cache_cluster/) for full documentation.
 #'
 #' @param CacheClusterId &#91;required&#93; The cluster identifier. This parameter is stored as a lowercase string.
 #' @param CacheNodeIdsToReboot &#91;required&#93; A list of cache node IDs to reboot. A node ID is a numeric identifier
@@ -3548,16 +3573,16 @@ elasticache_reboot_cache_cluster <- function(CacheClusterId, CacheNodeIdsToReboo
 #' @description
 #' Removes the tags identified by the `TagKeys` list from the named resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. For more information, see [Resource-level permissions](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html).
 #'
-#' See [https://paws-r.github.io/docs/elasticache/remove_tags_from_resource.html](https://paws-r.github.io/docs/elasticache/remove_tags_from_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_remove_tags_from_resource/](https://www.paws-r-sdk.com/docs/elasticache_remove_tags_from_resource/) for full documentation.
 #'
 #' @param ResourceName &#91;required&#93; The Amazon Resource Name (ARN) of the resource from which you want the
 #' tags removed, for example
 #' `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or
 #' `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
-#'
+#' 
 #' For more information about ARNs, see [Amazon Resource Names (ARNs) and
 #' Amazon Service
-#' Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+#' Namespaces](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html).
 #' @param TagKeys &#91;required&#93; A list of `TagKeys` identifying the tags you want removed from the named
 #' resource.
 #'
@@ -3587,13 +3612,13 @@ elasticache_remove_tags_from_resource <- function(ResourceName, TagKeys) {
 #' @description
 #' Modifies the parameters of a cache parameter group to the engine or system default value. You can reset specific parameters by submitting a list of parameter names. To reset the entire cache parameter group, specify the `ResetAllParameters` and `CacheParameterGroupName` parameters.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/reset_cache_parameter_group.html](https://paws-r.github.io/docs/elasticache/reset_cache_parameter_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_reset_cache_parameter_group/](https://www.paws-r-sdk.com/docs/elasticache_reset_cache_parameter_group/) for full documentation.
 #'
 #' @param CacheParameterGroupName &#91;required&#93; The name of the cache parameter group to reset.
 #' @param ResetAllParameters If `true`, all parameters in the cache parameter group are reset to
 #' their default values. If `false`, only the parameters listed by
 #' `ParameterNameValues` are reset to their default values.
-#'
+#' 
 #' Valid values: `true` | `false`
 #' @param ParameterNameValues An array of parameter names to reset to their default values. If
 #' `ResetAllParameters` is `true`, do not use `ParameterNameValues`. If
@@ -3625,7 +3650,7 @@ elasticache_reset_cache_parameter_group <- function(CacheParameterGroupName, Res
 #' @description
 #' Revokes ingress from a cache security group. Use this operation to disallow access from an Amazon EC2 security group that had been previously authorized.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/revoke_cache_security_group_ingress.html](https://paws-r.github.io/docs/elasticache/revoke_cache_security_group_ingress.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_revoke_cache_security_group_ingress/](https://www.paws-r-sdk.com/docs/elasticache_revoke_cache_security_group_ingress/) for full documentation.
 #'
 #' @param CacheSecurityGroupName &#91;required&#93; The name of the cache security group to revoke ingress from.
 #' @param EC2SecurityGroupName &#91;required&#93; The name of the Amazon EC2 security group to revoke access from.
@@ -3658,7 +3683,7 @@ elasticache_revoke_cache_security_group_ingress <- function(CacheSecurityGroupNa
 #' @description
 #' Start the migration of data.
 #'
-#' See [https://paws-r.github.io/docs/elasticache/start_migration.html](https://paws-r.github.io/docs/elasticache/start_migration.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_start_migration/](https://www.paws-r-sdk.com/docs/elasticache_start_migration/) for full documentation.
 #'
 #' @param ReplicationGroupId &#91;required&#93; The ID of the replication group to which data should be migrated.
 #' @param CustomerNodeEndpointList &#91;required&#93; List of endpoints from which data should be migrated. For Redis (cluster
@@ -3691,7 +3716,7 @@ elasticache_start_migration <- function(ReplicationGroupId, CustomerNodeEndpoint
 #' @description
 #' Represents the input of a [`test_failover`][elasticache_test_failover] operation which test automatic failover on a specified node group (called shard in the console) in a replication group (called cluster in the console).
 #'
-#' See [https://paws-r.github.io/docs/elasticache/test_failover.html](https://paws-r.github.io/docs/elasticache/test_failover.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/elasticache_test_failover/](https://www.paws-r-sdk.com/docs/elasticache_test_failover/) for full documentation.
 #'
 #' @param ReplicationGroupId &#91;required&#93; The name of the replication group (console: cluster) whose automatic
 #' failover is being tested by this operation.

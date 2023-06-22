@@ -19,7 +19,7 @@ default is 100.}
 \item{nextToken}{If your initial
 \code{\link[=redshiftserverless_list_usage_limits]{list_usage_limits}} operation
 returns a \code{nextToken}, you can include the returned \code{nextToken} in
-subsequent \code{\link[=redshiftserverless_list_usage_limits]{list_usage_limits}}
+following \code{\link[=redshiftserverless_list_usage_limits]{list_usage_limits}}
 operations, which returns results in the next page.}
 
 \item{resourceArn}{The Amazon Resource Name (ARN) associated with the resource whose usage
@@ -30,6 +30,6 @@ limits you want to list.}
 \description{
 Lists all usage limits within Amazon Redshift Serverless.
 
-See \url{https://paws-r.github.io/docs/redshiftserverless/list_usage_limits.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/redshiftserverless_list_usage_limits/} for full documentation.
 }
 \keyword{internal}

@@ -31,8 +31,8 @@ Constraints:
 \itemize{
 \item Must be 1 to 64 alphanumeric characters or hyphens. The user name
 can't be \code{PUBLIC}.
-\item Must contain only lowercase letters, numbers, underscore, plus sign,
-period (dot), at symbol (@), or hyphen.
+\item Must contain uppercase or lowercase letters, numbers, underscore,
+plus sign, period (dot), at symbol (@), or hyphen.
 \item First character must be a letter.
 \item Must not contain a colon ( : ) or slash ( / ).
 \item Cannot be a reserved word. A list of reserved words can be found in
@@ -46,8 +46,8 @@ in the Amazon Redshift Database Developer Guide.
 Constraints:
 \itemize{
 \item Must be 1 to 64 alphanumeric characters or hyphens
-\item Must contain only lowercase letters, numbers, underscore, plus sign,
-period (dot), at symbol (@), or hyphen.
+\item Must contain uppercase or lowercase letters, numbers, underscore,
+plus sign, period (dot), at symbol (@), or hyphen.
 \item First character must be a letter.
 \item Must not contain a colon ( : ) or slash ( / ).
 \item Cannot be a reserved word. A list of reserved words can be found in
@@ -87,6 +87,6 @@ in the Amazon Redshift Database Developer Guide.
 \description{
 Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with \verb{IAM:} if \code{AutoCreate} is \code{False} or \verb{IAMA:} if \code{AutoCreate} is \code{True}. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see \href{https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html}{Using IAM Authentication to Generate Database User Credentials} in the Amazon Redshift Cluster Management Guide.
 
-See \url{https://paws-r.github.io/docs/redshift/get_cluster_credentials.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/redshift_get_cluster_credentials/} for full documentation.
 }
 \keyword{internal}

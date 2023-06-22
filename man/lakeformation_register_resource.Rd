@@ -7,7 +7,8 @@
 lakeformation_register_resource(
   ResourceArn,
   UseServiceLinkedRole = NULL,
-  RoleArn = NULL
+  RoleArn = NULL,
+  WithFederation = NULL
 )
 }
 \arguments{
@@ -18,13 +19,15 @@ register.}
 by registering this role with the Data Catalog. A service-linked role is
 a unique type of IAM role that is linked directly to Lake Formation.
 
-For more information, see Using Service-Linked Roles for Lake Formation.}
+For more information, see \href{https://docs.aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html}{Using Service-Linked Roles for Lake Formation}.}
 
 \item{RoleArn}{The identifier for the role that registers the resource.}
+
+\item{WithFederation}{Whether or not the resource is a federated resource.}
 }
 \description{
 Registers the resource as managed by the Data Catalog.
 
-See \url{https://paws-r.github.io/docs/lakeformation/register_resource.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/lakeformation_register_resource/} for full documentation.
 }
 \keyword{internal}

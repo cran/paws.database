@@ -42,19 +42,14 @@ protection is enabled.}
 Changing this parameter results in an outage. The change is applied
 during the next maintenance window unless \code{ApplyImmediately} is enabled.
 
-To list all of the available engine versions for \code{aurora} (for MySQL
-5.6-compatible Aurora), use the following command:
-
-\verb{aws rds describe-db-engine-versions --engine aurora --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'}
-
 To list all of the available engine versions for \code{aurora-mysql} (for
-MySQL 5.7-compatible and MySQL 8.0-compatible Aurora), use the following
-command:
+MySQL-based Aurora global databases), use the following command:
 
 \verb{aws rds describe-db-engine-versions --engine aurora-mysql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'}
 
-To list all of the available engine versions for \code{aurora-postgresql},
-use the following command:
+To list all of the available engine versions for \code{aurora-postgresql}
+(for PostgreSQL-based Aurora global databases), use the following
+command:
 
 \verb{aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'}}
 
@@ -72,6 +67,6 @@ upgrade.}
 \description{
 Modify a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html}{What is Amazon Aurora?} in the \emph{Amazon Aurora User Guide}.
 
-See \url{https://paws-r.github.io/docs/rds/modify_global_cluster.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/rds_modify_global_cluster/} for full documentation.
 }
 \keyword{internal}

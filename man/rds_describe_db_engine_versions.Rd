@@ -22,10 +22,9 @@ rds_describe_db_engine_versions(
 
 Valid Values:
 \itemize{
-\item \code{aurora} (for MySQL 5.6-compatible Aurora)
-\item \code{aurora-mysql} (for MySQL 5.7-compatible and MySQL 8.0-compatible
-Aurora)
+\item \code{aurora-mysql}
 \item \code{aurora-postgresql}
+\item \code{custom-oracle-ee}
 \item \code{mariadb}
 \item \code{mysql}
 \item \code{oracle-ee}
@@ -126,6 +125,6 @@ versions.}
 \description{
 Returns a list of the available DB engines.
 
-See \url{https://paws-r.github.io/docs/rds/describe_db_engine_versions.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/rds_describe_db_engine_versions/} for full documentation.
 }
 \keyword{internal}

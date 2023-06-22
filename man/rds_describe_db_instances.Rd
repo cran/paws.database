@@ -12,9 +12,10 @@ rds_describe_db_instances(
 )
 }
 \arguments{
-\item{DBInstanceIdentifier}{The user-supplied instance identifier. If this parameter is specified,
-information from only the specific DB instance is returned. This
-parameter isn't case-sensitive.
+\item{DBInstanceIdentifier}{The user-supplied instance identifier or the Amazon Resource Name (ARN)
+of the DB instance. If this parameter is specified, information from
+only the specific DB instance is returned. This parameter isn't
+case-sensitive.
 
 Constraints:
 \itemize{
@@ -59,6 +60,6 @@ marker, up to the value specified by \code{MaxRecords}.}
 \description{
 Returns information about provisioned RDS instances. This API supports pagination.
 
-See \url{https://paws-r.github.io/docs/rds/describe_db_instances.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/rds_describe_db_instances/} for full documentation.
 }
 \keyword{internal}

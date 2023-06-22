@@ -21,7 +21,8 @@ neptune_restore_db_cluster_from_snapshot(
   EnableCloudwatchLogsExports = NULL,
   DBClusterParameterGroupName = NULL,
   DeletionProtection = NULL,
-  CopyTagsToSnapshot = NULL
+  CopyTagsToSnapshot = NULL,
+  ServerlessV2ScalingConfiguration = NULL
 )
 }
 \arguments{
@@ -123,10 +124,12 @@ enabled. By default, deletion protection is disabled.}
 
 \item{CopyTagsToSnapshot}{\emph{If set to true, tags are copied to any snapshot of the restored DB
 cluster that is created.}}
+
+\item{ServerlessV2ScalingConfiguration}{}
 }
 \description{
 Creates a new DB cluster from a DB snapshot or DB cluster snapshot.
 
-See \url{https://paws-r.github.io/docs/neptune/restore_db_cluster_from_snapshot.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/neptune_restore_db_cluster_from_snapshot/} for full documentation.
 }
 \keyword{internal}

@@ -8,7 +8,7 @@ NULL
 #' @description
 #' Ends a given Amazon QLDB journal stream. Before a stream can be canceled, its current status must be `ACTIVE`.
 #'
-#' See [https://paws-r.github.io/docs/qldb/cancel_journal_kinesis_stream.html](https://paws-r.github.io/docs/qldb/cancel_journal_kinesis_stream.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_cancel_journal_kinesis_stream/](https://www.paws-r-sdk.com/docs/qldb_cancel_journal_kinesis_stream/) for full documentation.
 #'
 #' @param LedgerName &#91;required&#93; The name of the ledger.
 #' @param StreamId &#91;required&#93; The UUID (represented in Base62-encoded text) of the QLDB journal stream
@@ -40,7 +40,7 @@ qldb_cancel_journal_kinesis_stream <- function(LedgerName, StreamId) {
 #' @description
 #' Creates a new ledger in your Amazon Web Services account in the current Region.
 #'
-#' See [https://paws-r.github.io/docs/qldb/create_ledger.html](https://paws-r.github.io/docs/qldb/create_ledger.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_create_ledger/](https://www.paws-r-sdk.com/docs/qldb_create_ledger/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the ledger that you want to create. The name must be unique
 #' among all of the ledgers in your Amazon Web Services account in the
@@ -79,13 +79,13 @@ qldb_cancel_journal_kinesis_stream <- function(LedgerName, StreamId) {
 #' 
 #' We strongly recommend using the `STANDARD` permissions mode to maximize
 #' the security of your ledger data.
-#' @param DeletionProtection The flag that prevents a ledger from being deleted by any user. If not
-#' provided on ledger creation, this feature is enabled (`true`) by
-#' default.
+#' @param DeletionProtection Specifies whether the ledger is protected from being deleted by any
+#' user. If not defined during ledger creation, this feature is enabled
+#' (`true`) by default.
 #' 
 #' If deletion protection is enabled, you must first disable it before you
 #' can delete the ledger. You can disable it by calling the
-#' [`update_ledger`][qldb_update_ledger] operation to set the flag to
+#' [`update_ledger`][qldb_update_ledger] operation to set this parameter to
 #' `false`.
 #' @param KmsKey The key in Key Management Service (KMS) to use for encryption of data at
 #' rest in the ledger. For more information, see [Encryption at
@@ -100,7 +100,8 @@ qldb_cancel_journal_kinesis_stream <- function(LedgerName, StreamId) {
 #' -   **Undefined**: By default, use an Amazon Web Services owned KMS key.
 #' 
 #' -   **A valid symmetric customer managed KMS key**: Use the specified
-#'     KMS key in your account that you create, own, and manage.
+#'     symmetric encryption KMS key in your account that you create, own,
+#'     and manage.
 #' 
 #'     Amazon QLDB does not support asymmetric keys. For more information,
 #'     see [Using symmetric and asymmetric
@@ -152,7 +153,7 @@ qldb_create_ledger <- function(Name, Tags = NULL, PermissionsMode, DeletionProte
 #' @description
 #' Deletes a ledger and all of its contents. This action is irreversible.
 #'
-#' See [https://paws-r.github.io/docs/qldb/delete_ledger.html](https://paws-r.github.io/docs/qldb/delete_ledger.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_delete_ledger/](https://www.paws-r-sdk.com/docs/qldb_delete_ledger/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the ledger that you want to delete.
 #'
@@ -181,7 +182,7 @@ qldb_delete_ledger <- function(Name) {
 #' @description
 #' Returns detailed information about a given Amazon QLDB journal stream. The output includes the Amazon Resource Name (ARN), stream name, current status, creation time, and the parameters of the original stream creation request.
 #'
-#' See [https://paws-r.github.io/docs/qldb/describe_journal_kinesis_stream.html](https://paws-r.github.io/docs/qldb/describe_journal_kinesis_stream.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_describe_journal_kinesis_stream/](https://www.paws-r-sdk.com/docs/qldb_describe_journal_kinesis_stream/) for full documentation.
 #'
 #' @param LedgerName &#91;required&#93; The name of the ledger.
 #' @param StreamId &#91;required&#93; The UUID (represented in Base62-encoded text) of the QLDB journal stream
@@ -214,7 +215,7 @@ qldb_describe_journal_kinesis_stream <- function(LedgerName, StreamId) {
 #' @description
 #' Returns information about a journal export job, including the ledger name, export ID, creation time, current status, and the parameters of the original export creation request.
 #'
-#' See [https://paws-r.github.io/docs/qldb/describe_journal_s3_export.html](https://paws-r.github.io/docs/qldb/describe_journal_s3_export.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_describe_journal_s3_export/](https://www.paws-r-sdk.com/docs/qldb_describe_journal_s3_export/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the ledger.
 #' @param ExportId &#91;required&#93; The UUID (represented in Base62-encoded text) of the journal export job
@@ -246,7 +247,7 @@ qldb_describe_journal_s3_export <- function(Name, ExportId) {
 #' @description
 #' Returns information about a ledger, including its state, permissions mode, encryption at rest settings, and when it was created.
 #'
-#' See [https://paws-r.github.io/docs/qldb/describe_ledger.html](https://paws-r.github.io/docs/qldb/describe_ledger.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_describe_ledger/](https://www.paws-r-sdk.com/docs/qldb_describe_ledger/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the ledger that you want to describe.
 #'
@@ -276,7 +277,7 @@ qldb_describe_ledger <- function(Name) {
 #' @description
 #' Exports journal contents within a date and time range from a ledger into a specified Amazon Simple Storage Service (Amazon S3) bucket. A journal export job can write the data objects in either the text or binary representation of Amazon Ion format, or in *JSON Lines* text format.
 #'
-#' See [https://paws-r.github.io/docs/qldb/export_journal_to_s3.html](https://paws-r.github.io/docs/qldb/export_journal_to_s3.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_export_journal_to_s3/](https://www.paws-r-sdk.com/docs/qldb_export_journal_to_s3/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the ledger.
 #' @param InclusiveStartTime &#91;required&#93; The inclusive start date and time for the range of journal contents to
@@ -304,8 +305,7 @@ qldb_describe_ledger <- function(Name) {
 #' @param RoleArn &#91;required&#93; The Amazon Resource Name (ARN) of the IAM role that grants QLDB
 #' permissions for a journal export job to do the following:
 #' 
-#' -   Write objects into your Amazon Simple Storage Service (Amazon S3)
-#'     bucket.
+#' -   Write objects into your Amazon S3 bucket.
 #' 
 #' -   (Optional) Use your customer managed key in Key Management Service
 #'     (KMS) for server-side encryption of your exported data.
@@ -313,8 +313,19 @@ qldb_describe_ledger <- function(Name) {
 #' To pass a role to QLDB when requesting a journal export, you must have
 #' permissions to perform the `iam:PassRole` action on the IAM role
 #' resource. This is required for all journal export requests.
-#' @param OutputFormat The output format of your exported journal data. If this parameter is
-#' not specified, the exported data defaults to `ION_TEXT` format.
+#' @param OutputFormat The output format of your exported journal data. A journal export job
+#' can write the data objects in either the text or binary representation
+#' of [Amazon
+#' Ion](https://docs.aws.amazon.com/qldb/latest/developerguide/ion.html)
+#' format, or in [JSON Lines](https://jsonlines.org/) text format.
+#' 
+#' Default: `ION_TEXT`
+#' 
+#' In JSON Lines format, each journal block in an exported data object is a
+#' valid JSON object that is delimited by a newline. You can use this
+#' format to directly integrate JSON exports with analytics tools such as
+#' Amazon Athena and Glue because these services can parse
+#' newline-delimited JSON automatically.
 #'
 #' @keywords internal
 #'
@@ -341,7 +352,7 @@ qldb_export_journal_to_s3 <- function(Name, InclusiveStartTime, ExclusiveEndTime
 #' @description
 #' Returns a block object at a specified address in a journal. Also returns a proof of the specified block for verification if `DigestTipAddress` is provided.
 #'
-#' See [https://paws-r.github.io/docs/qldb/get_block.html](https://paws-r.github.io/docs/qldb/get_block.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_get_block/](https://www.paws-r-sdk.com/docs/qldb_get_block/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the ledger.
 #' @param BlockAddress &#91;required&#93; The location of the block that you want to request. An address is an
@@ -380,7 +391,7 @@ qldb_get_block <- function(Name, BlockAddress, DigestTipAddress = NULL) {
 #' @description
 #' Returns the digest of a ledger at the latest committed block in the journal. The response includes a 256-bit hash value and a block address.
 #'
-#' See [https://paws-r.github.io/docs/qldb/get_digest.html](https://paws-r.github.io/docs/qldb/get_digest.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_get_digest/](https://www.paws-r-sdk.com/docs/qldb_get_digest/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the ledger.
 #'
@@ -410,7 +421,7 @@ qldb_get_digest <- function(Name) {
 #' @description
 #' Returns a revision data object for a specified document ID and block address. Also returns a proof of the specified revision for verification if `DigestTipAddress` is provided.
 #'
-#' See [https://paws-r.github.io/docs/qldb/get_revision.html](https://paws-r.github.io/docs/qldb/get_revision.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_get_revision/](https://www.paws-r-sdk.com/docs/qldb_get_revision/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the ledger.
 #' @param BlockAddress &#91;required&#93; The block location of the document revision to be verified. An address
@@ -446,13 +457,12 @@ qldb_get_revision <- function(Name, BlockAddress, DocumentId, DigestTipAddress =
 }
 .qldb$operations$get_revision <- qldb_get_revision
 
-#' Returns an array of all Amazon QLDB journal stream descriptors for a
-#' given ledger
+#' Returns all Amazon QLDB journal streams for a given ledger
 #'
 #' @description
-#' Returns an array of all Amazon QLDB journal stream descriptors for a given ledger. The output of each stream descriptor includes the same details that are returned by [`describe_journal_kinesis_stream`][qldb_describe_journal_kinesis_stream].
+#' Returns all Amazon QLDB journal streams for a given ledger.
 #'
-#' See [https://paws-r.github.io/docs/qldb/list_journal_kinesis_streams_for_ledger.html](https://paws-r.github.io/docs/qldb/list_journal_kinesis_streams_for_ledger.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_list_journal_kinesis_streams_for_ledger/](https://www.paws-r-sdk.com/docs/qldb_list_journal_kinesis_streams_for_ledger/) for full documentation.
 #'
 #' @param LedgerName &#91;required&#93; The name of the ledger.
 #' @param MaxResults The maximum number of results to return in a single
@@ -484,13 +494,13 @@ qldb_list_journal_kinesis_streams_for_ledger <- function(LedgerName, MaxResults 
 }
 .qldb$operations$list_journal_kinesis_streams_for_ledger <- qldb_list_journal_kinesis_streams_for_ledger
 
-#' Returns an array of journal export job descriptions for all ledgers that
-#' are associated with the current Amazon Web Services account and Region
+#' Returns all journal export jobs for all ledgers that are associated with
+#' the current Amazon Web Services account and Region
 #'
 #' @description
-#' Returns an array of journal export job descriptions for all ledgers that are associated with the current Amazon Web Services account and Region.
+#' Returns all journal export jobs for all ledgers that are associated with the current Amazon Web Services account and Region.
 #'
-#' See [https://paws-r.github.io/docs/qldb/list_journal_s3_exports.html](https://paws-r.github.io/docs/qldb/list_journal_s3_exports.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_list_journal_s3_exports/](https://www.paws-r-sdk.com/docs/qldb_list_journal_s3_exports/) for full documentation.
 #'
 #' @param MaxResults The maximum number of results to return in a single
 #' [`list_journal_s3_exports`][qldb_list_journal_s3_exports] request. (The
@@ -520,13 +530,12 @@ qldb_list_journal_s3_exports <- function(MaxResults = NULL, NextToken = NULL) {
 }
 .qldb$operations$list_journal_s3_exports <- qldb_list_journal_s3_exports
 
-#' Returns an array of journal export job descriptions for a specified
-#' ledger
+#' Returns all journal export jobs for a specified ledger
 #'
 #' @description
-#' Returns an array of journal export job descriptions for a specified ledger.
+#' Returns all journal export jobs for a specified ledger.
 #'
-#' See [https://paws-r.github.io/docs/qldb/list_journal_s3_exports_for_ledger.html](https://paws-r.github.io/docs/qldb/list_journal_s3_exports_for_ledger.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_list_journal_s3_exports_for_ledger/](https://www.paws-r-sdk.com/docs/qldb_list_journal_s3_exports_for_ledger/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the ledger.
 #' @param MaxResults The maximum number of results to return in a single
@@ -558,13 +567,13 @@ qldb_list_journal_s3_exports_for_ledger <- function(Name, MaxResults = NULL, Nex
 }
 .qldb$operations$list_journal_s3_exports_for_ledger <- qldb_list_journal_s3_exports_for_ledger
 
-#' Returns an array of ledger summaries that are associated with the
-#' current Amazon Web Services account and Region
+#' Returns all ledgers that are associated with the current Amazon Web
+#' Services account and Region
 #'
 #' @description
-#' Returns an array of ledger summaries that are associated with the current Amazon Web Services account and Region.
+#' Returns all ledgers that are associated with the current Amazon Web Services account and Region.
 #'
-#' See [https://paws-r.github.io/docs/qldb/list_ledgers.html](https://paws-r.github.io/docs/qldb/list_ledgers.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_list_ledgers/](https://www.paws-r-sdk.com/docs/qldb_list_ledgers/) for full documentation.
 #'
 #' @param MaxResults The maximum number of results to return in a single
 #' [`list_ledgers`][qldb_list_ledgers] request. (The actual number of
@@ -599,7 +608,7 @@ qldb_list_ledgers <- function(MaxResults = NULL, NextToken = NULL) {
 #' @description
 #' Returns all tags for a specified Amazon QLDB resource.
 #'
-#' See [https://paws-r.github.io/docs/qldb/list_tags_for_resource.html](https://paws-r.github.io/docs/qldb/list_tags_for_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_list_tags_for_resource/](https://www.paws-r-sdk.com/docs/qldb_list_tags_for_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) for which to list the tags. For example:
 #' 
@@ -630,7 +639,7 @@ qldb_list_tags_for_resource <- function(ResourceArn) {
 #' @description
 #' Creates a journal stream for a given Amazon QLDB ledger. The stream captures every document revision that is committed to the ledger's journal and delivers the data to a specified Amazon Kinesis Data Streams resource.
 #'
-#' See [https://paws-r.github.io/docs/qldb/stream_journal_to_kinesis.html](https://paws-r.github.io/docs/qldb/stream_journal_to_kinesis.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_stream_journal_to_kinesis/](https://www.paws-r-sdk.com/docs/qldb_stream_journal_to_kinesis/) for full documentation.
 #'
 #' @param LedgerName &#91;required&#93; The name of the ledger.
 #' @param RoleArn &#91;required&#93; The Amazon Resource Name (ARN) of the IAM role that grants QLDB
@@ -696,7 +705,7 @@ qldb_stream_journal_to_kinesis <- function(LedgerName, RoleArn, Tags = NULL, Inc
 #' @description
 #' Adds one or more tags to a specified Amazon QLDB resource.
 #'
-#' See [https://paws-r.github.io/docs/qldb/tag_resource.html](https://paws-r.github.io/docs/qldb/tag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_tag_resource/](https://www.paws-r-sdk.com/docs/qldb_tag_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) to which you want to add the tags. For
 #' example:
@@ -732,7 +741,7 @@ qldb_tag_resource <- function(ResourceArn, Tags) {
 #' @description
 #' Removes one or more tags from a specified Amazon QLDB resource. You can specify up to 50 tag keys to remove.
 #'
-#' See [https://paws-r.github.io/docs/qldb/untag_resource.html](https://paws-r.github.io/docs/qldb/untag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_untag_resource/](https://www.paws-r-sdk.com/docs/qldb_untag_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) from which to remove the tags. For
 #' example:
@@ -765,16 +774,16 @@ qldb_untag_resource <- function(ResourceArn, TagKeys) {
 #' @description
 #' Updates properties on a ledger.
 #'
-#' See [https://paws-r.github.io/docs/qldb/update_ledger.html](https://paws-r.github.io/docs/qldb/update_ledger.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_update_ledger/](https://www.paws-r-sdk.com/docs/qldb_update_ledger/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the ledger.
-#' @param DeletionProtection The flag that prevents a ledger from being deleted by any user. If not
-#' provided on ledger creation, this feature is enabled (`true`) by
-#' default.
+#' @param DeletionProtection Specifies whether the ledger is protected from being deleted by any
+#' user. If not defined during ledger creation, this feature is enabled
+#' (`true`) by default.
 #' 
 #' If deletion protection is enabled, you must first disable it before you
 #' can delete the ledger. You can disable it by calling the
-#' [`update_ledger`][qldb_update_ledger] operation to set the flag to
+#' [`update_ledger`][qldb_update_ledger] operation to set this parameter to
 #' `false`.
 #' @param KmsKey The key in Key Management Service (KMS) to use for encryption of data at
 #' rest in the ledger. For more information, see [Encryption at
@@ -789,7 +798,8 @@ qldb_untag_resource <- function(ResourceArn, TagKeys) {
 #' -   **Undefined**: Make no changes to the KMS key of the ledger.
 #' 
 #' -   **A valid symmetric customer managed KMS key**: Use the specified
-#'     KMS key in your account that you create, own, and manage.
+#'     symmetric encryption KMS key in your account that you create, own,
+#'     and manage.
 #' 
 #'     Amazon QLDB does not support asymmetric keys. For more information,
 #'     see [Using symmetric and asymmetric
@@ -841,7 +851,7 @@ qldb_update_ledger <- function(Name, DeletionProtection = NULL, KmsKey = NULL) {
 #' @description
 #' Updates the permissions mode of a ledger.
 #'
-#' See [https://paws-r.github.io/docs/qldb/update_ledger_permissions_mode.html](https://paws-r.github.io/docs/qldb/update_ledger_permissions_mode.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/qldb_update_ledger_permissions_mode/](https://www.paws-r-sdk.com/docs/qldb_update_ledger_permissions_mode/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the ledger.
 #' @param PermissionsMode &#91;required&#93; The permissions mode to assign to the ledger. This parameter can have

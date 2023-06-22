@@ -14,9 +14,10 @@ rds_describe_db_clusters(
 )
 }
 \arguments{
-\item{DBClusterIdentifier}{The user-supplied DB cluster identifier. If this parameter is specified,
-information from only the specific DB cluster is returned. This
-parameter isn't case-sensitive.
+\item{DBClusterIdentifier}{The user-supplied DB cluster identifier or the Amazon Resource Name
+(ARN) of the DB cluster. If this parameter is specified, information
+from only the specific DB cluster is returned. This parameter isn't
+case-sensitive.
 
 Constraints:
 \itemize{
@@ -33,6 +34,9 @@ these clone groups.
 \item \code{db-cluster-id} - Accepts DB cluster identifiers and DB cluster
 Amazon Resource Names (ARNs). The results list only includes
 information about the DB clusters identified by these ARNs.
+\item \code{db-cluster-resource-id} - Accepts DB cluster resource identifiers.
+The results list will only include information about the DB clusters
+identified by these DB cluster resource identifiers.
 \item \code{domain} - Accepts Active Directory directory IDs. The results list
 only includes information about the DB clusters associated with
 these domains.
@@ -61,6 +65,6 @@ accounts.}
 \description{
 Returns information about Amazon Aurora DB clusters and Multi-AZ DB clusters. This API supports pagination.
 
-See \url{https://paws-r.github.io/docs/rds/describe_db_clusters.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/rds_describe_db_clusters/} for full documentation.
 }
 \keyword{internal}

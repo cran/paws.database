@@ -55,15 +55,17 @@ account.
 }}
 
 \item{SnapshotIdentifier}{The name of the snapshot from which to create the new cluster. This
-parameter isn't case sensitive.
+parameter isn't case sensitive. You must specify this parameter or
+\code{snapshotArn}, but not both.
 
 Example: \code{my-snapshot-id}}
 
 \item{SnapshotArn}{The Amazon Resource Name (ARN) of the snapshot associated with the
-message to restore from a cluster.}
+message to restore from a cluster. You must specify this parameter or
+\code{snapshotIdentifier}, but not both.}
 
 \item{SnapshotClusterIdentifier}{The name of the cluster the source snapshot was created from. This
-parameter is required if your IAM user has a policy containing a
+parameter is required if your IAM user or role has a policy containing a
 snapshot resource element that specifies anything other than * for the
 cluster name.}
 
@@ -102,9 +104,9 @@ cluster uses to retrieve the data encryption keys stored in an HSM.}
 information the Amazon Redshift cluster can use to retrieve and store
 keys in an HSM.}
 
-\item{ElasticIp}{The elastic IP (EIP) address for the cluster. You don't have to specify
-the EIP for a publicly accessible cluster with
-AvailabilityZoneRelocation turned on.}
+\item{ElasticIp}{The Elastic IP (EIP) address for the cluster. Don't specify the Elastic
+IP address for a publicly accessible cluster with availability zone
+relocation turned on.}
 
 \item{ClusterParameterGroupName}{The name of the parameter group to be associated with this cluster.
 
@@ -220,15 +222,9 @@ source cluster are on different tracks.}
 \item{AvailabilityZoneRelocation}{The option to enable relocation for an Amazon Redshift cluster between
 Availability Zones after the cluster is restored.}
 
-\item{AquaConfigurationStatus}{The value represents how the cluster is configured to use AQUA (Advanced
-Query Accelerator) after the cluster is restored. Possible values
-include the following.
-\itemize{
-\item enabled - Use AQUA if it is available for the current Amazon Web
-Services Region and Amazon Redshift node type.
-\item disabled - Don't use AQUA.
-\item auto - Amazon Redshift determines whether to use AQUA.
-}}
+\item{AquaConfigurationStatus}{This parameter is retired. It does not set the AQUA configuration
+status. Amazon Redshift automatically determines whether to use AQUA
+(Advanced Query Accelerator).}
 
 \item{DefaultIamRoleArn}{The Amazon Resource Name (ARN) for the IAM role that was set as default
 for the cluster when the cluster was last modified while it was restored
@@ -244,6 +240,6 @@ encrypted with Key Management Service (KMS) and a customer managed key.}
 \description{
 Creates a new cluster from a snapshot. By default, Amazon Redshift creates the resulting cluster with the same configuration as the original cluster from which the snapshot was created, except that the new cluster is created with the default cluster security and parameter groups. After Amazon Redshift creates the cluster, you can use the \code{\link[=redshift_modify_cluster]{modify_cluster}} API to associate a different security group and different parameter group with the restored cluster. If you are using a DS node type, you can also choose to change to another DS node type of the same size during restore.
 
-See \url{https://paws-r.github.io/docs/redshift/restore_from_cluster_snapshot.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/redshift_restore_from_cluster_snapshot/} for full documentation.
 }
 \keyword{internal}

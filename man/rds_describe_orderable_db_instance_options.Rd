@@ -22,10 +22,9 @@ rds_describe_orderable_db_instance_options(
 
 Valid Values:
 \itemize{
-\item \code{aurora} (for MySQL 5.6-compatible Aurora)
-\item \code{aurora-mysql} (for MySQL 5.7-compatible and MySQL 8.0-compatible
-Aurora)
+\item \code{aurora-mysql}
 \item \code{aurora-postgresql}
+\item \code{custom-oracle-ee}
 \item \code{mariadb}
 \item \code{mysql}
 \item \code{oracle-ee}
@@ -84,6 +83,6 @@ the value specified by \code{MaxRecords}.}
 \description{
 Returns a list of orderable DB instance options for the specified DB engine, DB engine version, and DB instance class.
 
-See \url{https://paws-r.github.io/docs/rds/describe_orderable_db_instance_options.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/rds_describe_orderable_db_instance_options/} for full documentation.
 }
 \keyword{internal}

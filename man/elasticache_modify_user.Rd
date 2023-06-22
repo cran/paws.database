@@ -9,7 +9,8 @@ elasticache_modify_user(
   AccessString = NULL,
   AppendAccessString = NULL,
   Passwords = NULL,
-  NoPasswordRequired = NULL
+  NoPasswordRequired = NULL,
+  AuthenticationMode = NULL
 )
 }
 \arguments{
@@ -22,10 +23,12 @@ elasticache_modify_user(
 \item{Passwords}{The passwords belonging to the user. You are allowed up to two.}
 
 \item{NoPasswordRequired}{Indicates no password is required for the user.}
+
+\item{AuthenticationMode}{Specifies how to authenticate the user.}
 }
 \description{
 Changes user password(s) and/or access string.
 
-See \url{https://paws-r.github.io/docs/elasticache/modify_user.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/elasticache_modify_user/} for full documentation.
 }
 \keyword{internal}

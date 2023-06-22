@@ -17,8 +17,8 @@ redshiftserverless_get_credentials(
 Constraints:
 \itemize{
 \item Must be 1 to 64 alphanumeric characters or hyphens.
-\item Must contain only lowercase letters, numbers, underscore, plus sign,
-period (dot), at symbol (@), or hyphen.
+\item Must contain only uppercase or lowercase letters, numbers,
+underscore, plus sign, period (dot), at symbol (@), or hyphen.
 \item The first character must be a letter.
 \item Must not contain a colon ( : ) or slash ( / ).
 \item Cannot be a reserved word. A list of reserved words can be found in
@@ -34,6 +34,6 @@ minimum is 900 seconds, and the maximum is 3600 seconds.}
 \description{
 Returns a database user name and temporary password with temporary authorization to log in to Amazon Redshift Serverless.
 
-See \url{https://paws-r.github.io/docs/redshiftserverless/get_credentials.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/redshiftserverless_get_credentials/} for full documentation.
 }
 \keyword{internal}

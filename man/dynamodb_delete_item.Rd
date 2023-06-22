@@ -23,7 +23,7 @@ dynamodb_delete_item(
 \item{Key}{[required] A map of attribute names to \code{AttributeValue} objects, representing the
 primary key of the item to delete.
 
-For the primary key, you must provide all of the attributes. For
+For the primary key, you must provide all of the key attributes. For
 example, with a simple primary key, you only need to provide a value for
 the partition key. For a composite primary key, you must provide values
 for both the partition key and the sort key.}
@@ -139,6 +139,6 @@ in the \emph{Amazon DynamoDB Developer Guide}.}
 \description{
 Deletes a single item in a table by primary key. You can perform a conditional delete operation that deletes the item if it exists, or if it has an expected attribute value.
 
-See \url{https://paws-r.github.io/docs/dynamodb/delete_item.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/dynamodb_delete_item/} for full documentation.
 }
 \keyword{internal}

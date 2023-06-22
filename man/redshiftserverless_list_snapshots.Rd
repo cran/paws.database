@@ -18,7 +18,7 @@ redshiftserverless_list_snapshots(
 \item{endTime}{The timestamp showing when the snapshot creation finished.}
 
 \item{maxResults}{An optional parameter that specifies the maximum number of results to
-return. You can use \code{nextToken} to get the next page of results.}
+return. You can use \code{nextToken} to display the next page of results.}
 
 \item{namespaceArn}{The Amazon Resource Name (ARN) of the namespace from which to list all
 snapshots.}
@@ -36,6 +36,6 @@ again using the returned token to retrieve the next page.}
 \description{
 Returns a list of snapshots.
 
-See \url{https://paws-r.github.io/docs/redshiftserverless/list_snapshots.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/redshiftserverless_list_snapshots/} for full documentation.
 }
 \keyword{internal}

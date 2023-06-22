@@ -30,6 +30,7 @@ neptune_create_db_cluster(
   EnableIAMDatabaseAuthentication = NULL,
   EnableCloudwatchLogsExports = NULL,
   DeletionProtection = NULL,
+  ServerlessV2ScalingConfiguration = NULL,
   GlobalClusterIdentifier = NULL
 )
 }
@@ -186,12 +187,14 @@ CloudWatch Logs.}
 enabled. The database can't be deleted when deletion protection is
 enabled. By default, deletion protection is enabled.}
 
+\item{ServerlessV2ScalingConfiguration}{}
+
 \item{GlobalClusterIdentifier}{The ID of the Neptune global database to which this new DB cluster
 should be added.}
 }
 \description{
 Creates a new Amazon Neptune DB cluster.
 
-See \url{https://paws-r.github.io/docs/neptune/create_db_cluster.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/neptune_create_db_cluster/} for full documentation.
 }
 \keyword{internal}

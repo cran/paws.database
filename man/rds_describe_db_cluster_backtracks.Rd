@@ -31,7 +31,7 @@ be described.
 Constraints:
 \itemize{
 \item Must contain a valid universally unique identifier (UUID). For more
-information about UUIDs, see \href{https://www.ietf.org/rfc/rfc4122.txt}{A Universally Unique Identifier (UUID) URN Namespace}.
+information about UUIDs, see \href{https://en.wikipedia.org/wiki/Universally_unique_identifier}{Universally unique identifier}.
 }
 
 Example: \verb{123e4567-e89b-12d3-a456-426655440000}}
@@ -72,6 +72,6 @@ records beyond the marker, up to the value specified by \code{MaxRecords}.}
 \description{
 Returns information about backtracks for a DB cluster.
 
-See \url{https://paws-r.github.io/docs/rds/describe_db_cluster_backtracks.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/rds_describe_db_cluster_backtracks/} for full documentation.
 }
 \keyword{internal}

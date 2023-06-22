@@ -47,7 +47,7 @@ information, see
 in the \emph{Amazon DynamoDB Developer Guide}.}
 
 \item{ReturnValues}{Use \code{ReturnValues} if you want to get the item attributes as they appear
-before or after they are updated. For
+before or after they are successfully updated. For
 \code{\link[=dynamodb_update_item]{update_item}}, the valid values are:
 \itemize{
 \item \code{NONE} - If \code{ReturnValues} is not specified, or if its value is
@@ -233,6 +233,6 @@ in the \emph{Amazon DynamoDB Developer Guide}.}
 \description{
 Edits an existing item's attributes, or adds a new item to the table if it does not already exist. You can put, delete, or add attribute values. You can also perform a conditional update on an existing item (insert a new attribute name-value pair if it doesn't exist, or replace an existing name-value pair if it has certain expected attribute values).
 
-See \url{https://paws-r.github.io/docs/dynamodb/update_item.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/dynamodb_update_item/} for full documentation.
 }
 \keyword{internal}

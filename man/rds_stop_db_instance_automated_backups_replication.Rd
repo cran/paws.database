@@ -8,12 +8,12 @@ rds_stop_db_instance_automated_backups_replication(SourceDBInstanceArn)
 }
 \arguments{
 \item{SourceDBInstanceArn}{[required] The Amazon Resource Name (ARN) of the source DB instance for which to
-stop replicating automated backups, for example,
+stop replicating automate backups, for example,
 \code{arn:aws:rds:us-west-2:123456789012:db:mydatabase}.}
 }
 \description{
 Stops automated backup replication for a DB instance.
 
-See \url{https://paws-r.github.io/docs/rds/stop_db_instance_automated_backups_replication.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/rds_stop_db_instance_automated_backups_replication/} for full documentation.
 }
 \keyword{internal}

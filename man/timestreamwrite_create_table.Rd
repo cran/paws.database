@@ -2,15 +2,15 @@
 % Please edit documentation in R/timestreamwrite_operations.R
 \name{timestreamwrite_create_table}
 \alias{timestreamwrite_create_table}
-\title{The CreateTable operation adds a new table to an existing database in
-your account}
+\title{Adds a new table to an existing database in your account}
 \usage{
 timestreamwrite_create_table(
   DatabaseName,
   TableName,
   RetentionProperties = NULL,
   Tags = NULL,
-  MagneticStoreWriteProperties = NULL
+  MagneticStoreWriteProperties = NULL,
+  Schema = NULL
 )
 }
 \arguments{
@@ -18,17 +18,19 @@ timestreamwrite_create_table(
 
 \item{TableName}{[required] The name of the Timestream table.}
 
-\item{RetentionProperties}{The duration for which your time series data must be stored in the
+\item{RetentionProperties}{The duration for which your time-series data must be stored in the
 memory store and the magnetic store.}
 
 \item{Tags}{A list of key-value pairs to label the table.}
 
 \item{MagneticStoreWriteProperties}{Contains properties to set on the table when enabling magnetic store
 writes.}
+
+\item{Schema}{The schema of the table.}
 }
 \description{
-The CreateTable operation adds a new table to an existing database in your account. In an Amazon Web Services account, table names must be at least unique within each Region if they are in the same database. You may have identical table names in the same Region if the tables are in separate databases. While creating the table, you must specify the table name, database name, and the retention properties. \href{https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html}{Service quotas apply}. See \href{https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-table.html}{code sample} for details.
+Adds a new table to an existing database in your account. In an Amazon Web Services account, table names must be at least unique within each Region if they are in the same database. You might have identical table names in the same Region if the tables are in separate databases. While creating the table, you must specify the table name, database name, and the retention properties. \href{https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html}{Service quotas apply}. See \href{https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-table.html}{code sample} for details.
 
-See \url{https://paws-r.github.io/docs/timestreamwrite/create_table.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/timestreamwrite_create_table/} for full documentation.
 }
 \keyword{internal}

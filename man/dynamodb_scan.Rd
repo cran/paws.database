@@ -65,7 +65,9 @@ Retrieves all attributes that have been projected into the index. If
 the index is configured to project all attributes, this return value
 is equivalent to specifying \code{ALL_ATTRIBUTES}.
 \item \code{COUNT} - Returns the number of matching items, rather than the
-matching items themselves.
+matching items themselves. Note that this uses the same quantity of
+read capacity units as getting the items, and is subject to the same
+item size calculations.
 \item \code{SPECIFIC_ATTRIBUTES} - Returns only the attributes listed in
 \code{ProjectionExpression}. This return value is equivalent to
 specifying \code{ProjectionExpression} without specifying any value for
@@ -255,6 +257,6 @@ to true, you will receive a \code{ValidationException}.}
 \description{
 The \code{\link[=dynamodb_scan]{scan}} operation returns one or more items and item attributes by accessing every item in a table or a secondary index. To have DynamoDB return fewer items, you can provide a \code{FilterExpression} operation.
 
-See \url{https://paws-r.github.io/docs/dynamodb/scan.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/dynamodb_scan/} for full documentation.
 }
 \keyword{internal}

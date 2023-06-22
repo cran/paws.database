@@ -39,7 +39,7 @@ It's ignored in other Amazon Web Services Regions.
 
 To learn how to generate a Signature Version 4 signed request, see
 \href{https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html}{Authenticating Requests: Using Query Parameters (Amazon Web Services Signature Version 4)}
-and \href{https://docs.aws.amazon.com/general/latest/gr/signing-aws-api-requests.html}{Signature Version 4 Signing Process}.
+and \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html}{Signature Version 4 Signing Process}.
 
 If you are using an Amazon Web Services SDK tool or the CLI, you can
 specify \code{SourceRegion} (or \code{--source-region} for the CLI) instead of
@@ -50,6 +50,6 @@ that can run in the source Amazon Web Services Region.}
 \description{
 Enables replication of automated backups to a different Amazon Web Services Region.
 
-See \url{https://paws-r.github.io/docs/rds/start_db_instance_automated_backups_replication.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/rds_start_db_instance_automated_backups_replication/} for full documentation.
 }
 \keyword{internal}

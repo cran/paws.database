@@ -35,7 +35,7 @@ idempotent.
 
 If you submit a request with the same client token but a change in other
 parameters within the 8-hour idempotency window, DynamoDB returns an
-\code{IdempotentParameterMismatch} exception.}
+\code{ImportConflictException}.}
 
 \item{S3Bucket}{[required] The name of the Amazon S3 bucket to export the snapshot to.}
 
@@ -61,6 +61,6 @@ data will be stored (if applicable).}
 \description{
 Exports table data to an S3 bucket. The table must have point in time recovery enabled, and you can export data from any time within the point in time recovery window.
 
-See \url{https://paws-r.github.io/docs/dynamodb/export_table_to_point_in_time.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/dynamodb_export_table_to_point_in_time/} for full documentation.
 }
 \keyword{internal}

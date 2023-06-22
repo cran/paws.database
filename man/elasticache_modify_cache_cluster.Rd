@@ -24,7 +24,8 @@ elasticache_modify_cache_cluster(
   CacheNodeType = NULL,
   AuthToken = NULL,
   AuthTokenUpdateStrategy = NULL,
-  LogDeliveryConfigurations = NULL
+  LogDeliveryConfigurations = NULL,
+  IpDiscovery = NULL
 )
 }
 \arguments{
@@ -275,10 +276,15 @@ must be specified with the \code{auth-token} parameter. Possible values:
 For more information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html}{Authenticating Users with Redis AUTH}}
 
 \item{LogDeliveryConfigurations}{Specifies the destination, format and type of the logs.}
+
+\item{IpDiscovery}{The network type you choose when modifying a cluster, either \code{ipv4} |
+\code{ipv6}. IPv6 is supported for workloads using Redis engine version 6.2
+onward or Memcached engine version 1.6.6 on all instances built on the
+\href{https://aws.amazon.com/ec2/nitro/}{Nitro system}.}
 }
 \description{
 Modifies the settings for a cluster. You can use this operation to change one or more cluster configuration parameters by specifying the parameters and the new values.
 
-See \url{https://paws-r.github.io/docs/elasticache/modify_cache_cluster.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/elasticache_modify_cache_cluster/} for full documentation.
 }
 \keyword{internal}

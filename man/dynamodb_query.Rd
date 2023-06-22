@@ -48,7 +48,9 @@ Retrieves all attributes that have been projected into the index. If
 the index is configured to project all attributes, this return value
 is equivalent to specifying \code{ALL_ATTRIBUTES}.
 \item \code{COUNT} - Returns the number of matching items, rather than the
-matching items themselves.
+matching items themselves. Note that this uses the same quantity of
+read capacity units as getting the items, and is subject to the same
+item size calculations.
 \item \code{SPECIFIC_ATTRIBUTES} - Returns only the attributes listed in
 \code{ProjectionExpression}. This return value is equivalent to
 specifying \code{ProjectionExpression} without specifying any value for
@@ -300,6 +302,6 @@ in the \emph{Amazon DynamoDB Developer Guide}.}
 \description{
 You must provide the name of the partition key attribute and a single value for that attribute. \code{\link[=dynamodb_query]{query}} returns all items with that partition key value. Optionally, you can provide a sort key attribute and use a comparison operator to refine the search results.
 
-See \url{https://paws-r.github.io/docs/dynamodb/query.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/dynamodb_query/} for full documentation.
 }
 \keyword{internal}

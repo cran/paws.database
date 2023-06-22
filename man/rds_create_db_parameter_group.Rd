@@ -42,9 +42,7 @@ The output contains duplicates.
 
 The following are the valid DB engine values:
 \itemize{
-\item \code{aurora} (for MySQL 5.6-compatible Aurora)
-\item \code{aurora-mysql} (for MySQL 5.7-compatible and MySQL 8.0-compatible
-Aurora)
+\item \code{aurora-mysql}
 \item \code{aurora-postgresql}
 \item \code{mariadb}
 \item \code{mysql}
@@ -66,6 +64,6 @@ Aurora)
 \description{
 Creates a new DB parameter group.
 
-See \url{https://paws-r.github.io/docs/rds/create_db_parameter_group.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/rds_create_db_parameter_group/} for full documentation.
 }
 \keyword{internal}

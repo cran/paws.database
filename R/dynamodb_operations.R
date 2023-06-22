@@ -9,10 +9,10 @@ NULL
 #' @description
 #' This operation allows you to perform batch reads or writes on data stored in DynamoDB, using PartiQL. Each read statement in a [`batch_execute_statement`][dynamodb_batch_execute_statement] must specify an equality condition on all key attributes. This enforces that each `SELECT` statement in a batch returns at most a single item.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/batch_execute_statement.html](https://paws-r.github.io/docs/dynamodb/batch_execute_statement.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_batch_execute_statement/](https://www.paws-r-sdk.com/docs/dynamodb_batch_execute_statement/) for full documentation.
 #'
 #' @param Statements &#91;required&#93; The list of PartiQL statements representing the batch to run.
-#' @param ReturnConsumedCapacity
+#' @param ReturnConsumedCapacity 
 #'
 #' @keywords internal
 #'
@@ -40,83 +40,83 @@ dynamodb_batch_execute_statement <- function(Statements, ReturnConsumedCapacity 
 #' @description
 #' The [`batch_get_item`][dynamodb_batch_get_item] operation returns the attributes of one or more items from one or more tables. You identify requested items by primary key.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/batch_get_item.html](https://paws-r.github.io/docs/dynamodb/batch_get_item.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_batch_get_item/](https://www.paws-r-sdk.com/docs/dynamodb_batch_get_item/) for full documentation.
 #'
 #' @param RequestItems &#91;required&#93; A map of one or more table names and, for each table, a map that
 #' describes one or more items to retrieve from that table. Each table name
 #' can be used only once per [`batch_get_item`][dynamodb_batch_get_item]
 #' request.
-#'
+#' 
 #' Each element in the map of items to retrieve consists of the following:
-#'
+#' 
 #' -   `ConsistentRead` - If `true`, a strongly consistent read is used; if
 #'     `false` (the default), an eventually consistent read is used.
-#'
+#' 
 #' -   `ExpressionAttributeNames` - One or more substitution tokens for
 #'     attribute names in the `ProjectionExpression` parameter. The
 #'     following are some use cases for using `ExpressionAttributeNames`:
-#'
+#' 
 #'     -   To access an attribute whose name conflicts with a DynamoDB
 #'         reserved word.
-#'
+#' 
 #'     -   To create a placeholder for repeating occurrences of an
 #'         attribute name in an expression.
-#'
+#' 
 #'     -   To prevent special characters in an attribute name from being
 #'         misinterpreted in an expression.
-#'
+#' 
 #'     Use the **#** character in an expression to dereference an
 #'     attribute name. For example, consider the following attribute name:
-#'
+#' 
 #'     -   `Percentile`
-#'
+#' 
 #'     The name of this attribute conflicts with a reserved word, so it
 #'     cannot be used directly in an expression. (For the complete list of
 #'     reserved words, see [Reserved
 #'     Words](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 #'     in the *Amazon DynamoDB Developer Guide*). To work around this, you
 #'     could specify the following for `ExpressionAttributeNames`:
-#'
+#' 
 #'     -   `{"#P":"Percentile"}`
-#'
+#' 
 #'     You could then use this substitution in an expression, as in this
 #'     example:
-#'
+#' 
 #'     -   `#P = :val`
-#'
+#' 
 #'     Tokens that begin with the **:** character are *expression attribute
 #'     values*, which are placeholders for the actual value at runtime.
-#'
+#' 
 #'     For more information about expression attribute names, see
 #'     [Accessing Item
 #'     Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html)
 #'     in the *Amazon DynamoDB Developer Guide*.
-#'
+#' 
 #' -   `Keys` - An array of primary key attribute values that define
 #'     specific items in the table. For each primary key, you must provide
 #'     *all* of the key attributes. For example, with a simple primary key,
 #'     you only need to provide the partition key value. For a composite
 #'     key, you must provide *both* the partition key value and the sort
 #'     key value.
-#'
+#' 
 #' -   `ProjectionExpression` - A string that identifies one or more
 #'     attributes to retrieve from the table. These attributes can include
 #'     scalars, sets, or elements of a JSON document. The attributes in the
 #'     expression must be separated by commas.
-#'
+#' 
 #'     If no attribute names are specified, then all attributes are
 #'     returned. If any of the requested attributes are not found, they do
 #'     not appear in the result.
-#'
+#' 
 #'     For more information, see [Accessing Item
 #'     Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html)
 #'     in the *Amazon DynamoDB Developer Guide*.
-#'
+#' 
 #' -   `AttributesToGet` - This is a legacy parameter. Use
 #'     `ProjectionExpression` instead. For more information, see
 #'     [AttributesToGet](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
 #'     in the *Amazon DynamoDB Developer Guide*.
-#' @param ReturnConsumedCapacity
+#' @param ReturnConsumedCapacity 
 #'
 #' @keywords internal
 #'
@@ -144,16 +144,16 @@ dynamodb_batch_get_item <- function(RequestItems, ReturnConsumedCapacity = NULL)
 #' @description
 #' The [`batch_write_item`][dynamodb_batch_write_item] operation puts or deletes multiple items in one or more tables. A single call to [`batch_write_item`][dynamodb_batch_write_item] can transmit up to 16MB of data over the network, consisting of up to 25 item put or delete operations. While individual items can be up to 400 KB once stored, it's important to note that an item's representation might be greater than 400KB while being sent in DynamoDB's JSON format for the API call. For more details on this distinction, see [Naming Rules and Data Types](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html).
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/batch_write_item.html](https://paws-r.github.io/docs/dynamodb/batch_write_item.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_batch_write_item/](https://www.paws-r-sdk.com/docs/dynamodb_batch_write_item/) for full documentation.
 #'
 #' @param RequestItems &#91;required&#93; A map of one or more table names and, for each table, a list of
 #' operations to be performed (`DeleteRequest` or `PutRequest`). Each
 #' element in the map consists of the following:
-#'
+#' 
 #' -   `DeleteRequest` - Perform a [`delete_item`][dynamodb_delete_item]
 #'     operation on the specified item. The item to be deleted is
 #'     identified by a `Key` subelement:
-#'
+#' 
 #'     -   `Key` - A map of primary key attribute values that uniquely
 #'         identify the item. Each entry in this map consists of an
 #'         attribute name and an attribute value. For each primary key, you
@@ -161,22 +161,22 @@ dynamodb_batch_get_item <- function(RequestItems, ReturnConsumedCapacity = NULL)
 #'         simple primary key, you only need to provide a value for the
 #'         partition key. For a composite primary key, you must provide
 #'         values for *both* the partition key and the sort key.
-#'
+#' 
 #' -   `PutRequest` - Perform a [`put_item`][dynamodb_put_item] operation
 #'     on the specified item. The item to be put is identified by an `Item`
 #'     subelement:
-#'
+#' 
 #'     -   `Item` - A map of attributes and their values. Each entry in
 #'         this map consists of an attribute name and an attribute value.
 #'         Attribute values must not be null; string and binary type
 #'         attributes must have lengths greater than zero; and set type
 #'         attributes must not be empty. Requests that contain empty values
 #'         are rejected with a `ValidationException` exception.
-#'
+#' 
 #'         If you specify any attributes that are part of an index key,
 #'         then the data types for those attributes must match those of the
 #'         schema in the table's attribute definition.
-#' @param ReturnConsumedCapacity
+#' @param ReturnConsumedCapacity 
 #' @param ReturnItemCollectionMetrics Determines whether item collection metrics are returned. If set to
 #' `SIZE`, the response includes statistics about item collections, if any,
 #' that were modified during the operation are returned in the response. If
@@ -207,7 +207,7 @@ dynamodb_batch_write_item <- function(RequestItems, ReturnConsumedCapacity = NUL
 #' @description
 #' Creates a backup for an existing table.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/create_backup.html](https://paws-r.github.io/docs/dynamodb/create_backup.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_create_backup/](https://www.paws-r-sdk.com/docs/dynamodb_create_backup/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table.
 #' @param BackupName &#91;required&#93; Specified name for the backup.
@@ -237,7 +237,7 @@ dynamodb_create_backup <- function(TableName, BackupName) {
 #' @description
 #' Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/create_global_table.html](https://paws-r.github.io/docs/dynamodb/create_global_table.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_create_global_table/](https://www.paws-r-sdk.com/docs/dynamodb_create_global_table/) for full documentation.
 #'
 #' @param GlobalTableName &#91;required&#93; The global table name.
 #' @param ReplicationGroup &#91;required&#93; The Regions where the global table needs to be created.
@@ -267,7 +267,7 @@ dynamodb_create_global_table <- function(GlobalTableName, ReplicationGroup) {
 #' @description
 #' The [`create_table`][dynamodb_create_table] operation adds a new table to your account. In an Amazon Web Services account, table names must be unique within each Region. That is, you can have two tables with same name if you create the tables in different Regions.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/create_table.html](https://paws-r.github.io/docs/dynamodb/create_table.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_create_table/](https://www.paws-r-sdk.com/docs/dynamodb_create_table/) for full documentation.
 #'
 #' @param AttributeDefinitions &#91;required&#93; An array of attributes that describe the key schema for the table and
 #' indexes.
@@ -277,35 +277,35 @@ dynamodb_create_global_table <- function(GlobalTableName, ReplicationGroup) {
 #' `AttributeDefinitions` array. For more information, see [Data
 #' Model](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.html)
 #' in the *Amazon DynamoDB Developer Guide*.
-#'
+#' 
 #' Each `KeySchemaElement` in the array is composed of:
-#'
+#' 
 #' -   `AttributeName` - The name of this key attribute.
-#'
+#' 
 #' -   `KeyType` - The role that the key attribute will assume:
-#'
+#' 
 #'     -   `HASH` - partition key
-#'
+#' 
 #'     -   `RANGE` - sort key
-#'
+#' 
 #' The partition key of an item is also known as its *hash attribute*. The
 #' term "hash attribute" derives from the DynamoDB usage of an internal
 #' hash function to evenly distribute data items across partitions, based
 #' on their partition key values.
-#'
+#' 
 #' The sort key of an item is also known as its *range attribute*. The term
 #' "range attribute" derives from the way DynamoDB stores items with the
 #' same partition key physically close together, in sorted order by the
 #' sort key value.
-#'
+#' 
 #' For a simple primary key (partition key), you must provide exactly one
 #' element with a `KeyType` of `HASH`.
-#'
+#' 
 #' For a composite primary key (partition key and sort key), you must
 #' provide exactly two elements, in this order: The first element must have
 #' a `KeyType` of `HASH`, and the second element must have a `KeyType` of
 #' `RANGE`.
-#'
+#' 
 #' For more information, see [Working with
 #' Tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key)
 #' in the *Amazon DynamoDB Developer Guide*.
@@ -313,33 +313,33 @@ dynamodb_create_global_table <- function(GlobalTableName, ReplicationGroup) {
 #' the table. Each index is scoped to a given partition key value. There is
 #' a 10 GB size limit per partition key value; otherwise, the size of a
 #' local secondary index is unconstrained.
-#'
+#' 
 #' Each local secondary index in the array includes the following:
-#'
+#' 
 #' -   `IndexName` - The name of the local secondary index. Must be unique
 #'     only for this table.
-#'
+#' 
 #' -   `KeySchema` - Specifies the key schema for the local secondary
 #'     index. The key schema must begin with the same partition key as the
 #'     table.
-#'
+#' 
 #' -   `Projection` - Specifies attributes that are copied (projected) from
 #'     the table into the index. These are in addition to the primary key
 #'     attributes and index key attributes, which are automatically
 #'     projected. Each attribute specification is composed of:
-#'
+#' 
 #'     -   `ProjectionType` - One of the following:
-#'
+#' 
 #'         -   `KEYS_ONLY` - Only the index and primary keys are projected
 #'             into the index.
-#'
+#' 
 #'         -   `INCLUDE` - Only the specified table attributes are
 #'             projected into the index. The list of projected attributes
 #'             is in `NonKeyAttributes`.
-#'
+#' 
 #'         -   `ALL` - All of the table attributes are projected into the
 #'             index.
-#'
+#' 
 #'     -   `NonKeyAttributes` - A list of one or more non-key attribute
 #'         names that are projected into the secondary index. The total
 #'         count of attributes provided in `NonKeyAttributes`, summed
@@ -349,47 +349,47 @@ dynamodb_create_global_table <- function(GlobalTableName, ReplicationGroup) {
 #' @param GlobalSecondaryIndexes One or more global secondary indexes (the maximum is 20) to be created
 #' on the table. Each global secondary index in the array includes the
 #' following:
-#'
+#' 
 #' -   `IndexName` - The name of the global secondary index. Must be unique
 #'     only for this table.
-#'
+#' 
 #' -   `KeySchema` - Specifies the key schema for the global secondary
 #'     index.
-#'
+#' 
 #' -   `Projection` - Specifies attributes that are copied (projected) from
 #'     the table into the index. These are in addition to the primary key
 #'     attributes and index key attributes, which are automatically
 #'     projected. Each attribute specification is composed of:
-#'
+#' 
 #'     -   `ProjectionType` - One of the following:
-#'
+#' 
 #'         -   `KEYS_ONLY` - Only the index and primary keys are projected
 #'             into the index.
-#'
+#' 
 #'         -   `INCLUDE` - Only the specified table attributes are
 #'             projected into the index. The list of projected attributes
 #'             is in `NonKeyAttributes`.
-#'
+#' 
 #'         -   `ALL` - All of the table attributes are projected into the
 #'             index.
-#'
+#' 
 #'     -   `NonKeyAttributes` - A list of one or more non-key attribute
 #'         names that are projected into the secondary index. The total
 #'         count of attributes provided in `NonKeyAttributes`, summed
 #'         across all of the secondary indexes, must not exceed 100. If you
 #'         project the same attribute into two different indexes, this
 #'         counts as two distinct attributes when determining the total.
-#'
+#' 
 #' -   `ProvisionedThroughput` - The provisioned throughput settings for
 #'     the global secondary index, consisting of read and write capacity
 #'     units.
 #' @param BillingMode Controls how you are charged for read and write throughput and how you
 #' manage capacity. This setting can be changed later.
-#'
+#' 
 #' -   `PROVISIONED` - We recommend using `PROVISIONED` for predictable
 #'     workloads. `PROVISIONED` sets the billing mode to [Provisioned
 #'     Mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual).
-#'
+#' 
 #' -   `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
 #'     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
 #'     [On-Demand
@@ -397,34 +397,34 @@ dynamodb_create_global_table <- function(GlobalTableName, ReplicationGroup) {
 #' @param ProvisionedThroughput Represents the provisioned throughput settings for a specified table or
 #' index. The settings can be modified using the
 #' [`update_table`][dynamodb_update_table] operation.
-#'
+#' 
 #' If you set BillingMode as `PROVISIONED`, you must specify this property.
 #' If you set BillingMode as `PAY_PER_REQUEST`, you cannot specify this
 #' property.
-#'
+#' 
 #' For current minimum and maximum provisioned throughput values, see
 #' [Service, Account, and Table
 #' Quotas](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ServiceQuotas.html)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param StreamSpecification The settings for DynamoDB Streams on the table. These settings consist
 #' of:
-#'
+#' 
 #' -   `StreamEnabled` - Indicates whether DynamoDB Streams is to be
 #'     enabled (true) or disabled (false).
-#'
+#' 
 #' -   `StreamViewType` - When an item in the table is modified,
 #'     `StreamViewType` determines what information is written to the
 #'     table's stream. Valid values for `StreamViewType` are:
-#'
+#' 
 #'     -   `KEYS_ONLY` - Only the key attributes of the modified item are
 #'         written to the stream.
-#'
+#' 
 #'     -   `NEW_IMAGE` - The entire item, as it appears after it was
 #'         modified, is written to the stream.
-#'
+#' 
 #'     -   `OLD_IMAGE` - The entire item, as it appeared before it was
 #'         modified, is written to the stream.
-#'
+#' 
 #'     -   `NEW_AND_OLD_IMAGES` - Both the new and the old item images of
 #'         the item are written to the stream.
 #' @param SSESpecification Represents the settings used to enable server-side encryption.
@@ -433,18 +433,20 @@ dynamodb_create_global_table <- function(GlobalTableName, ReplicationGroup) {
 #' DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html).
 #' @param TableClass The table class of the new table. Valid values are `STANDARD` and
 #' `STANDARD_INFREQUENT_ACCESS`.
+#' @param DeletionProtectionEnabled Indicates whether deletion protection is to be enabled (true) or
+#' disabled (false) on the table.
 #'
 #' @keywords internal
 #'
 #' @rdname dynamodb_create_table
-dynamodb_create_table <- function(AttributeDefinitions, TableName, KeySchema, LocalSecondaryIndexes = NULL, GlobalSecondaryIndexes = NULL, BillingMode = NULL, ProvisionedThroughput = NULL, StreamSpecification = NULL, SSESpecification = NULL, Tags = NULL, TableClass = NULL) {
+dynamodb_create_table <- function(AttributeDefinitions, TableName, KeySchema, LocalSecondaryIndexes = NULL, GlobalSecondaryIndexes = NULL, BillingMode = NULL, ProvisionedThroughput = NULL, StreamSpecification = NULL, SSESpecification = NULL, Tags = NULL, TableClass = NULL, DeletionProtectionEnabled = NULL) {
   op <- new_operation(
     name = "CreateTable",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .dynamodb$create_table_input(AttributeDefinitions = AttributeDefinitions, TableName = TableName, KeySchema = KeySchema, LocalSecondaryIndexes = LocalSecondaryIndexes, GlobalSecondaryIndexes = GlobalSecondaryIndexes, BillingMode = BillingMode, ProvisionedThroughput = ProvisionedThroughput, StreamSpecification = StreamSpecification, SSESpecification = SSESpecification, Tags = Tags, TableClass = TableClass)
+  input <- .dynamodb$create_table_input(AttributeDefinitions = AttributeDefinitions, TableName = TableName, KeySchema = KeySchema, LocalSecondaryIndexes = LocalSecondaryIndexes, GlobalSecondaryIndexes = GlobalSecondaryIndexes, BillingMode = BillingMode, ProvisionedThroughput = ProvisionedThroughput, StreamSpecification = StreamSpecification, SSESpecification = SSESpecification, Tags = Tags, TableClass = TableClass, DeletionProtectionEnabled = DeletionProtectionEnabled)
   output <- .dynamodb$create_table_output()
   config <- get_config()
   svc <- .dynamodb$service(config)
@@ -459,7 +461,7 @@ dynamodb_create_table <- function(AttributeDefinitions, TableName, KeySchema, Lo
 #' @description
 #' Deletes an existing backup of a table.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/delete_backup.html](https://paws-r.github.io/docs/dynamodb/delete_backup.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_delete_backup/](https://www.paws-r-sdk.com/docs/dynamodb_delete_backup/) for full documentation.
 #'
 #' @param BackupArn &#91;required&#93; The ARN associated with the backup.
 #'
@@ -488,13 +490,13 @@ dynamodb_delete_backup <- function(BackupArn) {
 #' @description
 #' Deletes a single item in a table by primary key. You can perform a conditional delete operation that deletes the item if it exists, or if it has an expected attribute value.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/delete_item.html](https://paws-r.github.io/docs/dynamodb/delete_item.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_delete_item/](https://www.paws-r-sdk.com/docs/dynamodb_delete_item/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table from which to delete the item.
 #' @param Key &#91;required&#93; A map of attribute names to `AttributeValue` objects, representing the
 #' primary key of the item to delete.
-#'
-#' For the primary key, you must provide all of the attributes. For
+#' 
+#' For the primary key, you must provide all of the key attributes. For
 #' example, with a simple primary key, you only need to provide a value for
 #' the partition key. For a composite primary key, you must provide values
 #' for both the partition key and the sort key.
@@ -509,95 +511,95 @@ dynamodb_delete_backup <- function(BackupArn) {
 #' @param ReturnValues Use `ReturnValues` if you want to get the item attributes as they
 #' appeared before they were deleted. For
 #' [`delete_item`][dynamodb_delete_item], the valid values are:
-#'
+#' 
 #' -   `NONE` - If `ReturnValues` is not specified, or if its value is
 #'     `NONE`, then nothing is returned. (This setting is the default for
 #'     `ReturnValues`.)
-#'
+#' 
 #' -   `ALL_OLD` - The content of the old item is returned.
-#'
+#' 
 #' There is no additional cost associated with requesting a return value
 #' aside from the small network and processing overhead of receiving a
 #' larger response. No read capacity units are consumed.
-#'
+#' 
 #' The `ReturnValues` parameter is used by several DynamoDB operations;
 #' however, [`delete_item`][dynamodb_delete_item] does not recognize any
 #' values other than `NONE` or `ALL_OLD`.
-#' @param ReturnConsumedCapacity
+#' @param ReturnConsumedCapacity 
 #' @param ReturnItemCollectionMetrics Determines whether item collection metrics are returned. If set to
 #' `SIZE`, the response includes statistics about item collections, if any,
 #' that were modified during the operation are returned in the response. If
 #' set to `NONE` (the default), no statistics are returned.
 #' @param ConditionExpression A condition that must be satisfied in order for a conditional
 #' [`delete_item`][dynamodb_delete_item] to succeed.
-#'
+#' 
 #' An expression can contain any of the following:
-#'
+#' 
 #' -   Functions:
 #'     `attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size`
-#'
+#' 
 #'     These function names are case-sensitive.
-#'
+#' 
 #' -   Comparison operators: `= | <> | < | > | <= | >= | BETWEEN | IN `
-#'
+#' 
 #' -   Logical operators: `AND | OR | NOT`
-#'
+#' 
 #' For more information about condition expressions, see [Condition
 #' Expressions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ExpressionAttributeNames One or more substitution tokens for attribute names in an expression.
 #' The following are some use cases for using `ExpressionAttributeNames`:
-#'
+#' 
 #' -   To access an attribute whose name conflicts with a DynamoDB reserved
 #'     word.
-#'
+#' 
 #' -   To create a placeholder for repeating occurrences of an attribute
 #'     name in an expression.
-#'
+#' 
 #' -   To prevent special characters in an attribute name from being
 #'     misinterpreted in an expression.
-#'
+#' 
 #' Use the **#** character in an expression to dereference an attribute
 #' name. For example, consider the following attribute name:
-#'
+#' 
 #' -   `Percentile`
-#'
+#' 
 #' The name of this attribute conflicts with a reserved word, so it cannot
 #' be used directly in an expression. (For the complete list of reserved
 #' words, see [Reserved
 #' Words](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 #' in the *Amazon DynamoDB Developer Guide*). To work around this, you
 #' could specify the following for `ExpressionAttributeNames`:
-#'
+#' 
 #' -   `{"#P":"Percentile"}`
-#'
+#' 
 #' You could then use this substitution in an expression, as in this
 #' example:
-#'
+#' 
 #' -   `#P = :val`
-#'
+#' 
 #' Tokens that begin with the **:** character are *expression attribute
 #' values*, which are placeholders for the actual value at runtime.
-#'
+#' 
 #' For more information on expression attribute names, see [Specifying Item
 #' Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ExpressionAttributeValues One or more values that can be substituted in an expression.
-#'
+#' 
 #' Use the **:** (colon) character in an expression to dereference an
 #' attribute value. For example, suppose that you wanted to check whether
 #' the value of the *ProductStatus* attribute was one of the following:
-#'
+#' 
 #' `Available | Backordered | Discontinued`
-#'
+#' 
 #' You would first need to specify `ExpressionAttributeValues` as follows:
-#'
+#' 
 #' `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }`
-#'
+#' 
 #' You could then use these values in an expression, such as this:
-#'
+#' 
 #' `ProductStatus IN (:avail, :back, :disc)`
-#'
+#' 
 #' For more information on expression attribute values, see [Condition
 #' Expressions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html)
 #' in the *Amazon DynamoDB Developer Guide*.
@@ -627,7 +629,7 @@ dynamodb_delete_item <- function(TableName, Key, Expected = NULL, ConditionalOpe
 #' @description
 #' The [`delete_table`][dynamodb_delete_table] operation deletes a table and all of its items. After a [`delete_table`][dynamodb_delete_table] request, the specified table is in the `DELETING` state until DynamoDB completes the deletion. If the table is in the `ACTIVE` state, you can delete it. If a table is in `CREATING` or `UPDATING` states, then DynamoDB returns a `ResourceInUseException`. If the specified table does not exist, DynamoDB returns a `ResourceNotFoundException`. If table is already in the `DELETING` state, no error is returned.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/delete_table.html](https://paws-r.github.io/docs/dynamodb/delete_table.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_delete_table/](https://www.paws-r-sdk.com/docs/dynamodb_delete_table/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table to delete.
 #'
@@ -656,7 +658,7 @@ dynamodb_delete_table <- function(TableName) {
 #' @description
 #' Describes an existing backup of a table.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/describe_backup.html](https://paws-r.github.io/docs/dynamodb/describe_backup.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_describe_backup/](https://www.paws-r-sdk.com/docs/dynamodb_describe_backup/) for full documentation.
 #'
 #' @param BackupArn &#91;required&#93; The Amazon Resource Name (ARN) associated with the backup.
 #'
@@ -686,7 +688,7 @@ dynamodb_describe_backup <- function(BackupArn) {
 #' @description
 #' Checks the status of continuous backups and point in time recovery on the specified table. Continuous backups are `ENABLED` on all tables at table creation. If point in time recovery is enabled, `PointInTimeRecoveryStatus` will be set to ENABLED.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/describe_continuous_backups.html](https://paws-r.github.io/docs/dynamodb/describe_continuous_backups.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_describe_continuous_backups/](https://www.paws-r-sdk.com/docs/dynamodb_describe_continuous_backups/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; Name of the table for which the customer wants to check the continuous
 #' backups and point in time recovery settings.
@@ -711,13 +713,13 @@ dynamodb_describe_continuous_backups <- function(TableName) {
 }
 .dynamodb$operations$describe_continuous_backups <- dynamodb_describe_continuous_backups
 
-#' Returns information about contributor insights, for a given table or
+#' Returns information about contributor insights for a given table or
 #' global secondary index
 #'
 #' @description
-#' Returns information about contributor insights, for a given table or global secondary index.
+#' Returns information about contributor insights for a given table or global secondary index.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/describe_contributor_insights.html](https://paws-r.github.io/docs/dynamodb/describe_contributor_insights.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_describe_contributor_insights/](https://www.paws-r-sdk.com/docs/dynamodb_describe_contributor_insights/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table to describe.
 #' @param IndexName The name of the global secondary index to describe, if applicable.
@@ -745,9 +747,9 @@ dynamodb_describe_contributor_insights <- function(TableName, IndexName = NULL) 
 #' Returns the regional endpoint information
 #'
 #' @description
-#' Returns the regional endpoint information.
+#' Returns the regional endpoint information. This action must be included in your VPC endpoint policies, or access to the DescribeEndpoints API will be denied. For more information on policy permissions, please see [Internetwork traffic privacy](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/inter-network-traffic-privacy.html#inter-network-traffic-DescribeEndpoints).
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/describe_endpoints.html](https://paws-r.github.io/docs/dynamodb/describe_endpoints.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_describe_endpoints/](https://www.paws-r-sdk.com/docs/dynamodb_describe_endpoints/) for full documentation.
 #'
 #' @keywords internal
 #'
@@ -774,7 +776,7 @@ dynamodb_describe_endpoints <- function() {
 #' @description
 #' Describes an existing table export.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/describe_export.html](https://paws-r.github.io/docs/dynamodb/describe_export.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_describe_export/](https://www.paws-r-sdk.com/docs/dynamodb_describe_export/) for full documentation.
 #'
 #' @param ExportArn &#91;required&#93; The Amazon Resource Name (ARN) associated with the export.
 #'
@@ -803,7 +805,7 @@ dynamodb_describe_export <- function(ExportArn) {
 #' @description
 #' Returns information about the specified global table.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/describe_global_table.html](https://paws-r.github.io/docs/dynamodb/describe_global_table.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_describe_global_table/](https://www.paws-r-sdk.com/docs/dynamodb_describe_global_table/) for full documentation.
 #'
 #' @param GlobalTableName &#91;required&#93; The name of the global table.
 #'
@@ -832,7 +834,7 @@ dynamodb_describe_global_table <- function(GlobalTableName) {
 #' @description
 #' Describes Region-specific settings for a global table.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/describe_global_table_settings.html](https://paws-r.github.io/docs/dynamodb/describe_global_table_settings.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_describe_global_table_settings/](https://www.paws-r-sdk.com/docs/dynamodb_describe_global_table_settings/) for full documentation.
 #'
 #' @param GlobalTableName &#91;required&#93; The name of the global table to describe.
 #'
@@ -856,12 +858,42 @@ dynamodb_describe_global_table_settings <- function(GlobalTableName) {
 }
 .dynamodb$operations$describe_global_table_settings <- dynamodb_describe_global_table_settings
 
+#' Represents the properties of the import
+#'
+#' @description
+#' Represents the properties of the import.
+#'
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_describe_import/](https://www.paws-r-sdk.com/docs/dynamodb_describe_import/) for full documentation.
+#'
+#' @param ImportArn &#91;required&#93; The Amazon Resource Name (ARN) associated with the table you're
+#' importing to.
+#'
+#' @keywords internal
+#'
+#' @rdname dynamodb_describe_import
+dynamodb_describe_import <- function(ImportArn) {
+  op <- new_operation(
+    name = "DescribeImport",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .dynamodb$describe_import_input(ImportArn = ImportArn)
+  output <- .dynamodb$describe_import_output()
+  config <- get_config()
+  svc <- .dynamodb$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.dynamodb$operations$describe_import <- dynamodb_describe_import
+
 #' Returns information about the status of Kinesis streaming
 #'
 #' @description
 #' Returns information about the status of Kinesis streaming.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/describe_kinesis_streaming_destination.html](https://paws-r.github.io/docs/dynamodb/describe_kinesis_streaming_destination.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_describe_kinesis_streaming_destination/](https://www.paws-r-sdk.com/docs/dynamodb_describe_kinesis_streaming_destination/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table being described.
 #'
@@ -892,7 +924,7 @@ dynamodb_describe_kinesis_streaming_destination <- function(TableName) {
 #' @description
 #' Returns the current provisioned-capacity quotas for your Amazon Web Services account in a Region, both for the Region as a whole and for any one DynamoDB table that you create there.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/describe_limits.html](https://paws-r.github.io/docs/dynamodb/describe_limits.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_describe_limits/](https://www.paws-r-sdk.com/docs/dynamodb_describe_limits/) for full documentation.
 #'
 #' @keywords internal
 #'
@@ -921,7 +953,7 @@ dynamodb_describe_limits <- function() {
 #' @description
 #' Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/describe_table.html](https://paws-r.github.io/docs/dynamodb/describe_table.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_describe_table/](https://www.paws-r-sdk.com/docs/dynamodb_describe_table/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table to describe.
 #'
@@ -951,7 +983,7 @@ dynamodb_describe_table <- function(TableName) {
 #' @description
 #' Describes auto scaling settings across replicas of the global table at once.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/describe_table_replica_auto_scaling.html](https://paws-r.github.io/docs/dynamodb/describe_table_replica_auto_scaling.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_describe_table_replica_auto_scaling/](https://www.paws-r-sdk.com/docs/dynamodb_describe_table_replica_auto_scaling/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table.
 #'
@@ -981,7 +1013,7 @@ dynamodb_describe_table_replica_auto_scaling <- function(TableName) {
 #' @description
 #' Gives a description of the Time to Live (TTL) status on the specified table.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/describe_time_to_live.html](https://paws-r.github.io/docs/dynamodb/describe_time_to_live.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_describe_time_to_live/](https://www.paws-r-sdk.com/docs/dynamodb_describe_time_to_live/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table to be described.
 #'
@@ -1010,7 +1042,7 @@ dynamodb_describe_time_to_live <- function(TableName) {
 #' @description
 #' Stops replication from the DynamoDB table to the Kinesis data stream. This is done without deleting either of the resources.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/disable_kinesis_streaming_destination.html](https://paws-r.github.io/docs/dynamodb/disable_kinesis_streaming_destination.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_disable_kinesis_streaming_destination/](https://www.paws-r-sdk.com/docs/dynamodb_disable_kinesis_streaming_destination/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the DynamoDB table.
 #' @param StreamArn &#91;required&#93; The ARN for a Kinesis data stream.
@@ -1041,7 +1073,7 @@ dynamodb_disable_kinesis_streaming_destination <- function(TableName, StreamArn)
 #' @description
 #' Starts table data replication to the specified Kinesis data stream at a timestamp chosen during the enable workflow. If this operation doesn't return results immediately, use DescribeKinesisStreamingDestination to check if streaming to the Kinesis data stream is ACTIVE.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/enable_kinesis_streaming_destination.html](https://paws-r.github.io/docs/dynamodb/enable_kinesis_streaming_destination.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_enable_kinesis_streaming_destination/](https://www.paws-r-sdk.com/docs/dynamodb_enable_kinesis_streaming_destination/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the DynamoDB table.
 #' @param StreamArn &#91;required&#93; The ARN for a Kinesis data stream.
@@ -1072,7 +1104,7 @@ dynamodb_enable_kinesis_streaming_destination <- function(TableName, StreamArn) 
 #' @description
 #' This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/execute_statement.html](https://paws-r.github.io/docs/dynamodb/execute_statement.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_execute_statement/](https://www.paws-r-sdk.com/docs/dynamodb_execute_statement/) for full documentation.
 #'
 #' @param Statement &#91;required&#93; The PartiQL statement representing the operation to run.
 #' @param Parameters The parameters for the PartiQL statement, if any.
@@ -1081,7 +1113,7 @@ dynamodb_enable_kinesis_streaming_destination <- function(TableName, StreamArn) 
 #' used.
 #' @param NextToken Set this value to get remaining results, if `NextToken` was returned in
 #' the statement response.
-#' @param ReturnConsumedCapacity
+#' @param ReturnConsumedCapacity 
 #' @param Limit The maximum number of items to evaluate (not necessarily the number of
 #' matching items). If DynamoDB processes the number of items up to the
 #' limit while processing the results, it stops the operation and returns
@@ -1118,7 +1150,7 @@ dynamodb_execute_statement <- function(Statement, Parameters = NULL, ConsistentR
 #' @description
 #' This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/execute_transaction.html](https://paws-r.github.io/docs/dynamodb/execute_transaction.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_execute_transaction/](https://www.paws-r-sdk.com/docs/dynamodb_execute_transaction/) for full documentation.
 #'
 #' @param TransactStatements &#91;required&#93; The list of PartiQL statements representing the transaction to run.
 #' @param ClientRequestToken Set this value to get remaining results, if `NextToken` was returned in
@@ -1153,7 +1185,7 @@ dynamodb_execute_transaction <- function(TransactStatements, ClientRequestToken 
 #' @description
 #' Exports table data to an S3 bucket. The table must have point in time recovery enabled, and you can export data from any time within the point in time recovery window.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/export_table_to_point_in_time.html](https://paws-r.github.io/docs/dynamodb/export_table_to_point_in_time.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_export_table_to_point_in_time/](https://www.paws-r-sdk.com/docs/dynamodb_export_table_to_point_in_time/) for full documentation.
 #'
 #' @param TableArn &#91;required&#93; The Amazon Resource Name (ARN) associated with the table to export.
 #' @param ExportTime Time in the past from which to export table data, counted in seconds
@@ -1162,16 +1194,16 @@ dynamodb_execute_transaction <- function(TransactStatements, ClientRequestToken 
 #' @param ClientToken Providing a `ClientToken` makes the call to
 #' `ExportTableToPointInTimeInput` idempotent, meaning that multiple
 #' identical calls have the same effect as one single call.
-#'
+#' 
 #' A client token is valid for 8 hours after the first request that uses it
 #' is completed. After 8 hours, any request with the same client token is
 #' treated as a new request. Do not resubmit the same request with the same
 #' client token for more than 8 hours, or the result might not be
 #' idempotent.
-#'
+#' 
 #' If you submit a request with the same client token but a change in other
 #' parameters within the 8-hour idempotency window, DynamoDB returns an
-#' `IdempotentParameterMismatch` exception.
+#' `ImportConflictException`.
 #' @param S3Bucket &#91;required&#93; The name of the Amazon S3 bucket to export the snapshot to.
 #' @param S3BucketOwner The ID of the Amazon Web Services account that owns the bucket the
 #' export will be stored in.
@@ -1179,9 +1211,9 @@ dynamodb_execute_transaction <- function(TransactStatements, ClientRequestToken 
 #' exported snapshot.
 #' @param S3SseAlgorithm Type of encryption used on the bucket where export data will be stored.
 #' Valid values for `S3SseAlgorithm` are:
-#'
+#' 
 #' -   `AES256` - server-side encryption with Amazon S3 managed keys
-#'
+#' 
 #' -   `KMS` - server-side encryption with KMS managed keys
 #' @param S3SseKmsKeyId The ID of the KMS managed key used to encrypt the S3 bucket where export
 #' data will be stored (if applicable).
@@ -1214,12 +1246,12 @@ dynamodb_export_table_to_point_in_time <- function(TableArn, ExportTime = NULL, 
 #' @description
 #' The [`get_item`][dynamodb_get_item] operation returns a set of attributes for the item with the given primary key. If there is no matching item, [`get_item`][dynamodb_get_item] does not return any data and there will be no `Item` element in the response.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/get_item.html](https://paws-r.github.io/docs/dynamodb/get_item.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_get_item/](https://www.paws-r-sdk.com/docs/dynamodb_get_item/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table containing the requested item.
 #' @param Key &#91;required&#93; A map of attribute names to `AttributeValue` objects, representing the
 #' primary key of the item to retrieve.
-#'
+#' 
 #' For the primary key, you must provide all of the attributes. For
 #' example, with a simple primary key, you only need to provide a value for
 #' the partition key. For a composite primary key, you must provide values
@@ -1231,52 +1263,52 @@ dynamodb_export_table_to_point_in_time <- function(TableArn, ExportTime = NULL, 
 #' @param ConsistentRead Determines the read consistency model: If set to `true`, then the
 #' operation uses strongly consistent reads; otherwise, the operation uses
 #' eventually consistent reads.
-#' @param ReturnConsumedCapacity
+#' @param ReturnConsumedCapacity 
 #' @param ProjectionExpression A string that identifies one or more attributes to retrieve from the
 #' table. These attributes can include scalars, sets, or elements of a JSON
 #' document. The attributes in the expression must be separated by commas.
-#'
+#' 
 #' If no attribute names are specified, then all attributes are returned.
 #' If any of the requested attributes are not found, they do not appear in
 #' the result.
-#'
+#' 
 #' For more information, see [Specifying Item
 #' Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ExpressionAttributeNames One or more substitution tokens for attribute names in an expression.
 #' The following are some use cases for using `ExpressionAttributeNames`:
-#'
+#' 
 #' -   To access an attribute whose name conflicts with a DynamoDB reserved
 #'     word.
-#'
+#' 
 #' -   To create a placeholder for repeating occurrences of an attribute
 #'     name in an expression.
-#'
+#' 
 #' -   To prevent special characters in an attribute name from being
 #'     misinterpreted in an expression.
-#'
+#' 
 #' Use the **#** character in an expression to dereference an attribute
 #' name. For example, consider the following attribute name:
-#'
+#' 
 #' -   `Percentile`
-#'
+#' 
 #' The name of this attribute conflicts with a reserved word, so it cannot
 #' be used directly in an expression. (For the complete list of reserved
 #' words, see [Reserved
 #' Words](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 #' in the *Amazon DynamoDB Developer Guide*). To work around this, you
 #' could specify the following for `ExpressionAttributeNames`:
-#'
+#' 
 #' -   `{"#P":"Percentile"}`
-#'
+#' 
 #' You could then use this substitution in an expression, as in this
 #' example:
-#'
+#' 
 #' -   `#P = :val`
-#'
+#' 
 #' Tokens that begin with the **:** character are *expression attribute
 #' values*, which are placeholders for the actual value at runtime.
-#'
+#' 
 #' For more information on expression attribute names, see [Specifying Item
 #' Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html)
 #' in the *Amazon DynamoDB Developer Guide*.
@@ -1301,12 +1333,60 @@ dynamodb_get_item <- function(TableName, Key, AttributesToGet = NULL, Consistent
 }
 .dynamodb$operations$get_item <- dynamodb_get_item
 
+#' Imports table data from an S3 bucket
+#'
+#' @description
+#' Imports table data from an S3 bucket.
+#'
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_import_table/](https://www.paws-r-sdk.com/docs/dynamodb_import_table/) for full documentation.
+#'
+#' @param ClientToken Providing a `ClientToken` makes the call to `ImportTableInput`
+#' idempotent, meaning that multiple identical calls have the same effect
+#' as one single call.
+#' 
+#' A client token is valid for 8 hours after the first request that uses it
+#' is completed. After 8 hours, any request with the same client token is
+#' treated as a new request. Do not resubmit the same request with the same
+#' client token for more than 8 hours, or the result might not be
+#' idempotent.
+#' 
+#' If you submit a request with the same client token but a change in other
+#' parameters within the 8-hour idempotency window, DynamoDB returns an
+#' `IdempotentParameterMismatch` exception.
+#' @param S3BucketSource &#91;required&#93; The S3 bucket that provides the source for the import.
+#' @param InputFormat &#91;required&#93; The format of the source data. Valid values for `ImportFormat` are
+#' `CSV`, `DYNAMODB_JSON` or `ION`.
+#' @param InputFormatOptions Additional properties that specify how the input is formatted,
+#' @param InputCompressionType Type of compression to be used on the input coming from the imported
+#' table.
+#' @param TableCreationParameters &#91;required&#93; Parameters for the table to import the data into.
+#'
+#' @keywords internal
+#'
+#' @rdname dynamodb_import_table
+dynamodb_import_table <- function(ClientToken = NULL, S3BucketSource, InputFormat, InputFormatOptions = NULL, InputCompressionType = NULL, TableCreationParameters) {
+  op <- new_operation(
+    name = "ImportTable",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .dynamodb$import_table_input(ClientToken = ClientToken, S3BucketSource = S3BucketSource, InputFormat = InputFormat, InputFormatOptions = InputFormatOptions, InputCompressionType = InputCompressionType, TableCreationParameters = TableCreationParameters)
+  output <- .dynamodb$import_table_output()
+  config <- get_config()
+  svc <- .dynamodb$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.dynamodb$operations$import_table <- dynamodb_import_table
+
 #' List backups associated with an Amazon Web Services account
 #'
 #' @description
 #' List backups associated with an Amazon Web Services account. To list backups for a given table, specify `TableName`. [`list_backups`][dynamodb_list_backups] returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a maximum number of entries to be returned in a page.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/list_backups.html](https://paws-r.github.io/docs/dynamodb/list_backups.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_list_backups/](https://www.paws-r-sdk.com/docs/dynamodb_list_backups/) for full documentation.
 #'
 #' @param TableName The backups from the table specified by `TableName` are listed.
 #' @param Limit Maximum number of backups to return at once.
@@ -1321,14 +1401,14 @@ dynamodb_get_item <- function(TableName, Key, AttributesToGet = NULL, Consistent
 #' [`list_backups`][dynamodb_list_backups] operation in order to fetch the
 #' next page of results.
 #' @param BackupType The backups from the table specified by `BackupType` are listed.
-#'
+#' 
 #' Where `BackupType` can be:
-#'
+#' 
 #' -   `USER` - On-demand backup created by you. (The default setting if no
 #'     other backup types are specified.)
-#'
+#' 
 #' -   `SYSTEM` - On-demand backup automatically created by DynamoDB.
-#'
+#' 
 #' -   `ALL` - All types of on-demand backups (USER and SYSTEM).
 #'
 #' @keywords internal
@@ -1357,7 +1437,7 @@ dynamodb_list_backups <- function(TableName = NULL, Limit = NULL, TimeRangeLower
 #' @description
 #' Returns a list of ContributorInsightsSummary for a table and all its global secondary indexes.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/list_contributor_insights.html](https://paws-r.github.io/docs/dynamodb/list_contributor_insights.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_list_contributor_insights/](https://www.paws-r-sdk.com/docs/dynamodb_list_contributor_insights/) for full documentation.
 #'
 #' @param TableName The name of the table.
 #' @param NextToken A token to for the desired page, if there is one.
@@ -1388,7 +1468,7 @@ dynamodb_list_contributor_insights <- function(TableName = NULL, NextToken = NUL
 #' @description
 #' Lists completed exports within the past 90 days.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/list_exports.html](https://paws-r.github.io/docs/dynamodb/list_exports.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_list_exports/](https://www.paws-r-sdk.com/docs/dynamodb_list_exports/) for full documentation.
 #'
 #' @param TableArn The Amazon Resource Name (ARN) associated with the exported table.
 #' @param MaxResults Maximum number of results to return per page.
@@ -1421,12 +1501,12 @@ dynamodb_list_exports <- function(TableArn = NULL, MaxResults = NULL, NextToken 
 #' @description
 #' Lists all global tables that have a replica in the specified Region.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/list_global_tables.html](https://paws-r.github.io/docs/dynamodb/list_global_tables.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_list_global_tables/](https://www.paws-r-sdk.com/docs/dynamodb_list_global_tables/) for full documentation.
 #'
 #' @param ExclusiveStartGlobalTableName The first global table name that this operation will evaluate.
 #' @param Limit The maximum number of table names to return, if the parameter is not
 #' specified DynamoDB defaults to 100.
-#'
+#' 
 #' If the number of global tables DynamoDB finds reaches this limit, it
 #' stops the operation and returns the table names collected up to that
 #' point, with a table name in the `LastEvaluatedGlobalTableName` to apply
@@ -1454,13 +1534,47 @@ dynamodb_list_global_tables <- function(ExclusiveStartGlobalTableName = NULL, Li
 }
 .dynamodb$operations$list_global_tables <- dynamodb_list_global_tables
 
+#' Lists completed imports within the past 90 days
+#'
+#' @description
+#' Lists completed imports within the past 90 days.
+#'
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_list_imports/](https://www.paws-r-sdk.com/docs/dynamodb_list_imports/) for full documentation.
+#'
+#' @param TableArn The Amazon Resource Name (ARN) associated with the table that was
+#' imported to.
+#' @param PageSize The number of `ImportSummary `objects returned in a single page.
+#' @param NextToken An optional string that, if supplied, must be copied from the output of
+#' a previous call to [`list_imports`][dynamodb_list_imports]. When
+#' provided in this manner, the API fetches the next page of results.
+#'
+#' @keywords internal
+#'
+#' @rdname dynamodb_list_imports
+dynamodb_list_imports <- function(TableArn = NULL, PageSize = NULL, NextToken = NULL) {
+  op <- new_operation(
+    name = "ListImports",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .dynamodb$list_imports_input(TableArn = TableArn, PageSize = PageSize, NextToken = NextToken)
+  output <- .dynamodb$list_imports_output()
+  config <- get_config()
+  svc <- .dynamodb$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.dynamodb$operations$list_imports <- dynamodb_list_imports
+
 #' Returns an array of table names associated with the current account and
 #' endpoint
 #'
 #' @description
 #' Returns an array of table names associated with the current account and endpoint. The output from [`list_tables`][dynamodb_list_tables] is paginated, with each page returning a maximum of 100 table names.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/list_tables.html](https://paws-r.github.io/docs/dynamodb/list_tables.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_list_tables/](https://www.paws-r-sdk.com/docs/dynamodb_list_tables/) for full documentation.
 #'
 #' @param ExclusiveStartTableName The first table name that this operation will evaluate. Use the value
 #' that was returned for `LastEvaluatedTableName` in a previous operation,
@@ -1493,7 +1607,7 @@ dynamodb_list_tables <- function(ExclusiveStartTableName = NULL, Limit = NULL) {
 #' @description
 #' List all tags on an Amazon DynamoDB resource. You can call ListTagsOfResource up to 10 times per second, per account.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/list_tags_of_resource.html](https://paws-r.github.io/docs/dynamodb/list_tags_of_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_list_tags_of_resource/](https://www.paws-r-sdk.com/docs/dynamodb_list_tags_of_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The Amazon DynamoDB resource with tags to be listed. This value is an
 #' Amazon Resource Name (ARN).
@@ -1526,30 +1640,30 @@ dynamodb_list_tags_of_resource <- function(ResourceArn, NextToken = NULL) {
 #' @description
 #' Creates a new item, or replaces an old item with a new item. If an item that has the same primary key as the new item already exists in the specified table, the new item completely replaces the existing item. You can perform a conditional put operation (add a new item if one with the specified primary key doesn't exist), or replace an existing item if it has certain attribute values. You can return the item's attribute values in the same operation, using the `ReturnValues` parameter.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/put_item.html](https://paws-r.github.io/docs/dynamodb/put_item.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_put_item/](https://www.paws-r-sdk.com/docs/dynamodb_put_item/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table to contain the item.
 #' @param Item &#91;required&#93; A map of attribute name/value pairs, one for each attribute. Only the
 #' primary key attributes are required; you can optionally provide other
 #' attribute name-value pairs for the item.
-#'
+#' 
 #' You must provide all of the attributes for the primary key. For example,
 #' with a simple primary key, you only need to provide a value for the
 #' partition key. For a composite primary key, you must provide both values
 #' for both the partition key and the sort key.
-#'
+#' 
 #' If you specify any attributes that are part of an index key, then the
 #' data types for those attributes must match those of the schema in the
 #' table's attribute definition.
-#'
+#' 
 #' Empty String and Binary attribute values are allowed. Attribute values
 #' of type String and Binary must have a length greater than zero if the
 #' attribute is used as a key attribute for a table or index.
-#'
+#' 
 #' For more information about primary keys, see [Primary
 #' Key](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.PrimaryKey)
 #' in the *Amazon DynamoDB Developer Guide*.
-#'
+#' 
 #' Each element in the `Item` map is an `AttributeValue` object.
 #' @param Expected This is a legacy parameter. Use `ConditionExpression` instead. For more
 #' information, see
@@ -1559,25 +1673,25 @@ dynamodb_list_tags_of_resource <- function(ResourceArn, NextToken = NULL) {
 #' appeared before they were updated with the
 #' [`put_item`][dynamodb_put_item] request. For
 #' [`put_item`][dynamodb_put_item], the valid values are:
-#'
+#' 
 #' -   `NONE` - If `ReturnValues` is not specified, or if its value is
 #'     `NONE`, then nothing is returned. (This setting is the default for
 #'     `ReturnValues`.)
-#'
+#' 
 #' -   `ALL_OLD` - If [`put_item`][dynamodb_put_item] overwrote an
 #'     attribute name-value pair, then the content of the old item is
 #'     returned.
-#'
+#' 
 #' The values returned are strongly consistent.
-#'
+#' 
 #' There is no additional cost associated with requesting a return value
 #' aside from the small network and processing overhead of receiving a
 #' larger response. No read capacity units are consumed.
-#'
+#' 
 #' The `ReturnValues` parameter is used by several DynamoDB operations;
 #' however, [`put_item`][dynamodb_put_item] does not recognize any values
 #' other than `NONE` or `ALL_OLD`.
-#' @param ReturnConsumedCapacity
+#' @param ReturnConsumedCapacity 
 #' @param ReturnItemCollectionMetrics Determines whether item collection metrics are returned. If set to
 #' `SIZE`, the response includes statistics about item collections, if any,
 #' that were modified during the operation are returned in the response. If
@@ -1588,74 +1702,74 @@ dynamodb_list_tags_of_resource <- function(ResourceArn, NextToken = NULL) {
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ConditionExpression A condition that must be satisfied in order for a conditional
 #' [`put_item`][dynamodb_put_item] operation to succeed.
-#'
+#' 
 #' An expression can contain any of the following:
-#'
+#' 
 #' -   Functions:
 #'     `attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size`
-#'
+#' 
 #'     These function names are case-sensitive.
-#'
+#' 
 #' -   Comparison operators: `= | <> | < | > | <= | >= | BETWEEN | IN `
-#'
+#' 
 #' -   Logical operators: `AND | OR | NOT`
-#'
+#' 
 #' For more information on condition expressions, see [Condition
 #' Expressions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ExpressionAttributeNames One or more substitution tokens for attribute names in an expression.
 #' The following are some use cases for using `ExpressionAttributeNames`:
-#'
+#' 
 #' -   To access an attribute whose name conflicts with a DynamoDB reserved
 #'     word.
-#'
+#' 
 #' -   To create a placeholder for repeating occurrences of an attribute
 #'     name in an expression.
-#'
+#' 
 #' -   To prevent special characters in an attribute name from being
 #'     misinterpreted in an expression.
-#'
+#' 
 #' Use the **#** character in an expression to dereference an attribute
 #' name. For example, consider the following attribute name:
-#'
+#' 
 #' -   `Percentile`
-#'
+#' 
 #' The name of this attribute conflicts with a reserved word, so it cannot
 #' be used directly in an expression. (For the complete list of reserved
 #' words, see [Reserved
 #' Words](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 #' in the *Amazon DynamoDB Developer Guide*). To work around this, you
 #' could specify the following for `ExpressionAttributeNames`:
-#'
+#' 
 #' -   `{"#P":"Percentile"}`
-#'
+#' 
 #' You could then use this substitution in an expression, as in this
 #' example:
-#'
+#' 
 #' -   `#P = :val`
-#'
+#' 
 #' Tokens that begin with the **:** character are *expression attribute
 #' values*, which are placeholders for the actual value at runtime.
-#'
+#' 
 #' For more information on expression attribute names, see [Specifying Item
 #' Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ExpressionAttributeValues One or more values that can be substituted in an expression.
-#'
+#' 
 #' Use the **:** (colon) character in an expression to dereference an
 #' attribute value. For example, suppose that you wanted to check whether
 #' the value of the *ProductStatus* attribute was one of the following:
-#'
+#' 
 #' `Available | Backordered | Discontinued`
-#'
+#' 
 #' You would first need to specify `ExpressionAttributeValues` as follows:
-#'
+#' 
 #' `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }`
-#'
+#' 
 #' You could then use these values in an expression, such as this:
-#'
+#' 
 #' `ProductStatus IN (:avail, :back, :disc)`
-#'
+#' 
 #' For more information on expression attribute values, see [Condition
 #' Expressions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html)
 #' in the *Amazon DynamoDB Developer Guide*.
@@ -1686,7 +1800,7 @@ dynamodb_put_item <- function(TableName, Item, Expected = NULL, ReturnValues = N
 #' @description
 #' You must provide the name of the partition key attribute and a single value for that attribute. [`query`][dynamodb_query] returns all items with that partition key value. Optionally, you can provide a sort key attribute and use a comparison operator to refine the search results.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/query.html](https://paws-r.github.io/docs/dynamodb/query.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_query/](https://www.paws-r-sdk.com/docs/dynamodb_query/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table containing the requested items.
 #' @param IndexName The name of an index to query. This index can be any local secondary
@@ -1696,38 +1810,40 @@ dynamodb_put_item <- function(TableName, Item, Expected = NULL, ReturnValues = N
 #' attributes, specific item attributes, the count of matching items, or in
 #' the case of an index, some or all of the attributes projected into the
 #' index.
-#'
+#' 
 #' -   `ALL_ATTRIBUTES` - Returns all of the item attributes from the
 #'     specified table or index. If you query a local secondary index, then
 #'     for each matching item in the index, DynamoDB fetches the entire
 #'     item from the parent table. If the index is configured to project
 #'     all item attributes, then all of the data can be obtained from the
 #'     local secondary index, and no fetching is required.
-#'
+#' 
 #' -   `ALL_PROJECTED_ATTRIBUTES` - Allowed only when querying an index.
 #'     Retrieves all attributes that have been projected into the index. If
 #'     the index is configured to project all attributes, this return value
 #'     is equivalent to specifying `ALL_ATTRIBUTES`.
-#'
+#' 
 #' -   `COUNT` - Returns the number of matching items, rather than the
-#'     matching items themselves.
-#'
+#'     matching items themselves. Note that this uses the same quantity of
+#'     read capacity units as getting the items, and is subject to the same
+#'     item size calculations.
+#' 
 #' -   `SPECIFIC_ATTRIBUTES` - Returns only the attributes listed in
 #'     `ProjectionExpression`. This return value is equivalent to
 #'     specifying `ProjectionExpression` without specifying any value for
 #'     `Select`.
-#'
+#' 
 #'     If you query or scan a local secondary index and request only
 #'     attributes that are projected into that index, the operation will
 #'     read only the index and not the table. If any of the requested
 #'     attributes are not projected into the local secondary index,
 #'     DynamoDB fetches each of these attributes from the parent table.
 #'     This extra fetching incurs additional throughput cost and latency.
-#'
+#' 
 #'     If you query or scan a global secondary index, you can only request
 #'     attributes that are projected into the index. Global secondary index
 #'     queries cannot fetch attributes from the parent table.
-#'
+#' 
 #' If neither `Select` nor `ProjectionExpression` are specified, DynamoDB
 #' defaults to `ALL_ATTRIBUTES` when accessing a table, and
 #' `ALL_PROJECTED_ATTRIBUTES` when accessing an index. You cannot use both
@@ -1735,7 +1851,7 @@ dynamodb_put_item <- function(TableName, Item, Expected = NULL, ReturnValues = N
 #' the value for `Select` is `SPECIFIC_ATTRIBUTES`. (This usage is
 #' equivalent to specifying `ProjectionExpression` without any value for
 #' `Select`.)
-#'
+#' 
 #' If you use the `ProjectionExpression` parameter, then the value for
 #' `Select` can only be `SPECIFIC_ATTRIBUTES`. Any other value for `Select`
 #' will return an error.
@@ -1758,7 +1874,7 @@ dynamodb_put_item <- function(TableName, Item, Expected = NULL, ReturnValues = N
 #' @param ConsistentRead Determines the read consistency model: If set to `true`, then the
 #' operation uses strongly consistent reads; otherwise, the operation uses
 #' eventually consistent reads.
-#'
+#' 
 #' Strongly consistent reads are not supported on global secondary indexes.
 #' If you query a global secondary index with `ConsistentRead` set to
 #' `true`, you will receive a `ValidationException`.
@@ -1777,13 +1893,13 @@ dynamodb_put_item <- function(TableName, Item, Expected = NULL, ReturnValues = N
 #' @param ScanIndexForward Specifies the order for index traversal: If `true` (default), the
 #' traversal is performed in ascending order; if `false`, the traversal is
 #' performed in descending order.
-#'
+#' 
 #' Items with the same partition key value are stored in sorted order by
 #' sort key. If the sort key data type is Number, the results are stored in
 #' numeric order. For type String, the results are stored in order of UTF-8
 #' bytes. For type Binary, DynamoDB treats each byte of the binary data as
 #' unsigned.
-#'
+#' 
 #' If `ScanIndexForward` is `true`, DynamoDB returns the results in the
 #' order in which they are stored (by sort key value). This is the default
 #' behavior. If `ScanIndexForward` is `false`, DynamoDB reads the results
@@ -1792,18 +1908,18 @@ dynamodb_put_item <- function(TableName, Item, Expected = NULL, ReturnValues = N
 #' @param ExclusiveStartKey The primary key of the first item that this operation will evaluate. Use
 #' the value that was returned for `LastEvaluatedKey` in the previous
 #' operation.
-#'
+#' 
 #' The data type for `ExclusiveStartKey` must be String, Number, or Binary.
 #' No set data types are allowed.
-#' @param ReturnConsumedCapacity
+#' @param ReturnConsumedCapacity 
 #' @param ProjectionExpression A string that identifies one or more attributes to retrieve from the
 #' table. These attributes can include scalars, sets, or elements of a JSON
 #' document. The attributes in the expression must be separated by commas.
-#'
+#' 
 #' If no attribute names are specified, then all attributes will be
 #' returned. If any of the requested attributes are not found, they will
 #' not appear in the result.
-#'
+#' 
 #' For more information, see [Accessing Item
 #' Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html)
 #' in the *Amazon DynamoDB Developer Guide*.
@@ -1811,88 +1927,88 @@ dynamodb_put_item <- function(TableName, Item, Expected = NULL, ReturnValues = N
 #' [`query`][dynamodb_query] operation, but before the data is returned to
 #' you. Items that do not satisfy the `FilterExpression` criteria are not
 #' returned.
-#'
+#' 
 #' A `FilterExpression` does not allow key attributes. You cannot define a
 #' filter expression based on a partition key or a sort key.
-#'
+#' 
 #' A `FilterExpression` is applied after the items have already been read;
 #' the process of filtering does not consume any additional read capacity
 #' units.
-#'
+#' 
 #' For more information, see [Filter
 #' Expressions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html#Query.FilterExpression)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param KeyConditionExpression The condition that specifies the key values for items to be retrieved by
 #' the [`query`][dynamodb_query] action.
-#'
+#' 
 #' The condition must perform an equality test on a single partition key
 #' value.
-#'
+#' 
 #' The condition can optionally perform one of several comparison tests on
 #' a single sort key value. This allows [`query`][dynamodb_query] to
 #' retrieve one item with a given partition key value and sort key value,
 #' or several items that have the same partition key value but different
 #' sort key values.
-#'
+#' 
 #' The partition key equality test is required, and must be specified in
 #' the following format:
-#'
+#' 
 #' `partitionKeyName` *=* `:partitionkeyval`
-#'
+#' 
 #' If you also want to provide a condition for the sort key, it must be
 #' combined using `AND` with the condition for the sort key. Following is
 #' an example, using the **=** comparison operator for the sort key:
-#'
+#' 
 #' `partitionKeyName` `=` `:partitionkeyval` `AND` `sortKeyName` `=`
 #' `:sortkeyval`
-#'
+#' 
 #' Valid comparisons for the sort key condition are as follows:
-#'
+#' 
 #' -   `sortKeyName` `=` `:sortkeyval` - true if the sort key value is
 #'     equal to `:sortkeyval`.
-#'
+#' 
 #' -   `sortKeyName` `<` `:sortkeyval` - true if the sort key value is less
 #'     than `:sortkeyval`.
-#'
+#' 
 #' -   `sortKeyName` `<=` `:sortkeyval` - true if the sort key value is
 #'     less than or equal to `:sortkeyval`.
-#'
+#' 
 #' -   `sortKeyName` `>` `:sortkeyval` - true if the sort key value is
 #'     greater than `:sortkeyval`.
-#'
+#' 
 #' -   `sortKeyName` `>= ` `:sortkeyval` - true if the sort key value is
 #'     greater than or equal to `:sortkeyval`.
-#'
+#' 
 #' -   `sortKeyName` `BETWEEN` `:sortkeyval1` `AND` `:sortkeyval2` - true
 #'     if the sort key value is greater than or equal to `:sortkeyval1`,
 #'     and less than or equal to `:sortkeyval2`.
-#'
+#' 
 #' -   `begins_with (` `sortKeyName`, `:sortkeyval` `)` - true if the sort
 #'     key value begins with a particular operand. (You cannot use this
 #'     function with a sort key that is of type Number.) Note that the
 #'     function name `begins_with` is case-sensitive.
-#'
+#' 
 #' Use the `ExpressionAttributeValues` parameter to replace tokens such as
 #' `:partitionval` and `:sortval` with actual values at runtime.
-#'
+#' 
 #' You can optionally use the `ExpressionAttributeNames` parameter to
 #' replace the names of the partition key and sort key with placeholder
 #' tokens. This option might be necessary if an attribute name conflicts
 #' with a DynamoDB reserved word. For example, the following
 #' `KeyConditionExpression` parameter causes an error because *Size* is a
 #' reserved word:
-#'
+#' 
 #' -   `Size = :myval`
-#'
+#' 
 #' To work around this, define a placeholder (such a `#S`) to represent the
 #' attribute name *Size*. `KeyConditionExpression` then is as follows:
-#'
+#' 
 #' -   `#S = :myval`
-#'
+#' 
 #' For a list of reserved words, see [Reserved
 #' Words](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 #' in the *Amazon DynamoDB Developer Guide*.
-#'
+#' 
 #' For more information on `ExpressionAttributeNames` and
 #' `ExpressionAttributeValues`, see [Using Placeholders for Attribute Names
 #' and
@@ -1900,57 +2016,57 @@ dynamodb_put_item <- function(TableName, Item, Expected = NULL, ReturnValues = N
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ExpressionAttributeNames One or more substitution tokens for attribute names in an expression.
 #' The following are some use cases for using `ExpressionAttributeNames`:
-#'
+#' 
 #' -   To access an attribute whose name conflicts with a DynamoDB reserved
 #'     word.
-#'
+#' 
 #' -   To create a placeholder for repeating occurrences of an attribute
 #'     name in an expression.
-#'
+#' 
 #' -   To prevent special characters in an attribute name from being
 #'     misinterpreted in an expression.
-#'
+#' 
 #' Use the **#** character in an expression to dereference an attribute
 #' name. For example, consider the following attribute name:
-#'
+#' 
 #' -   `Percentile`
-#'
+#' 
 #' The name of this attribute conflicts with a reserved word, so it cannot
 #' be used directly in an expression. (For the complete list of reserved
 #' words, see [Reserved
 #' Words](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 #' in the *Amazon DynamoDB Developer Guide*). To work around this, you
 #' could specify the following for `ExpressionAttributeNames`:
-#'
+#' 
 #' -   `{"#P":"Percentile"}`
-#'
+#' 
 #' You could then use this substitution in an expression, as in this
 #' example:
-#'
+#' 
 #' -   `#P = :val`
-#'
+#' 
 #' Tokens that begin with the **:** character are *expression attribute
 #' values*, which are placeholders for the actual value at runtime.
-#'
+#' 
 #' For more information on expression attribute names, see [Specifying Item
 #' Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ExpressionAttributeValues One or more values that can be substituted in an expression.
-#'
+#' 
 #' Use the **:** (colon) character in an expression to dereference an
 #' attribute value. For example, suppose that you wanted to check whether
 #' the value of the *ProductStatus* attribute was one of the following:
-#'
+#' 
 #' `Available | Backordered | Discontinued`
-#'
+#' 
 #' You would first need to specify `ExpressionAttributeValues` as follows:
-#'
+#' 
 #' `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }`
-#'
+#' 
 #' You could then use these values in an expression, such as this:
-#'
+#' 
 #' `ProductStatus IN (:avail, :back, :disc)`
-#'
+#' 
 #' For more information on expression attribute values, see [Specifying
 #' Conditions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html)
 #' in the *Amazon DynamoDB Developer Guide*.
@@ -1978,9 +2094,9 @@ dynamodb_query <- function(TableName, IndexName = NULL, Select = NULL, Attribute
 #' Creates a new table from an existing backup
 #'
 #' @description
-#' Creates a new table from an existing backup. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.
+#' Creates a new table from an existing backup. Any number of users can execute up to 50 concurrent restores (any type of restore) in a given account.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/restore_table_from_backup.html](https://paws-r.github.io/docs/dynamodb/restore_table_from_backup.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_restore_table_from_backup/](https://www.paws-r-sdk.com/docs/dynamodb_restore_table_from_backup/) for full documentation.
 #'
 #' @param TargetTableName &#91;required&#93; The name of the new table to which the backup must be restored.
 #' @param BackupArn &#91;required&#93; The Amazon Resource Name (ARN) associated with the backup.
@@ -2020,7 +2136,7 @@ dynamodb_restore_table_from_backup <- function(TargetTableName, BackupArn, Billi
 #' @description
 #' Restores the specified table to the specified point in time within `EarliestRestorableDateTime` and `LatestRestorableDateTime`. You can restore your table to any point in time during the last 35 days. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/restore_table_to_point_in_time.html](https://paws-r.github.io/docs/dynamodb/restore_table_to_point_in_time.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_restore_table_to_point_in_time/](https://www.paws-r-sdk.com/docs/dynamodb_restore_table_to_point_in_time/) for full documentation.
 #'
 #' @param SourceTableArn The DynamoDB table that will be restored. This value is an Amazon
 #' Resource Name (ARN).
@@ -2066,7 +2182,7 @@ dynamodb_restore_table_to_point_in_time <- function(SourceTableArn = NULL, Sourc
 #' @description
 #' The [`scan`][dynamodb_scan] operation returns one or more items and item attributes by accessing every item in a table or a secondary index. To have DynamoDB return fewer items, you can provide a `FilterExpression` operation.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/scan.html](https://paws-r.github.io/docs/dynamodb/scan.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_scan/](https://www.paws-r-sdk.com/docs/dynamodb_scan/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table containing the requested items; or, if you provide
 #' `IndexName`, the name of the table to which that index belongs.
@@ -2093,38 +2209,40 @@ dynamodb_restore_table_to_point_in_time <- function(SourceTableArn = NULL, Sourc
 #' attributes, specific item attributes, the count of matching items, or in
 #' the case of an index, some or all of the attributes projected into the
 #' index.
-#'
+#' 
 #' -   `ALL_ATTRIBUTES` - Returns all of the item attributes from the
 #'     specified table or index. If you query a local secondary index, then
 #'     for each matching item in the index, DynamoDB fetches the entire
 #'     item from the parent table. If the index is configured to project
 #'     all item attributes, then all of the data can be obtained from the
 #'     local secondary index, and no fetching is required.
-#'
+#' 
 #' -   `ALL_PROJECTED_ATTRIBUTES` - Allowed only when querying an index.
 #'     Retrieves all attributes that have been projected into the index. If
 #'     the index is configured to project all attributes, this return value
 #'     is equivalent to specifying `ALL_ATTRIBUTES`.
-#'
+#' 
 #' -   `COUNT` - Returns the number of matching items, rather than the
-#'     matching items themselves.
-#'
+#'     matching items themselves. Note that this uses the same quantity of
+#'     read capacity units as getting the items, and is subject to the same
+#'     item size calculations.
+#' 
 #' -   `SPECIFIC_ATTRIBUTES` - Returns only the attributes listed in
 #'     `ProjectionExpression`. This return value is equivalent to
 #'     specifying `ProjectionExpression` without specifying any value for
 #'     `Select`.
-#'
+#' 
 #'     If you query or scan a local secondary index and request only
 #'     attributes that are projected into that index, the operation reads
 #'     only the index and not the table. If any of the requested attributes
 #'     are not projected into the local secondary index, DynamoDB fetches
 #'     each of these attributes from the parent table. This extra fetching
 #'     incurs additional throughput cost and latency.
-#'
+#' 
 #'     If you query or scan a global secondary index, you can only request
 #'     attributes that are projected into the index. Global secondary index
 #'     queries cannot fetch attributes from the parent table.
-#'
+#' 
 #' If neither `Select` nor `ProjectionExpression` are specified, DynamoDB
 #' defaults to `ALL_ATTRIBUTES` when accessing a table, and
 #' `ALL_PROJECTED_ATTRIBUTES` when accessing an index. You cannot use both
@@ -2132,7 +2250,7 @@ dynamodb_restore_table_to_point_in_time <- function(SourceTableArn = NULL, Sourc
 #' the value for `Select` is `SPECIFIC_ATTRIBUTES`. (This usage is
 #' equivalent to specifying `ProjectionExpression` without any value for
 #' `Select`.)
-#'
+#' 
 #' If you use the `ProjectionExpression` parameter, then the value for
 #' `Select` can only be `SPECIFIC_ATTRIBUTES`. Any other value for `Select`
 #' will return an error.
@@ -2147,15 +2265,15 @@ dynamodb_restore_table_to_point_in_time <- function(SourceTableArn = NULL, Sourc
 #' @param ExclusiveStartKey The primary key of the first item that this operation will evaluate. Use
 #' the value that was returned for `LastEvaluatedKey` in the previous
 #' operation.
-#'
+#' 
 #' The data type for `ExclusiveStartKey` must be String, Number or Binary.
 #' No set data types are allowed.
-#'
+#' 
 #' In a parallel scan, a [`scan`][dynamodb_scan] request that includes
 #' `ExclusiveStartKey` must specify the same segment whose previous
 #' [`scan`][dynamodb_scan] returned the corresponding value of
 #' `LastEvaluatedKey`.
-#' @param ReturnConsumedCapacity
+#' @param ReturnConsumedCapacity 
 #' @param TotalSegments For a parallel [`scan`][dynamodb_scan] request, `TotalSegments`
 #' represents the total number of segments into which the
 #' [`scan`][dynamodb_scan] operation will be divided. The value of
@@ -2163,38 +2281,38 @@ dynamodb_restore_table_to_point_in_time <- function(SourceTableArn = NULL, Sourc
 #' will perform the parallel scan. For example, if you want to use four
 #' application threads to scan a table or an index, specify a
 #' `TotalSegments` value of 4.
-#'
+#' 
 #' The value for `TotalSegments` must be greater than or equal to 1, and
 #' less than or equal to 1000000. If you specify a `TotalSegments` value of
 #' 1, the [`scan`][dynamodb_scan] operation will be sequential rather than
 #' parallel.
-#'
+#' 
 #' If you specify `TotalSegments`, you must also specify `Segment`.
 #' @param Segment For a parallel [`scan`][dynamodb_scan] request, `Segment` identifies an
 #' individual segment to be scanned by an application worker.
-#'
+#' 
 #' Segment IDs are zero-based, so the first segment is always 0. For
 #' example, if you want to use four application threads to scan a table or
 #' an index, then the first thread specifies a `Segment` value of 0, the
 #' second thread specifies 1, and so on.
-#'
+#' 
 #' The value of `LastEvaluatedKey` returned from a parallel
 #' [`scan`][dynamodb_scan] request must be used as `ExclusiveStartKey` with
 #' the same segment ID in a subsequent [`scan`][dynamodb_scan] operation.
-#'
+#' 
 #' The value for `Segment` must be greater than or equal to 0, and less
 #' than the value provided for `TotalSegments`.
-#'
+#' 
 #' If you provide `Segment`, you must also provide `TotalSegments`.
 #' @param ProjectionExpression A string that identifies one or more attributes to retrieve from the
 #' specified table or index. These attributes can include scalars, sets, or
 #' elements of a JSON document. The attributes in the expression must be
 #' separated by commas.
-#'
+#' 
 #' If no attribute names are specified, then all attributes will be
 #' returned. If any of the requested attributes are not found, they will
 #' not appear in the result.
-#'
+#' 
 #' For more information, see [Specifying Item
 #' Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html)
 #' in the *Amazon DynamoDB Developer Guide*.
@@ -2202,86 +2320,86 @@ dynamodb_restore_table_to_point_in_time <- function(SourceTableArn = NULL, Sourc
 #' [`scan`][dynamodb_scan] operation, but before the data is returned to
 #' you. Items that do not satisfy the `FilterExpression` criteria are not
 #' returned.
-#'
+#' 
 #' A `FilterExpression` is applied after the items have already been read;
 #' the process of filtering does not consume any additional read capacity
 #' units.
-#'
+#' 
 #' For more information, see [Filter
 #' Expressions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html#Query.FilterExpression)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ExpressionAttributeNames One or more substitution tokens for attribute names in an expression.
 #' The following are some use cases for using `ExpressionAttributeNames`:
-#'
+#' 
 #' -   To access an attribute whose name conflicts with a DynamoDB reserved
 #'     word.
-#'
+#' 
 #' -   To create a placeholder for repeating occurrences of an attribute
 #'     name in an expression.
-#'
+#' 
 #' -   To prevent special characters in an attribute name from being
 #'     misinterpreted in an expression.
-#'
+#' 
 #' Use the **#** character in an expression to dereference an attribute
 #' name. For example, consider the following attribute name:
-#'
+#' 
 #' -   `Percentile`
-#'
+#' 
 #' The name of this attribute conflicts with a reserved word, so it cannot
 #' be used directly in an expression. (For the complete list of reserved
 #' words, see [Reserved
 #' Words](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 #' in the *Amazon DynamoDB Developer Guide*). To work around this, you
 #' could specify the following for `ExpressionAttributeNames`:
-#'
+#' 
 #' -   `{"#P":"Percentile"}`
-#'
+#' 
 #' You could then use this substitution in an expression, as in this
 #' example:
-#'
+#' 
 #' -   `#P = :val`
-#'
+#' 
 #' Tokens that begin with the **:** character are *expression attribute
 #' values*, which are placeholders for the actual value at runtime.
-#'
+#' 
 #' For more information on expression attribute names, see [Specifying Item
 #' Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ExpressionAttributeValues One or more values that can be substituted in an expression.
-#'
+#' 
 #' Use the **:** (colon) character in an expression to dereference an
 #' attribute value. For example, suppose that you wanted to check whether
 #' the value of the `ProductStatus` attribute was one of the following:
-#'
+#' 
 #' `Available | Backordered | Discontinued`
-#'
+#' 
 #' You would first need to specify `ExpressionAttributeValues` as follows:
-#'
+#' 
 #' `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }`
-#'
+#' 
 #' You could then use these values in an expression, such as this:
-#'
+#' 
 #' `ProductStatus IN (:avail, :back, :disc)`
-#'
+#' 
 #' For more information on expression attribute values, see [Condition
 #' Expressions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ConsistentRead A Boolean value that determines the read consistency model during the
 #' scan:
-#'
+#' 
 #' -   If `ConsistentRead` is `false`, then the data returned from
 #'     [`scan`][dynamodb_scan] might not contain the results from other
 #'     recently completed write operations
 #'     ([`put_item`][dynamodb_put_item],
 #'     [`update_item`][dynamodb_update_item], or
 #'     [`delete_item`][dynamodb_delete_item]).
-#'
+#' 
 #' -   If `ConsistentRead` is `true`, then all of the write operations that
 #'     completed before the [`scan`][dynamodb_scan] began are guaranteed to
 #'     be contained in the [`scan`][dynamodb_scan] response.
-#'
+#' 
 #' The default setting for `ConsistentRead` is `false`.
-#'
+#' 
 #' The `ConsistentRead` parameter is not supported on global secondary
 #' indexes. If you scan a global secondary index with `ConsistentRead` set
 #' to true, you will receive a `ValidationException`.
@@ -2311,7 +2429,7 @@ dynamodb_scan <- function(TableName, IndexName = NULL, AttributesToGet = NULL, L
 #' @description
 #' Associate a set of tags with an Amazon DynamoDB resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking. You can call TagResource up to five times per second, per account.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/tag_resource.html](https://paws-r.github.io/docs/dynamodb/tag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_tag_resource/](https://www.paws-r-sdk.com/docs/dynamodb_tag_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; Identifies the Amazon DynamoDB resource to which tags should be added.
 #' This value is an Amazon Resource Name (ARN).
@@ -2342,11 +2460,11 @@ dynamodb_tag_resource <- function(ResourceArn, Tags) {
 #' single account and Region
 #'
 #' @description
-#' [`transact_get_items`][dynamodb_transact_get_items] is a synchronous operation that atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and Region. A [`transact_get_items`][dynamodb_transact_get_items] call can contain up to 25 `TransactGetItem` objects, each of which contains a `Get` structure that specifies an item to retrieve from a table in the account and Region. A call to [`transact_get_items`][dynamodb_transact_get_items] cannot retrieve items from tables in more than one Amazon Web Services account or Region. The aggregate size of the items in the transaction cannot exceed 4 MB.
+#' [`transact_get_items`][dynamodb_transact_get_items] is a synchronous operation that atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and Region. A [`transact_get_items`][dynamodb_transact_get_items] call can contain up to 100 `TransactGetItem` objects, each of which contains a `Get` structure that specifies an item to retrieve from a table in the account and Region. A call to [`transact_get_items`][dynamodb_transact_get_items] cannot retrieve items from tables in more than one Amazon Web Services account or Region. The aggregate size of the items in the transaction cannot exceed 4 MB.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/transact_get_items.html](https://paws-r.github.io/docs/dynamodb/transact_get_items.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_transact_get_items/](https://www.paws-r-sdk.com/docs/dynamodb_transact_get_items/) for full documentation.
 #'
-#' @param TransactItems &#91;required&#93; An ordered array of up to 25 `TransactGetItem` objects, each of which
+#' @param TransactItems &#91;required&#93; An ordered array of up to 100 `TransactGetItem` objects, each of which
 #' contains a `Get` structure.
 #' @param ReturnConsumedCapacity A value of `TOTAL` causes consumed capacity information to be returned,
 #' and a value of `NONE` prevents that information from being returned. No
@@ -2372,20 +2490,20 @@ dynamodb_transact_get_items <- function(TransactItems, ReturnConsumedCapacity = 
 }
 .dynamodb$operations$transact_get_items <- dynamodb_transact_get_items
 
-#' TransactWriteItems is a synchronous write operation that groups up to 25
-#' action requests
+#' TransactWriteItems is a synchronous write operation that groups up to
+#' 100 action requests
 #'
 #' @description
-#' [`transact_write_items`][dynamodb_transact_write_items] is a synchronous write operation that groups up to 25 action requests. These actions can target items in different tables, but not in different Amazon Web Services accounts or Regions, and no two actions can target the same item. For example, you cannot both `ConditionCheck` and `Update` the same item. The aggregate size of the items in the transaction cannot exceed 4 MB.
+#' [`transact_write_items`][dynamodb_transact_write_items] is a synchronous write operation that groups up to 100 action requests. These actions can target items in different tables, but not in different Amazon Web Services accounts or Regions, and no two actions can target the same item. For example, you cannot both `ConditionCheck` and `Update` the same item. The aggregate size of the items in the transaction cannot exceed 4 MB.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/transact_write_items.html](https://paws-r.github.io/docs/dynamodb/transact_write_items.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_transact_write_items/](https://www.paws-r-sdk.com/docs/dynamodb_transact_write_items/) for full documentation.
 #'
-#' @param TransactItems &#91;required&#93; An ordered array of up to 25 `TransactWriteItem` objects, each of which
+#' @param TransactItems &#91;required&#93; An ordered array of up to 100 `TransactWriteItem` objects, each of which
 #' contains a `ConditionCheck`, `Put`, `Update`, or `Delete` object. These
 #' can operate on items in different tables, but the tables must reside in
 #' the same Amazon Web Services account and Region, and no two of them can
 #' operate on the same item.
-#' @param ReturnConsumedCapacity
+#' @param ReturnConsumedCapacity 
 #' @param ReturnItemCollectionMetrics Determines whether item collection metrics are returned. If set to
 #' `SIZE`, the response includes statistics about item collections (if
 #' any), that were modified during the operation and are returned in the
@@ -2394,23 +2512,23 @@ dynamodb_transact_get_items <- function(TransactItems, ReturnConsumedCapacity = 
 #' [`transact_write_items`][dynamodb_transact_write_items] idempotent,
 #' meaning that multiple identical calls have the same effect as one single
 #' call.
-#'
+#' 
 #' Although multiple identical calls using the same client request token
 #' produce the same result on the server (no side effects), the responses
-#' to the calls might not be the same. If the `ReturnConsumedCapacity>`
+#' to the calls might not be the same. If the `ReturnConsumedCapacity`
 #' parameter is set, then the initial
 #' [`transact_write_items`][dynamodb_transact_write_items] call returns the
 #' amount of write capacity units consumed in making the changes.
 #' Subsequent [`transact_write_items`][dynamodb_transact_write_items] calls
 #' with the same client token return the number of read capacity units
 #' consumed in reading the item.
-#'
+#' 
 #' A client request token is valid for 10 minutes after the first request
 #' that uses it is completed. After 10 minutes, any request with the same
 #' client token is treated as a new request. Do not resubmit the same
 #' request with the same client token for more than 10 minutes, or the
 #' result might not be idempotent.
-#'
+#' 
 #' If you submit a request with the same client token but a change in other
 #' parameters within the 10-minute idempotency window, DynamoDB returns an
 #' `IdempotentParameterMismatch` exception.
@@ -2440,7 +2558,7 @@ dynamodb_transact_write_items <- function(TransactItems, ReturnConsumedCapacity 
 #' @description
 #' Removes the association of tags from an Amazon DynamoDB resource. You can call [`untag_resource`][dynamodb_untag_resource] up to five times per second, per account.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/untag_resource.html](https://paws-r.github.io/docs/dynamodb/untag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_untag_resource/](https://www.paws-r-sdk.com/docs/dynamodb_untag_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The DynamoDB resource that the tags will be removed from. This value is
 #' an Amazon Resource Name (ARN).
@@ -2473,7 +2591,7 @@ dynamodb_untag_resource <- function(ResourceArn, TagKeys) {
 #' @description
 #' [`update_continuous_backups`][dynamodb_update_continuous_backups] enables or disables point in time recovery for the specified table. A successful [`update_continuous_backups`][dynamodb_update_continuous_backups] call returns the current `ContinuousBackupsDescription`. Continuous backups are `ENABLED` on all tables at table creation. If point in time recovery is enabled, `PointInTimeRecoveryStatus` will be set to ENABLED.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/update_continuous_backups.html](https://paws-r.github.io/docs/dynamodb/update_continuous_backups.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_update_continuous_backups/](https://www.paws-r-sdk.com/docs/dynamodb_update_continuous_backups/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table.
 #' @param PointInTimeRecoverySpecification &#91;required&#93; Represents the settings used to enable point in time recovery.
@@ -2504,7 +2622,7 @@ dynamodb_update_continuous_backups <- function(TableName, PointInTimeRecoverySpe
 #' @description
 #' Updates the status for contributor insights for a specific table or index. CloudWatch Contributor Insights for DynamoDB graphs display the partition key and (if applicable) sort key of frequently accessed items and frequently throttled items in plaintext. If you require the use of Amazon Web Services Key Management Service (KMS) to encrypt this table’s partition key and sort key data with an Amazon Web Services managed key or customer managed key, you should not enable CloudWatch Contributor Insights for DynamoDB for this table.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/update_contributor_insights.html](https://paws-r.github.io/docs/dynamodb/update_contributor_insights.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_update_contributor_insights/](https://www.paws-r-sdk.com/docs/dynamodb_update_contributor_insights/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table.
 #' @param IndexName The global secondary index name, if applicable.
@@ -2535,7 +2653,7 @@ dynamodb_update_contributor_insights <- function(TableName, IndexName = NULL, Co
 #' @description
 #' Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, have the same name as the global table, have the same key schema, have DynamoDB Streams enabled, and have the same provisioned and maximum write capacity units.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/update_global_table.html](https://paws-r.github.io/docs/dynamodb/update_global_table.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_update_global_table/](https://www.paws-r-sdk.com/docs/dynamodb_update_global_table/) for full documentation.
 #'
 #' @param GlobalTableName &#91;required&#93; The global table name.
 #' @param ReplicaUpdates &#91;required&#93; A list of Regions that should be added or removed from the global table.
@@ -2565,17 +2683,17 @@ dynamodb_update_global_table <- function(GlobalTableName, ReplicaUpdates) {
 #' @description
 #' Updates settings for a global table.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/update_global_table_settings.html](https://paws-r.github.io/docs/dynamodb/update_global_table_settings.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_update_global_table_settings/](https://www.paws-r-sdk.com/docs/dynamodb_update_global_table_settings/) for full documentation.
 #'
 #' @param GlobalTableName &#91;required&#93; The name of the global table
 #' @param GlobalTableBillingMode The billing mode of the global table. If `GlobalTableBillingMode` is not
 #' specified, the global table defaults to `PROVISIONED` capacity billing
 #' mode.
-#'
+#' 
 #' -   `PROVISIONED` - We recommend using `PROVISIONED` for predictable
 #'     workloads. `PROVISIONED` sets the billing mode to [Provisioned
 #'     Mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual).
-#'
+#' 
 #' -   `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
 #'     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
 #'     [On-Demand
@@ -2615,12 +2733,12 @@ dynamodb_update_global_table_settings <- function(GlobalTableName, GlobalTableBi
 #' @description
 #' Edits an existing item's attributes, or adds a new item to the table if it does not already exist. You can put, delete, or add attribute values. You can also perform a conditional update on an existing item (insert a new attribute name-value pair if it doesn't exist, or replace an existing name-value pair if it has certain expected attribute values).
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/update_item.html](https://paws-r.github.io/docs/dynamodb/update_item.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_update_item/](https://www.paws-r-sdk.com/docs/dynamodb_update_item/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table containing the item to update.
 #' @param Key &#91;required&#93; The primary key of the item to be updated. Each element consists of an
 #' attribute name and a value for that attribute.
-#'
+#' 
 #' For the primary key, you must provide all of the attributes. For
 #' example, with a simple primary key, you only need to provide a value for
 #' the partition key. For a composite primary key, you must provide values
@@ -2638,75 +2756,75 @@ dynamodb_update_global_table_settings <- function(GlobalTableName, GlobalTableBi
 #' [ConditionalOperator](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ReturnValues Use `ReturnValues` if you want to get the item attributes as they appear
-#' before or after they are updated. For
+#' before or after they are successfully updated. For
 #' [`update_item`][dynamodb_update_item], the valid values are:
-#'
+#' 
 #' -   `NONE` - If `ReturnValues` is not specified, or if its value is
 #'     `NONE`, then nothing is returned. (This setting is the default for
 #'     `ReturnValues`.)
-#'
+#' 
 #' -   `ALL_OLD` - Returns all of the attributes of the item, as they
 #'     appeared before the UpdateItem operation.
-#'
+#' 
 #' -   `UPDATED_OLD` - Returns only the updated attributes, as they
 #'     appeared before the UpdateItem operation.
-#'
+#' 
 #' -   `ALL_NEW` - Returns all of the attributes of the item, as they
 #'     appear after the UpdateItem operation.
-#'
+#' 
 #' -   `UPDATED_NEW` - Returns only the updated attributes, as they appear
 #'     after the UpdateItem operation.
-#'
+#' 
 #' There is no additional cost associated with requesting a return value
 #' aside from the small network and processing overhead of receiving a
 #' larger response. No read capacity units are consumed.
-#'
+#' 
 #' The values returned are strongly consistent.
-#' @param ReturnConsumedCapacity
+#' @param ReturnConsumedCapacity 
 #' @param ReturnItemCollectionMetrics Determines whether item collection metrics are returned. If set to
 #' `SIZE`, the response includes statistics about item collections, if any,
 #' that were modified during the operation are returned in the response. If
 #' set to `NONE` (the default), no statistics are returned.
 #' @param UpdateExpression An expression that defines one or more attributes to be updated, the
 #' action to be performed on them, and new values for them.
-#'
+#' 
 #' The following action values are available for `UpdateExpression`.
-#'
+#' 
 #' -   `SET` - Adds one or more attributes and values to an item. If any of
 #'     these attributes already exist, they are replaced by the new values.
 #'     You can also use `SET` to add or subtract from an attribute that is
 #'     of type Number. For example: `SET myNum = myNum + :val`
-#'
+#' 
 #'     `SET` supports the following functions:
-#'
+#' 
 #'     -   `if_not_exists (path, operand)` - if the item does not contain
 #'         an attribute at the specified path, then `if_not_exists`
 #'         evaluates to operand; otherwise, it evaluates to path. You can
 #'         use this function to avoid overwriting an attribute that may
 #'         already be present in the item.
-#'
+#' 
 #'     -   `list_append (operand, operand)` - evaluates to a list with a
 #'         new element added to it. You can append the new element to the
 #'         start or the end of the list by reversing the order of the
 #'         operands.
-#'
+#' 
 #'     These function names are case-sensitive.
-#'
+#' 
 #' -   `REMOVE` - Removes one or more attributes from an item.
-#'
+#' 
 #' -   `ADD` - Adds the specified value to the item, if the attribute does
 #'     not already exist. If the attribute does exist, then the behavior of
 #'     `ADD` depends on the data type of the attribute:
-#'
+#' 
 #'     -   If the existing attribute is a number, and if `Value` is also a
 #'         number, then `Value` is mathematically added to the existing
 #'         attribute. If `Value` is a negative number, then it is
 #'         subtracted from the existing attribute.
-#'
+#' 
 #'         If you use `ADD` to increment or decrement a number value for an
 #'         item that doesn't exist before the update, DynamoDB uses `0` as
 #'         the initial value.
-#'
+#' 
 #'         Similarly, if you use `ADD` for an existing item to increment or
 #'         decrement an attribute value that doesn't exist before the
 #'         update, DynamoDB uses `0` as the initial value. For example,
@@ -2716,7 +2834,7 @@ dynamodb_update_global_table_settings <- function(GlobalTableName, GlobalTableBi
 #'         `itemcount` attribute, set its initial value to `0`, and finally
 #'         add `3` to it. The result will be a new `itemcount` attribute in
 #'         the item, with a value of `3`.
-#'
+#' 
 #'     -   If the existing data type is a set and if `Value` is also a set,
 #'         then `Value` is added to the existing set. For example, if the
 #'         attribute value is the set `[1,2]`, and the `ADD` action
@@ -2724,103 +2842,103 @@ dynamodb_update_global_table_settings <- function(GlobalTableName, GlobalTableBi
 #'         error occurs if an `ADD` action is specified for a set attribute
 #'         and the attribute type specified does not match the existing set
 #'         type.
-#'
+#' 
 #'         Both sets must have the same primitive data type. For example,
 #'         if the existing data type is a set of strings, the `Value` must
 #'         also be a set of strings.
-#'
+#' 
 #'     The `ADD` action only supports Number and set data types. In
 #'     addition, `ADD` can only be used on top-level attributes, not nested
 #'     attributes.
-#'
+#' 
 #' -   `DELETE` - Deletes an element from a set.
-#'
+#' 
 #'     If a set of values is specified, then those values are subtracted
 #'     from the old set. For example, if the attribute value was the set
 #'     `[a,b,c]` and the `DELETE` action specifies `[a,c]`, then the final
 #'     attribute value is `[b]`. Specifying an empty set is an error.
-#'
+#' 
 #'     The `DELETE` action only supports set data types. In addition,
 #'     `DELETE` can only be used on top-level attributes, not nested
 #'     attributes.
-#'
+#' 
 #' You can have many actions in a single expression, such as the following:
 #' `SET a=:value1, b=:value2 DELETE :value3, :value4, :value5`
-#'
+#' 
 #' For more information on update expressions, see [Modifying Items and
 #' Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.UpdateExpressions.html)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ConditionExpression A condition that must be satisfied in order for a conditional update to
 #' succeed.
-#'
+#' 
 #' An expression can contain any of the following:
-#'
+#' 
 #' -   Functions:
 #'     `attribute_exists | attribute_not_exists | attribute_type | contains | begins_with | size`
-#'
+#' 
 #'     These function names are case-sensitive.
-#'
+#' 
 #' -   Comparison operators: `= | <> | < | > | <= | >= | BETWEEN | IN `
-#'
+#' 
 #' -   Logical operators: `AND | OR | NOT`
-#'
+#' 
 #' For more information about condition expressions, see [Specifying
 #' Conditions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ExpressionAttributeNames One or more substitution tokens for attribute names in an expression.
 #' The following are some use cases for using `ExpressionAttributeNames`:
-#'
+#' 
 #' -   To access an attribute whose name conflicts with a DynamoDB reserved
 #'     word.
-#'
+#' 
 #' -   To create a placeholder for repeating occurrences of an attribute
 #'     name in an expression.
-#'
+#' 
 #' -   To prevent special characters in an attribute name from being
 #'     misinterpreted in an expression.
-#'
+#' 
 #' Use the **#** character in an expression to dereference an attribute
 #' name. For example, consider the following attribute name:
-#'
+#' 
 #' -   `Percentile`
-#'
+#' 
 #' The name of this attribute conflicts with a reserved word, so it cannot
 #' be used directly in an expression. (For the complete list of reserved
 #' words, see [Reserved
 #' Words](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 #' in the *Amazon DynamoDB Developer Guide*.) To work around this, you
 #' could specify the following for `ExpressionAttributeNames`:
-#'
+#' 
 #' -   `{"#P":"Percentile"}`
-#'
+#' 
 #' You could then use this substitution in an expression, as in this
 #' example:
-#'
+#' 
 #' -   `#P = :val`
-#'
+#' 
 #' Tokens that begin with the **:** character are *expression attribute
 #' values*, which are placeholders for the actual value at runtime.
-#'
+#' 
 #' For more information about expression attribute names, see [Specifying
 #' Item
 #' Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param ExpressionAttributeValues One or more values that can be substituted in an expression.
-#'
+#' 
 #' Use the **:** (colon) character in an expression to dereference an
 #' attribute value. For example, suppose that you wanted to check whether
 #' the value of the `ProductStatus` attribute was one of the following:
-#'
+#' 
 #' `Available | Backordered | Discontinued`
-#'
+#' 
 #' You would first need to specify `ExpressionAttributeValues` as follows:
-#'
+#' 
 #' `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }`
-#'
+#' 
 #' You could then use these values in an expression, such as this:
-#'
+#' 
 #' `ProductStatus IN (:avail, :back, :disc)`
-#'
+#' 
 #' For more information on expression attribute values, see [Condition
 #' Expressions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html)
 #' in the *Amazon DynamoDB Developer Guide*.
@@ -2851,7 +2969,7 @@ dynamodb_update_item <- function(TableName, Key, AttributeUpdates = NULL, Expect
 #' @description
 #' Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/update_table.html](https://paws-r.github.io/docs/dynamodb/update_table.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_update_table/](https://www.paws-r-sdk.com/docs/dynamodb_update_table/) for full documentation.
 #'
 #' @param AttributeDefinitions An array of attributes that describe the key schema for the table and
 #' indexes. If you are adding a new global secondary index to the table,
@@ -2863,11 +2981,11 @@ dynamodb_update_item <- function(TableName, Key, AttributeUpdates = NULL, Expect
 #' provisioned capacity values are estimated based on the consumed read and
 #' write capacity of your table and global secondary indexes over the past
 #' 30 minutes.
-#'
+#' 
 #' -   `PROVISIONED` - We recommend using `PROVISIONED` for predictable
 #'     workloads. `PROVISIONED` sets the billing mode to [Provisioned
 #'     Mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual).
-#'
+#' 
 #' -   `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
 #'     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
 #'     [On-Demand
@@ -2876,46 +2994,48 @@ dynamodb_update_item <- function(TableName, Key, AttributeUpdates = NULL, Expect
 #' index.
 #' @param GlobalSecondaryIndexUpdates An array of one or more global secondary indexes for the table. For each
 #' index in the array, you can request one action:
-#'
+#' 
 #' -   `Create` - add a new global secondary index to the table.
-#'
+#' 
 #' -   `Update` - modify the provisioned throughput settings of an existing
 #'     global secondary index.
-#'
+#' 
 #' -   `Delete` - remove a global secondary index from the table.
-#'
+#' 
 #' You can create or delete only one global secondary index per
 #' [`update_table`][dynamodb_update_table] operation.
-#'
+#' 
 #' For more information, see [Managing Global Secondary
 #' Indexes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html)
 #' in the *Amazon DynamoDB Developer Guide*.
 #' @param StreamSpecification Represents the DynamoDB Streams configuration for the table.
-#'
+#' 
 #' You receive a `ResourceInUseException` if you try to enable a stream on
 #' a table that already has a stream, or if you try to disable a stream on
 #' a table that doesn't have a stream.
 #' @param SSESpecification The new server-side encryption settings for the specified table.
 #' @param ReplicaUpdates A list of replica update actions (create, delete, or update) for the
 #' table.
-#'
-#' This property only applies to [Version
-#' 2019.11.21](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
+#' 
+#' This property only applies to [Version 2019.11.21
+#' (Current)](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
 #' of global tables.
 #' @param TableClass The table class of the table to be updated. Valid values are `STANDARD`
 #' and `STANDARD_INFREQUENT_ACCESS`.
+#' @param DeletionProtectionEnabled Indicates whether deletion protection is to be enabled (true) or
+#' disabled (false) on the table.
 #'
 #' @keywords internal
 #'
 #' @rdname dynamodb_update_table
-dynamodb_update_table <- function(AttributeDefinitions = NULL, TableName, BillingMode = NULL, ProvisionedThroughput = NULL, GlobalSecondaryIndexUpdates = NULL, StreamSpecification = NULL, SSESpecification = NULL, ReplicaUpdates = NULL, TableClass = NULL) {
+dynamodb_update_table <- function(AttributeDefinitions = NULL, TableName, BillingMode = NULL, ProvisionedThroughput = NULL, GlobalSecondaryIndexUpdates = NULL, StreamSpecification = NULL, SSESpecification = NULL, ReplicaUpdates = NULL, TableClass = NULL, DeletionProtectionEnabled = NULL) {
   op <- new_operation(
     name = "UpdateTable",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .dynamodb$update_table_input(AttributeDefinitions = AttributeDefinitions, TableName = TableName, BillingMode = BillingMode, ProvisionedThroughput = ProvisionedThroughput, GlobalSecondaryIndexUpdates = GlobalSecondaryIndexUpdates, StreamSpecification = StreamSpecification, SSESpecification = SSESpecification, ReplicaUpdates = ReplicaUpdates, TableClass = TableClass)
+  input <- .dynamodb$update_table_input(AttributeDefinitions = AttributeDefinitions, TableName = TableName, BillingMode = BillingMode, ProvisionedThroughput = ProvisionedThroughput, GlobalSecondaryIndexUpdates = GlobalSecondaryIndexUpdates, StreamSpecification = StreamSpecification, SSESpecification = SSESpecification, ReplicaUpdates = ReplicaUpdates, TableClass = TableClass, DeletionProtectionEnabled = DeletionProtectionEnabled)
   output <- .dynamodb$update_table_output()
   config <- get_config()
   svc <- .dynamodb$service(config)
@@ -2930,12 +3050,12 @@ dynamodb_update_table <- function(AttributeDefinitions = NULL, TableName, Billin
 #' @description
 #' Updates auto scaling settings on your global tables at once.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/update_table_replica_auto_scaling.html](https://paws-r.github.io/docs/dynamodb/update_table_replica_auto_scaling.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_update_table_replica_auto_scaling/](https://www.paws-r-sdk.com/docs/dynamodb_update_table_replica_auto_scaling/) for full documentation.
 #'
 #' @param GlobalSecondaryIndexUpdates Represents the auto scaling settings of the global secondary indexes of
 #' the replica to be updated.
 #' @param TableName &#91;required&#93; The name of the global table to be updated.
-#' @param ProvisionedWriteCapacityAutoScalingUpdate
+#' @param ProvisionedWriteCapacityAutoScalingUpdate 
 #' @param ReplicaUpdates Represents the auto scaling settings of replicas of the table that will
 #' be modified.
 #'
@@ -2965,7 +3085,7 @@ dynamodb_update_table_replica_auto_scaling <- function(GlobalSecondaryIndexUpdat
 #' @description
 #' The [`update_time_to_live`][dynamodb_update_time_to_live] method enables or disables Time to Live (TTL) for the specified table. A successful [`update_time_to_live`][dynamodb_update_time_to_live] call returns the current `TimeToLiveSpecification`. It can take up to one hour for the change to fully process. Any additional [`update_time_to_live`][dynamodb_update_time_to_live] calls for the same table during this one hour duration result in a `ValidationException`.
 #'
-#' See [https://paws-r.github.io/docs/dynamodb/update_time_to_live.html](https://paws-r.github.io/docs/dynamodb/update_time_to_live.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/dynamodb_update_time_to_live/](https://www.paws-r-sdk.com/docs/dynamodb_update_time_to_live/) for full documentation.
 #'
 #' @param TableName &#91;required&#93; The name of the table to be configured.
 #' @param TimeToLiveSpecification &#91;required&#93; Represents the settings used to enable or disable Time to Live for the

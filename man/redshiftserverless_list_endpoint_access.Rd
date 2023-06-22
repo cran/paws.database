@@ -13,12 +13,12 @@ redshiftserverless_list_endpoint_access(
 }
 \arguments{
 \item{maxResults}{An optional parameter that specifies the maximum number of results to
-return. You can use \code{nextToken} to get the next page of results.}
+return. You can use \code{nextToken} to display the next page of results.}
 
 \item{nextToken}{If your initial
 \code{\link[=redshiftserverless_list_endpoint_access]{list_endpoint_access}}
 operation returns a \code{nextToken}, you can include the returned
-\code{nextToken} in subsequent
+\code{nextToken} in following
 \code{\link[=redshiftserverless_list_endpoint_access]{list_endpoint_access}}
 operations, which returns results in the next page.}
 
@@ -30,6 +30,6 @@ Redshift Serverless.}
 \description{
 Returns an array of \code{EndpointAccess} objects and relevant information.
 
-See \url{https://paws-r.github.io/docs/redshiftserverless/list_endpoint_access.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/redshiftserverless_list_endpoint_access/} for full documentation.
 }
 \keyword{internal}

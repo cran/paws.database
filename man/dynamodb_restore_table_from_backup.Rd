@@ -34,8 +34,8 @@ exclude some or all of the indexes at the time of restore.}
 \item{SSESpecificationOverride}{The new server-side encryption settings for the restored table.}
 }
 \description{
-Creates a new table from an existing backup. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.
+Creates a new table from an existing backup. Any number of users can execute up to 50 concurrent restores (any type of restore) in a given account.
 
-See \url{https://paws-r.github.io/docs/dynamodb/restore_table_from_backup.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/dynamodb_restore_table_from_backup/} for full documentation.
 }
 \keyword{internal}

@@ -1,6 +1,6 @@
 Package: paws.database
 Title: 'Amazon Web Services' Database Services
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: c(
     person("David", "Kretch", , "david.kretch@gmail.com", role = "aut"),
     person("Adam", "Banker", , "adam.banker39@gmail.com", role = "aut"),
@@ -16,7 +16,7 @@ BugReports: https://github.com/paws-r/paws/issues
 Imports: paws.common (>= 0.5.4)
 Suggests: testthat
 Encoding: UTF-8
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Collate: 'dax_service.R' 'dax_interfaces.R' 'dax_operations.R'
         'docdb_service.R' 'docdb_interfaces.R' 'docdb_operations.R'
         'dynamodb_service.R' 'dynamodb_interfaces.R'
@@ -47,11 +47,11 @@ Collate: 'dax_service.R' 'dax_interfaces.R' 'dax_operations.R'
         'timestreamquery_operations.R' 'timestreamwrite_service.R'
         'timestreamwrite_interfaces.R' 'timestreamwrite_operations.R'
 NeedsCompilation: no
-Packaged: 2023-02-08 10:03:35 UTC; dyfanjones
+Packaged: 2023-06-22 08:25:30 UTC; dyfanjones
 Author: David Kretch [aut],
   Adam Banker [aut],
   Dyfan Jones [cre],
   Amazon.com, Inc. [cph]
 Maintainer: Dyfan Jones <dyfan.r.jones@gmail.com>
 Repository: CRAN
-Date/Publication: 2023-02-09 11:20:02 UTC
+Date/Publication: 2023-06-22 10:22:35 UTC

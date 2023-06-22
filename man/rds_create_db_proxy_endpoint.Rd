@@ -28,13 +28,15 @@ original DB proxy. The default is the default security group for the
 VPC.}
 
 \item{TargetRole}{A value that indicates whether the DB proxy endpoint can be used for
-read/write or read-only operations. The default is \code{READ_WRITE}.}
+read/write or read-only operations. The default is \code{READ_WRITE}. The
+only role that proxies for RDS for Microsoft SQL Server support is
+\code{READ_WRITE}.}
 
 \item{Tags}{}
 }
 \description{
 Creates a \code{DBProxyEndpoint}. Only applies to proxies that are associated with Aurora DB clusters. You can use DB proxy endpoints to specify read/write or read-only access to the DB cluster. You can also use DB proxy endpoints to access a DB proxy through a different VPC than the proxy's default VPC.
 
-See \url{https://paws-r.github.io/docs/rds/create_db_proxy_endpoint.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/rds_create_db_proxy_endpoint/} for full documentation.
 }
 \keyword{internal}

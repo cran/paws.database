@@ -30,7 +30,7 @@ neptune_create_db_instance(
   CharacterSetName = NULL,
   PubliclyAccessible = NULL,
   Tags = NULL,
-  DBClusterIdentifier = NULL,
+  DBClusterIdentifier,
   StorageType = NULL,
   TdeCredentialArn = NULL,
   TdeCredentialPassword = NULL,
@@ -187,7 +187,7 @@ be initially allocated for the DB instance.}
 
 \item{Tags}{The tags to assign to the new instance.}
 
-\item{DBClusterIdentifier}{The identifier of the DB cluster that the instance will belong to.
+\item{DBClusterIdentifier}{[required] The identifier of the DB cluster that the instance will belong to.
 
 For information on creating a DB cluster, see
 \code{\link[=neptune_create_db_cluster]{create_db_cluster}}.
@@ -281,6 +281,6 @@ protection is enabled in their parent DB cluster.}
 \description{
 Creates a new DB instance.
 
-See \url{https://paws-r.github.io/docs/neptune/create_db_instance.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/neptune_create_db_instance/} for full documentation.
 }
 \keyword{internal}

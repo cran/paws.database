@@ -11,7 +11,10 @@ redshiftserverless_update_usage_limit(
 )
 }
 \arguments{
-\item{amount}{The new limit amount. For more information about this parameter.}
+\item{amount}{The new limit amount. If time-based, this amount is in Redshift
+Processing Units (RPU) consumed per hour. If data-based, this amount is
+in terabytes (TB) of data transferred between Regions in cross-account
+sharing. The value must be a positive number.}
 
 \item{breachAction}{The new action that Amazon Redshift Serverless takes when the limit is
 reached.}
@@ -21,6 +24,6 @@ reached.}
 \description{
 Update a usage limit in Amazon Redshift Serverless. You can't update the usage type or period of a usage limit.
 
-See \url{https://paws-r.github.io/docs/redshiftserverless/update_usage_limit.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/redshiftserverless_update_usage_limit/} for full documentation.
 }
 \keyword{internal}

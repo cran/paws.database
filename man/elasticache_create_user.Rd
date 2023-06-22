@@ -11,7 +11,8 @@ elasticache_create_user(
   Passwords = NULL,
   AccessString,
   NoPasswordRequired = NULL,
-  Tags = NULL
+  Tags = NULL,
+  AuthenticationMode = NULL
 )
 }
 \arguments{
@@ -30,10 +31,12 @@ each user.}
 
 \item{Tags}{A list of tags to be added to this resource. A tag is a key-value pair.
 A tag key must be accompanied by a tag value, although null is accepted.}
+
+\item{AuthenticationMode}{Specifies how to authenticate the user.}
 }
 \description{
 For Redis engine version 6.0 onwards: Creates a Redis user. For more information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html}{Using Role Based Access Control (RBAC)}.
 
-See \url{https://paws-r.github.io/docs/elasticache/create_user.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/elasticache_create_user/} for full documentation.
 }
 \keyword{internal}

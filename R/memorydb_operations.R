@@ -8,7 +8,7 @@ NULL
 #' @description
 #' Apply the service update to a list of clusters supplied. For more information on service updates and applying them, see [Applying the service updates](https://docs.aws.amazon.com/memorydb/latest/devguide/managing-updates.html#applying-updates).
 #'
-#' See [https://paws-r.github.io/docs/memorydb/batch_update_cluster.html](https://paws-r.github.io/docs/memorydb/batch_update_cluster.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_batch_update_cluster/](https://www.paws-r-sdk.com/docs/memorydb_batch_update_cluster/) for full documentation.
 #'
 #' @param ClusterNames &#91;required&#93; The cluster names to apply the updates.
 #' @param ServiceUpdate The unique ID of the service update
@@ -38,7 +38,7 @@ memorydb_batch_update_cluster <- function(ClusterNames, ServiceUpdate = NULL) {
 #' @description
 #' Makes a copy of an existing snapshot.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/copy_snapshot.html](https://paws-r.github.io/docs/memorydb/copy_snapshot.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_copy_snapshot/](https://www.paws-r-sdk.com/docs/memorydb_copy_snapshot/) for full documentation.
 #'
 #' @param SourceSnapshotName &#91;required&#93; The name of an existing snapshot from which to make a copy.
 #' @param TargetSnapshotName &#91;required&#93; A name for the snapshot copy. MemoryDB does not permit overwriting a
@@ -79,7 +79,7 @@ memorydb_copy_snapshot <- function(SourceSnapshotName, TargetSnapshotName, Targe
 #' @description
 #' Creates an Access Control List. For more information, see [Authenticating users with Access Contol Lists (ACLs)](https://docs.aws.amazon.com/memorydb/latest/devguide/clusters.acls.html).
 #'
-#' See [https://paws-r.github.io/docs/memorydb/create_acl.html](https://paws-r.github.io/docs/memorydb/create_acl.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_create_acl/](https://www.paws-r-sdk.com/docs/memorydb_create_acl/) for full documentation.
 #'
 #' @param ACLName &#91;required&#93; The name of the Access Control List.
 #' @param UserNames The list of users that belong to the Access Control List.
@@ -111,7 +111,7 @@ memorydb_create_acl <- function(ACLName, UserNames = NULL, Tags = NULL) {
 #' @description
 #' Creates a cluster. All nodes in the cluster run the same protocol-compliant engine software.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/create_cluster.html](https://paws-r.github.io/docs/memorydb/create_cluster.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_create_cluster/](https://www.paws-r-sdk.com/docs/memorydb_create_cluster/) for full documentation.
 #'
 #' @param ClusterName &#91;required&#93; The name of the cluster. This value must be unique as it also serves as
 #' the cluster identifier.
@@ -125,8 +125,26 @@ memorydb_create_acl <- function(ACLName, UserNames = NULL, Tags = NULL) {
 #' @param SecurityGroupIds A list of security group names to associate with this cluster.
 #' @param MaintenanceWindow Specifies the weekly time range during which maintenance on the cluster
 #' is performed. It is specified as a range in the format
-#' `ddd:hh24:mi-ddd:hh24:mi` (24H Clock UTC). The minimum maintenance
-#' window is a 60 minute period.
+#' ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window
+#' is a 60 minute period.
+#' 
+#' Valid values for `ddd` are:
+#' 
+#' -   `sun`
+#' 
+#' -   `mon`
+#' 
+#' -   `tue`
+#' 
+#' -   `wed`
+#' 
+#' -   `thu`
+#' 
+#' -   `fri`
+#' 
+#' -   `sat`
+#' 
+#' Example: `sun:23:00-mon:01:30`
 #' @param Port The port number on which each of the nodes accepts connections.
 #' @param SnsTopicArn The Amazon Resource Name (ARN) of the Amazon Simple Notification Service
 #' (SNS) topic to which notifications are sent.
@@ -158,18 +176,22 @@ memorydb_create_acl <- function(ACLName, UserNames = NULL, Tags = NULL) {
 #' @param EngineVersion The version number of the Redis engine to be used for the cluster.
 #' @param AutoMinorVersionUpgrade When set to true, the cluster will automatically receive minor engine
 #' version upgrades after launch.
+#' @param DataTiering Enables data tiering. Data tiering is only supported for clusters using
+#' the r6gd node type. This parameter must be set when using r6gd nodes.
+#' For more information, see [Data
+#' tiering](https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html).
 #'
 #' @keywords internal
 #'
 #' @rdname memorydb_create_cluster
-memorydb_create_cluster <- function(ClusterName, NodeType, ParameterGroupName = NULL, Description = NULL, NumShards = NULL, NumReplicasPerShard = NULL, SubnetGroupName = NULL, SecurityGroupIds = NULL, MaintenanceWindow = NULL, Port = NULL, SnsTopicArn = NULL, TLSEnabled = NULL, KmsKeyId = NULL, SnapshotArns = NULL, SnapshotName = NULL, SnapshotRetentionLimit = NULL, Tags = NULL, SnapshotWindow = NULL, ACLName, EngineVersion = NULL, AutoMinorVersionUpgrade = NULL) {
+memorydb_create_cluster <- function(ClusterName, NodeType, ParameterGroupName = NULL, Description = NULL, NumShards = NULL, NumReplicasPerShard = NULL, SubnetGroupName = NULL, SecurityGroupIds = NULL, MaintenanceWindow = NULL, Port = NULL, SnsTopicArn = NULL, TLSEnabled = NULL, KmsKeyId = NULL, SnapshotArns = NULL, SnapshotName = NULL, SnapshotRetentionLimit = NULL, Tags = NULL, SnapshotWindow = NULL, ACLName, EngineVersion = NULL, AutoMinorVersionUpgrade = NULL, DataTiering = NULL) {
   op <- new_operation(
     name = "CreateCluster",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .memorydb$create_cluster_input(ClusterName = ClusterName, NodeType = NodeType, ParameterGroupName = ParameterGroupName, Description = Description, NumShards = NumShards, NumReplicasPerShard = NumReplicasPerShard, SubnetGroupName = SubnetGroupName, SecurityGroupIds = SecurityGroupIds, MaintenanceWindow = MaintenanceWindow, Port = Port, SnsTopicArn = SnsTopicArn, TLSEnabled = TLSEnabled, KmsKeyId = KmsKeyId, SnapshotArns = SnapshotArns, SnapshotName = SnapshotName, SnapshotRetentionLimit = SnapshotRetentionLimit, Tags = Tags, SnapshotWindow = SnapshotWindow, ACLName = ACLName, EngineVersion = EngineVersion, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade)
+  input <- .memorydb$create_cluster_input(ClusterName = ClusterName, NodeType = NodeType, ParameterGroupName = ParameterGroupName, Description = Description, NumShards = NumShards, NumReplicasPerShard = NumReplicasPerShard, SubnetGroupName = SubnetGroupName, SecurityGroupIds = SecurityGroupIds, MaintenanceWindow = MaintenanceWindow, Port = Port, SnsTopicArn = SnsTopicArn, TLSEnabled = TLSEnabled, KmsKeyId = KmsKeyId, SnapshotArns = SnapshotArns, SnapshotName = SnapshotName, SnapshotRetentionLimit = SnapshotRetentionLimit, Tags = Tags, SnapshotWindow = SnapshotWindow, ACLName = ACLName, EngineVersion = EngineVersion, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, DataTiering = DataTiering)
   output <- .memorydb$create_cluster_output()
   config <- get_config()
   svc <- .memorydb$service(config)
@@ -184,7 +206,7 @@ memorydb_create_cluster <- function(ClusterName, NodeType, ParameterGroupName = 
 #' @description
 #' Creates a new MemoryDB parameter group. A parameter group is a collection of parameters and their values that are applied to all of the nodes in any cluster. For more information, see [Configuring engine parameters using parameter groups](https://docs.aws.amazon.com/memorydb/latest/devguide/parametergroups.html).
 #'
-#' See [https://paws-r.github.io/docs/memorydb/create_parameter_group.html](https://paws-r.github.io/docs/memorydb/create_parameter_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_create_parameter_group/](https://www.paws-r-sdk.com/docs/memorydb_create_parameter_group/) for full documentation.
 #'
 #' @param ParameterGroupName &#91;required&#93; The name of the parameter group.
 #' @param Family &#91;required&#93; The name of the parameter group family that the parameter group can be
@@ -218,7 +240,7 @@ memorydb_create_parameter_group <- function(ParameterGroupName, Family, Descript
 #' @description
 #' Creates a copy of an entire cluster at a specific moment in time.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/create_snapshot.html](https://paws-r.github.io/docs/memorydb/create_snapshot.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_create_snapshot/](https://www.paws-r-sdk.com/docs/memorydb_create_snapshot/) for full documentation.
 #'
 #' @param ClusterName &#91;required&#93; The snapshot is created from this cluster.
 #' @param SnapshotName &#91;required&#93; A name for the snapshot being created.
@@ -251,7 +273,7 @@ memorydb_create_snapshot <- function(ClusterName, SnapshotName, KmsKeyId = NULL,
 #' @description
 #' Creates a subnet group. A subnet group is a collection of subnets (typically private) that you can designate for your clusters running in an Amazon Virtual Private Cloud (VPC) environment. When you create a cluster in an Amazon VPC, you must specify a subnet group. MemoryDB uses that subnet group to choose a subnet and IP addresses within that subnet to associate with your nodes. For more information, see [Subnets and subnet groups](https://docs.aws.amazon.com/memorydb/latest/devguide/subnetgroups.html).
 #'
-#' See [https://paws-r.github.io/docs/memorydb/create_subnet_group.html](https://paws-r.github.io/docs/memorydb/create_subnet_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_create_subnet_group/](https://www.paws-r-sdk.com/docs/memorydb_create_subnet_group/) for full documentation.
 #'
 #' @param SubnetGroupName &#91;required&#93; The name of the subnet group.
 #' @param Description A description for the subnet group.
@@ -284,7 +306,7 @@ memorydb_create_subnet_group <- function(SubnetGroupName, Description = NULL, Su
 #' @description
 #' Creates a MemoryDB user. For more information, see [Authenticating users with Access Contol Lists (ACLs)](https://docs.aws.amazon.com/memorydb/latest/devguide/clusters.acls.html).
 #'
-#' See [https://paws-r.github.io/docs/memorydb/create_user.html](https://paws-r.github.io/docs/memorydb/create_user.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_create_user/](https://www.paws-r-sdk.com/docs/memorydb_create_user/) for full documentation.
 #'
 #' @param UserName &#91;required&#93; The name of the user. This value must be unique as it also serves as the
 #' user identifier.
@@ -319,7 +341,7 @@ memorydb_create_user <- function(UserName, AuthenticationMode, AccessString, Tag
 #' @description
 #' Deletes an Access Control List. The ACL must first be disassociated from the cluster before it can be deleted. For more information, see [Authenticating users with Access Contol Lists (ACLs)](https://docs.aws.amazon.com/memorydb/latest/devguide/clusters.acls.html).
 #'
-#' See [https://paws-r.github.io/docs/memorydb/delete_acl.html](https://paws-r.github.io/docs/memorydb/delete_acl.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_delete_acl/](https://www.paws-r-sdk.com/docs/memorydb_delete_acl/) for full documentation.
 #'
 #' @param ACLName &#91;required&#93; The name of the Access Control List to delete
 #'
@@ -348,7 +370,7 @@ memorydb_delete_acl <- function(ACLName) {
 #' @description
 #' Deletes a cluster. It also deletes all associated nodes and node endpoints
 #'
-#' See [https://paws-r.github.io/docs/memorydb/delete_cluster.html](https://paws-r.github.io/docs/memorydb/delete_cluster.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_delete_cluster/](https://www.paws-r-sdk.com/docs/memorydb_delete_cluster/) for full documentation.
 #'
 #' @param ClusterName &#91;required&#93; The name of the cluster to be deleted
 #' @param FinalSnapshotName The user-supplied name of a final cluster snapshot. This is the unique
@@ -380,7 +402,7 @@ memorydb_delete_cluster <- function(ClusterName, FinalSnapshotName = NULL) {
 #' @description
 #' Deletes the specified parameter group. You cannot delete a parameter group if it is associated with any clusters. You cannot delete the default parameter groups in your account.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/delete_parameter_group.html](https://paws-r.github.io/docs/memorydb/delete_parameter_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_delete_parameter_group/](https://www.paws-r-sdk.com/docs/memorydb_delete_parameter_group/) for full documentation.
 #'
 #' @param ParameterGroupName &#91;required&#93; The name of the parameter group to delete.
 #'
@@ -409,7 +431,7 @@ memorydb_delete_parameter_group <- function(ParameterGroupName) {
 #' @description
 #' Deletes an existing snapshot. When you receive a successful response from this operation, MemoryDB immediately begins deleting the snapshot; you cannot cancel or revert this operation.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/delete_snapshot.html](https://paws-r.github.io/docs/memorydb/delete_snapshot.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_delete_snapshot/](https://www.paws-r-sdk.com/docs/memorydb_delete_snapshot/) for full documentation.
 #'
 #' @param SnapshotName &#91;required&#93; The name of the snapshot to delete
 #'
@@ -438,7 +460,7 @@ memorydb_delete_snapshot <- function(SnapshotName) {
 #' @description
 #' Deletes a subnet group. You cannot delete a default subnet group or one that is associated with any clusters.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/delete_subnet_group.html](https://paws-r.github.io/docs/memorydb/delete_subnet_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_delete_subnet_group/](https://www.paws-r-sdk.com/docs/memorydb_delete_subnet_group/) for full documentation.
 #'
 #' @param SubnetGroupName &#91;required&#93; The name of the subnet group to delete
 #'
@@ -467,7 +489,7 @@ memorydb_delete_subnet_group <- function(SubnetGroupName) {
 #' @description
 #' Deletes a user. The user will be removed from all ACLs and in turn removed from all clusters.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/delete_user.html](https://paws-r.github.io/docs/memorydb/delete_user.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_delete_user/](https://www.paws-r-sdk.com/docs/memorydb_delete_user/) for full documentation.
 #'
 #' @param UserName &#91;required&#93; The name of the user to delete
 #'
@@ -496,7 +518,7 @@ memorydb_delete_user <- function(UserName) {
 #' @description
 #' Returns a list of ACLs
 #'
-#' See [https://paws-r.github.io/docs/memorydb/describe_ac_ls.html](https://paws-r.github.io/docs/memorydb/describe_ac_ls.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_describe_ac_ls/](https://www.paws-r-sdk.com/docs/memorydb_describe_ac_ls/) for full documentation.
 #'
 #' @param ACLName The name of the ACL
 #' @param MaxResults The maximum number of records to include in the response. If more
@@ -535,7 +557,7 @@ memorydb_describe_ac_ls <- function(ACLName = NULL, MaxResults = NULL, NextToken
 #' @description
 #' Returns information about all provisioned clusters if no cluster identifier is specified, or about a specific cluster if a cluster name is supplied.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/describe_clusters.html](https://paws-r.github.io/docs/memorydb/describe_clusters.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_describe_clusters/](https://www.paws-r-sdk.com/docs/memorydb_describe_clusters/) for full documentation.
 #'
 #' @param ClusterName The name of the cluster
 #' @param MaxResults The maximum number of records to include in the response. If more
@@ -574,7 +596,7 @@ memorydb_describe_clusters <- function(ClusterName = NULL, MaxResults = NULL, Ne
 #' @description
 #' Returns a list of the available Redis engine versions.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/describe_engine_versions.html](https://paws-r.github.io/docs/memorydb/describe_engine_versions.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_describe_engine_versions/](https://www.paws-r-sdk.com/docs/memorydb_describe_engine_versions/) for full documentation.
 #'
 #' @param EngineVersion The Redis engine version
 #' @param ParameterGroupFamily The name of a specific parameter group family to return details for.
@@ -615,7 +637,7 @@ memorydb_describe_engine_versions <- function(EngineVersion = NULL, ParameterGro
 #' @description
 #' Returns events related to clusters, security groups, and parameter groups. You can obtain events specific to a particular cluster, security group, or parameter group by providing the name as a parameter. By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days' worth of events if necessary.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/describe_events.html](https://paws-r.github.io/docs/memorydb/describe_events.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_describe_events/](https://www.paws-r-sdk.com/docs/memorydb_describe_events/) for full documentation.
 #'
 #' @param SourceName The identifier of the event source for which events are returned. If not
 #' specified, all sources are included in the response.
@@ -660,7 +682,7 @@ memorydb_describe_events <- function(SourceName = NULL, SourceType = NULL, Start
 #' @description
 #' Returns a list of parameter group descriptions. If a parameter group name is specified, the list contains only the descriptions for that group.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/describe_parameter_groups.html](https://paws-r.github.io/docs/memorydb/describe_parameter_groups.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_describe_parameter_groups/](https://www.paws-r-sdk.com/docs/memorydb_describe_parameter_groups/) for full documentation.
 #'
 #' @param ParameterGroupName The name of a specific parameter group to return details for.
 #' @param MaxResults The maximum number of records to include in the response. If more
@@ -697,7 +719,7 @@ memorydb_describe_parameter_groups <- function(ParameterGroupName = NULL, MaxRes
 #' @description
 #' Returns the detailed parameter list for a particular parameter group.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/describe_parameters.html](https://paws-r.github.io/docs/memorydb/describe_parameters.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_describe_parameters/](https://www.paws-r-sdk.com/docs/memorydb_describe_parameters/) for full documentation.
 #'
 #' @param ParameterGroupName &#91;required&#93; he name of a specific parameter group to return details for.
 #' @param MaxResults The maximum number of records to include in the response. If more
@@ -729,12 +751,107 @@ memorydb_describe_parameters <- function(ParameterGroupName, MaxResults = NULL, 
 }
 .memorydb$operations$describe_parameters <- memorydb_describe_parameters
 
+#' Returns information about reserved nodes for this account, or about a
+#' specified reserved node
+#'
+#' @description
+#' Returns information about reserved nodes for this account, or about a specified reserved node.
+#'
+#' See [https://www.paws-r-sdk.com/docs/memorydb_describe_reserved_nodes/](https://www.paws-r-sdk.com/docs/memorydb_describe_reserved_nodes/) for full documentation.
+#'
+#' @param ReservationId The reserved node identifier filter value. Use this parameter to show
+#' only the reservation that matches the specified reservation ID.
+#' @param ReservedNodesOfferingId The offering identifier filter value. Use this parameter to show only
+#' purchased reservations matching the specified offering identifier.
+#' @param NodeType The node type filter value. Use this parameter to show only those
+#' reservations matching the specified node type. For more information, see
+#' [Supported node
+#' types](https://docs.aws.amazon.com/memorydb/latest/devguide/#reserved-nodes-supported).
+#' @param Duration The duration filter value, specified in years or seconds. Use this
+#' parameter to show only reservations for this duration.
+#' @param OfferingType The offering type filter value. Use this parameter to show only the
+#' available offerings matching the specified offering type. Valid values:
+#' "All Upfront"|"Partial Upfront"| "No Upfront"
+#' @param MaxResults The maximum number of records to include in the response. If more
+#' records exist than the specified MaxRecords value, a marker is included
+#' in the response so that the remaining results can be retrieved.
+#' @param NextToken An optional marker returned from a prior request. Use this marker for
+#' pagination of results from this operation. If this parameter is
+#' specified, the response includes only records beyond the marker, up to
+#' the value specified by MaxRecords.
+#'
+#' @keywords internal
+#'
+#' @rdname memorydb_describe_reserved_nodes
+memorydb_describe_reserved_nodes <- function(ReservationId = NULL, ReservedNodesOfferingId = NULL, NodeType = NULL, Duration = NULL, OfferingType = NULL, MaxResults = NULL, NextToken = NULL) {
+  op <- new_operation(
+    name = "DescribeReservedNodes",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .memorydb$describe_reserved_nodes_input(ReservationId = ReservationId, ReservedNodesOfferingId = ReservedNodesOfferingId, NodeType = NodeType, Duration = Duration, OfferingType = OfferingType, MaxResults = MaxResults, NextToken = NextToken)
+  output <- .memorydb$describe_reserved_nodes_output()
+  config <- get_config()
+  svc <- .memorydb$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.memorydb$operations$describe_reserved_nodes <- memorydb_describe_reserved_nodes
+
+#' Lists available reserved node offerings
+#'
+#' @description
+#' Lists available reserved node offerings.
+#'
+#' See [https://www.paws-r-sdk.com/docs/memorydb_describe_reserved_nodes_offerings/](https://www.paws-r-sdk.com/docs/memorydb_describe_reserved_nodes_offerings/) for full documentation.
+#'
+#' @param ReservedNodesOfferingId The offering identifier filter value. Use this parameter to show only
+#' the available offering that matches the specified reservation
+#' identifier.
+#' @param NodeType The node type for the reserved nodes. For more information, see
+#' [Supported node
+#' types](https://docs.aws.amazon.com/memorydb/latest/devguide/#reserved-nodes-supported).
+#' @param Duration Duration filter value, specified in years or seconds. Use this parameter
+#' to show only reservations for a given duration.
+#' @param OfferingType The offering type filter value. Use this parameter to show only the
+#' available offerings matching the specified offering type. Valid values:
+#' "All Upfront"|"Partial Upfront"| "No Upfront"
+#' @param MaxResults The maximum number of records to include in the response. If more
+#' records exist than the specified MaxRecords value, a marker is included
+#' in the response so that the remaining results can be retrieved.
+#' @param NextToken An optional marker returned from a prior request. Use this marker for
+#' pagination of results from this operation. If this parameter is
+#' specified, the response includes only records beyond the marker, up to
+#' the value specified by MaxRecords.
+#'
+#' @keywords internal
+#'
+#' @rdname memorydb_describe_reserved_nodes_offerings
+memorydb_describe_reserved_nodes_offerings <- function(ReservedNodesOfferingId = NULL, NodeType = NULL, Duration = NULL, OfferingType = NULL, MaxResults = NULL, NextToken = NULL) {
+  op <- new_operation(
+    name = "DescribeReservedNodesOfferings",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .memorydb$describe_reserved_nodes_offerings_input(ReservedNodesOfferingId = ReservedNodesOfferingId, NodeType = NodeType, Duration = Duration, OfferingType = OfferingType, MaxResults = MaxResults, NextToken = NextToken)
+  output <- .memorydb$describe_reserved_nodes_offerings_output()
+  config <- get_config()
+  svc <- .memorydb$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.memorydb$operations$describe_reserved_nodes_offerings <- memorydb_describe_reserved_nodes_offerings
+
 #' Returns details of the service updates
 #'
 #' @description
 #' Returns details of the service updates
 #'
-#' See [https://paws-r.github.io/docs/memorydb/describe_service_updates.html](https://paws-r.github.io/docs/memorydb/describe_service_updates.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_describe_service_updates/](https://www.paws-r-sdk.com/docs/memorydb_describe_service_updates/) for full documentation.
 #'
 #' @param ServiceUpdateName The unique ID of the service update to describe.
 #' @param ClusterNames The list of cluster names to identify service updates to apply
@@ -773,7 +890,7 @@ memorydb_describe_service_updates <- function(ServiceUpdateName = NULL, ClusterN
 #' @description
 #' Returns information about cluster snapshots. By default, DescribeSnapshots lists all of your snapshots; it can optionally describe a single snapshot, or just the snapshots associated with a particular cluster.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/describe_snapshots.html](https://paws-r.github.io/docs/memorydb/describe_snapshots.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_describe_snapshots/](https://www.paws-r-sdk.com/docs/memorydb_describe_snapshots/) for full documentation.
 #'
 #' @param ClusterName A user-supplied cluster identifier. If this parameter is specified, only
 #' snapshots associated with that specific cluster are described.
@@ -819,7 +936,7 @@ memorydb_describe_snapshots <- function(ClusterName = NULL, SnapshotName = NULL,
 #' @description
 #' Returns a list of subnet group descriptions. If a subnet group name is specified, the list contains only the description of that group.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/describe_subnet_groups.html](https://paws-r.github.io/docs/memorydb/describe_subnet_groups.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_describe_subnet_groups/](https://www.paws-r-sdk.com/docs/memorydb_describe_subnet_groups/) for full documentation.
 #'
 #' @param SubnetGroupName The name of the subnet group to return details for.
 #' @param MaxResults The maximum number of records to include in the response. If more
@@ -856,7 +973,7 @@ memorydb_describe_subnet_groups <- function(SubnetGroupName = NULL, MaxResults =
 #' @description
 #' Returns a list of users.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/describe_users.html](https://paws-r.github.io/docs/memorydb/describe_users.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_describe_users/](https://www.paws-r-sdk.com/docs/memorydb_describe_users/) for full documentation.
 #'
 #' @param UserName The name of the user
 #' @param Filters Filter to determine the list of users to return.
@@ -892,9 +1009,9 @@ memorydb_describe_users <- function(UserName = NULL, Filters = NULL, MaxResults 
 #' Used to failover a shard
 #'
 #' @description
-#' Used to failover a shard
+#' Used to failover a shard. This API is designed for testing the behavior of your application in case of MemoryDB failover. It is not designed to be used as a production-level tool for initiating a failover to overcome a problem you may have with the cluster. Moreover, in certain conditions such as large scale operational events, Amazon may block this API.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/failover_shard.html](https://paws-r.github.io/docs/memorydb/failover_shard.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_failover_shard/](https://www.paws-r-sdk.com/docs/memorydb_failover_shard/) for full documentation.
 #'
 #' @param ClusterName &#91;required&#93; The cluster being failed over
 #' @param ShardName &#91;required&#93; The name of the shard
@@ -925,7 +1042,7 @@ memorydb_failover_shard <- function(ClusterName, ShardName) {
 #' @description
 #' Lists all available node types that you can scale to from your cluster's current node type. When you use the UpdateCluster operation to scale your cluster, the value of the NodeType parameter must be one of the node types returned by this operation.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/list_allowed_node_type_updates.html](https://paws-r.github.io/docs/memorydb/list_allowed_node_type_updates.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_list_allowed_node_type_updates/](https://www.paws-r-sdk.com/docs/memorydb_list_allowed_node_type_updates/) for full documentation.
 #'
 #' @param ClusterName &#91;required&#93; The name of the cluster you want to scale. MemoryDB uses the cluster
 #' name to identify the current node type being used by this cluster, and
@@ -956,7 +1073,7 @@ memorydb_list_allowed_node_type_updates <- function(ClusterName) {
 #' @description
 #' Lists all tags currently on a named resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track your MemoryDB resources. For more information, see [Tagging your MemoryDB resources](https://docs.aws.amazon.com/memorydb/latest/devguide/)
 #'
-#' See [https://paws-r.github.io/docs/memorydb/list_tags.html](https://paws-r.github.io/docs/memorydb/list_tags.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_list_tags/](https://www.paws-r-sdk.com/docs/memorydb_list_tags/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource for which you want the
 #' list of tags
@@ -981,13 +1098,46 @@ memorydb_list_tags <- function(ResourceArn) {
 }
 .memorydb$operations$list_tags <- memorydb_list_tags
 
+#' Allows you to purchase a reserved node offering
+#'
+#' @description
+#' Allows you to purchase a reserved node offering. Reserved nodes are not eligible for cancellation and are non-refundable.
+#'
+#' See [https://www.paws-r-sdk.com/docs/memorydb_purchase_reserved_nodes_offering/](https://www.paws-r-sdk.com/docs/memorydb_purchase_reserved_nodes_offering/) for full documentation.
+#'
+#' @param ReservedNodesOfferingId &#91;required&#93; The ID of the reserved node offering to purchase.
+#' @param ReservationId A customer-specified identifier to track this reservation.
+#' @param NodeCount The number of node instances to reserve.
+#' @param Tags A list of tags to be added to this resource. A tag is a key-value pair.
+#' A tag key must be accompanied by a tag value, although null is accepted.
+#'
+#' @keywords internal
+#'
+#' @rdname memorydb_purchase_reserved_nodes_offering
+memorydb_purchase_reserved_nodes_offering <- function(ReservedNodesOfferingId, ReservationId = NULL, NodeCount = NULL, Tags = NULL) {
+  op <- new_operation(
+    name = "PurchaseReservedNodesOffering",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .memorydb$purchase_reserved_nodes_offering_input(ReservedNodesOfferingId = ReservedNodesOfferingId, ReservationId = ReservationId, NodeCount = NodeCount, Tags = Tags)
+  output <- .memorydb$purchase_reserved_nodes_offering_output()
+  config <- get_config()
+  svc <- .memorydb$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.memorydb$operations$purchase_reserved_nodes_offering <- memorydb_purchase_reserved_nodes_offering
+
 #' Modifies the parameters of a parameter group to the engine or system
 #' default value
 #'
 #' @description
 #' Modifies the parameters of a parameter group to the engine or system default value. You can reset specific parameters by submitting a list of parameter names. To reset the entire parameter group, specify the AllParameters and ParameterGroupName parameters.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/reset_parameter_group.html](https://paws-r.github.io/docs/memorydb/reset_parameter_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_reset_parameter_group/](https://www.paws-r-sdk.com/docs/memorydb_reset_parameter_group/) for full documentation.
 #'
 #' @param ParameterGroupName &#91;required&#93; The name of the parameter group to reset.
 #' @param AllParameters If true, all parameters in the parameter group are reset to their
@@ -1022,7 +1172,7 @@ memorydb_reset_parameter_group <- function(ParameterGroupName, AllParameters = N
 #' @description
 #' A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your MemoryDB resources. When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. For more information, see [Resource-level permissions](https://docs.aws.amazon.com/memorydb/latest/devguide/iam.resourcelevelpermissions.html).
 #'
-#' See [https://paws-r.github.io/docs/memorydb/tag_resource.html](https://paws-r.github.io/docs/memorydb/tag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_tag_resource/](https://www.paws-r-sdk.com/docs/memorydb_tag_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource to which the tags are to
 #' be added
@@ -1054,7 +1204,7 @@ memorydb_tag_resource <- function(ResourceArn, Tags) {
 #' @description
 #' Use this operation to remove tags on a resource
 #'
-#' See [https://paws-r.github.io/docs/memorydb/untag_resource.html](https://paws-r.github.io/docs/memorydb/untag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_untag_resource/](https://www.paws-r-sdk.com/docs/memorydb_untag_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource to which the tags are to
 #' be removed
@@ -1085,7 +1235,7 @@ memorydb_untag_resource <- function(ResourceArn, TagKeys) {
 #' @description
 #' Changes the list of users that belong to the Access Control List.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/update_acl.html](https://paws-r.github.io/docs/memorydb/update_acl.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_update_acl/](https://www.paws-r-sdk.com/docs/memorydb_update_acl/) for full documentation.
 #'
 #' @param ACLName &#91;required&#93; The name of the Access Control List
 #' @param UserNamesToAdd The list of users to add to the Access Control List
@@ -1116,12 +1266,33 @@ memorydb_update_acl <- function(ACLName, UserNamesToAdd = NULL, UserNamesToRemov
 #' @description
 #' Modifies the settings for a cluster. You can use this operation to change one or more cluster configuration settings by specifying the settings and the new values.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/update_cluster.html](https://paws-r.github.io/docs/memorydb/update_cluster.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_update_cluster/](https://www.paws-r-sdk.com/docs/memorydb_update_cluster/) for full documentation.
 #'
 #' @param ClusterName &#91;required&#93; The name of the cluster to update
 #' @param Description The description of the cluster to update
 #' @param SecurityGroupIds The SecurityGroupIds to update
-#' @param MaintenanceWindow The maintenance window to update
+#' @param MaintenanceWindow Specifies the weekly time range during which maintenance on the cluster
+#' is performed. It is specified as a range in the format
+#' ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window
+#' is a 60 minute period.
+#' 
+#' Valid values for `ddd` are:
+#' 
+#' -   `sun`
+#' 
+#' -   `mon`
+#' 
+#' -   `tue`
+#' 
+#' -   `wed`
+#' 
+#' -   `thu`
+#' 
+#' -   `fri`
+#' 
+#' -   `sat`
+#' 
+#' Example: `sun:23:00-mon:01:30`
 #' @param SnsTopicArn The SNS topic ARN to update
 #' @param SnsTopicStatus The status of the Amazon SNS notification topic. Notifications are sent
 #' only if the status is active.
@@ -1167,7 +1338,7 @@ memorydb_update_cluster <- function(ClusterName, Description = NULL, SecurityGro
 #' @description
 #' Updates the parameters of a parameter group. You can modify up to 20 parameters in a single request by submitting a list parameter name and value pairs.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/update_parameter_group.html](https://paws-r.github.io/docs/memorydb/update_parameter_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_update_parameter_group/](https://www.paws-r-sdk.com/docs/memorydb_update_parameter_group/) for full documentation.
 #'
 #' @param ParameterGroupName &#91;required&#93; The name of the parameter group to update.
 #' @param ParameterNameValues &#91;required&#93; An array of parameter names and values for the parameter update. You
@@ -1199,7 +1370,7 @@ memorydb_update_parameter_group <- function(ParameterGroupName, ParameterNameVal
 #' @description
 #' Updates a subnet group. For more information, see [Updating a subnet group](https://docs.aws.amazon.com/memorydb/latest/devguide/)
 #'
-#' See [https://paws-r.github.io/docs/memorydb/update_subnet_group.html](https://paws-r.github.io/docs/memorydb/update_subnet_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_update_subnet_group/](https://www.paws-r-sdk.com/docs/memorydb_update_subnet_group/) for full documentation.
 #'
 #' @param SubnetGroupName &#91;required&#93; The name of the subnet group
 #' @param Description A description of the subnet group
@@ -1230,7 +1401,7 @@ memorydb_update_subnet_group <- function(SubnetGroupName, Description = NULL, Su
 #' @description
 #' Changes user password(s) and/or access string.
 #'
-#' See [https://paws-r.github.io/docs/memorydb/update_user.html](https://paws-r.github.io/docs/memorydb/update_user.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/memorydb_update_user/](https://www.paws-r-sdk.com/docs/memorydb_update_user/) for full documentation.
 #'
 #' @param UserName &#91;required&#93; The name of the user
 #' @param AuthenticationMode Denotes the user's authentication properties, such as whether it

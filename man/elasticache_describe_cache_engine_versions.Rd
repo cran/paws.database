@@ -25,7 +25,7 @@ for.
 
 Valid values are: \code{memcached1.4} | \code{memcached1.5} | \code{memcached1.6} |
 \code{redis2.6} | \code{redis2.8} | \code{redis3.2} | \code{redis4.0} | \code{redis5.0} |
-\code{redis6.x} | \code{redis6.2}
+\code{redis6.x} | \code{redis6.2} | \code{redis7}
 
 Constraints:
 \itemize{
@@ -53,6 +53,6 @@ engine or engine and major version combination is to be returned.}
 \description{
 Returns a list of the available cache engines and their versions.
 
-See \url{https://paws-r.github.io/docs/elasticache/describe_cache_engine_versions.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/elasticache_describe_cache_engine_versions/} for full documentation.
 }
 \keyword{internal}

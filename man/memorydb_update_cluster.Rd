@@ -28,7 +28,23 @@ memorydb_update_cluster(
 
 \item{SecurityGroupIds}{The SecurityGroupIds to update}
 
-\item{MaintenanceWindow}{The maintenance window to update}
+\item{MaintenanceWindow}{Specifies the weekly time range during which maintenance on the cluster
+is performed. It is specified as a range in the format
+ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window
+is a 60 minute period.
+
+Valid values for \code{ddd} are:
+\itemize{
+\item \code{sun}
+\item \code{mon}
+\item \code{tue}
+\item \code{wed}
+\item \code{thu}
+\item \code{fri}
+\item \code{sat}
+}
+
+Example: \code{sun:23:00-mon:01:30}}
 
 \item{SnsTopicArn}{The SNS topic ARN to update}
 
@@ -62,6 +78,6 @@ engine version.}
 \description{
 Modifies the settings for a cluster. You can use this operation to change one or more cluster configuration settings by specifying the settings and the new values.
 
-See \url{https://paws-r.github.io/docs/memorydb/update_cluster.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/memorydb_update_cluster/} for full documentation.
 }
 \keyword{internal}

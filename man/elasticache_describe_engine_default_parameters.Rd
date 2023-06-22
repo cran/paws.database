@@ -16,7 +16,7 @@ elasticache_describe_engine_default_parameters(
 
 Valid values are: \code{memcached1.4} | \code{memcached1.5} | \code{memcached1.6} |
 \code{redis2.6} | \code{redis2.8} | \code{redis3.2} | \code{redis4.0} | \code{redis5.0} |
-\code{redis6.x} | \code{redis6.2}}
+\code{redis6.x} | \code{redis6.2} | \code{redis7}}
 
 \item{MaxRecords}{The maximum number of records to include in the response. If more
 records exist than the specified \code{MaxRecords} value, a marker is
@@ -34,6 +34,6 @@ the value specified by \code{MaxRecords}.}
 \description{
 Returns the default engine and system parameter information for the specified cache engine.
 
-See \url{https://paws-r.github.io/docs/elasticache/describe_engine_default_parameters.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/elasticache_describe_engine_default_parameters/} for full documentation.
 }
 \keyword{internal}

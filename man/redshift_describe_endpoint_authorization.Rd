@@ -15,9 +15,9 @@ redshift_describe_endpoint_authorization(
 \arguments{
 \item{ClusterIdentifier}{The cluster identifier of the cluster to access.}
 
-\item{Account}{The AAmazon Web Services account ID of either the cluster owner
-(grantor) or grantee. If \code{Grantee} parameter is true, then the \code{Account}
-value is of the grantor.}
+\item{Account}{The Amazon Web Services account ID of either the cluster owner (grantor)
+or grantee. If \code{Grantee} parameter is true, then the \code{Account} value is
+of the grantor.}
 
 \item{Grantee}{Indicates whether to check authorization from a grantor or grantee point
 of view. If true, Amazon Redshift returns endpoint authorizations that
@@ -38,6 +38,6 @@ parameter.}
 \description{
 Describes an endpoint authorization.
 
-See \url{https://paws-r.github.io/docs/redshift/describe_endpoint_authorization.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/redshift_describe_endpoint_authorization/} for full documentation.
 }
 \keyword{internal}
