@@ -8,6 +8,7 @@ redshiftserverless_update_workgroup(
   baseCapacity = NULL,
   configParameters = NULL,
   enhancedVpcRouting = NULL,
+  maxCapacity = NULL,
   port = NULL,
   publiclyAccessible = NULL,
   securityGroupIds = NULL,
@@ -20,15 +21,18 @@ redshiftserverless_update_workgroup(
 (RPUs).}
 
 \item{configParameters}{An array of parameters to set for advanced control over a database. The
-options are \code{auto_mv}, \code{datestyle},
-\code{enable_case_sensitivity_identifier}, \code{enable_user_activity_logging},
-\code{query_group}, \code{search_path}, and query monitoring metrics that let you
-define performance boundaries. For more information about query
-monitoring rules and available metrics, see \href{https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless}{Query monitoring metrics for Amazon Redshift Serverless}.}
+options are \code{auto_mv}, \code{datestyle}, \code{enable_case_sensitive_identifier},
+\code{enable_user_activity_logging}, \code{query_group}, \code{search_path}, and query
+monitoring metrics that let you define performance boundaries. For more
+information about query monitoring rules and available metrics, see
+\href{https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless}{Query monitoring metrics for Amazon Redshift Serverless}.}
 
 \item{enhancedVpcRouting}{The value that specifies whether to turn on enhanced virtual private
 cloud (VPC) routing, which forces Amazon Redshift Serverless to route
 traffic through your VPC.}
+
+\item{maxCapacity}{The maximum data-warehouse capacity Amazon Redshift Serverless uses to
+serve queries. The max capacity is specified in RPUs.}
 
 \item{port}{The custom port to use when connecting to a workgroup. Valid port ranges
 are 5431-5455 and 8191-8215. The default is 5439.}

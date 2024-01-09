@@ -1,6 +1,6 @@
 Package: paws.database
 Title: 'Amazon Web Services' Database Services
-Version: 0.4.0
+Version: 0.5.0
 Authors@R: c(
     person("David", "Kretch", , "david.kretch@gmail.com", role = "aut"),
     person("Adam", "Banker", , "adam.banker39@gmail.com", role = "aut"),
@@ -19,17 +19,20 @@ Encoding: UTF-8
 RoxygenNote: 7.2.3
 Collate: 'dax_service.R' 'dax_interfaces.R' 'dax_operations.R'
         'docdb_service.R' 'docdb_interfaces.R' 'docdb_operations.R'
-        'dynamodb_service.R' 'dynamodb_interfaces.R'
-        'dynamodb_operations.R' 'dynamodbstreams_service.R'
-        'dynamodbstreams_interfaces.R' 'dynamodbstreams_operations.R'
-        'elasticache_service.R' 'elasticache_interfaces.R'
-        'elasticache_operations.R' 'keyspaces_service.R'
-        'keyspaces_interfaces.R' 'keyspaces_operations.R'
-        'lakeformation_service.R' 'lakeformation_interfaces.R'
-        'lakeformation_operations.R' 'memorydb_service.R'
-        'memorydb_interfaces.R' 'memorydb_operations.R'
-        'neptune_service.R' 'neptune_interfaces.R'
-        'neptune_operations.R' 'qldb_service.R' 'qldb_interfaces.R'
+        'docdbelastic_service.R' 'docdbelastic_interfaces.R'
+        'docdbelastic_operations.R' 'dynamodb_service.R'
+        'dynamodb_interfaces.R' 'dynamodb_operations.R'
+        'dynamodbstreams_service.R' 'dynamodbstreams_interfaces.R'
+        'dynamodbstreams_operations.R' 'elasticache_service.R'
+        'elasticache_interfaces.R' 'elasticache_operations.R'
+        'keyspaces_service.R' 'keyspaces_interfaces.R'
+        'keyspaces_operations.R' 'lakeformation_service.R'
+        'lakeformation_interfaces.R' 'lakeformation_operations.R'
+        'memorydb_service.R' 'memorydb_interfaces.R'
+        'memorydb_operations.R' 'neptune_service.R'
+        'neptune_interfaces.R' 'neptune_operations.R'
+        'neptunedata_service.R' 'neptunedata_interfaces.R'
+        'neptunedata_operations.R' 'qldb_service.R' 'qldb_interfaces.R'
         'qldb_operations.R' 'qldbsession_service.R'
         'qldbsession_interfaces.R' 'qldbsession_operations.R'
         'rds_service.R' 'rds_operations.R' 'rds_custom.R'
@@ -48,11 +51,11 @@ Collate: 'dax_service.R' 'dax_interfaces.R' 'dax_operations.R'
         'timestreamwrite_service.R' 'timestreamwrite_interfaces.R'
         'timestreamwrite_operations.R'
 NeedsCompilation: no
-Packaged: 2023-09-11 15:35:08 UTC; dyfanjones
+Packaged: 2024-01-09 17:40:33 UTC; dyfanjones
 Author: David Kretch [aut],
   Adam Banker [aut],
   Dyfan Jones [cre],
   Amazon.com, Inc. [cph]
 Maintainer: Dyfan Jones <dyfan.r.jones@gmail.com>
 Repository: CRAN
-Date/Publication: 2023-09-11 18:10:05 UTC
+Date/Publication: 2024-01-09 22:00:02 UTC

@@ -14,32 +14,32 @@ lakeformation(
 \arguments{
 \item{config}{Optional configuration of credentials, endpoint, and/or region.
 \itemize{
-\item{\strong{credentials}:} {\itemize{
-\item{\strong{creds}:} {\itemize{
-\item{\strong{access_key_id}:} {AWS access key ID}
-\item{\strong{secret_access_key}:} {AWS secret access key}
-\item{\strong{session_token}:} {AWS temporary session token}
+\item{\strong{credentials}: \itemize{
+\item{\strong{creds}: \itemize{
+\item{\strong{access_key_id}: AWS access key ID}
+\item{\strong{secret_access_key}: AWS secret access key}
+\item{\strong{session_token}: AWS temporary session token}
 }}
-\item{\strong{profile}:} {The name of a profile to use. If not given, then the default profile is used.}
-\item{\strong{anonymous}:} {Set anonymous credentials.}
-\item{\strong{endpoint}:} {The complete URL to use for the constructed client.}
-\item{\strong{region}:} {The AWS Region used in instantiating the client.}
+\item{\strong{profile}: The name of a profile to use. If not given, then the default profile is used.}
+\item{\strong{anonymous}: Set anonymous credentials.}
 }}
-\item{\strong{close_connection}:} {Immediately close all HTTP connections.}
-\item{\strong{timeout}:} {The time in seconds till a timeout exception is thrown when attempting to make a connection. The default is 60 seconds.}
-\item{\strong{s3_force_path_style}:} {Set this to \code{true} to force the request to use path-style addressing, i.e. \verb{http://s3.amazonaws.com/BUCKET/KEY}.}
-\item{\strong{sts_regional_endpoint}:} {Set sts regional endpoint resolver to regional or legacy \url{https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html}}
+\item{\strong{endpoint}: The complete URL to use for the constructed client.}
+\item{\strong{region}: The AWS Region used in instantiating the client.}
+\item{\strong{close_connection}: Immediately close all HTTP connections.}
+\item{\strong{timeout}: The time in seconds till a timeout exception is thrown when attempting to make a connection. The default is 60 seconds.}
+\item{\strong{s3_force_path_style}: Set this to \code{true} to force the request to use path-style addressing, i.e. \verb{http://s3.amazonaws.com/BUCKET/KEY}.}
+\item{\strong{sts_regional_endpoint}: Set sts regional endpoint resolver to regional or legacy \url{https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html}}
 }}
 
 \item{credentials}{Optional credentials shorthand for the config parameter
 \itemize{
-\item{\strong{creds}:} {\itemize{
-\item{\strong{access_key_id}:} {AWS access key ID}
-\item{\strong{secret_access_key}:} {AWS secret access key}
-\item{\strong{session_token}:} {AWS temporary session token}
+\item{\strong{creds}: \itemize{
+\item{\strong{access_key_id}: AWS access key ID}
+\item{\strong{secret_access_key}: AWS secret access key}
+\item{\strong{session_token}: AWS temporary session token}
 }}
-\item{\strong{profile}:} {The name of a profile to use. If not given, then the default profile is used.}
-\item{\strong{anonymous}:} {Set anonymous credentials.}
+\item{\strong{profile}: The name of a profile to use. If not given, then the default profile is used.}
+\item{\strong{anonymous}: Set anonymous credentials.}
 }}
 
 \item{endpoint}{Optional shorthand for complete URL to use for the constructed client.}
@@ -103,11 +103,16 @@ Defines the public endpoint for the Lake Formation service.
 \link[=lakeformation_cancel_transaction]{cancel_transaction} \tab Attempts to cancel the specified transaction\cr
 \link[=lakeformation_commit_transaction]{commit_transaction} \tab Attempts to commit the specified transaction\cr
 \link[=lakeformation_create_data_cells_filter]{create_data_cells_filter} \tab Creates a data cell filter to allow one to grant access to certain columns on certain rows\cr
+\link[=lakeformation_create_lake_formation_identity_center_configuration]{create_lake_formation_identity_center_configuration} \tab Creates an IAM Identity Center connection with Lake Formation to allow IAM Identity Center users and groups to access Data Catalog resources\cr
+\link[=lakeformation_create_lake_formation_opt_in]{create_lake_formation_opt_in} \tab Enforce Lake Formation permissions for the given databases, tables, and principals\cr
 \link[=lakeformation_create_lf_tag]{create_lf_tag} \tab Creates an LF-tag with the specified name and values\cr
 \link[=lakeformation_delete_data_cells_filter]{delete_data_cells_filter} \tab Deletes a data cell filter\cr
+\link[=lakeformation_delete_lake_formation_identity_center_configuration]{delete_lake_formation_identity_center_configuration} \tab Deletes an IAM Identity Center connection with Lake Formation\cr
+\link[=lakeformation_delete_lake_formation_opt_in]{delete_lake_formation_opt_in} \tab Remove the Lake Formation permissions enforcement of the given databases, tables, and principals\cr
 \link[=lakeformation_delete_lf_tag]{delete_lf_tag} \tab Deletes the specified LF-tag given a key name\cr
 \link[=lakeformation_delete_objects_on_cancel]{delete_objects_on_cancel} \tab For a specific governed table, provides a list of Amazon S3 objects that will be written during the current transaction and that can be automatically deleted if the transaction is canceled\cr
 \link[=lakeformation_deregister_resource]{deregister_resource} \tab Deregisters the resource as managed by the Data Catalog\cr
+\link[=lakeformation_describe_lake_formation_identity_center_configuration]{describe_lake_formation_identity_center_configuration} \tab Retrieves the instance ARN and application ARN for the connection\cr
 \link[=lakeformation_describe_resource]{describe_resource} \tab Retrieves the current data access role for the given resource registered in Lake Formation\cr
 \link[=lakeformation_describe_transaction]{describe_transaction} \tab Returns the details of a single transaction\cr
 \link[=lakeformation_extend_transaction]{extend_transaction} \tab Indicates to the service that the specified transaction is still active and should not be treated as idle and aborted\cr
@@ -125,6 +130,7 @@ Defines the public endpoint for the Lake Formation service.
 \link[=lakeformation_get_work_units]{get_work_units} \tab Retrieves the work units generated by the StartQueryPlanning operation\cr
 \link[=lakeformation_grant_permissions]{grant_permissions} \tab Grants permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3\cr
 \link[=lakeformation_list_data_cells_filter]{list_data_cells_filter} \tab Lists all the data cell filters on a table\cr
+\link[=lakeformation_list_lake_formation_opt_ins]{list_lake_formation_opt_ins} \tab Retrieve the current list of resources and principals that are opt in to enforce Lake Formation permissions\cr
 \link[=lakeformation_list_lf_tags]{list_lf_tags} \tab Lists LF-tags that the requester has permission to view\cr
 \link[=lakeformation_list_permissions]{list_permissions} \tab Returns a list of the principal permissions on the resource, filtered by the permissions of the caller\cr
 \link[=lakeformation_list_resources]{list_resources} \tab Lists the resources registered to be managed by the Data Catalog\cr
@@ -139,6 +145,7 @@ Defines the public endpoint for the Lake Formation service.
 \link[=lakeformation_start_query_planning]{start_query_planning} \tab Submits a request to process a query statement\cr
 \link[=lakeformation_start_transaction]{start_transaction} \tab Starts a new transaction and returns its transaction ID\cr
 \link[=lakeformation_update_data_cells_filter]{update_data_cells_filter} \tab Updates a data cell filter\cr
+\link[=lakeformation_update_lake_formation_identity_center_configuration]{update_lake_formation_identity_center_configuration} \tab Updates the IAM Identity Center connection parameters\cr
 \link[=lakeformation_update_lf_tag]{update_lf_tag} \tab Updates the list of possible values for the specified LF-tag key\cr
 \link[=lakeformation_update_resource]{update_resource} \tab Updates the data access role used for vending access to the given (registered) resource in Lake Formation\cr
 \link[=lakeformation_update_table_objects]{update_table_objects} \tab Updates the manifest of Amazon S3 objects that make up the specified governed table\cr

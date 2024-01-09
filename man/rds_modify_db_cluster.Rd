@@ -47,7 +47,8 @@ rds_modify_db_cluster(
   MasterUserSecretKmsKeyId = NULL,
   EngineMode = NULL,
   AllowEngineModeChange = NULL,
-  EnableLocalWriteForwarding = NULL
+  EnableLocalWriteForwarding = NULL,
+  AwsBackupRecoveryPointArn = NULL
 )
 }
 \arguments{
@@ -246,7 +247,7 @@ Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters}
 
 \item{AllowMajorVersionUpgrade}{Specifies whether major version upgrades are allowed.
 
-Valid for Cluster Type: Aurora DB clusters only
+Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 
 Constraints:
 \itemize{
@@ -302,15 +303,21 @@ default, deletion protection isn't enabled.
 Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters}
 
 \item{EnableHttpEndpoint}{Specifies whether to enable the HTTP endpoint for an Aurora Serverless
-v1 DB cluster. By default, the HTTP endpoint is disabled.
+v1 DB cluster. By default, the HTTP endpoint isn't enabled.
 
 When enabled, the HTTP endpoint provides a connectionless web service
-API for running SQL queries on the Aurora Serverless v1 DB cluster. You
-can also query your database from inside the RDS console with the query
-editor.
+API (RDS Data API) for running SQL queries on the Aurora Serverless v1
+DB cluster. You can also query your database from inside the RDS console
+with the RDS query editor.
 
-For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html}{Using the Data API for Aurora Serverless v1}
+For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html}{Using RDS Data API}
 in the \emph{Amazon Aurora User Guide}.
+
+This parameter applies only to Aurora Serverless v1 DB clusters. To
+enable or disable the HTTP endpoint for an Aurora PostgreSQL Serverless
+v2 or provisioned DB cluster, use the
+\code{\link[=rds_enable_http_endpoint]{enable_http_endpoint}} and
+\code{\link[=rds_disable_http_endpoint]{disable_http_endpoint}} operations.
 
 Valid for Cluster Type: Aurora DB clusters only}
 
@@ -569,6 +576,9 @@ writer DB instance in the DB cluster. By default, write operations
 aren't allowed on reader DB instances.
 
 Valid for: Aurora DB clusters only}
+
+\item{AwsBackupRecoveryPointArn}{The Amazon Resource Name (ARN) of the recovery point in Amazon Web
+Services Backup.}
 }
 \description{
 Modifies the settings of an Amazon Aurora DB cluster or a Multi-AZ DB cluster. You can change one or more settings by specifying these parameters and the new values in the request.

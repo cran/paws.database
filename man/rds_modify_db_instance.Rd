@@ -62,7 +62,9 @@ rds_modify_db_instance(
   ManageMasterUserPassword = NULL,
   RotateMasterUserPassword = NULL,
   MasterUserSecretKmsKeyId = NULL,
-  Engine = NULL
+  Engine = NULL,
+  DedicatedLogVolume = NULL,
+  MultiTenant = NULL
 )
 }
 \arguments{
@@ -77,7 +79,7 @@ Constraints:
 \item{AllocatedStorage}{The new amount of storage in gibibytes (GiB) to allocate for the DB
 instance.
 
-For RDS for MariaDB, RDS for MySQL, RDS for Oracle, and RDS for
+For RDS for Db2, MariaDB, RDS for MySQL, RDS for Oracle, and RDS for
 PostgreSQL, the value supplied must be at least 10\% greater than the
 current value. Values that are not at least 10\% greater than the
 existing value are rounded up so that they are 10\% greater than the
@@ -98,7 +100,17 @@ If you modify the DB instance class, an outage occurs during the change.
 The change is applied during the next maintenance window, unless you
 specify \code{ApplyImmediately} in your request.
 
-Default: Uses existing setting}
+Default: Uses existing setting
+
+Constraints:
+\itemize{
+\item If you are modifying the DB instance class and upgrading the engine
+version at the same time, the currently running engine version must
+be supported on the specified DB instance class. Otherwise, the
+operation returns an error. In this case, first run the operation to
+upgrade the engine version, and then run it again to modify the DB
+instance class.
+}}
 
 \item{DBSubnetGroupName}{The new DB subnet group for the DB instance. You can use this parameter
 to move your DB instance to a different VPC. If your DB instance isn't
@@ -168,7 +180,7 @@ request and the completion of the request, the \code{MasterUserPassword}
 element exists in the \code{PendingModifiedValues} element of the operation
 response.
 
-Amazon RDS API operations never return the password, so this action
+Amazon RDS API operations never return the password, so this operation
 provides a way to regain access to a primary instance user if the
 password is lost. This includes restoring privileges that might have
 been accidentally revoked.
@@ -187,10 +199,13 @@ Constraints:
 \itemize{
 \item Can't be specified if \code{ManageMasterUserPassword} is turned on.
 \item Can include any printable ASCII character except "/", """, or "@".
+For RDS for Oracle, can't include the "&" (ampersand) or the "'"
+(single quotes) character.
 }
 
 Length Constraints:
 \itemize{
+\item RDS for Db2 - Must contain from 8 to 255 characters.
 \item RDS for MariaDB - Must contain from 8 to 41 characters.
 \item RDS for Microsoft SQL Server - Must contain from 8 to 128
 characters.
@@ -317,7 +332,17 @@ engine version that you specify must be the same or higher than the
 version that the source DB instance or cluster is running.
 
 In RDS Custom for Oracle, this parameter is supported for read replicas
-only if they are in the \code{PATCH_DB_FAILURE} lifecycle.}
+only if they are in the \code{PATCH_DB_FAILURE} lifecycle.
+
+Constraints:
+\itemize{
+\item If you are upgrading the engine version and modifying the DB
+instance class at the same time, the currently running engine
+version must be supported on the specified DB instance class.
+Otherwise, the operation returns an error. In this case, first run
+the operation to upgrade the engine version, and then run it again
+to modify the DB instance class.
+}}
 
 \item{AllowMajorVersionUpgrade}{Specifies whether major version upgrades are allowed. Changing this
 parameter doesn't result in an outage and the change is asynchronously
@@ -353,6 +378,7 @@ This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.
 
 Valid Values:
 \itemize{
+\item RDS for Db2 - \code{bring-your-own-license}
 \item RDS for MariaDB - \code{general-public-license}
 \item RDS for Microsoft SQL Server - \code{license-included}
 \item RDS for MySQL - \code{general-public-license}
@@ -474,9 +500,9 @@ in the \emph{Amazon Aurora User Guide}.}
 
 \item{Domain}{The Active Directory directory ID to move the DB instance to. Specify
 \code{none} to remove the instance from its current domain. You must create
-the domain before this operation. Currently, you can create only MySQL,
-Microsoft SQL Server, Oracle, and PostgreSQL DB instances in an Active
-Directory Domain.
+the domain before this operation. Currently, you can create only Db2,
+MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances in an
+Active Directory Domain.
 
 For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/database-authentication.html}{Kerberos Authentication}
 in the \emph{Amazon RDS User Guide}.
@@ -557,6 +583,7 @@ Valid Values: \code{1150-65535}
 Default:
 \itemize{
 \item Amazon Aurora - \code{3306}
+\item RDS for Db2 - \code{50000}
 \item RDS for MariaDB - \code{3306}
 \item RDS for Microsoft SQL Server - \code{1433}
 \item RDS for MySQL - \code{3306}
@@ -888,6 +915,25 @@ parameter group. To avoid reverting to the default, specify a new
 parameter group with \code{--db-parameter-group-name} and a new option
 group with \code{--option-group-name}.
 }}
+
+\item{DedicatedLogVolume}{Indicates whether the DB instance has a dedicated log volume (DLV)
+enabled.}
+
+\item{MultiTenant}{Specifies whether the to convert your DB instance from the single-tenant
+conﬁguration to the multi-tenant conﬁguration. This parameter is
+supported only for RDS for Oracle CDB instances.
+
+During the conversion, RDS creates an initial tenant database and
+associates the DB name, master user name, character set, and national
+character set metadata with this database. The tags associated with the
+instance also propagate to the initial tenant database. You can add more
+tenant databases to your DB instance by using the
+\code{\link[=rds_create_tenant_database]{create_tenant_database}} operation.
+
+The conversion to the multi-tenant configuration is permanent and
+irreversible, so you can't later convert back to the single-tenant
+configuration. When you specify this parameter, you must also specify
+\code{ApplyImmediately}.}
 }
 \description{
 Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. To learn what modifications you can make to your DB instance, call \code{\link[=rds_describe_valid_db_instance_modifications]{describe_valid_db_instance_modifications}} before you call \code{\link[=rds_modify_db_instance]{modify_db_instance}}.

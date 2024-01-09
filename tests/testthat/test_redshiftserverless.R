@@ -1,5 +1,9 @@
 svc <- paws::redshiftserverless()
 
+test_that("list_custom_domain_associations", {
+  expect_error(svc$list_custom_domain_associations(), NA)
+})
+
 test_that("list_endpoint_access", {
   expect_error(svc$list_endpoint_access(), NA)
 })
@@ -10,6 +14,14 @@ test_that("list_namespaces", {
 
 test_that("list_recovery_points", {
   expect_error(svc$list_recovery_points(), NA)
+})
+
+test_that("list_scheduled_actions", {
+  expect_error(svc$list_scheduled_actions(), NA)
+})
+
+test_that("list_snapshot_copy_configurations", {
+  expect_error(svc$list_snapshot_copy_configurations(), NA)
 })
 
 test_that("list_snapshots", {

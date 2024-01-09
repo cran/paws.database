@@ -80,8 +80,16 @@ test_that("describe_hsm_configurations", {
   expect_error(svc$describe_hsm_configurations(), NA)
 })
 
+test_that("describe_inbound_integrations", {
+  expect_error(svc$describe_inbound_integrations(), NA)
+})
+
 test_that("describe_orderable_cluster_options", {
   expect_error(svc$describe_orderable_cluster_options(), NA)
+})
+
+test_that("describe_redshift_idc_applications", {
+  expect_error(svc$describe_redshift_idc_applications(), NA)
 })
 
 test_that("describe_reserved_node_exchange_status", {

@@ -1,5 +1,9 @@
 svc <- paws::lakeformation()
 
+test_that("describe_lake_formation_identity_center_configuration", {
+  expect_error(svc$describe_lake_formation_identity_center_configuration(), NA)
+})
+
 test_that("list_data_cells_filter", {
   expect_error(svc$list_data_cells_filter(), NA)
 })
@@ -14,6 +18,14 @@ test_that("list_lf_tags", {
 
 test_that("list_lf_tags", {
   expect_error(svc$list_lf_tags(MaxResults = 20), NA)
+})
+
+test_that("list_lake_formation_opt_ins", {
+  expect_error(svc$list_lake_formation_opt_ins(), NA)
+})
+
+test_that("list_lake_formation_opt_ins", {
+  expect_error(svc$list_lake_formation_opt_ins(MaxResults = 20), NA)
 })
 
 test_that("list_permissions", {
