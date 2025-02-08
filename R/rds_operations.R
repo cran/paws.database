@@ -28,7 +28,8 @@ rds_add_role_to_db_cluster <- function(DBClusterIdentifier, RoleArn, FeatureName
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$add_role_to_db_cluster_input(DBClusterIdentifier = DBClusterIdentifier, RoleArn = RoleArn, FeatureName = FeatureName)
   output <- .rds$add_role_to_db_cluster_output()
@@ -64,7 +65,8 @@ rds_add_role_to_db_instance <- function(DBInstanceIdentifier, RoleArn, FeatureNa
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$add_role_to_db_instance_input(DBInstanceIdentifier = DBInstanceIdentifier, RoleArn = RoleArn, FeatureName = FeatureName)
   output <- .rds$add_role_to_db_instance_output()
@@ -120,7 +122,8 @@ rds_add_source_identifier_to_subscription <- function(SubscriptionName, SourceId
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$add_source_identifier_to_subscription_input(SubscriptionName = SubscriptionName, SourceIdentifier = SourceIdentifier)
   output <- .rds$add_source_identifier_to_subscription_output()
@@ -154,7 +157,8 @@ rds_add_tags_to_resource <- function(ResourceName, Tags) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$add_tags_to_resource_input(ResourceName = ResourceName, Tags = Tags)
   output <- .rds$add_tags_to_resource_output()
@@ -180,8 +184,23 @@ rds_add_tags_to_resource <- function(ResourceName, Tags) {
 #' (ARN)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing).
 #' @param ApplyAction &#91;required&#93; The pending maintenance action to apply to this resource.
 #' 
-#' Valid Values: `system-update`, `db-upgrade`, `hardware-maintenance`,
-#' `ca-certificate-rotation`
+#' Valid Values:
+#' 
+#' -   `ca-certificate-rotation`
+#' 
+#' -   `db-upgrade`
+#' 
+#' -   `hardware-maintenance`
+#' 
+#' -   `os-upgrade`
+#' 
+#' -   `system-update`
+#' 
+#' For more information about these actions, see [Maintenance actions for
+#' Amazon
+#' Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora)
+#' or [Maintenance actions for Amazon
+#' RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds).
 #' @param OptInType &#91;required&#93; A value that specifies the type of opt-in request, or undoes an opt-in
 #' request. An opt-in request of type `immediate` can't be undone.
 #' 
@@ -204,7 +223,8 @@ rds_apply_pending_maintenance_action <- function(ResourceIdentifier, ApplyAction
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$apply_pending_maintenance_action_input(ResourceIdentifier = ResourceIdentifier, ApplyAction = ApplyAction, OptInType = OptInType)
   output <- .rds$apply_pending_maintenance_action_output()
@@ -250,7 +270,8 @@ rds_authorize_db_security_group_ingress <- function(DBSecurityGroupName, CIDRIP 
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$authorize_db_security_group_ingress_input(DBSecurityGroupName = DBSecurityGroupName, CIDRIP = CIDRIP, EC2SecurityGroupName = EC2SecurityGroupName, EC2SecurityGroupId = EC2SecurityGroupId, EC2SecurityGroupOwnerId = EC2SecurityGroupOwnerId)
   output <- .rds$authorize_db_security_group_ingress_output()
@@ -315,7 +336,8 @@ rds_backtrack_db_cluster <- function(DBClusterIdentifier, BacktrackTo, Force = N
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$backtrack_db_cluster_input(DBClusterIdentifier = DBClusterIdentifier, BacktrackTo = BacktrackTo, Force = Force, UseEarliestTimeOnPointInTimeUnavailable = UseEarliestTimeOnPointInTimeUnavailable)
   output <- .rds$backtrack_db_cluster_output()
@@ -346,7 +368,8 @@ rds_cancel_export_task <- function(ExportTaskIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$cancel_export_task_input(ExportTaskIdentifier = ExportTaskIdentifier)
   output <- .rds$cancel_export_task_output()
@@ -399,7 +422,8 @@ rds_copy_db_cluster_parameter_group <- function(SourceDBClusterParameterGroupIde
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$copy_db_cluster_parameter_group_input(SourceDBClusterParameterGroupIdentifier = SourceDBClusterParameterGroupIdentifier, TargetDBClusterParameterGroupIdentifier = TargetDBClusterParameterGroupIdentifier, TargetDBClusterParameterGroupDescription = TargetDBClusterParameterGroupDescription, Tags = Tags)
   output <- .rds$copy_db_cluster_parameter_group_output()
@@ -517,33 +541,30 @@ rds_copy_db_cluster_parameter_group <- function(SourceDBClusterParameterGroupIde
 #' Signature Version
 #' 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
 #' and [Signature Version 4 Signing
-#' Process](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html).
+#' Process](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html).
 #' 
 #' If you are using an Amazon Web Services SDK tool or the CLI, you can
 #' specify `SourceRegion` (or `--source-region` for the CLI) instead of
 #' specifying `PreSignedUrl` manually. Specifying `SourceRegion`
 #' autogenerates a presigned URL that is a valid request for the operation
 #' that can run in the source Amazon Web Services Region.
-#' 
-#' If you supply a value for this operation's `SourceRegion` parameter, a
-#' pre-signed URL will be calculated on your behalf.
 #' @param CopyTags Specifies whether to copy all tags from the source DB cluster snapshot
 #' to the target DB cluster snapshot. By default, tags are not copied.
 #' @param Tags 
-#' @param SourceRegion The ID of the region that contains the snapshot to be copied.
 #'
 #' @keywords internal
 #'
 #' @rdname rds_copy_db_cluster_snapshot
-rds_copy_db_cluster_snapshot <- function(SourceDBClusterSnapshotIdentifier, TargetDBClusterSnapshotIdentifier, KmsKeyId = NULL, PreSignedUrl = NULL, CopyTags = NULL, Tags = NULL, SourceRegion = NULL) {
+rds_copy_db_cluster_snapshot <- function(SourceDBClusterSnapshotIdentifier, TargetDBClusterSnapshotIdentifier, KmsKeyId = NULL, PreSignedUrl = NULL, CopyTags = NULL, Tags = NULL) {
   op <- new_operation(
     name = "CopyDBClusterSnapshot",
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .rds$copy_db_cluster_snapshot_input(SourceDBClusterSnapshotIdentifier = SourceDBClusterSnapshotIdentifier, TargetDBClusterSnapshotIdentifier = TargetDBClusterSnapshotIdentifier, KmsKeyId = KmsKeyId, PreSignedUrl = PreSignedUrl, CopyTags = CopyTags, Tags = Tags, SourceRegion = SourceRegion)
+  input <- .rds$copy_db_cluster_snapshot_input(SourceDBClusterSnapshotIdentifier = SourceDBClusterSnapshotIdentifier, TargetDBClusterSnapshotIdentifier = TargetDBClusterSnapshotIdentifier, KmsKeyId = KmsKeyId, PreSignedUrl = PreSignedUrl, CopyTags = CopyTags, Tags = Tags)
   output <- .rds$copy_db_cluster_snapshot_output()
   config <- get_config()
   svc <- .rds$service(config, op)
@@ -593,7 +614,8 @@ rds_copy_db_parameter_group <- function(SourceDBParameterGroupIdentifier, Target
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$copy_db_parameter_group_input(SourceDBParameterGroupIdentifier = SourceDBParameterGroupIdentifier, TargetDBParameterGroupIdentifier = TargetDBParameterGroupIdentifier, TargetDBParameterGroupDescription = TargetDBParameterGroupDescription, Tags = Tags)
   output <- .rds$copy_db_parameter_group_output()
@@ -730,16 +752,13 @@ rds_copy_db_parameter_group <- function(SourceDBParameterGroupIdentifier, Target
 #' Signature Version
 #' 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
 #' and [Signature Version 4 Signing
-#' Process](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html).
+#' Process](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html).
 #' 
 #' If you are using an Amazon Web Services SDK tool or the CLI, you can
 #' specify `SourceRegion` (or `--source-region` for the CLI) instead of
 #' specifying `PreSignedUrl` manually. Specifying `SourceRegion`
 #' autogenerates a presigned URL that is a valid request for the operation
 #' that can run in the source Amazon Web Services Region.
-#' 
-#' If you supply a value for this operation's `SourceRegion` parameter, a
-#' pre-signed URL will be calculated on your behalf.
 #' @param OptionGroupName The name of an option group to associate with the copy of the snapshot.
 #' 
 #' Specify this option if you are copying a snapshot from one Amazon Web
@@ -758,20 +777,20 @@ rds_copy_db_parameter_group <- function(SourceDBParameterGroupIdentifier, Target
 #' DB snapshot to the target Amazon Web Services account and associate with
 #' the target DB snapshot. The associated option group can be copied only
 #' with cross-account snapshot copy calls.
-#' @param SourceRegion The ID of the region that contains the snapshot to be copied.
 #'
 #' @keywords internal
 #'
 #' @rdname rds_copy_db_snapshot
-rds_copy_db_snapshot <- function(SourceDBSnapshotIdentifier, TargetDBSnapshotIdentifier, KmsKeyId = NULL, Tags = NULL, CopyTags = NULL, PreSignedUrl = NULL, OptionGroupName = NULL, TargetCustomAvailabilityZone = NULL, CopyOptionGroup = NULL, SourceRegion = NULL) {
+rds_copy_db_snapshot <- function(SourceDBSnapshotIdentifier, TargetDBSnapshotIdentifier, KmsKeyId = NULL, Tags = NULL, CopyTags = NULL, PreSignedUrl = NULL, OptionGroupName = NULL, TargetCustomAvailabilityZone = NULL, CopyOptionGroup = NULL) {
   op <- new_operation(
     name = "CopyDBSnapshot",
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .rds$copy_db_snapshot_input(SourceDBSnapshotIdentifier = SourceDBSnapshotIdentifier, TargetDBSnapshotIdentifier = TargetDBSnapshotIdentifier, KmsKeyId = KmsKeyId, Tags = Tags, CopyTags = CopyTags, PreSignedUrl = PreSignedUrl, OptionGroupName = OptionGroupName, TargetCustomAvailabilityZone = TargetCustomAvailabilityZone, CopyOptionGroup = CopyOptionGroup, SourceRegion = SourceRegion)
+  input <- .rds$copy_db_snapshot_input(SourceDBSnapshotIdentifier = SourceDBSnapshotIdentifier, TargetDBSnapshotIdentifier = TargetDBSnapshotIdentifier, KmsKeyId = KmsKeyId, Tags = Tags, CopyTags = CopyTags, PreSignedUrl = PreSignedUrl, OptionGroupName = OptionGroupName, TargetCustomAvailabilityZone = TargetCustomAvailabilityZone, CopyOptionGroup = CopyOptionGroup)
   output <- .rds$copy_db_snapshot_output()
   config <- get_config()
   svc <- .rds$service(config, op)
@@ -818,7 +837,8 @@ rds_copy_option_group <- function(SourceOptionGroupIdentifier, TargetOptionGroup
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$copy_option_group_input(SourceOptionGroupIdentifier = SourceOptionGroupIdentifier, TargetOptionGroupIdentifier = TargetOptionGroupIdentifier, TargetOptionGroupDescription = TargetOptionGroupDescription, Tags = Tags)
   output <- .rds$copy_option_group_output()
@@ -878,19 +898,42 @@ rds_copy_option_group <- function(SourceOptionGroupIdentifier, TargetOptionGroup
 #' 32-bit file system to the preferred configuration. For more information,
 #' see [Upgrading the storage file system for a DB
 #' instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem).
+#' @param TargetIops The amount of Provisioned IOPS (input/output operations per second) to
+#' allocate for the green DB instance. For information about valid IOPS
+#' values, see [Amazon RDS DB instance
+#' storage](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)
+#' in the *Amazon RDS User Guide*.
+#' 
+#' This setting doesn't apply to Amazon Aurora blue/green deployments.
+#' @param TargetStorageType The storage type to associate with the green DB instance.
+#' 
+#' Valid Values: `gp2 | gp3 | io1 | io2`
+#' 
+#' This setting doesn't apply to Amazon Aurora blue/green deployments.
+#' @param TargetAllocatedStorage The amount of storage in gibibytes (GiB) to allocate for the green DB
+#' instance. You can choose to increase or decrease the allocated storage
+#' on the green DB instance.
+#' 
+#' This setting doesn't apply to Amazon Aurora blue/green deployments.
+#' @param TargetStorageThroughput The storage throughput value for the green DB instance.
+#' 
+#' This setting applies only to the `gp3` storage type.
+#' 
+#' This setting doesn't apply to Amazon Aurora blue/green deployments.
 #'
 #' @keywords internal
 #'
 #' @rdname rds_create_blue_green_deployment
-rds_create_blue_green_deployment <- function(BlueGreenDeploymentName, Source, TargetEngineVersion = NULL, TargetDBParameterGroupName = NULL, TargetDBClusterParameterGroupName = NULL, Tags = NULL, TargetDBInstanceClass = NULL, UpgradeTargetStorageConfig = NULL) {
+rds_create_blue_green_deployment <- function(BlueGreenDeploymentName, Source, TargetEngineVersion = NULL, TargetDBParameterGroupName = NULL, TargetDBClusterParameterGroupName = NULL, Tags = NULL, TargetDBInstanceClass = NULL, UpgradeTargetStorageConfig = NULL, TargetIops = NULL, TargetStorageType = NULL, TargetAllocatedStorage = NULL, TargetStorageThroughput = NULL) {
   op <- new_operation(
     name = "CreateBlueGreenDeployment",
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .rds$create_blue_green_deployment_input(BlueGreenDeploymentName = BlueGreenDeploymentName, Source = Source, TargetEngineVersion = TargetEngineVersion, TargetDBParameterGroupName = TargetDBParameterGroupName, TargetDBClusterParameterGroupName = TargetDBClusterParameterGroupName, Tags = Tags, TargetDBInstanceClass = TargetDBInstanceClass, UpgradeTargetStorageConfig = UpgradeTargetStorageConfig)
+  input <- .rds$create_blue_green_deployment_input(BlueGreenDeploymentName = BlueGreenDeploymentName, Source = Source, TargetEngineVersion = TargetEngineVersion, TargetDBParameterGroupName = TargetDBParameterGroupName, TargetDBClusterParameterGroupName = TargetDBClusterParameterGroupName, Tags = Tags, TargetDBInstanceClass = TargetDBInstanceClass, UpgradeTargetStorageConfig = UpgradeTargetStorageConfig, TargetIops = TargetIops, TargetStorageType = TargetStorageType, TargetAllocatedStorage = TargetAllocatedStorage, TargetStorageThroughput = TargetStorageThroughput)
   output <- .rds$create_blue_green_deployment_output()
   config <- get_config()
   svc <- .rds$service(config, op)
@@ -997,7 +1040,8 @@ rds_create_custom_db_engine_version <- function(Engine, EngineVersion, DatabaseI
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$create_custom_db_engine_version_input(Engine = Engine, EngineVersion = EngineVersion, DatabaseInstallationFilesS3BucketName = DatabaseInstallationFilesS3BucketName, DatabaseInstallationFilesS3Prefix = DatabaseInstallationFilesS3Prefix, ImageId = ImageId, KMSKeyId = KMSKeyId, Description = Description, Manifest = Manifest, Tags = Tags, SourceCustomDbEngineVersionIdentifier = SourceCustomDbEngineVersionIdentifier, UseAwsProvidedLatestImage = UseAwsProvidedLatestImage)
   output <- .rds$create_custom_db_engine_version_output()
@@ -1303,7 +1347,7 @@ rds_create_custom_db_engine_version <- function(Engine, EngineVersion, DatabaseI
 #' Signature Version
 #' 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
 #' and [Signature Version 4 Signing
-#' Process](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html).
+#' Process](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html).
 #' 
 #' If you are using an Amazon Web Services SDK tool or the CLI, you can
 #' specify `SourceRegion` (or `--source-region` for the CLI) instead of
@@ -1312,18 +1356,18 @@ rds_create_custom_db_engine_version <- function(Engine, EngineVersion, DatabaseI
 #' that can run in the source Amazon Web Services Region.
 #' 
 #' Valid for Cluster Type: Aurora DB clusters only
-#' 
-#' If you supply a value for this operation's `SourceRegion` parameter, a
-#' pre-signed URL will be calculated on your behalf.
 #' @param EnableIAMDatabaseAuthentication Specifies whether to enable mapping of Amazon Web Services Identity and
 #' Access Management (IAM) accounts to database accounts. By default,
 #' mapping isn't enabled.
 #' 
 #' For more information, see [IAM Database
 #' Authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
-#' in the *Amazon Aurora User Guide*.
+#' in the *Amazon Aurora User Guide* or [IAM database authentication for
+#' MariaDB, MySQL, and
+#' PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
+#' in the *Amazon RDS User Guide*.
 #' 
-#' Valid for Cluster Type: Aurora DB clusters only
+#' Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 #' @param BacktrackWindow The target backtrack window, in seconds. To disable backtracking, set
 #' this value to `0`.
 #' 
@@ -1397,12 +1441,6 @@ rds_create_custom_db_engine_version <- function(Engine, EngineVersion, DatabaseI
 #' API (RDS Data API) for running SQL queries on the DB cluster. You can
 #' also query your database from inside the RDS console with the RDS query
 #' editor.
-#' 
-#' RDS Data API is supported with the following DB clusters:
-#' 
-#' -   Aurora PostgreSQL Serverless v2 and provisioned
-#' 
-#' -   Aurora PostgreSQL and Aurora MySQL Serverless v1
 #' 
 #' For more information, see [Using RDS Data
 #' API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
@@ -1545,7 +1583,7 @@ rds_create_custom_db_engine_version <- function(Engine, EngineVersion, DatabaseI
 #' DB cluster during the maintenance window. By default, minor engine
 #' upgrades are applied automatically.
 #' 
-#' Valid for Cluster Type: Multi-AZ DB clusters only
+#' Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster
 #' @param MonitoringInterval The interval, in seconds, between points when Enhanced Monitoring
 #' metrics are collected for the DB cluster. To turn off collecting
 #' Enhanced Monitoring metrics, specify `0`.
@@ -1553,7 +1591,7 @@ rds_create_custom_db_engine_version <- function(Engine, EngineVersion, DatabaseI
 #' If `MonitoringRoleArn` is specified, also set `MonitoringInterval` to a
 #' value other than `0`.
 #' 
-#' Valid for Cluster Type: Multi-AZ DB clusters only
+#' Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 #' 
 #' Valid Values: `0 | 1 | 5 | 10 | 15 | 30 | 60`
 #' 
@@ -1568,14 +1606,21 @@ rds_create_custom_db_engine_version <- function(Engine, EngineVersion, DatabaseI
 #' If `MonitoringInterval` is set to a value other than `0`, supply a
 #' `MonitoringRoleArn` value.
 #' 
-#' Valid for Cluster Type: Multi-AZ DB clusters only
+#' Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+#' @param DatabaseInsightsMode The mode of Database Insights to enable for the DB cluster.
+#' 
+#' If you set this value to `advanced`, you must also set the
+#' `PerformanceInsightsEnabled` parameter to `true` and the
+#' `PerformanceInsightsRetentionPeriod` parameter to 465.
+#' 
+#' Valid for Cluster Type: Aurora DB clusters only
 #' @param EnablePerformanceInsights Specifies whether to turn on Performance Insights for the DB cluster.
 #' 
 #' For more information, see [Using Amazon Performance
 #' Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
 #' in the *Amazon RDS User Guide*.
 #' 
-#' Valid for Cluster Type: Multi-AZ DB clusters only
+#' Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 #' @param PerformanceInsightsKMSKeyId The Amazon Web Services KMS key identifier for encryption of Performance
 #' Insights data.
 #' 
@@ -1587,10 +1632,10 @@ rds_create_custom_db_engine_version <- function(Engine, EngineVersion, DatabaseI
 #' your Amazon Web Services account. Your Amazon Web Services account has a
 #' different default KMS key for each Amazon Web Services Region.
 #' 
-#' Valid for Cluster Type: Multi-AZ DB clusters only
+#' Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 #' @param PerformanceInsightsRetentionPeriod The number of days to retain Performance Insights data.
 #' 
-#' Valid for Cluster Type: Multi-AZ DB clusters only
+#' Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 #' 
 #' Valid Values:
 #' 
@@ -1610,6 +1655,9 @@ rds_create_custom_db_engine_version <- function(Engine, EngineVersion, DatabaseI
 #' Aurora Limitless Database to create a DB shard group.
 #' 
 #' Valid for: Aurora DB clusters only
+#' 
+#' This setting is no longer used. Instead use the `ClusterScalabilityType`
+#' setting.
 #' @param ServerlessV2ScalingConfiguration 
 #' @param NetworkType The network type of the DB cluster.
 #' 
@@ -1624,6 +1672,14 @@ rds_create_custom_db_engine_version <- function(Engine, EngineVersion, DatabaseI
 #' Valid for Cluster Type: Aurora DB clusters only
 #' 
 #' Valid Values: `IPV4 | DUAL`
+#' @param ClusterScalabilityType Specifies the scalability mode of the Aurora DB cluster. When set to
+#' `limitless`, the cluster operates as an Aurora Limitless Database. When
+#' set to `standard` (the default), the cluster uses normal DB instance
+#' creation.
+#' 
+#' Valid for: Aurora DB clusters only
+#' 
+#' You can't modify this setting after you create the DB cluster.
 #' @param DBSystemId Reserved for future use.
 #' @param ManageMasterUserPassword Specifies whether to manage the master user password with Amazon Web
 #' Services Secrets Manager.
@@ -1692,7 +1748,7 @@ rds_create_custom_db_engine_version <- function(Engine, EngineVersion, DatabaseI
 #' for that engine version. For more information, see the following
 #' sections:
 #' 
-#' -   Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+#' -   Amazon Aurora - [Using Amazon RDS Extended
 #'     Support](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html)
 #'     in the *Amazon Aurora User Guide*
 #' 
@@ -1706,20 +1762,20 @@ rds_create_custom_db_engine_version <- function(Engine, EngineVersion, DatabaseI
 #' `open-source-rds-extended-support | open-source-rds-extended-support-disabled`
 #' 
 #' Default: `open-source-rds-extended-support`
-#' @param SourceRegion The ID of the region that contains the source for the read replica.
 #'
 #' @keywords internal
 #'
 #' @rdname rds_create_db_cluster
-rds_create_db_cluster <- function(AvailabilityZones = NULL, BackupRetentionPeriod = NULL, CharacterSetName = NULL, DatabaseName = NULL, DBClusterIdentifier, DBClusterParameterGroupName = NULL, VpcSecurityGroupIds = NULL, DBSubnetGroupName = NULL, Engine, EngineVersion = NULL, Port = NULL, MasterUsername = NULL, MasterUserPassword = NULL, OptionGroupName = NULL, PreferredBackupWindow = NULL, PreferredMaintenanceWindow = NULL, ReplicationSourceIdentifier = NULL, Tags = NULL, StorageEncrypted = NULL, KmsKeyId = NULL, PreSignedUrl = NULL, EnableIAMDatabaseAuthentication = NULL, BacktrackWindow = NULL, EnableCloudwatchLogsExports = NULL, EngineMode = NULL, ScalingConfiguration = NULL, RdsCustomClusterConfiguration = NULL, DeletionProtection = NULL, GlobalClusterIdentifier = NULL, EnableHttpEndpoint = NULL, CopyTagsToSnapshot = NULL, Domain = NULL, DomainIAMRoleName = NULL, EnableGlobalWriteForwarding = NULL, DBClusterInstanceClass = NULL, AllocatedStorage = NULL, StorageType = NULL, Iops = NULL, PubliclyAccessible = NULL, AutoMinorVersionUpgrade = NULL, MonitoringInterval = NULL, MonitoringRoleArn = NULL, EnablePerformanceInsights = NULL, PerformanceInsightsKMSKeyId = NULL, PerformanceInsightsRetentionPeriod = NULL, EnableLimitlessDatabase = NULL, ServerlessV2ScalingConfiguration = NULL, NetworkType = NULL, DBSystemId = NULL, ManageMasterUserPassword = NULL, MasterUserSecretKmsKeyId = NULL, EnableLocalWriteForwarding = NULL, CACertificateIdentifier = NULL, EngineLifecycleSupport = NULL, SourceRegion = NULL) {
+rds_create_db_cluster <- function(AvailabilityZones = NULL, BackupRetentionPeriod = NULL, CharacterSetName = NULL, DatabaseName = NULL, DBClusterIdentifier, DBClusterParameterGroupName = NULL, VpcSecurityGroupIds = NULL, DBSubnetGroupName = NULL, Engine, EngineVersion = NULL, Port = NULL, MasterUsername = NULL, MasterUserPassword = NULL, OptionGroupName = NULL, PreferredBackupWindow = NULL, PreferredMaintenanceWindow = NULL, ReplicationSourceIdentifier = NULL, Tags = NULL, StorageEncrypted = NULL, KmsKeyId = NULL, PreSignedUrl = NULL, EnableIAMDatabaseAuthentication = NULL, BacktrackWindow = NULL, EnableCloudwatchLogsExports = NULL, EngineMode = NULL, ScalingConfiguration = NULL, RdsCustomClusterConfiguration = NULL, DeletionProtection = NULL, GlobalClusterIdentifier = NULL, EnableHttpEndpoint = NULL, CopyTagsToSnapshot = NULL, Domain = NULL, DomainIAMRoleName = NULL, EnableGlobalWriteForwarding = NULL, DBClusterInstanceClass = NULL, AllocatedStorage = NULL, StorageType = NULL, Iops = NULL, PubliclyAccessible = NULL, AutoMinorVersionUpgrade = NULL, MonitoringInterval = NULL, MonitoringRoleArn = NULL, DatabaseInsightsMode = NULL, EnablePerformanceInsights = NULL, PerformanceInsightsKMSKeyId = NULL, PerformanceInsightsRetentionPeriod = NULL, EnableLimitlessDatabase = NULL, ServerlessV2ScalingConfiguration = NULL, NetworkType = NULL, ClusterScalabilityType = NULL, DBSystemId = NULL, ManageMasterUserPassword = NULL, MasterUserSecretKmsKeyId = NULL, EnableLocalWriteForwarding = NULL, CACertificateIdentifier = NULL, EngineLifecycleSupport = NULL) {
   op <- new_operation(
     name = "CreateDBCluster",
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .rds$create_db_cluster_input(AvailabilityZones = AvailabilityZones, BackupRetentionPeriod = BackupRetentionPeriod, CharacterSetName = CharacterSetName, DatabaseName = DatabaseName, DBClusterIdentifier = DBClusterIdentifier, DBClusterParameterGroupName = DBClusterParameterGroupName, VpcSecurityGroupIds = VpcSecurityGroupIds, DBSubnetGroupName = DBSubnetGroupName, Engine = Engine, EngineVersion = EngineVersion, Port = Port, MasterUsername = MasterUsername, MasterUserPassword = MasterUserPassword, OptionGroupName = OptionGroupName, PreferredBackupWindow = PreferredBackupWindow, PreferredMaintenanceWindow = PreferredMaintenanceWindow, ReplicationSourceIdentifier = ReplicationSourceIdentifier, Tags = Tags, StorageEncrypted = StorageEncrypted, KmsKeyId = KmsKeyId, PreSignedUrl = PreSignedUrl, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, BacktrackWindow = BacktrackWindow, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, EngineMode = EngineMode, ScalingConfiguration = ScalingConfiguration, RdsCustomClusterConfiguration = RdsCustomClusterConfiguration, DeletionProtection = DeletionProtection, GlobalClusterIdentifier = GlobalClusterIdentifier, EnableHttpEndpoint = EnableHttpEndpoint, CopyTagsToSnapshot = CopyTagsToSnapshot, Domain = Domain, DomainIAMRoleName = DomainIAMRoleName, EnableGlobalWriteForwarding = EnableGlobalWriteForwarding, DBClusterInstanceClass = DBClusterInstanceClass, AllocatedStorage = AllocatedStorage, StorageType = StorageType, Iops = Iops, PubliclyAccessible = PubliclyAccessible, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, MonitoringInterval = MonitoringInterval, MonitoringRoleArn = MonitoringRoleArn, EnablePerformanceInsights = EnablePerformanceInsights, PerformanceInsightsKMSKeyId = PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod = PerformanceInsightsRetentionPeriod, EnableLimitlessDatabase = EnableLimitlessDatabase, ServerlessV2ScalingConfiguration = ServerlessV2ScalingConfiguration, NetworkType = NetworkType, DBSystemId = DBSystemId, ManageMasterUserPassword = ManageMasterUserPassword, MasterUserSecretKmsKeyId = MasterUserSecretKmsKeyId, EnableLocalWriteForwarding = EnableLocalWriteForwarding, CACertificateIdentifier = CACertificateIdentifier, EngineLifecycleSupport = EngineLifecycleSupport, SourceRegion = SourceRegion)
+  input <- .rds$create_db_cluster_input(AvailabilityZones = AvailabilityZones, BackupRetentionPeriod = BackupRetentionPeriod, CharacterSetName = CharacterSetName, DatabaseName = DatabaseName, DBClusterIdentifier = DBClusterIdentifier, DBClusterParameterGroupName = DBClusterParameterGroupName, VpcSecurityGroupIds = VpcSecurityGroupIds, DBSubnetGroupName = DBSubnetGroupName, Engine = Engine, EngineVersion = EngineVersion, Port = Port, MasterUsername = MasterUsername, MasterUserPassword = MasterUserPassword, OptionGroupName = OptionGroupName, PreferredBackupWindow = PreferredBackupWindow, PreferredMaintenanceWindow = PreferredMaintenanceWindow, ReplicationSourceIdentifier = ReplicationSourceIdentifier, Tags = Tags, StorageEncrypted = StorageEncrypted, KmsKeyId = KmsKeyId, PreSignedUrl = PreSignedUrl, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, BacktrackWindow = BacktrackWindow, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, EngineMode = EngineMode, ScalingConfiguration = ScalingConfiguration, RdsCustomClusterConfiguration = RdsCustomClusterConfiguration, DeletionProtection = DeletionProtection, GlobalClusterIdentifier = GlobalClusterIdentifier, EnableHttpEndpoint = EnableHttpEndpoint, CopyTagsToSnapshot = CopyTagsToSnapshot, Domain = Domain, DomainIAMRoleName = DomainIAMRoleName, EnableGlobalWriteForwarding = EnableGlobalWriteForwarding, DBClusterInstanceClass = DBClusterInstanceClass, AllocatedStorage = AllocatedStorage, StorageType = StorageType, Iops = Iops, PubliclyAccessible = PubliclyAccessible, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, MonitoringInterval = MonitoringInterval, MonitoringRoleArn = MonitoringRoleArn, DatabaseInsightsMode = DatabaseInsightsMode, EnablePerformanceInsights = EnablePerformanceInsights, PerformanceInsightsKMSKeyId = PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod = PerformanceInsightsRetentionPeriod, EnableLimitlessDatabase = EnableLimitlessDatabase, ServerlessV2ScalingConfiguration = ServerlessV2ScalingConfiguration, NetworkType = NetworkType, ClusterScalabilityType = ClusterScalabilityType, DBSystemId = DBSystemId, ManageMasterUserPassword = ManageMasterUserPassword, MasterUserSecretKmsKeyId = MasterUserSecretKmsKeyId, EnableLocalWriteForwarding = EnableLocalWriteForwarding, CACertificateIdentifier = CACertificateIdentifier, EngineLifecycleSupport = EngineLifecycleSupport)
   output <- .rds$create_db_cluster_output()
   config <- get_config()
   svc <- .rds$service(config, op)
@@ -1759,7 +1815,8 @@ rds_create_db_cluster_endpoint <- function(DBClusterIdentifier, DBClusterEndpoin
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$create_db_cluster_endpoint_input(DBClusterIdentifier = DBClusterIdentifier, DBClusterEndpointIdentifier = DBClusterEndpointIdentifier, EndpointType = EndpointType, StaticMembers = StaticMembers, ExcludedMembers = ExcludedMembers, Tags = Tags)
   output <- .rds$create_db_cluster_endpoint_output()
@@ -1840,7 +1897,8 @@ rds_create_db_cluster_parameter_group <- function(DBClusterParameterGroupName, D
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$create_db_cluster_parameter_group_input(DBClusterParameterGroupName = DBClusterParameterGroupName, DBParameterGroupFamily = DBParameterGroupFamily, Description = Description, Tags = Tags)
   output <- .rds$create_db_cluster_parameter_group_output()
@@ -1890,7 +1948,8 @@ rds_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCluste
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$create_db_cluster_snapshot_input(DBClusterSnapshotIdentifier = DBClusterSnapshotIdentifier, DBClusterIdentifier = DBClusterIdentifier, Tags = Tags)
   output <- .rds$create_db_cluster_snapshot_output()
@@ -1922,6 +1981,9 @@ rds_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCluste
 #' Constraints:
 #' 
 #' -   Must contain 1 to 64 alphanumeric characters.
+#' 
+#' -   Must begin with a letter. Subsequent characters can be letters,
+#'     underscores, or digits (0-9).
 #' 
 #' -   Can't be a word reserved by the database engine.
 #' 
@@ -2193,6 +2255,8 @@ rds_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCluste
 #' 
 #' -   `custom-sqlserver-web` (for RDS Custom for SQL Server DB instances)
 #' 
+#' -   `custom-sqlserver-dev` (for RDS Custom for SQL Server DB instances)
+#' 
 #' -   `db2-ae`
 #' 
 #' -   `db2-se`
@@ -2299,8 +2363,6 @@ rds_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCluste
 #' Constraints:
 #' 
 #' -   Must match the name of an existing DB subnet group.
-#' 
-#' -   Must not be `default`.
 #' 
 #' Example: `mydbsubnetgroup`
 #' @param PreferredMaintenanceWindow The time range each week during which system maintenance can occur. For
@@ -2481,10 +2543,11 @@ rds_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCluste
 #' @param LicenseModel The license model information for this DB instance.
 #' 
 #' License models for RDS for Db2 require additional configuration. The
-#' Bring Your Own License (BYOL) model requires a custom parameter group.
-#' The Db2 license through Amazon Web Services Marketplace model requires
-#' an Amazon Web Services Marketplace subscription. For more information,
-#' see [RDS for Db2 licensing
+#' Bring Your Own License (BYOL) model requires a custom parameter group
+#' and an Amazon Web Services License Manager self-managed license. The Db2
+#' license through Amazon Web Services Marketplace model requires an Amazon
+#' Web Services Marketplace subscription. For more information, see [Amazon
+#' RDS for Db2 licensing
 #' options](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html)
 #' in the *Amazon RDS User Guide*.
 #' 
@@ -2740,6 +2803,12 @@ rds_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCluste
 #'     accounts is managed by the DB cluster.)
 #' 
 #' -   RDS Custom
+#' @param DatabaseInsightsMode The mode of Database Insights to enable for the DB instance.
+#' 
+#' This setting only applies to Amazon Aurora DB instances.
+#' 
+#' Currently, this value is inherited from the DB cluster and can't be
+#' changed.
 #' @param EnablePerformanceInsights Specifies whether to enable Performance Insights for the DB instance.
 #' For more information, see [Using Amazon Performance
 #' Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
@@ -2989,15 +3058,16 @@ rds_create_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier, DBCluste
 #' @keywords internal
 #'
 #' @rdname rds_create_db_instance
-rds_create_db_instance <- function(DBName = NULL, DBInstanceIdentifier, AllocatedStorage = NULL, DBInstanceClass, Engine, MasterUsername = NULL, MasterUserPassword = NULL, DBSecurityGroups = NULL, VpcSecurityGroupIds = NULL, AvailabilityZone = NULL, DBSubnetGroupName = NULL, PreferredMaintenanceWindow = NULL, DBParameterGroupName = NULL, BackupRetentionPeriod = NULL, PreferredBackupWindow = NULL, Port = NULL, MultiAZ = NULL, EngineVersion = NULL, AutoMinorVersionUpgrade = NULL, LicenseModel = NULL, Iops = NULL, OptionGroupName = NULL, CharacterSetName = NULL, NcharCharacterSetName = NULL, PubliclyAccessible = NULL, Tags = NULL, DBClusterIdentifier = NULL, StorageType = NULL, TdeCredentialArn = NULL, TdeCredentialPassword = NULL, StorageEncrypted = NULL, KmsKeyId = NULL, Domain = NULL, DomainFqdn = NULL, DomainOu = NULL, DomainAuthSecretArn = NULL, DomainDnsIps = NULL, CopyTagsToSnapshot = NULL, MonitoringInterval = NULL, MonitoringRoleArn = NULL, DomainIAMRoleName = NULL, PromotionTier = NULL, Timezone = NULL, EnableIAMDatabaseAuthentication = NULL, EnablePerformanceInsights = NULL, PerformanceInsightsKMSKeyId = NULL, PerformanceInsightsRetentionPeriod = NULL, EnableCloudwatchLogsExports = NULL, ProcessorFeatures = NULL, DeletionProtection = NULL, MaxAllocatedStorage = NULL, EnableCustomerOwnedIp = NULL, CustomIamInstanceProfile = NULL, BackupTarget = NULL, NetworkType = NULL, StorageThroughput = NULL, ManageMasterUserPassword = NULL, MasterUserSecretKmsKeyId = NULL, CACertificateIdentifier = NULL, DBSystemId = NULL, DedicatedLogVolume = NULL, MultiTenant = NULL, EngineLifecycleSupport = NULL) {
+rds_create_db_instance <- function(DBName = NULL, DBInstanceIdentifier, AllocatedStorage = NULL, DBInstanceClass, Engine, MasterUsername = NULL, MasterUserPassword = NULL, DBSecurityGroups = NULL, VpcSecurityGroupIds = NULL, AvailabilityZone = NULL, DBSubnetGroupName = NULL, PreferredMaintenanceWindow = NULL, DBParameterGroupName = NULL, BackupRetentionPeriod = NULL, PreferredBackupWindow = NULL, Port = NULL, MultiAZ = NULL, EngineVersion = NULL, AutoMinorVersionUpgrade = NULL, LicenseModel = NULL, Iops = NULL, OptionGroupName = NULL, CharacterSetName = NULL, NcharCharacterSetName = NULL, PubliclyAccessible = NULL, Tags = NULL, DBClusterIdentifier = NULL, StorageType = NULL, TdeCredentialArn = NULL, TdeCredentialPassword = NULL, StorageEncrypted = NULL, KmsKeyId = NULL, Domain = NULL, DomainFqdn = NULL, DomainOu = NULL, DomainAuthSecretArn = NULL, DomainDnsIps = NULL, CopyTagsToSnapshot = NULL, MonitoringInterval = NULL, MonitoringRoleArn = NULL, DomainIAMRoleName = NULL, PromotionTier = NULL, Timezone = NULL, EnableIAMDatabaseAuthentication = NULL, DatabaseInsightsMode = NULL, EnablePerformanceInsights = NULL, PerformanceInsightsKMSKeyId = NULL, PerformanceInsightsRetentionPeriod = NULL, EnableCloudwatchLogsExports = NULL, ProcessorFeatures = NULL, DeletionProtection = NULL, MaxAllocatedStorage = NULL, EnableCustomerOwnedIp = NULL, CustomIamInstanceProfile = NULL, BackupTarget = NULL, NetworkType = NULL, StorageThroughput = NULL, ManageMasterUserPassword = NULL, MasterUserSecretKmsKeyId = NULL, CACertificateIdentifier = NULL, DBSystemId = NULL, DedicatedLogVolume = NULL, MultiTenant = NULL, EngineLifecycleSupport = NULL) {
   op <- new_operation(
     name = "CreateDBInstance",
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .rds$create_db_instance_input(DBName = DBName, DBInstanceIdentifier = DBInstanceIdentifier, AllocatedStorage = AllocatedStorage, DBInstanceClass = DBInstanceClass, Engine = Engine, MasterUsername = MasterUsername, MasterUserPassword = MasterUserPassword, DBSecurityGroups = DBSecurityGroups, VpcSecurityGroupIds = VpcSecurityGroupIds, AvailabilityZone = AvailabilityZone, DBSubnetGroupName = DBSubnetGroupName, PreferredMaintenanceWindow = PreferredMaintenanceWindow, DBParameterGroupName = DBParameterGroupName, BackupRetentionPeriod = BackupRetentionPeriod, PreferredBackupWindow = PreferredBackupWindow, Port = Port, MultiAZ = MultiAZ, EngineVersion = EngineVersion, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, LicenseModel = LicenseModel, Iops = Iops, OptionGroupName = OptionGroupName, CharacterSetName = CharacterSetName, NcharCharacterSetName = NcharCharacterSetName, PubliclyAccessible = PubliclyAccessible, Tags = Tags, DBClusterIdentifier = DBClusterIdentifier, StorageType = StorageType, TdeCredentialArn = TdeCredentialArn, TdeCredentialPassword = TdeCredentialPassword, StorageEncrypted = StorageEncrypted, KmsKeyId = KmsKeyId, Domain = Domain, DomainFqdn = DomainFqdn, DomainOu = DomainOu, DomainAuthSecretArn = DomainAuthSecretArn, DomainDnsIps = DomainDnsIps, CopyTagsToSnapshot = CopyTagsToSnapshot, MonitoringInterval = MonitoringInterval, MonitoringRoleArn = MonitoringRoleArn, DomainIAMRoleName = DomainIAMRoleName, PromotionTier = PromotionTier, Timezone = Timezone, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, EnablePerformanceInsights = EnablePerformanceInsights, PerformanceInsightsKMSKeyId = PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod = PerformanceInsightsRetentionPeriod, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, ProcessorFeatures = ProcessorFeatures, DeletionProtection = DeletionProtection, MaxAllocatedStorage = MaxAllocatedStorage, EnableCustomerOwnedIp = EnableCustomerOwnedIp, CustomIamInstanceProfile = CustomIamInstanceProfile, BackupTarget = BackupTarget, NetworkType = NetworkType, StorageThroughput = StorageThroughput, ManageMasterUserPassword = ManageMasterUserPassword, MasterUserSecretKmsKeyId = MasterUserSecretKmsKeyId, CACertificateIdentifier = CACertificateIdentifier, DBSystemId = DBSystemId, DedicatedLogVolume = DedicatedLogVolume, MultiTenant = MultiTenant, EngineLifecycleSupport = EngineLifecycleSupport)
+  input <- .rds$create_db_instance_input(DBName = DBName, DBInstanceIdentifier = DBInstanceIdentifier, AllocatedStorage = AllocatedStorage, DBInstanceClass = DBInstanceClass, Engine = Engine, MasterUsername = MasterUsername, MasterUserPassword = MasterUserPassword, DBSecurityGroups = DBSecurityGroups, VpcSecurityGroupIds = VpcSecurityGroupIds, AvailabilityZone = AvailabilityZone, DBSubnetGroupName = DBSubnetGroupName, PreferredMaintenanceWindow = PreferredMaintenanceWindow, DBParameterGroupName = DBParameterGroupName, BackupRetentionPeriod = BackupRetentionPeriod, PreferredBackupWindow = PreferredBackupWindow, Port = Port, MultiAZ = MultiAZ, EngineVersion = EngineVersion, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, LicenseModel = LicenseModel, Iops = Iops, OptionGroupName = OptionGroupName, CharacterSetName = CharacterSetName, NcharCharacterSetName = NcharCharacterSetName, PubliclyAccessible = PubliclyAccessible, Tags = Tags, DBClusterIdentifier = DBClusterIdentifier, StorageType = StorageType, TdeCredentialArn = TdeCredentialArn, TdeCredentialPassword = TdeCredentialPassword, StorageEncrypted = StorageEncrypted, KmsKeyId = KmsKeyId, Domain = Domain, DomainFqdn = DomainFqdn, DomainOu = DomainOu, DomainAuthSecretArn = DomainAuthSecretArn, DomainDnsIps = DomainDnsIps, CopyTagsToSnapshot = CopyTagsToSnapshot, MonitoringInterval = MonitoringInterval, MonitoringRoleArn = MonitoringRoleArn, DomainIAMRoleName = DomainIAMRoleName, PromotionTier = PromotionTier, Timezone = Timezone, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, DatabaseInsightsMode = DatabaseInsightsMode, EnablePerformanceInsights = EnablePerformanceInsights, PerformanceInsightsKMSKeyId = PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod = PerformanceInsightsRetentionPeriod, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, ProcessorFeatures = ProcessorFeatures, DeletionProtection = DeletionProtection, MaxAllocatedStorage = MaxAllocatedStorage, EnableCustomerOwnedIp = EnableCustomerOwnedIp, CustomIamInstanceProfile = CustomIamInstanceProfile, BackupTarget = BackupTarget, NetworkType = NetworkType, StorageThroughput = StorageThroughput, ManageMasterUserPassword = ManageMasterUserPassword, MasterUserSecretKmsKeyId = MasterUserSecretKmsKeyId, CACertificateIdentifier = CACertificateIdentifier, DBSystemId = DBSystemId, DedicatedLogVolume = DedicatedLogVolume, MultiTenant = MultiTenant, EngineLifecycleSupport = EngineLifecycleSupport)
   output <- .rds$create_db_instance_output()
   config <- get_config()
   svc <- .rds$service(config, op)
@@ -3096,17 +3166,24 @@ rds_create_db_instance <- function(DBName = NULL, DBInstanceIdentifier, Allocate
 #' source.
 #' 
 #' This setting doesn't apply to RDS Custom DB instances.
-#' @param DBParameterGroupName The name of the DB parameter group to associate with this DB instance.
+#' @param DBParameterGroupName The name of the DB parameter group to associate with this read replica
+#' DB instance.
 #' 
-#' If you don't specify a value for `DBParameterGroupName`, then Amazon RDS
-#' uses the `DBParameterGroup` of the source DB instance for a same Region
-#' read replica, or the default `DBParameterGroup` for the specified DB
-#' engine for a cross-Region read replica.
+#' For Single-AZ or Multi-AZ DB instance read replica instances, if you
+#' don't specify a value for `DBParameterGroupName`, then Amazon RDS uses
+#' the `DBParameterGroup` of the source DB instance for a same Region read
+#' replica, or the default `DBParameterGroup` for the specified DB engine
+#' for a cross-Region read replica.
+#' 
+#' For Multi-AZ DB cluster same Region read replica instances, if you don't
+#' specify a value for `DBParameterGroupName`, then Amazon RDS uses the
+#' default `DBParameterGroup`.
 #' 
 #' Specifying a parameter group for this operation is only supported for
-#' MySQL DB instances for cross-Region read replicas and for Oracle DB
-#' instances. It isn't supported for MySQL DB instances for same Region
-#' read replicas or for RDS Custom.
+#' MySQL DB instances for cross-Region read replicas, for Multi-AZ DB
+#' cluster read replica instances, and for Oracle DB instances. It isn't
+#' supported for MySQL DB instances for same Region read replicas or for
+#' RDS Custom.
 #' 
 #' Constraints:
 #' 
@@ -3281,7 +3358,7 @@ rds_create_db_instance <- function(DBName = NULL, DBInstanceIdentifier, Allocate
 #' Signature Version
 #' 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
 #' and [Signature Version 4 Signing
-#' Process](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html).
+#' Process](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html).
 #' 
 #' If you are using an Amazon Web Services SDK tool or the CLI, you can
 #' specify `SourceRegion` (or `--source-region` for the CLI) instead of
@@ -3289,13 +3366,7 @@ rds_create_db_instance <- function(DBName = NULL, DBInstanceIdentifier, Allocate
 #' autogenerates a presigned URL that is a valid request for the operation
 #' that can run in the source Amazon Web Services Region.
 #' 
-#' `SourceRegion` isn't supported for SQL Server, because Amazon RDS for
-#' SQL Server doesn't support cross-Region read replicas.
-#' 
 #' This setting doesn't apply to RDS Custom DB instances.
-#' 
-#' If you supply a value for this operation's `SourceRegion` parameter, a
-#' pre-signed URL will be calculated on your behalf.
 #' @param EnableIAMDatabaseAuthentication Specifies whether to enable mapping of Amazon Web Services Identity and
 #' Access Management (IAM) accounts to database accounts. By default,
 #' mapping isn't enabled.
@@ -3306,6 +3377,9 @@ rds_create_db_instance <- function(DBName = NULL, DBInstanceIdentifier, Allocate
 #' in the *Amazon RDS User Guide*.
 #' 
 #' This setting doesn't apply to RDS Custom DB instances.
+#' @param DatabaseInsightsMode The mode of Database Insights to enable for the read replica.
+#' 
+#' Currently, this setting is not supported.
 #' @param EnablePerformanceInsights Specifies whether to enable Performance Insights for the read replica.
 #' 
 #' For more information, see [Using Amazon Performance
@@ -3491,6 +3565,8 @@ rds_create_db_instance <- function(DBName = NULL, DBInstanceIdentifier, Allocate
 #' replica. Follow the allocation rules specified in
 #' [`create_db_instance`][rds_create_db_instance].
 #' 
+#' This setting isn't valid for RDS for SQL Server.
+#' 
 #' Be sure to allocate enough storage for your read replica so that the
 #' create operation can succeed. You can also allocate additional storage
 #' for future growth.
@@ -3525,20 +3601,20 @@ rds_create_db_instance <- function(DBName = NULL, DBInstanceIdentifier, Allocate
 #' connection to a DB
 #' cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
 #' in the *Amazon Aurora User Guide*.
-#' @param SourceRegion The ID of the region that contains the source for the read replica.
 #'
 #' @keywords internal
 #'
 #' @rdname rds_create_db_instance_read_replica
-rds_create_db_instance_read_replica <- function(DBInstanceIdentifier, SourceDBInstanceIdentifier = NULL, DBInstanceClass = NULL, AvailabilityZone = NULL, Port = NULL, MultiAZ = NULL, AutoMinorVersionUpgrade = NULL, Iops = NULL, OptionGroupName = NULL, DBParameterGroupName = NULL, PubliclyAccessible = NULL, Tags = NULL, DBSubnetGroupName = NULL, VpcSecurityGroupIds = NULL, StorageType = NULL, CopyTagsToSnapshot = NULL, MonitoringInterval = NULL, MonitoringRoleArn = NULL, KmsKeyId = NULL, PreSignedUrl = NULL, EnableIAMDatabaseAuthentication = NULL, EnablePerformanceInsights = NULL, PerformanceInsightsKMSKeyId = NULL, PerformanceInsightsRetentionPeriod = NULL, EnableCloudwatchLogsExports = NULL, ProcessorFeatures = NULL, UseDefaultProcessorFeatures = NULL, DeletionProtection = NULL, Domain = NULL, DomainIAMRoleName = NULL, DomainFqdn = NULL, DomainOu = NULL, DomainAuthSecretArn = NULL, DomainDnsIps = NULL, ReplicaMode = NULL, MaxAllocatedStorage = NULL, CustomIamInstanceProfile = NULL, NetworkType = NULL, StorageThroughput = NULL, EnableCustomerOwnedIp = NULL, AllocatedStorage = NULL, SourceDBClusterIdentifier = NULL, DedicatedLogVolume = NULL, UpgradeStorageConfig = NULL, CACertificateIdentifier = NULL, SourceRegion = NULL) {
+rds_create_db_instance_read_replica <- function(DBInstanceIdentifier, SourceDBInstanceIdentifier = NULL, DBInstanceClass = NULL, AvailabilityZone = NULL, Port = NULL, MultiAZ = NULL, AutoMinorVersionUpgrade = NULL, Iops = NULL, OptionGroupName = NULL, DBParameterGroupName = NULL, PubliclyAccessible = NULL, Tags = NULL, DBSubnetGroupName = NULL, VpcSecurityGroupIds = NULL, StorageType = NULL, CopyTagsToSnapshot = NULL, MonitoringInterval = NULL, MonitoringRoleArn = NULL, KmsKeyId = NULL, PreSignedUrl = NULL, EnableIAMDatabaseAuthentication = NULL, DatabaseInsightsMode = NULL, EnablePerformanceInsights = NULL, PerformanceInsightsKMSKeyId = NULL, PerformanceInsightsRetentionPeriod = NULL, EnableCloudwatchLogsExports = NULL, ProcessorFeatures = NULL, UseDefaultProcessorFeatures = NULL, DeletionProtection = NULL, Domain = NULL, DomainIAMRoleName = NULL, DomainFqdn = NULL, DomainOu = NULL, DomainAuthSecretArn = NULL, DomainDnsIps = NULL, ReplicaMode = NULL, MaxAllocatedStorage = NULL, CustomIamInstanceProfile = NULL, NetworkType = NULL, StorageThroughput = NULL, EnableCustomerOwnedIp = NULL, AllocatedStorage = NULL, SourceDBClusterIdentifier = NULL, DedicatedLogVolume = NULL, UpgradeStorageConfig = NULL, CACertificateIdentifier = NULL) {
   op <- new_operation(
     name = "CreateDBInstanceReadReplica",
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .rds$create_db_instance_read_replica_input(DBInstanceIdentifier = DBInstanceIdentifier, SourceDBInstanceIdentifier = SourceDBInstanceIdentifier, DBInstanceClass = DBInstanceClass, AvailabilityZone = AvailabilityZone, Port = Port, MultiAZ = MultiAZ, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, Iops = Iops, OptionGroupName = OptionGroupName, DBParameterGroupName = DBParameterGroupName, PubliclyAccessible = PubliclyAccessible, Tags = Tags, DBSubnetGroupName = DBSubnetGroupName, VpcSecurityGroupIds = VpcSecurityGroupIds, StorageType = StorageType, CopyTagsToSnapshot = CopyTagsToSnapshot, MonitoringInterval = MonitoringInterval, MonitoringRoleArn = MonitoringRoleArn, KmsKeyId = KmsKeyId, PreSignedUrl = PreSignedUrl, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, EnablePerformanceInsights = EnablePerformanceInsights, PerformanceInsightsKMSKeyId = PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod = PerformanceInsightsRetentionPeriod, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, ProcessorFeatures = ProcessorFeatures, UseDefaultProcessorFeatures = UseDefaultProcessorFeatures, DeletionProtection = DeletionProtection, Domain = Domain, DomainIAMRoleName = DomainIAMRoleName, DomainFqdn = DomainFqdn, DomainOu = DomainOu, DomainAuthSecretArn = DomainAuthSecretArn, DomainDnsIps = DomainDnsIps, ReplicaMode = ReplicaMode, MaxAllocatedStorage = MaxAllocatedStorage, CustomIamInstanceProfile = CustomIamInstanceProfile, NetworkType = NetworkType, StorageThroughput = StorageThroughput, EnableCustomerOwnedIp = EnableCustomerOwnedIp, AllocatedStorage = AllocatedStorage, SourceDBClusterIdentifier = SourceDBClusterIdentifier, DedicatedLogVolume = DedicatedLogVolume, UpgradeStorageConfig = UpgradeStorageConfig, CACertificateIdentifier = CACertificateIdentifier, SourceRegion = SourceRegion)
+  input <- .rds$create_db_instance_read_replica_input(DBInstanceIdentifier = DBInstanceIdentifier, SourceDBInstanceIdentifier = SourceDBInstanceIdentifier, DBInstanceClass = DBInstanceClass, AvailabilityZone = AvailabilityZone, Port = Port, MultiAZ = MultiAZ, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, Iops = Iops, OptionGroupName = OptionGroupName, DBParameterGroupName = DBParameterGroupName, PubliclyAccessible = PubliclyAccessible, Tags = Tags, DBSubnetGroupName = DBSubnetGroupName, VpcSecurityGroupIds = VpcSecurityGroupIds, StorageType = StorageType, CopyTagsToSnapshot = CopyTagsToSnapshot, MonitoringInterval = MonitoringInterval, MonitoringRoleArn = MonitoringRoleArn, KmsKeyId = KmsKeyId, PreSignedUrl = PreSignedUrl, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, DatabaseInsightsMode = DatabaseInsightsMode, EnablePerformanceInsights = EnablePerformanceInsights, PerformanceInsightsKMSKeyId = PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod = PerformanceInsightsRetentionPeriod, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, ProcessorFeatures = ProcessorFeatures, UseDefaultProcessorFeatures = UseDefaultProcessorFeatures, DeletionProtection = DeletionProtection, Domain = Domain, DomainIAMRoleName = DomainIAMRoleName, DomainFqdn = DomainFqdn, DomainOu = DomainOu, DomainAuthSecretArn = DomainAuthSecretArn, DomainDnsIps = DomainDnsIps, ReplicaMode = ReplicaMode, MaxAllocatedStorage = MaxAllocatedStorage, CustomIamInstanceProfile = CustomIamInstanceProfile, NetworkType = NetworkType, StorageThroughput = StorageThroughput, EnableCustomerOwnedIp = EnableCustomerOwnedIp, AllocatedStorage = AllocatedStorage, SourceDBClusterIdentifier = SourceDBClusterIdentifier, DedicatedLogVolume = DedicatedLogVolume, UpgradeStorageConfig = UpgradeStorageConfig, CACertificateIdentifier = CACertificateIdentifier)
   output <- .rds$create_db_instance_read_replica_output()
   config <- get_config()
   svc <- .rds$service(config, op)
@@ -3624,7 +3700,8 @@ rds_create_db_parameter_group <- function(DBParameterGroupName, DBParameterGroup
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$create_db_parameter_group_input(DBParameterGroupName = DBParameterGroupName, DBParameterGroupFamily = DBParameterGroupFamily, Description = Description, Tags = Tags)
   output <- .rds$create_db_parameter_group_output()
@@ -3684,7 +3761,8 @@ rds_create_db_proxy <- function(DBProxyName, EngineFamily, Auth, RoleArn, VpcSub
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$create_db_proxy_input(DBProxyName = DBProxyName, EngineFamily = EngineFamily, Auth = Auth, RoleArn = RoleArn, VpcSubnetIds = VpcSubnetIds, VpcSecurityGroupIds = VpcSecurityGroupIds, RequireTLS = RequireTLS, IdleClientTimeout = IdleClientTimeout, DebugLogging = DebugLogging, Tags = Tags)
   output <- .rds$create_db_proxy_output()
@@ -3727,7 +3805,8 @@ rds_create_db_proxy_endpoint <- function(DBProxyName, DBProxyEndpointName, VpcSu
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$create_db_proxy_endpoint_input(DBProxyName = DBProxyName, DBProxyEndpointName = DBProxyEndpointName, VpcSubnetIds = VpcSubnetIds, VpcSecurityGroupIds = VpcSecurityGroupIds, TargetRole = TargetRole, Tags = Tags)
   output <- .rds$create_db_proxy_endpoint_output()
@@ -3772,7 +3851,8 @@ rds_create_db_security_group <- function(DBSecurityGroupName, DBSecurityGroupDes
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$create_db_security_group_input(DBSecurityGroupName = DBSecurityGroupName, DBSecurityGroupDescription = DBSecurityGroupDescription, Tags = Tags)
   output <- .rds$create_db_security_group_output()
@@ -3793,18 +3873,17 @@ rds_create_db_security_group <- function(DBSecurityGroupName, DBSecurityGroupDes
 #'
 #' @param DBShardGroupIdentifier &#91;required&#93; The name of the DB shard group.
 #' @param DBClusterIdentifier &#91;required&#93; The name of the primary DB cluster for the DB shard group.
-#' @param ComputeRedundancy Specifies whether to create standby instances for the DB shard group.
-#' Valid values are the following:
+#' @param ComputeRedundancy Specifies whether to create standby DB shard groups for the DB shard
+#' group. Valid values are the following:
 #' 
-#' -   0 - Creates a single, primary DB instance for each physical shard.
-#'     This is the default value, and the only one supported for the
-#'     preview.
+#' -   0 - Creates a DB shard group without a standby DB shard group. This
+#'     is the default value.
 #' 
-#' -   1 - Creates a primary DB instance and a standby instance in a
-#'     different Availability Zone (AZ) for each physical shard.
+#' -   1 - Creates a DB shard group with a standby DB shard group in a
+#'     different Availability Zone (AZ).
 #' 
-#' -   2 - Creates a primary DB instance and two standby instances in
-#'     different AZs for each physical shard.
+#' -   2 - Creates a DB shard group with two standby DB shard groups in two
+#'     different AZs.
 #' @param MaxACU &#91;required&#93; The maximum capacity of the DB shard group in Aurora capacity units
 #' (ACUs).
 #' @param MinACU The minimum capacity of the DB shard group in Aurora capacity units
@@ -3842,19 +3921,21 @@ rds_create_db_security_group <- function(DBSecurityGroupName, DBSecurityGroupDes
 #' 
 #' -   If the subnets are part of a VPC that has an internet gateway
 #'     attached to it, the DB shard group is public.
+#' @param Tags 
 #'
 #' @keywords internal
 #'
 #' @rdname rds_create_db_shard_group
-rds_create_db_shard_group <- function(DBShardGroupIdentifier, DBClusterIdentifier, ComputeRedundancy = NULL, MaxACU, MinACU = NULL, PubliclyAccessible = NULL) {
+rds_create_db_shard_group <- function(DBShardGroupIdentifier, DBClusterIdentifier, ComputeRedundancy = NULL, MaxACU, MinACU = NULL, PubliclyAccessible = NULL, Tags = NULL) {
   op <- new_operation(
     name = "CreateDBShardGroup",
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .rds$create_db_shard_group_input(DBShardGroupIdentifier = DBShardGroupIdentifier, DBClusterIdentifier = DBClusterIdentifier, ComputeRedundancy = ComputeRedundancy, MaxACU = MaxACU, MinACU = MinACU, PubliclyAccessible = PubliclyAccessible)
+  input <- .rds$create_db_shard_group_input(DBShardGroupIdentifier = DBShardGroupIdentifier, DBClusterIdentifier = DBClusterIdentifier, ComputeRedundancy = ComputeRedundancy, MaxACU = MaxACU, MinACU = MinACU, PubliclyAccessible = PubliclyAccessible, Tags = Tags)
   output <- .rds$create_db_shard_group_output()
   config <- get_config()
   svc <- .rds$service(config, op)
@@ -3901,7 +3982,8 @@ rds_create_db_snapshot <- function(DBSnapshotIdentifier, DBInstanceIdentifier, T
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$create_db_snapshot_input(DBSnapshotIdentifier = DBSnapshotIdentifier, DBInstanceIdentifier = DBInstanceIdentifier, Tags = Tags)
   output <- .rds$create_db_snapshot_output()
@@ -3946,7 +4028,8 @@ rds_create_db_subnet_group <- function(DBSubnetGroupName, DBSubnetGroupDescripti
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$create_db_subnet_group_input(DBSubnetGroupName = DBSubnetGroupName, DBSubnetGroupDescription = DBSubnetGroupDescription, SubnetIds = SubnetIds, Tags = Tags)
   output <- .rds$create_db_subnet_group_output()
@@ -4036,7 +4119,8 @@ rds_create_event_subscription <- function(SubscriptionName, SnsTopicArn, SourceT
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$create_event_subscription_input(SubscriptionName = SubscriptionName, SnsTopicArn = SnsTopicArn, SourceType = SourceType, EventCategories = EventCategories, SourceIds = SourceIds, Enabled = Enabled, Tags = Tags)
   output <- .rds$create_event_subscription_output()
@@ -4130,19 +4214,21 @@ rds_create_event_subscription <- function(SubscriptionName, SnsTopicArn, SourceT
 #' -   Can't be specified if `SourceDBClusterIdentifier` is specified. In
 #'     this case, Amazon Aurora uses the setting from the source DB
 #'     cluster.
+#' @param Tags Tags to assign to the global cluster.
 #'
 #' @keywords internal
 #'
 #' @rdname rds_create_global_cluster
-rds_create_global_cluster <- function(GlobalClusterIdentifier = NULL, SourceDBClusterIdentifier = NULL, Engine = NULL, EngineVersion = NULL, EngineLifecycleSupport = NULL, DeletionProtection = NULL, DatabaseName = NULL, StorageEncrypted = NULL) {
+rds_create_global_cluster <- function(GlobalClusterIdentifier = NULL, SourceDBClusterIdentifier = NULL, Engine = NULL, EngineVersion = NULL, EngineLifecycleSupport = NULL, DeletionProtection = NULL, DatabaseName = NULL, StorageEncrypted = NULL, Tags = NULL) {
   op <- new_operation(
     name = "CreateGlobalCluster",
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .rds$create_global_cluster_input(GlobalClusterIdentifier = GlobalClusterIdentifier, SourceDBClusterIdentifier = SourceDBClusterIdentifier, Engine = Engine, EngineVersion = EngineVersion, EngineLifecycleSupport = EngineLifecycleSupport, DeletionProtection = DeletionProtection, DatabaseName = DatabaseName, StorageEncrypted = StorageEncrypted)
+  input <- .rds$create_global_cluster_input(GlobalClusterIdentifier = GlobalClusterIdentifier, SourceDBClusterIdentifier = SourceDBClusterIdentifier, Engine = Engine, EngineVersion = EngineVersion, EngineLifecycleSupport = EngineLifecycleSupport, DeletionProtection = DeletionProtection, DatabaseName = DatabaseName, StorageEncrypted = StorageEncrypted, Tags = Tags)
   output <- .rds$create_global_cluster_output()
   config <- get_config()
   svc <- .rds$service(config, op)
@@ -4193,7 +4279,8 @@ rds_create_integration <- function(SourceArn, TargetArn, IntegrationName, KMSKey
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$create_integration_input(SourceArn = SourceArn, TargetArn = TargetArn, IntegrationName = IntegrationName, KMSKeyId = KMSKeyId, AdditionalEncryptionContext = AdditionalEncryptionContext, Tags = Tags, DataFilter = DataFilter, Description = Description)
   output <- .rds$create_integration_output()
@@ -4266,7 +4353,8 @@ rds_create_option_group <- function(OptionGroupName, EngineName, MajorEngineVers
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$create_option_group_input(OptionGroupName = OptionGroupName, EngineName = EngineName, MajorEngineVersion = MajorEngineVersion, OptionGroupDescription = OptionGroupDescription, Tags = Tags)
   output <- .rds$create_option_group_output()
@@ -4325,7 +4413,8 @@ rds_create_tenant_database <- function(DBInstanceIdentifier, TenantDBName, Maste
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$create_tenant_database_input(DBInstanceIdentifier = DBInstanceIdentifier, TenantDBName = TenantDBName, MasterUsername = MasterUsername, MasterUserPassword = MasterUserPassword, CharacterSetName = CharacterSetName, NcharCharacterSetName = NcharCharacterSetName, Tags = Tags)
   output <- .rds$create_tenant_database_output()
@@ -4364,7 +4453,8 @@ rds_delete_blue_green_deployment <- function(BlueGreenDeploymentIdentifier, Dele
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_blue_green_deployment_input(BlueGreenDeploymentIdentifier = BlueGreenDeploymentIdentifier, DeleteTarget = DeleteTarget)
   output <- .rds$delete_blue_green_deployment_output()
@@ -4407,7 +4497,8 @@ rds_delete_custom_db_engine_version <- function(Engine, EngineVersion) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_custom_db_engine_version_input(Engine = Engine, EngineVersion = EngineVersion)
   output <- .rds$delete_custom_db_engine_version_output()
@@ -4468,7 +4559,8 @@ rds_delete_db_cluster <- function(DBClusterIdentifier, SkipFinalSnapshot = NULL,
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_db_cluster_input(DBClusterIdentifier = DBClusterIdentifier, SkipFinalSnapshot = SkipFinalSnapshot, FinalDBSnapshotIdentifier = FinalDBSnapshotIdentifier, DeleteAutomatedBackups = DeleteAutomatedBackups)
   output <- .rds$delete_db_cluster_output()
@@ -4501,7 +4593,8 @@ rds_delete_db_cluster_automated_backup <- function(DbClusterResourceId) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_db_cluster_automated_backup_input(DbClusterResourceId = DbClusterResourceId)
   output <- .rds$delete_db_cluster_automated_backup_output()
@@ -4533,7 +4626,8 @@ rds_delete_db_cluster_endpoint <- function(DBClusterEndpointIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_db_cluster_endpoint_input(DBClusterEndpointIdentifier = DBClusterEndpointIdentifier)
   output <- .rds$delete_db_cluster_endpoint_output()
@@ -4571,7 +4665,8 @@ rds_delete_db_cluster_parameter_group <- function(DBClusterParameterGroupName) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_db_cluster_parameter_group_input(DBClusterParameterGroupName = DBClusterParameterGroupName)
   output <- .rds$delete_db_cluster_parameter_group_output()
@@ -4604,7 +4699,8 @@ rds_delete_db_cluster_snapshot <- function(DBClusterSnapshotIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_db_cluster_snapshot_input(DBClusterSnapshotIdentifier = DBClusterSnapshotIdentifier)
   output <- .rds$delete_db_cluster_snapshot_output()
@@ -4677,7 +4773,8 @@ rds_delete_db_instance <- function(DBInstanceIdentifier, SkipFinalSnapshot = NUL
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_db_instance_input(DBInstanceIdentifier = DBInstanceIdentifier, SkipFinalSnapshot = SkipFinalSnapshot, FinalDBSnapshotIdentifier = FinalDBSnapshotIdentifier, DeleteAutomatedBackups = DeleteAutomatedBackups)
   output <- .rds$delete_db_instance_output()
@@ -4714,7 +4811,8 @@ rds_delete_db_instance_automated_backup <- function(DbiResourceId = NULL, DBInst
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_db_instance_automated_backup_input(DbiResourceId = DbiResourceId, DBInstanceAutomatedBackupsArn = DBInstanceAutomatedBackupsArn)
   output <- .rds$delete_db_instance_automated_backup_output()
@@ -4752,7 +4850,8 @@ rds_delete_db_parameter_group <- function(DBParameterGroupName) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_db_parameter_group_input(DBParameterGroupName = DBParameterGroupName)
   output <- .rds$delete_db_parameter_group_output()
@@ -4782,7 +4881,8 @@ rds_delete_db_proxy <- function(DBProxyName) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_db_proxy_input(DBProxyName = DBProxyName)
   output <- .rds$delete_db_proxy_output()
@@ -4812,7 +4912,8 @@ rds_delete_db_proxy_endpoint <- function(DBProxyEndpointName) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_db_proxy_endpoint_input(DBProxyEndpointName = DBProxyEndpointName)
   output <- .rds$delete_db_proxy_endpoint_output()
@@ -4854,7 +4955,8 @@ rds_delete_db_security_group <- function(DBSecurityGroupName) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_db_security_group_input(DBSecurityGroupName = DBSecurityGroupName)
   output <- .rds$delete_db_security_group_output()
@@ -4873,7 +4975,7 @@ rds_delete_db_security_group <- function(DBSecurityGroupName) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/rds_delete_db_shard_group/](https://www.paws-r-sdk.com/docs/rds_delete_db_shard_group/) for full documentation.
 #'
-#' @param DBShardGroupIdentifier &#91;required&#93; Teh name of the DB shard group to delete.
+#' @param DBShardGroupIdentifier &#91;required&#93; The name of the DB shard group to delete.
 #'
 #' @keywords internal
 #'
@@ -4884,7 +4986,8 @@ rds_delete_db_shard_group <- function(DBShardGroupIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_db_shard_group_input(DBShardGroupIdentifier = DBShardGroupIdentifier)
   output <- .rds$delete_db_shard_group_output()
@@ -4917,7 +5020,8 @@ rds_delete_db_snapshot <- function(DBSnapshotIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_db_snapshot_input(DBSnapshotIdentifier = DBSnapshotIdentifier)
   output <- .rds$delete_db_snapshot_output()
@@ -4954,7 +5058,8 @@ rds_delete_db_subnet_group <- function(DBSubnetGroupName) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_db_subnet_group_input(DBSubnetGroupName = DBSubnetGroupName)
   output <- .rds$delete_db_subnet_group_output()
@@ -4984,7 +5089,8 @@ rds_delete_event_subscription <- function(SubscriptionName) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_event_subscription_input(SubscriptionName = SubscriptionName)
   output <- .rds$delete_event_subscription_output()
@@ -5014,7 +5120,8 @@ rds_delete_global_cluster <- function(GlobalClusterIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_global_cluster_input(GlobalClusterIdentifier = GlobalClusterIdentifier)
   output <- .rds$delete_global_cluster_output()
@@ -5044,7 +5151,8 @@ rds_delete_integration <- function(IntegrationIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_integration_input(IntegrationIdentifier = IntegrationIdentifier)
   output <- .rds$delete_integration_output()
@@ -5076,7 +5184,8 @@ rds_delete_option_group <- function(OptionGroupName) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_option_group_input(OptionGroupName = OptionGroupName)
   output <- .rds$delete_option_group_output()
@@ -5122,7 +5231,8 @@ rds_delete_tenant_database <- function(DBInstanceIdentifier, TenantDBName, SkipF
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$delete_tenant_database_input(DBInstanceIdentifier = DBInstanceIdentifier, TenantDBName = TenantDBName, SkipFinalSnapshot = SkipFinalSnapshot, FinalDBSnapshotIdentifier = FinalDBSnapshotIdentifier)
   output <- .rds$delete_tenant_database_output()
@@ -5157,7 +5267,8 @@ rds_deregister_db_proxy_targets <- function(DBProxyName, TargetGroupName = NULL,
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$deregister_db_proxy_targets_input(DBProxyName = DBProxyName, TargetGroupName = TargetGroupName, DBInstanceIdentifiers = DBInstanceIdentifiers, DBClusterIdentifiers = DBClusterIdentifiers)
   output <- .rds$deregister_db_proxy_targets_output()
@@ -5187,7 +5298,8 @@ rds_describe_account_attributes <- function() {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$describe_account_attributes_input()
   output <- .rds$describe_account_attributes_output()
@@ -5259,7 +5371,8 @@ rds_describe_blue_green_deployments <- function(BlueGreenDeploymentIdentifier = 
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "BlueGreenDeployments")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "BlueGreenDeployments"),
+    stream_api = FALSE
   )
   input <- .rds$describe_blue_green_deployments_input(BlueGreenDeploymentIdentifier = BlueGreenDeploymentIdentifier, Filters = Filters, Marker = Marker, MaxRecords = MaxRecords)
   output <- .rds$describe_blue_green_deployments_output()
@@ -5309,7 +5422,8 @@ rds_describe_certificates <- function(CertificateIdentifier = NULL, Filters = NU
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "Certificates")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "Certificates"),
+    stream_api = FALSE
   )
   input <- .rds$describe_certificates_input(CertificateIdentifier = CertificateIdentifier, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_certificates_output()
@@ -5370,7 +5484,8 @@ rds_describe_db_cluster_automated_backups <- function(DbClusterResourceId = NULL
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBClusterAutomatedBackups")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBClusterAutomatedBackups"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_cluster_automated_backups_input(DbClusterResourceId = DbClusterResourceId, DBClusterIdentifier = DBClusterIdentifier, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_db_cluster_automated_backups_output()
@@ -5453,7 +5568,8 @@ rds_describe_db_cluster_backtracks <- function(DBClusterIdentifier, BacktrackIde
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBClusterBacktracks")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "DBClusterBacktracks"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_cluster_backtracks_input(DBClusterIdentifier = DBClusterIdentifier, BacktrackIdentifier = BacktrackIdentifier, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_db_cluster_backtracks_output()
@@ -5509,7 +5625,8 @@ rds_describe_db_cluster_endpoints <- function(DBClusterIdentifier = NULL, DBClus
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBClusterEndpoints")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBClusterEndpoints"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_cluster_endpoints_input(DBClusterIdentifier = DBClusterIdentifier, DBClusterEndpointIdentifier = DBClusterEndpointIdentifier, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_db_cluster_endpoints_output()
@@ -5557,7 +5674,8 @@ rds_describe_db_cluster_parameter_groups <- function(DBClusterParameterGroupName
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBClusterParameterGroups")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "DBClusterParameterGroups"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_cluster_parameter_groups_input(DBClusterParameterGroupName = DBClusterParameterGroupName, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_db_cluster_parameter_groups_output()
@@ -5588,12 +5706,15 @@ rds_describe_db_cluster_parameter_groups <- function(DBClusterParameterGroupName
 #' 
 #' Valid Values:
 #' 
-#' -   `customer`
+#' -   `engine-default`
 #' 
-#' -   `engine`
+#' -   `system`
 #' 
-#' -   `service`
-#' @param Filters This parameter isn't currently supported.
+#' -   `user`
+#' @param Filters A filter that specifies one or more DB cluster parameters to describe.
+#' 
+#' The only supported filter is `parameter-name`. The results list only
+#' includes information about the DB cluster parameters with these names.
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a pagination token
 #' called a marker is included in the response so you can retrieve the
@@ -5616,7 +5737,8 @@ rds_describe_db_cluster_parameters <- function(DBClusterParameterGroupName, Sour
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "Parameters")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "Parameters"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_cluster_parameters_input(DBClusterParameterGroupName = DBClusterParameterGroupName, Source = Source, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_db_cluster_parameters_output()
@@ -5648,7 +5770,8 @@ rds_describe_db_cluster_snapshot_attributes <- function(DBClusterSnapshotIdentif
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_cluster_snapshot_attributes_input(DBClusterSnapshotIdentifier = DBClusterSnapshotIdentifier)
   output <- .rds$describe_db_cluster_snapshot_attributes_output()
@@ -5765,7 +5888,8 @@ rds_describe_db_cluster_snapshots <- function(DBClusterIdentifier = NULL, DBClus
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBClusterSnapshots")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "DBClusterSnapshots"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_cluster_snapshots_input(DBClusterIdentifier = DBClusterIdentifier, DBClusterSnapshotIdentifier = DBClusterSnapshotIdentifier, SnapshotType = SnapshotType, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker, IncludeShared = IncludeShared, IncludePublic = IncludePublic, DbClusterResourceId = DbClusterResourceId)
   output <- .rds$describe_db_cluster_snapshots_output()
@@ -5838,7 +5962,8 @@ rds_describe_db_clusters <- function(DBClusterIdentifier = NULL, Filters = NULL,
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBClusters")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBClusters"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_clusters_input(DBClusterIdentifier = DBClusterIdentifier, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker, IncludeShared = IncludeShared)
   output <- .rds$describe_db_clusters_output()
@@ -5986,7 +6111,8 @@ rds_describe_db_engine_versions <- function(Engine = NULL, EngineVersion = NULL,
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBEngineVersions")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "DBEngineVersions"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_engine_versions_input(Engine = Engine, EngineVersion = EngineVersion, DBParameterGroupFamily = DBParameterGroupFamily, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker, DefaultOnly = DefaultOnly, ListSupportedCharacterSets = ListSupportedCharacterSets, ListSupportedTimezones = ListSupportedTimezones, IncludeAll = IncludeAll)
   output <- .rds$describe_db_engine_versions_output()
@@ -6057,7 +6183,8 @@ rds_describe_db_instance_automated_backups <- function(DbiResourceId = NULL, DBI
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBInstanceAutomatedBackups")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBInstanceAutomatedBackups"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_instance_automated_backups_input(DbiResourceId = DbiResourceId, DBInstanceIdentifier = DBInstanceIdentifier, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker, DBInstanceAutomatedBackupsArn = DBInstanceAutomatedBackupsArn)
   output <- .rds$describe_db_instance_automated_backups_output()
@@ -6129,7 +6256,8 @@ rds_describe_db_instances <- function(DBInstanceIdentifier = NULL, Filters = NUL
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBInstances")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "DBInstances"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_instances_input(DBInstanceIdentifier = DBInstanceIdentifier, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_db_instances_output()
@@ -6178,7 +6306,8 @@ rds_describe_db_log_files <- function(DBInstanceIdentifier, FilenameContains = N
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DescribeDBLogFiles")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "DescribeDBLogFiles"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_log_files_input(DBInstanceIdentifier = DBInstanceIdentifier, FilenameContains = FilenameContains, FileLastWritten = FileLastWritten, FileSize = FileSize, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_db_log_files_output()
@@ -6226,7 +6355,8 @@ rds_describe_db_parameter_groups <- function(DBParameterGroupName = NULL, Filter
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBParameterGroups")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "DBParameterGroups"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_parameter_groups_input(DBParameterGroupName = DBParameterGroupName, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_db_parameter_groups_output()
@@ -6255,7 +6385,10 @@ rds_describe_db_parameter_groups <- function(DBParameterGroupName = NULL, Filter
 #' Default: All parameter types returned
 #' 
 #' Valid Values: `user | system | engine-default`
-#' @param Filters This parameter isn't currently supported.
+#' @param Filters A filter that specifies one or more DB parameters to describe.
+#' 
+#' The only supported filter is `parameter-name`. The results list only
+#' includes information about the DB parameters with these names.
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a pagination token
 #' called a marker is included in the response so that you can retrieve the
@@ -6278,7 +6411,8 @@ rds_describe_db_parameters <- function(DBParameterGroupName, Source = NULL, Filt
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "Parameters")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "Parameters"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_parameters_input(DBParameterGroupName = DBParameterGroupName, Source = Source, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_db_parameters_output()
@@ -6322,7 +6456,8 @@ rds_describe_db_proxies <- function(DBProxyName = NULL, Filters = NULL, Marker =
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBProxies")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBProxies"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_proxies_input(DBProxyName = DBProxyName, Filters = Filters, Marker = Marker, MaxRecords = MaxRecords)
   output <- .rds$describe_db_proxies_output()
@@ -6369,7 +6504,8 @@ rds_describe_db_proxy_endpoints <- function(DBProxyName = NULL, DBProxyEndpointN
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBProxyEndpoints")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBProxyEndpoints"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_proxy_endpoints_input(DBProxyName = DBProxyName, DBProxyEndpointName = DBProxyEndpointName, Filters = Filters, Marker = Marker, MaxRecords = MaxRecords)
   output <- .rds$describe_db_proxy_endpoints_output()
@@ -6413,7 +6549,8 @@ rds_describe_db_proxy_target_groups <- function(DBProxyName, TargetGroupName = N
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "TargetGroups")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "TargetGroups"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_proxy_target_groups_input(DBProxyName = DBProxyName, TargetGroupName = TargetGroupName, Filters = Filters, Marker = Marker, MaxRecords = MaxRecords)
   output <- .rds$describe_db_proxy_target_groups_output()
@@ -6456,7 +6593,8 @@ rds_describe_db_proxy_targets <- function(DBProxyName, TargetGroupName = NULL, F
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "Targets")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "Targets"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_proxy_targets_input(DBProxyName = DBProxyName, TargetGroupName = TargetGroupName, Filters = Filters, Marker = Marker, MaxRecords = MaxRecords)
   output <- .rds$describe_db_proxy_targets_output()
@@ -6582,7 +6720,8 @@ rds_describe_db_recommendations <- function(LastUpdatedAfter = NULL, LastUpdated
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBRecommendations")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBRecommendations"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_recommendations_input(LastUpdatedAfter = LastUpdatedAfter, LastUpdatedBefore = LastUpdatedBefore, Locale = Locale, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_db_recommendations_output()
@@ -6625,7 +6764,8 @@ rds_describe_db_security_groups <- function(DBSecurityGroupName = NULL, Filters 
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBSecurityGroups")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "DBSecurityGroups"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_security_groups_input(DBSecurityGroupName = DBSecurityGroupName, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_db_security_groups_output()
@@ -6644,10 +6784,9 @@ rds_describe_db_security_groups <- function(DBSecurityGroupName = NULL, Filters 
 #'
 #' See [https://www.paws-r-sdk.com/docs/rds_describe_db_shard_groups/](https://www.paws-r-sdk.com/docs/rds_describe_db_shard_groups/) for full documentation.
 #'
-#' @param DBShardGroupIdentifier The user-supplied DB shard group identifier or the Amazon Resource Name
-#' (ARN) of the DB shard group. If this parameter is specified, information
-#' for only the specific DB shard group is returned. This parameter isn't
-#' case-sensitive.
+#' @param DBShardGroupIdentifier The user-supplied DB shard group identifier. If this parameter is
+#' specified, information for only the specific DB shard group is returned.
+#' This parameter isn't case-sensitive.
 #' 
 #' Constraints:
 #' 
@@ -6675,7 +6814,8 @@ rds_describe_db_shard_groups <- function(DBShardGroupIdentifier = NULL, Filters 
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_shard_groups_input(DBShardGroupIdentifier = DBShardGroupIdentifier, Filters = Filters, Marker = Marker, MaxRecords = MaxRecords)
   output <- .rds$describe_db_shard_groups_output()
@@ -6706,7 +6846,8 @@ rds_describe_db_snapshot_attributes <- function(DBSnapshotIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_snapshot_attributes_input(DBSnapshotIdentifier = DBSnapshotIdentifier)
   output <- .rds$describe_db_snapshot_attributes_output()
@@ -6799,7 +6940,8 @@ rds_describe_db_snapshot_tenant_databases <- function(DBInstanceIdentifier = NUL
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBSnapshotTenantDatabases")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBSnapshotTenantDatabases"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_snapshot_tenant_databases_input(DBInstanceIdentifier = DBInstanceIdentifier, DBSnapshotIdentifier = DBSnapshotIdentifier, SnapshotType = SnapshotType, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker, DbiResourceId = DbiResourceId)
   output <- .rds$describe_db_snapshot_tenant_databases_output()
@@ -6924,7 +7066,8 @@ rds_describe_db_snapshots <- function(DBInstanceIdentifier = NULL, DBSnapshotIde
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBSnapshots")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "DBSnapshots"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_snapshots_input(DBInstanceIdentifier = DBInstanceIdentifier, DBSnapshotIdentifier = DBSnapshotIdentifier, SnapshotType = SnapshotType, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker, IncludeShared = IncludeShared, IncludePublic = IncludePublic, DbiResourceId = DbiResourceId)
   output <- .rds$describe_db_snapshots_output()
@@ -6967,7 +7110,8 @@ rds_describe_db_subnet_groups <- function(DBSubnetGroupName = NULL, Filters = NU
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "DBSubnetGroups")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "DBSubnetGroups"),
+    stream_api = FALSE
   )
   input <- .rds$describe_db_subnet_groups_input(DBSubnetGroupName = DBSubnetGroupName, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_db_subnet_groups_output()
@@ -7012,7 +7156,8 @@ rds_describe_engine_default_cluster_parameters <- function(DBParameterGroupFamil
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(input_token = "Marker", output_token = "EngineDefaults.Marker", limit_key = "MaxRecords", result_key = "EngineDefaults.Parameters"),
+    stream_api = FALSE
   )
   input <- .rds$describe_engine_default_cluster_parameters_input(DBParameterGroupFamily = DBParameterGroupFamily, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_engine_default_cluster_parameters_output()
@@ -7133,7 +7278,10 @@ rds_describe_engine_default_cluster_parameters <- function(DBParameterGroupFamil
 #' -   `sqlserver-web-14.0`
 #' 
 #' -   `sqlserver-web-15.0`
-#' @param Filters This parameter isn't currently supported.
+#' @param Filters A filter that specifies one or more parameters to describe.
+#' 
+#' The only supported filter is `parameter-name`. The results list only
+#' includes information about the parameters with these names.
 #' @param MaxRecords The maximum number of records to include in the response. If more
 #' records exist than the specified `MaxRecords` value, a pagination token
 #' called a marker is included in the response so you can retrieve the
@@ -7156,7 +7304,8 @@ rds_describe_engine_default_parameters <- function(DBParameterGroupFamily, Filte
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "EngineDefaults.Marker", result_key = "EngineDefaults.Parameters")
+    paginator = list(input_token = "Marker", output_token = "EngineDefaults.Marker", limit_key = "MaxRecords", result_key = "EngineDefaults.Parameters"),
+    stream_api = FALSE
   )
   input <- .rds$describe_engine_default_parameters_input(DBParameterGroupFamily = DBParameterGroupFamily, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_engine_default_parameters_output()
@@ -7192,7 +7341,8 @@ rds_describe_event_categories <- function(SourceType = NULL, Filters = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$describe_event_categories_input(SourceType = SourceType, Filters = Filters)
   output <- .rds$describe_event_categories_output()
@@ -7236,7 +7386,8 @@ rds_describe_event_subscriptions <- function(SubscriptionName = NULL, Filters = 
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "EventSubscriptionsList")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "EventSubscriptionsList"),
+    stream_api = FALSE
   )
   input <- .rds$describe_event_subscriptions_input(SubscriptionName = SubscriptionName, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_event_subscriptions_output()
@@ -7326,7 +7477,8 @@ rds_describe_events <- function(SourceIdentifier = NULL, SourceType = NULL, Star
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "Events")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "Events"),
+    stream_api = FALSE
   )
   input <- .rds$describe_events_input(SourceIdentifier = SourceIdentifier, SourceType = SourceType, StartTime = StartTime, EndTime = EndTime, Duration = Duration, EventCategories = EventCategories, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_events_output()
@@ -7400,7 +7552,8 @@ rds_describe_export_tasks <- function(ExportTaskIdentifier = NULL, SourceArn = N
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "ExportTasks")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "ExportTasks"),
+    stream_api = FALSE
   )
   input <- .rds$describe_export_tasks_input(ExportTaskIdentifier = ExportTaskIdentifier, SourceArn = SourceArn, Filters = Filters, Marker = Marker, MaxRecords = MaxRecords, SourceType = SourceType)
   output <- .rds$describe_export_tasks_output()
@@ -7456,7 +7609,8 @@ rds_describe_global_clusters <- function(GlobalClusterIdentifier = NULL, Filters
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "GlobalClusters")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "GlobalClusters"),
+    stream_api = FALSE
   )
   input <- .rds$describe_global_clusters_input(GlobalClusterIdentifier = GlobalClusterIdentifier, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_global_clusters_output()
@@ -7499,7 +7653,8 @@ rds_describe_integrations <- function(IntegrationIdentifier = NULL, Filters = NU
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "Integrations")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "Integrations"),
+    stream_api = FALSE
   )
   input <- .rds$describe_integrations_input(IntegrationIdentifier = IntegrationIdentifier, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_integrations_output()
@@ -7571,7 +7726,8 @@ rds_describe_option_group_options <- function(EngineName, MajorEngineVersion = N
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "OptionGroupOptions")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "OptionGroupOptions"),
+    stream_api = FALSE
   )
   input <- .rds$describe_option_group_options_input(EngineName = EngineName, MajorEngineVersion = MajorEngineVersion, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_option_group_options_output()
@@ -7647,7 +7803,8 @@ rds_describe_option_groups <- function(OptionGroupName = NULL, Filters = NULL, M
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "OptionGroupsList")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "OptionGroupsList"),
+    stream_api = FALSE
   )
   input <- .rds$describe_option_groups_input(OptionGroupName = OptionGroupName, Filters = Filters, Marker = Marker, MaxRecords = MaxRecords, EngineName = EngineName, MajorEngineVersion = MajorEngineVersion)
   output <- .rds$describe_option_groups_output()
@@ -7751,7 +7908,8 @@ rds_describe_orderable_db_instance_options <- function(Engine, EngineVersion = N
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "OrderableDBInstanceOptions")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "OrderableDBInstanceOptions"),
+    stream_api = FALSE
   )
   input <- .rds$describe_orderable_db_instance_options_input(Engine = Engine, EngineVersion = EngineVersion, DBInstanceClass = DBInstanceClass, LicenseModel = LicenseModel, AvailabilityZoneGroup = AvailabilityZoneGroup, Vpc = Vpc, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_orderable_db_instance_options_output()
@@ -7807,7 +7965,8 @@ rds_describe_pending_maintenance_actions <- function(ResourceIdentifier = NULL, 
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "PendingMaintenanceActions")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "PendingMaintenanceActions"),
+    stream_api = FALSE
   )
   input <- .rds$describe_pending_maintenance_actions_input(ResourceIdentifier = ResourceIdentifier, Filters = Filters, Marker = Marker, MaxRecords = MaxRecords)
   output <- .rds$describe_pending_maintenance_actions_output()
@@ -7870,7 +8029,8 @@ rds_describe_reserved_db_instances <- function(ReservedDBInstanceId = NULL, Rese
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "ReservedDBInstances")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "ReservedDBInstances"),
+    stream_api = FALSE
   )
   input <- .rds$describe_reserved_db_instances_input(ReservedDBInstanceId = ReservedDBInstanceId, ReservedDBInstancesOfferingId = ReservedDBInstancesOfferingId, DBInstanceClass = DBInstanceClass, Duration = Duration, ProductDescription = ProductDescription, OfferingType = OfferingType, MultiAZ = MultiAZ, LeaseId = LeaseId, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_reserved_db_instances_output()
@@ -7930,7 +8090,8 @@ rds_describe_reserved_db_instances_offerings <- function(ReservedDBInstancesOffe
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "ReservedDBInstancesOfferings")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "ReservedDBInstancesOfferings"),
+    stream_api = FALSE
   )
   input <- .rds$describe_reserved_db_instances_offerings_input(ReservedDBInstancesOfferingId = ReservedDBInstancesOfferingId, DBInstanceClass = DBInstanceClass, Duration = Duration, ProductDescription = ProductDescription, OfferingType = OfferingType, MultiAZ = MultiAZ, Filters = Filters, MaxRecords = MaxRecords, Marker = Marker)
   output <- .rds$describe_reserved_db_instances_offerings_output()
@@ -7979,7 +8140,8 @@ rds_describe_source_regions <- function(RegionName = NULL, MaxRecords = NULL, Ma
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "SourceRegions")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "MaxRecords", result_key = "SourceRegions"),
+    stream_api = FALSE
   )
   input <- .rds$describe_source_regions_input(RegionName = RegionName, MaxRecords = MaxRecords, Marker = Marker, Filters = Filters)
   output <- .rds$describe_source_regions_output()
@@ -8037,7 +8199,8 @@ rds_describe_tenant_databases <- function(DBInstanceIdentifier = NULL, TenantDBN
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "TenantDatabases")
+    paginator = list(input_token = "Marker", limit_key = "MaxRecords", output_token = "Marker", result_key = "TenantDatabases"),
+    stream_api = FALSE
   )
   input <- .rds$describe_tenant_databases_input(DBInstanceIdentifier = DBInstanceIdentifier, TenantDBName = TenantDBName, Filters = Filters, Marker = Marker, MaxRecords = MaxRecords)
   output <- .rds$describe_tenant_databases_output()
@@ -8068,7 +8231,8 @@ rds_describe_valid_db_instance_modifications <- function(DBInstanceIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$describe_valid_db_instance_modifications_input(DBInstanceIdentifier = DBInstanceIdentifier)
   output <- .rds$describe_valid_db_instance_modifications_output()
@@ -8098,7 +8262,8 @@ rds_disable_http_endpoint <- function(ResourceArn) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$disable_http_endpoint_input(ResourceArn = ResourceArn)
   output <- .rds$disable_http_endpoint_output()
@@ -8161,7 +8326,8 @@ rds_download_db_log_file_portion <- function(DBInstanceIdentifier, LogFileName, 
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "Marker", limit_key = "NumberOfLines", more_results = "AdditionalDataPending", output_token = "Marker", result_key = "LogFileData")
+    paginator = list(input_token = "Marker", output_token = "Marker", limit_key = "NumberOfLines", more_results = "AdditionalDataPending", result_key = "LogFileData"),
+    stream_api = FALSE
   )
   input <- .rds$download_db_log_file_portion_input(DBInstanceIdentifier = DBInstanceIdentifier, LogFileName = LogFileName, Marker = Marker, NumberOfLines = NumberOfLines)
   output <- .rds$download_db_log_file_portion_output()
@@ -8191,7 +8357,8 @@ rds_enable_http_endpoint <- function(ResourceArn) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$enable_http_endpoint_input(ResourceArn = ResourceArn)
   output <- .rds$enable_http_endpoint_output()
@@ -8232,7 +8399,8 @@ rds_failover_db_cluster <- function(DBClusterIdentifier, TargetDBInstanceIdentif
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$failover_db_cluster_input(DBClusterIdentifier = DBClusterIdentifier, TargetDBInstanceIdentifier = TargetDBInstanceIdentifier)
   output <- .rds$failover_db_cluster_output()
@@ -8289,7 +8457,8 @@ rds_failover_global_cluster <- function(GlobalClusterIdentifier, TargetDbCluster
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$failover_global_cluster_input(GlobalClusterIdentifier = GlobalClusterIdentifier, TargetDbClusterIdentifier = TargetDbClusterIdentifier, AllowDataLoss = AllowDataLoss, Switchover = Switchover)
   output <- .rds$failover_global_cluster_output()
@@ -8324,7 +8493,8 @@ rds_list_tags_for_resource <- function(ResourceName, Filters = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(result_key = "TagList")
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$list_tags_for_resource_input(ResourceName = ResourceName, Filters = Filters)
   output <- .rds$list_tags_for_resource_output()
@@ -8360,7 +8530,8 @@ rds_modify_activity_stream <- function(ResourceArn = NULL, AuditPolicyState = NU
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_activity_stream_input(ResourceArn = ResourceArn, AuditPolicyState = AuditPolicyState)
   output <- .rds$modify_activity_stream_output()
@@ -8398,7 +8569,8 @@ rds_modify_certificates <- function(CertificateIdentifier = NULL, RemoveCustomer
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_certificates_input(CertificateIdentifier = CertificateIdentifier, RemoveCustomerOverride = RemoveCustomerOverride)
   output <- .rds$modify_certificates_output()
@@ -8459,7 +8631,8 @@ rds_modify_current_db_cluster_capacity <- function(DBClusterIdentifier, Capacity
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_current_db_cluster_capacity_input(DBClusterIdentifier = DBClusterIdentifier, Capacity = Capacity, SecondsBeforeTimeout = SecondsBeforeTimeout, TimeoutAction = TimeoutAction)
   output <- .rds$modify_current_db_cluster_capacity_output()
@@ -8522,7 +8695,8 @@ rds_modify_custom_db_engine_version <- function(Engine, EngineVersion, Descripti
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_custom_db_engine_version_input(Engine = Engine, EngineVersion = EngineVersion, Description = Description, Status = Status)
   output <- .rds$modify_custom_db_engine_version_output()
@@ -8564,9 +8738,9 @@ rds_modify_custom_db_engine_version <- function(Engine, EngineVersion, Descripti
 #' -   Can't end with a hyphen or contain two consecutive hyphens.
 #' 
 #' Example: `my-cluster2`
-#' @param ApplyImmediately Specifies whether the modifications in this request and any pending
-#' modifications are asynchronously applied as soon as possible, regardless
-#' of the `PreferredMaintenanceWindow` setting for the DB cluster. If this
+#' @param ApplyImmediately Specifies whether the modifications in this request are asynchronously
+#' applied as soon as possible, regardless of the
+#' `PreferredMaintenanceWindow` setting for the DB cluster. If this
 #' parameter is disabled, changes to the DB cluster are applied during the
 #' next maintenance window.
 #' 
@@ -8664,9 +8838,12 @@ rds_modify_custom_db_engine_version <- function(Engine, EngineVersion, Descripti
 #' 
 #' For more information, see [IAM Database
 #' Authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
-#' in the *Amazon Aurora User Guide*.
+#' in the *Amazon Aurora User Guide* or [IAM database authentication for
+#' MariaDB, MySQL, and
+#' PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
+#' in the *Amazon RDS User Guide*.
 #' 
-#' Valid for Cluster Type: Aurora DB clusters only
+#' Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 #' @param BacktrackWindow The target backtrack window, in seconds. To disable backtracking, set
 #' this value to `0`.
 #' 
@@ -8795,8 +8972,8 @@ rds_modify_custom_db_engine_version <- function(Engine, EngineVersion, Descripti
 #' in the *Amazon Aurora User Guide*.
 #' 
 #' This parameter applies only to Aurora Serverless v1 DB clusters. To
-#' enable or disable the HTTP endpoint for an Aurora PostgreSQL Serverless
-#' v2 or provisioned DB cluster, use the
+#' enable or disable the HTTP endpoint for an Aurora Serverless v2 or
+#' provisioned DB cluster, use the
 #' [`enable_http_endpoint`][rds_enable_http_endpoint] and
 #' [`disable_http_endpoint`][rds_disable_http_endpoint] operations.
 #' 
@@ -8877,7 +9054,7 @@ rds_modify_custom_db_engine_version <- function(Engine, EngineVersion, Descripti
 #' DB cluster during the maintenance window. By default, minor engine
 #' upgrades are applied automatically.
 #' 
-#' Valid for Cluster Type: Multi-AZ DB clusters only
+#' Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 #' @param MonitoringInterval The interval, in seconds, between points when Enhanced Monitoring
 #' metrics are collected for the DB cluster. To turn off collecting
 #' Enhanced Monitoring metrics, specify `0`.
@@ -8901,13 +9078,23 @@ rds_modify_custom_db_engine_version <- function(Engine, EngineVersion, Descripti
 #' `MonitoringRoleArn` value.
 #' 
 #' Valid for Cluster Type: Multi-AZ DB clusters only
+#' @param DatabaseInsightsMode Specifies the mode of Database Insights to enable for the DB cluster.
+#' 
+#' If you change the value from `standard` to `advanced`, you must set the
+#' `PerformanceInsightsEnabled` parameter to `true` and the
+#' `PerformanceInsightsRetentionPeriod` parameter to 465.
+#' 
+#' If you change the value from `advanced` to `standard`, you must set the
+#' `PerformanceInsightsEnabled` parameter to `false`.
+#' 
+#' Valid for Cluster Type: Aurora DB clusters only
 #' @param EnablePerformanceInsights Specifies whether to turn on Performance Insights for the DB cluster.
 #' 
 #' For more information, see [Using Amazon Performance
 #' Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
 #' in the *Amazon RDS User Guide*.
 #' 
-#' Valid for Cluster Type: Multi-AZ DB clusters only
+#' Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 #' @param PerformanceInsightsKMSKeyId The Amazon Web Services KMS key identifier for encryption of Performance
 #' Insights data.
 #' 
@@ -8919,10 +9106,10 @@ rds_modify_custom_db_engine_version <- function(Engine, EngineVersion, Descripti
 #' your Amazon Web Services account. Your Amazon Web Services account has a
 #' different default KMS key for each Amazon Web Services Region.
 #' 
-#' Valid for Cluster Type: Multi-AZ DB clusters only
+#' Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 #' @param PerformanceInsightsRetentionPeriod The number of days to retain Performance Insights data.
 #' 
-#' Valid for Cluster Type: Multi-AZ DB clusters only
+#' Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 #' 
 #' Valid Values:
 #' 
@@ -9059,6 +9246,9 @@ rds_modify_custom_db_engine_version <- function(Engine, EngineVersion, Descripti
 #' Aurora Limitless Database to create a DB shard group.
 #' 
 #' Valid for: Aurora DB clusters only
+#' 
+#' This setting is no longer used. Instead use the `ClusterScalabilityType`
+#' setting when you create your Aurora Limitless Database DB cluster.
 #' @param CACertificateIdentifier The CA certificate identifier to use for the DB cluster's server
 #' certificate.
 #' 
@@ -9071,15 +9261,16 @@ rds_modify_custom_db_engine_version <- function(Engine, EngineVersion, Descripti
 #' @keywords internal
 #'
 #' @rdname rds_modify_db_cluster
-rds_modify_db_cluster <- function(DBClusterIdentifier, NewDBClusterIdentifier = NULL, ApplyImmediately = NULL, BackupRetentionPeriod = NULL, DBClusterParameterGroupName = NULL, VpcSecurityGroupIds = NULL, Port = NULL, MasterUserPassword = NULL, OptionGroupName = NULL, PreferredBackupWindow = NULL, PreferredMaintenanceWindow = NULL, EnableIAMDatabaseAuthentication = NULL, BacktrackWindow = NULL, CloudwatchLogsExportConfiguration = NULL, EngineVersion = NULL, AllowMajorVersionUpgrade = NULL, DBInstanceParameterGroupName = NULL, Domain = NULL, DomainIAMRoleName = NULL, ScalingConfiguration = NULL, DeletionProtection = NULL, EnableHttpEndpoint = NULL, CopyTagsToSnapshot = NULL, EnableGlobalWriteForwarding = NULL, DBClusterInstanceClass = NULL, AllocatedStorage = NULL, StorageType = NULL, Iops = NULL, AutoMinorVersionUpgrade = NULL, MonitoringInterval = NULL, MonitoringRoleArn = NULL, EnablePerformanceInsights = NULL, PerformanceInsightsKMSKeyId = NULL, PerformanceInsightsRetentionPeriod = NULL, ServerlessV2ScalingConfiguration = NULL, NetworkType = NULL, ManageMasterUserPassword = NULL, RotateMasterUserPassword = NULL, MasterUserSecretKmsKeyId = NULL, EngineMode = NULL, AllowEngineModeChange = NULL, EnableLocalWriteForwarding = NULL, AwsBackupRecoveryPointArn = NULL, EnableLimitlessDatabase = NULL, CACertificateIdentifier = NULL) {
+rds_modify_db_cluster <- function(DBClusterIdentifier, NewDBClusterIdentifier = NULL, ApplyImmediately = NULL, BackupRetentionPeriod = NULL, DBClusterParameterGroupName = NULL, VpcSecurityGroupIds = NULL, Port = NULL, MasterUserPassword = NULL, OptionGroupName = NULL, PreferredBackupWindow = NULL, PreferredMaintenanceWindow = NULL, EnableIAMDatabaseAuthentication = NULL, BacktrackWindow = NULL, CloudwatchLogsExportConfiguration = NULL, EngineVersion = NULL, AllowMajorVersionUpgrade = NULL, DBInstanceParameterGroupName = NULL, Domain = NULL, DomainIAMRoleName = NULL, ScalingConfiguration = NULL, DeletionProtection = NULL, EnableHttpEndpoint = NULL, CopyTagsToSnapshot = NULL, EnableGlobalWriteForwarding = NULL, DBClusterInstanceClass = NULL, AllocatedStorage = NULL, StorageType = NULL, Iops = NULL, AutoMinorVersionUpgrade = NULL, MonitoringInterval = NULL, MonitoringRoleArn = NULL, DatabaseInsightsMode = NULL, EnablePerformanceInsights = NULL, PerformanceInsightsKMSKeyId = NULL, PerformanceInsightsRetentionPeriod = NULL, ServerlessV2ScalingConfiguration = NULL, NetworkType = NULL, ManageMasterUserPassword = NULL, RotateMasterUserPassword = NULL, MasterUserSecretKmsKeyId = NULL, EngineMode = NULL, AllowEngineModeChange = NULL, EnableLocalWriteForwarding = NULL, AwsBackupRecoveryPointArn = NULL, EnableLimitlessDatabase = NULL, CACertificateIdentifier = NULL) {
   op <- new_operation(
     name = "ModifyDBCluster",
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .rds$modify_db_cluster_input(DBClusterIdentifier = DBClusterIdentifier, NewDBClusterIdentifier = NewDBClusterIdentifier, ApplyImmediately = ApplyImmediately, BackupRetentionPeriod = BackupRetentionPeriod, DBClusterParameterGroupName = DBClusterParameterGroupName, VpcSecurityGroupIds = VpcSecurityGroupIds, Port = Port, MasterUserPassword = MasterUserPassword, OptionGroupName = OptionGroupName, PreferredBackupWindow = PreferredBackupWindow, PreferredMaintenanceWindow = PreferredMaintenanceWindow, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, BacktrackWindow = BacktrackWindow, CloudwatchLogsExportConfiguration = CloudwatchLogsExportConfiguration, EngineVersion = EngineVersion, AllowMajorVersionUpgrade = AllowMajorVersionUpgrade, DBInstanceParameterGroupName = DBInstanceParameterGroupName, Domain = Domain, DomainIAMRoleName = DomainIAMRoleName, ScalingConfiguration = ScalingConfiguration, DeletionProtection = DeletionProtection, EnableHttpEndpoint = EnableHttpEndpoint, CopyTagsToSnapshot = CopyTagsToSnapshot, EnableGlobalWriteForwarding = EnableGlobalWriteForwarding, DBClusterInstanceClass = DBClusterInstanceClass, AllocatedStorage = AllocatedStorage, StorageType = StorageType, Iops = Iops, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, MonitoringInterval = MonitoringInterval, MonitoringRoleArn = MonitoringRoleArn, EnablePerformanceInsights = EnablePerformanceInsights, PerformanceInsightsKMSKeyId = PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod = PerformanceInsightsRetentionPeriod, ServerlessV2ScalingConfiguration = ServerlessV2ScalingConfiguration, NetworkType = NetworkType, ManageMasterUserPassword = ManageMasterUserPassword, RotateMasterUserPassword = RotateMasterUserPassword, MasterUserSecretKmsKeyId = MasterUserSecretKmsKeyId, EngineMode = EngineMode, AllowEngineModeChange = AllowEngineModeChange, EnableLocalWriteForwarding = EnableLocalWriteForwarding, AwsBackupRecoveryPointArn = AwsBackupRecoveryPointArn, EnableLimitlessDatabase = EnableLimitlessDatabase, CACertificateIdentifier = CACertificateIdentifier)
+  input <- .rds$modify_db_cluster_input(DBClusterIdentifier = DBClusterIdentifier, NewDBClusterIdentifier = NewDBClusterIdentifier, ApplyImmediately = ApplyImmediately, BackupRetentionPeriod = BackupRetentionPeriod, DBClusterParameterGroupName = DBClusterParameterGroupName, VpcSecurityGroupIds = VpcSecurityGroupIds, Port = Port, MasterUserPassword = MasterUserPassword, OptionGroupName = OptionGroupName, PreferredBackupWindow = PreferredBackupWindow, PreferredMaintenanceWindow = PreferredMaintenanceWindow, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, BacktrackWindow = BacktrackWindow, CloudwatchLogsExportConfiguration = CloudwatchLogsExportConfiguration, EngineVersion = EngineVersion, AllowMajorVersionUpgrade = AllowMajorVersionUpgrade, DBInstanceParameterGroupName = DBInstanceParameterGroupName, Domain = Domain, DomainIAMRoleName = DomainIAMRoleName, ScalingConfiguration = ScalingConfiguration, DeletionProtection = DeletionProtection, EnableHttpEndpoint = EnableHttpEndpoint, CopyTagsToSnapshot = CopyTagsToSnapshot, EnableGlobalWriteForwarding = EnableGlobalWriteForwarding, DBClusterInstanceClass = DBClusterInstanceClass, AllocatedStorage = AllocatedStorage, StorageType = StorageType, Iops = Iops, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, MonitoringInterval = MonitoringInterval, MonitoringRoleArn = MonitoringRoleArn, DatabaseInsightsMode = DatabaseInsightsMode, EnablePerformanceInsights = EnablePerformanceInsights, PerformanceInsightsKMSKeyId = PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod = PerformanceInsightsRetentionPeriod, ServerlessV2ScalingConfiguration = ServerlessV2ScalingConfiguration, NetworkType = NetworkType, ManageMasterUserPassword = ManageMasterUserPassword, RotateMasterUserPassword = RotateMasterUserPassword, MasterUserSecretKmsKeyId = MasterUserSecretKmsKeyId, EngineMode = EngineMode, AllowEngineModeChange = AllowEngineModeChange, EnableLocalWriteForwarding = EnableLocalWriteForwarding, AwsBackupRecoveryPointArn = AwsBackupRecoveryPointArn, EnableLimitlessDatabase = EnableLimitlessDatabase, CACertificateIdentifier = CACertificateIdentifier)
   output <- .rds$modify_db_cluster_output()
   config <- get_config()
   svc <- .rds$service(config, op)
@@ -9114,7 +9305,8 @@ rds_modify_db_cluster_endpoint <- function(DBClusterEndpointIdentifier, Endpoint
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_db_cluster_endpoint_input(DBClusterEndpointIdentifier = DBClusterEndpointIdentifier, EndpointType = EndpointType, StaticMembers = StaticMembers, ExcludedMembers = ExcludedMembers)
   output <- .rds$modify_db_cluster_endpoint_output()
@@ -9156,7 +9348,8 @@ rds_modify_db_cluster_parameter_group <- function(DBClusterParameterGroupName, P
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_db_cluster_parameter_group_input(DBClusterParameterGroupName = DBClusterParameterGroupName, Parameters = Parameters)
   output <- .rds$modify_db_cluster_parameter_group_output()
@@ -9215,7 +9408,8 @@ rds_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdentifier
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_db_cluster_snapshot_attribute_input(DBClusterSnapshotIdentifier = DBClusterSnapshotIdentifier, AttributeName = AttributeName, ValuesToAdd = ValuesToAdd, ValuesToRemove = ValuesToRemove)
   output <- .rds$modify_db_cluster_snapshot_attribute_output()
@@ -9569,19 +9763,18 @@ rds_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdentifier
 #' effect.
 #' 
 #' If you choose to migrate your DB instance from using standard storage to
-#' using Provisioned IOPS, or from using Provisioned IOPS to using standard
-#' storage, the process can take time. The duration of the migration
-#' depends on several factors such as database load, storage size, storage
-#' type (standard or Provisioned IOPS), amount of IOPS provisioned (if
-#' any), and the number of prior scale storage operations. Typical
-#' migration times are under 24 hours, but the process can take up to
-#' several days in some cases. During the migration, the DB instance is
-#' available for use, but might experience performance degradation. While
-#' the migration takes place, nightly backups for the instance are
-#' suspended. No other Amazon RDS operations can take place for the
-#' instance, including modifying the instance, rebooting the instance,
-#' deleting the instance, creating a read replica for the instance, and
-#' creating a DB snapshot of the instance.
+#' Provisioned IOPS (io1), or from Provisioned IOPS to standard storage,
+#' the process can take time. The duration of the migration depends on
+#' several factors such as database load, storage size, storage type
+#' (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and
+#' the number of prior scale storage operations. Typical migration times
+#' are under 24 hours, but the process can take up to several days in some
+#' cases. During the migration, the DB instance is available for use, but
+#' might experience performance degradation. While the migration takes
+#' place, nightly backups for the instance are suspended. No other Amazon
+#' RDS operations can take place for the instance, including modifying the
+#' instance, rebooting the instance, deleting the instance, creating a read
+#' replica for the instance, and creating a DB snapshot of the instance.
 #' 
 #' Constraints:
 #' 
@@ -9634,19 +9827,19 @@ rds_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdentifier
 #' the `Iops` parameter.
 #' 
 #' If you choose to migrate your DB instance from using standard storage to
-#' using Provisioned IOPS, or from using Provisioned IOPS to using standard
-#' storage, the process can take time. The duration of the migration
-#' depends on several factors such as database load, storage size, storage
-#' type (standard or Provisioned IOPS), amount of IOPS provisioned (if
-#' any), and the number of prior scale storage operations. Typical
-#' migration times are under 24 hours, but the process can take up to
-#' several days in some cases. During the migration, the DB instance is
-#' available for use, but might experience performance degradation. While
-#' the migration takes place, nightly backups for the instance are
-#' suspended. No other Amazon RDS operations can take place for the
-#' instance, including modifying the instance, rebooting the instance,
-#' deleting the instance, creating a read replica for the instance, and
-#' creating a DB snapshot of the instance.
+#' gp2 (General Purpose SSD), gp3, or Provisioned IOPS (io1), or from these
+#' storage types to standard storage, the process can take time. The
+#' duration of the migration depends on several factors such as database
+#' load, storage size, storage type (standard or Provisioned IOPS), amount
+#' of IOPS provisioned (if any), and the number of prior scale storage
+#' operations. Typical migration times are under 24 hours, but the process
+#' can take up to several days in some cases. During the migration, the DB
+#' instance is available for use, but might experience performance
+#' degradation. While the migration takes place, nightly backups for the
+#' instance are suspended. No other Amazon RDS operations can take place
+#' for the instance, including modifying the instance, rebooting the
+#' instance, deleting the instance, creating a read replica for the
+#' instance, and creating a DB snapshot of the instance.
 #' 
 #' Valid Values: `gp2 | gp3 | io1 | io2 | standard`
 #' 
@@ -9824,6 +10017,12 @@ rds_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdentifier
 #' in the *Amazon RDS User Guide.*
 #' 
 #' This setting doesn't apply to RDS Custom DB instances.
+#' @param DatabaseInsightsMode Specifies the mode of Database Insights to enable for the DB instance.
+#' 
+#' This setting only applies to Amazon Aurora DB instances.
+#' 
+#' Currently, this value is inherited from the DB cluster and can't be
+#' changed.
 #' @param EnablePerformanceInsights Specifies whether to enable Performance Insights for the DB instance.
 #' 
 #' For more information, see [Using Amazon Performance
@@ -9869,6 +10068,26 @@ rds_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdentifier
 #' `ApplyImmediately` parameter has no effect.
 #' 
 #' This setting doesn't apply to RDS Custom DB instances.
+#' 
+#' The following values are valid for each DB engine:
+#' 
+#' -   Aurora MySQL - `audit | error | general | slowquery`
+#' 
+#' -   Aurora PostgreSQL - `postgresql`
+#' 
+#' -   RDS for MySQL - `error | general | slowquery`
+#' 
+#' -   RDS for PostgreSQL - `postgresql | upgrade`
+#' 
+#' For more information about exporting CloudWatch Logs for Amazon RDS, see
+#' [Publishing Database Logs to Amazon CloudWatch
+#' Logs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
+#' in the *Amazon RDS User Guide*.
+#' 
+#' For more information about exporting CloudWatch Logs for Amazon Aurora,
+#' see [Publishing Database Logs to Amazon CloudWatch
+#' Logs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
+#' in the *Amazon Aurora User Guide*.
 #' @param ProcessorFeatures The number of CPU cores and the number of threads per core for the DB
 #' instance class of the DB instance.
 #' 
@@ -10104,15 +10323,16 @@ rds_modify_db_cluster_snapshot_attribute <- function(DBClusterSnapshotIdentifier
 #' @keywords internal
 #'
 #' @rdname rds_modify_db_instance
-rds_modify_db_instance <- function(DBInstanceIdentifier, AllocatedStorage = NULL, DBInstanceClass = NULL, DBSubnetGroupName = NULL, DBSecurityGroups = NULL, VpcSecurityGroupIds = NULL, ApplyImmediately = NULL, MasterUserPassword = NULL, DBParameterGroupName = NULL, BackupRetentionPeriod = NULL, PreferredBackupWindow = NULL, PreferredMaintenanceWindow = NULL, MultiAZ = NULL, EngineVersion = NULL, AllowMajorVersionUpgrade = NULL, AutoMinorVersionUpgrade = NULL, LicenseModel = NULL, Iops = NULL, OptionGroupName = NULL, NewDBInstanceIdentifier = NULL, StorageType = NULL, TdeCredentialArn = NULL, TdeCredentialPassword = NULL, CACertificateIdentifier = NULL, Domain = NULL, DomainFqdn = NULL, DomainOu = NULL, DomainAuthSecretArn = NULL, DomainDnsIps = NULL, CopyTagsToSnapshot = NULL, MonitoringInterval = NULL, DBPortNumber = NULL, PubliclyAccessible = NULL, MonitoringRoleArn = NULL, DomainIAMRoleName = NULL, DisableDomain = NULL, PromotionTier = NULL, EnableIAMDatabaseAuthentication = NULL, EnablePerformanceInsights = NULL, PerformanceInsightsKMSKeyId = NULL, PerformanceInsightsRetentionPeriod = NULL, CloudwatchLogsExportConfiguration = NULL, ProcessorFeatures = NULL, UseDefaultProcessorFeatures = NULL, DeletionProtection = NULL, MaxAllocatedStorage = NULL, CertificateRotationRestart = NULL, ReplicaMode = NULL, EnableCustomerOwnedIp = NULL, AwsBackupRecoveryPointArn = NULL, AutomationMode = NULL, ResumeFullAutomationModeMinutes = NULL, NetworkType = NULL, StorageThroughput = NULL, ManageMasterUserPassword = NULL, RotateMasterUserPassword = NULL, MasterUserSecretKmsKeyId = NULL, Engine = NULL, DedicatedLogVolume = NULL, MultiTenant = NULL) {
+rds_modify_db_instance <- function(DBInstanceIdentifier, AllocatedStorage = NULL, DBInstanceClass = NULL, DBSubnetGroupName = NULL, DBSecurityGroups = NULL, VpcSecurityGroupIds = NULL, ApplyImmediately = NULL, MasterUserPassword = NULL, DBParameterGroupName = NULL, BackupRetentionPeriod = NULL, PreferredBackupWindow = NULL, PreferredMaintenanceWindow = NULL, MultiAZ = NULL, EngineVersion = NULL, AllowMajorVersionUpgrade = NULL, AutoMinorVersionUpgrade = NULL, LicenseModel = NULL, Iops = NULL, OptionGroupName = NULL, NewDBInstanceIdentifier = NULL, StorageType = NULL, TdeCredentialArn = NULL, TdeCredentialPassword = NULL, CACertificateIdentifier = NULL, Domain = NULL, DomainFqdn = NULL, DomainOu = NULL, DomainAuthSecretArn = NULL, DomainDnsIps = NULL, CopyTagsToSnapshot = NULL, MonitoringInterval = NULL, DBPortNumber = NULL, PubliclyAccessible = NULL, MonitoringRoleArn = NULL, DomainIAMRoleName = NULL, DisableDomain = NULL, PromotionTier = NULL, EnableIAMDatabaseAuthentication = NULL, DatabaseInsightsMode = NULL, EnablePerformanceInsights = NULL, PerformanceInsightsKMSKeyId = NULL, PerformanceInsightsRetentionPeriod = NULL, CloudwatchLogsExportConfiguration = NULL, ProcessorFeatures = NULL, UseDefaultProcessorFeatures = NULL, DeletionProtection = NULL, MaxAllocatedStorage = NULL, CertificateRotationRestart = NULL, ReplicaMode = NULL, EnableCustomerOwnedIp = NULL, AwsBackupRecoveryPointArn = NULL, AutomationMode = NULL, ResumeFullAutomationModeMinutes = NULL, NetworkType = NULL, StorageThroughput = NULL, ManageMasterUserPassword = NULL, RotateMasterUserPassword = NULL, MasterUserSecretKmsKeyId = NULL, Engine = NULL, DedicatedLogVolume = NULL, MultiTenant = NULL) {
   op <- new_operation(
     name = "ModifyDBInstance",
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .rds$modify_db_instance_input(DBInstanceIdentifier = DBInstanceIdentifier, AllocatedStorage = AllocatedStorage, DBInstanceClass = DBInstanceClass, DBSubnetGroupName = DBSubnetGroupName, DBSecurityGroups = DBSecurityGroups, VpcSecurityGroupIds = VpcSecurityGroupIds, ApplyImmediately = ApplyImmediately, MasterUserPassword = MasterUserPassword, DBParameterGroupName = DBParameterGroupName, BackupRetentionPeriod = BackupRetentionPeriod, PreferredBackupWindow = PreferredBackupWindow, PreferredMaintenanceWindow = PreferredMaintenanceWindow, MultiAZ = MultiAZ, EngineVersion = EngineVersion, AllowMajorVersionUpgrade = AllowMajorVersionUpgrade, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, LicenseModel = LicenseModel, Iops = Iops, OptionGroupName = OptionGroupName, NewDBInstanceIdentifier = NewDBInstanceIdentifier, StorageType = StorageType, TdeCredentialArn = TdeCredentialArn, TdeCredentialPassword = TdeCredentialPassword, CACertificateIdentifier = CACertificateIdentifier, Domain = Domain, DomainFqdn = DomainFqdn, DomainOu = DomainOu, DomainAuthSecretArn = DomainAuthSecretArn, DomainDnsIps = DomainDnsIps, CopyTagsToSnapshot = CopyTagsToSnapshot, MonitoringInterval = MonitoringInterval, DBPortNumber = DBPortNumber, PubliclyAccessible = PubliclyAccessible, MonitoringRoleArn = MonitoringRoleArn, DomainIAMRoleName = DomainIAMRoleName, DisableDomain = DisableDomain, PromotionTier = PromotionTier, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, EnablePerformanceInsights = EnablePerformanceInsights, PerformanceInsightsKMSKeyId = PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod = PerformanceInsightsRetentionPeriod, CloudwatchLogsExportConfiguration = CloudwatchLogsExportConfiguration, ProcessorFeatures = ProcessorFeatures, UseDefaultProcessorFeatures = UseDefaultProcessorFeatures, DeletionProtection = DeletionProtection, MaxAllocatedStorage = MaxAllocatedStorage, CertificateRotationRestart = CertificateRotationRestart, ReplicaMode = ReplicaMode, EnableCustomerOwnedIp = EnableCustomerOwnedIp, AwsBackupRecoveryPointArn = AwsBackupRecoveryPointArn, AutomationMode = AutomationMode, ResumeFullAutomationModeMinutes = ResumeFullAutomationModeMinutes, NetworkType = NetworkType, StorageThroughput = StorageThroughput, ManageMasterUserPassword = ManageMasterUserPassword, RotateMasterUserPassword = RotateMasterUserPassword, MasterUserSecretKmsKeyId = MasterUserSecretKmsKeyId, Engine = Engine, DedicatedLogVolume = DedicatedLogVolume, MultiTenant = MultiTenant)
+  input <- .rds$modify_db_instance_input(DBInstanceIdentifier = DBInstanceIdentifier, AllocatedStorage = AllocatedStorage, DBInstanceClass = DBInstanceClass, DBSubnetGroupName = DBSubnetGroupName, DBSecurityGroups = DBSecurityGroups, VpcSecurityGroupIds = VpcSecurityGroupIds, ApplyImmediately = ApplyImmediately, MasterUserPassword = MasterUserPassword, DBParameterGroupName = DBParameterGroupName, BackupRetentionPeriod = BackupRetentionPeriod, PreferredBackupWindow = PreferredBackupWindow, PreferredMaintenanceWindow = PreferredMaintenanceWindow, MultiAZ = MultiAZ, EngineVersion = EngineVersion, AllowMajorVersionUpgrade = AllowMajorVersionUpgrade, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, LicenseModel = LicenseModel, Iops = Iops, OptionGroupName = OptionGroupName, NewDBInstanceIdentifier = NewDBInstanceIdentifier, StorageType = StorageType, TdeCredentialArn = TdeCredentialArn, TdeCredentialPassword = TdeCredentialPassword, CACertificateIdentifier = CACertificateIdentifier, Domain = Domain, DomainFqdn = DomainFqdn, DomainOu = DomainOu, DomainAuthSecretArn = DomainAuthSecretArn, DomainDnsIps = DomainDnsIps, CopyTagsToSnapshot = CopyTagsToSnapshot, MonitoringInterval = MonitoringInterval, DBPortNumber = DBPortNumber, PubliclyAccessible = PubliclyAccessible, MonitoringRoleArn = MonitoringRoleArn, DomainIAMRoleName = DomainIAMRoleName, DisableDomain = DisableDomain, PromotionTier = PromotionTier, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, DatabaseInsightsMode = DatabaseInsightsMode, EnablePerformanceInsights = EnablePerformanceInsights, PerformanceInsightsKMSKeyId = PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod = PerformanceInsightsRetentionPeriod, CloudwatchLogsExportConfiguration = CloudwatchLogsExportConfiguration, ProcessorFeatures = ProcessorFeatures, UseDefaultProcessorFeatures = UseDefaultProcessorFeatures, DeletionProtection = DeletionProtection, MaxAllocatedStorage = MaxAllocatedStorage, CertificateRotationRestart = CertificateRotationRestart, ReplicaMode = ReplicaMode, EnableCustomerOwnedIp = EnableCustomerOwnedIp, AwsBackupRecoveryPointArn = AwsBackupRecoveryPointArn, AutomationMode = AutomationMode, ResumeFullAutomationModeMinutes = ResumeFullAutomationModeMinutes, NetworkType = NetworkType, StorageThroughput = StorageThroughput, ManageMasterUserPassword = ManageMasterUserPassword, RotateMasterUserPassword = RotateMasterUserPassword, MasterUserSecretKmsKeyId = MasterUserSecretKmsKeyId, Engine = Engine, DedicatedLogVolume = DedicatedLogVolume, MultiTenant = MultiTenant)
   output <- .rds$modify_db_instance_output()
   config <- get_config()
   svc <- .rds$service(config, op)
@@ -10169,7 +10389,8 @@ rds_modify_db_parameter_group <- function(DBParameterGroupName, Parameters) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_db_parameter_group_input(DBParameterGroupName = DBParameterGroupName, Parameters = Parameters)
   output <- .rds$modify_db_parameter_group_output()
@@ -10220,7 +10441,8 @@ rds_modify_db_proxy <- function(DBProxyName, NewDBProxyName = NULL, Auth = NULL,
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_db_proxy_input(DBProxyName = DBProxyName, NewDBProxyName = NewDBProxyName, Auth = Auth, RequireTLS = RequireTLS, IdleClientTimeout = IdleClientTimeout, DebugLogging = DebugLogging, RoleArn = RoleArn, SecurityGroups = SecurityGroups)
   output <- .rds$modify_db_proxy_output()
@@ -10257,7 +10479,8 @@ rds_modify_db_proxy_endpoint <- function(DBProxyEndpointName, NewDBProxyEndpoint
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_db_proxy_endpoint_input(DBProxyEndpointName = DBProxyEndpointName, NewDBProxyEndpointName = NewDBProxyEndpointName, VpcSecurityGroupIds = VpcSecurityGroupIds)
   output <- .rds$modify_db_proxy_endpoint_output()
@@ -10293,7 +10516,8 @@ rds_modify_db_proxy_target_group <- function(TargetGroupName, DBProxyName, Conne
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_db_proxy_target_group_input(TargetGroupName = TargetGroupName, DBProxyName = DBProxyName, ConnectionPoolConfig = ConnectionPoolConfig, NewName = NewName)
   output <- .rds$modify_db_proxy_target_group_output()
@@ -10334,7 +10558,8 @@ rds_modify_db_recommendation <- function(RecommendationId, Locale = NULL, Status
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_db_recommendation_input(RecommendationId = RecommendationId, Locale = Locale, Status = Status, RecommendedActionUpdates = RecommendedActionUpdates)
   output <- .rds$modify_db_recommendation_output()
@@ -10358,19 +10583,31 @@ rds_modify_db_recommendation <- function(RecommendationId, Locale = NULL, Status
 #' (ACUs).
 #' @param MinACU The minimum capacity of the DB shard group in Aurora capacity units
 #' (ACUs).
+#' @param ComputeRedundancy Specifies whether to create standby DB shard groups for the DB shard
+#' group. Valid values are the following:
+#' 
+#' -   0 - Creates a DB shard group without a standby DB shard group. This
+#'     is the default value.
+#' 
+#' -   1 - Creates a DB shard group with a standby DB shard group in a
+#'     different Availability Zone (AZ).
+#' 
+#' -   2 - Creates a DB shard group with two standby DB shard groups in two
+#'     different AZs.
 #'
 #' @keywords internal
 #'
 #' @rdname rds_modify_db_shard_group
-rds_modify_db_shard_group <- function(DBShardGroupIdentifier, MaxACU = NULL, MinACU = NULL) {
+rds_modify_db_shard_group <- function(DBShardGroupIdentifier, MaxACU = NULL, MinACU = NULL, ComputeRedundancy = NULL) {
   op <- new_operation(
     name = "ModifyDBShardGroup",
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .rds$modify_db_shard_group_input(DBShardGroupIdentifier = DBShardGroupIdentifier, MaxACU = MaxACU, MinACU = MinACU)
+  input <- .rds$modify_db_shard_group_input(DBShardGroupIdentifier = DBShardGroupIdentifier, MaxACU = MaxACU, MinACU = MinACU, ComputeRedundancy = ComputeRedundancy)
   output <- .rds$modify_db_shard_group_output()
   config <- get_config()
   svc <- .rds$service(config, op)
@@ -10437,7 +10674,8 @@ rds_modify_db_snapshot <- function(DBSnapshotIdentifier, EngineVersion = NULL, O
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_db_snapshot_input(DBSnapshotIdentifier = DBSnapshotIdentifier, EngineVersion = EngineVersion, OptionGroupName = OptionGroupName)
   output <- .rds$modify_db_snapshot_output()
@@ -10495,7 +10733,8 @@ rds_modify_db_snapshot_attribute <- function(DBSnapshotIdentifier, AttributeName
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_db_snapshot_attribute_input(DBSnapshotIdentifier = DBSnapshotIdentifier, AttributeName = AttributeName, ValuesToAdd = ValuesToAdd, ValuesToRemove = ValuesToRemove)
   output <- .rds$modify_db_snapshot_attribute_output()
@@ -10533,7 +10772,8 @@ rds_modify_db_subnet_group <- function(DBSubnetGroupName, DBSubnetGroupDescripti
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_db_subnet_group_input(DBSubnetGroupName = DBSubnetGroupName, DBSubnetGroupDescription = DBSubnetGroupDescription, SubnetIds = SubnetIds)
   output <- .rds$modify_db_subnet_group_output()
@@ -10580,7 +10820,8 @@ rds_modify_event_subscription <- function(SubscriptionName, SnsTopicArn = NULL, 
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_event_subscription_input(SubscriptionName = SubscriptionName, SnsTopicArn = SnsTopicArn, SourceType = SourceType, EventCategories = EventCategories, Enabled = Enabled)
   output <- .rds$modify_event_subscription_output()
@@ -10652,7 +10893,8 @@ rds_modify_global_cluster <- function(GlobalClusterIdentifier = NULL, NewGlobalC
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_global_cluster_input(GlobalClusterIdentifier = GlobalClusterIdentifier, NewGlobalClusterIdentifier = NewGlobalClusterIdentifier, DeletionProtection = DeletionProtection, EngineVersion = EngineVersion, AllowMajorVersionUpgrade = AllowMajorVersionUpgrade)
   output <- .rds$modify_global_cluster_output()
@@ -10687,7 +10929,8 @@ rds_modify_integration <- function(IntegrationIdentifier, IntegrationName = NULL
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_integration_input(IntegrationIdentifier = IntegrationIdentifier, IntegrationName = IntegrationName, DataFilter = DataFilter, Description = Description)
   output <- .rds$modify_integration_output()
@@ -10727,7 +10970,8 @@ rds_modify_option_group <- function(OptionGroupName, OptionsToInclude = NULL, Op
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_option_group_input(OptionGroupName = OptionGroupName, OptionsToInclude = OptionsToInclude, OptionsToRemove = OptionsToRemove, ApplyImmediately = ApplyImmediately)
   output <- .rds$modify_option_group_output()
@@ -10792,7 +11036,8 @@ rds_modify_tenant_database <- function(DBInstanceIdentifier, TenantDBName, Maste
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$modify_tenant_database_input(DBInstanceIdentifier = DBInstanceIdentifier, TenantDBName = TenantDBName, MasterUserPassword = MasterUserPassword, NewTenantDBName = NewTenantDBName)
   output <- .rds$modify_tenant_database_output()
@@ -10836,8 +11081,8 @@ rds_modify_tenant_database <- function(DBInstanceIdentifier, TenantDBName, Maste
 #' The default is a 30-minute window selected at random from an 8-hour
 #' block of time for each Amazon Web Services Region. To see the time
 #' blocks available, see [Adjusting the Preferred Maintenance
-#' Window](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
-#' in the *Amazon RDS User Guide.*
+#' Window](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/) in the
+#' *Amazon RDS User Guide.*
 #' 
 #' Constraints:
 #' 
@@ -10858,7 +11103,8 @@ rds_promote_read_replica <- function(DBInstanceIdentifier, BackupRetentionPeriod
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$promote_read_replica_input(DBInstanceIdentifier = DBInstanceIdentifier, BackupRetentionPeriod = BackupRetentionPeriod, PreferredBackupWindow = PreferredBackupWindow)
   output <- .rds$promote_read_replica_output()
@@ -10895,7 +11141,8 @@ rds_promote_read_replica_db_cluster <- function(DBClusterIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$promote_read_replica_db_cluster_input(DBClusterIdentifier = DBClusterIdentifier)
   output <- .rds$promote_read_replica_db_cluster_output()
@@ -10934,7 +11181,8 @@ rds_purchase_reserved_db_instances_offering <- function(ReservedDBInstancesOffer
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$purchase_reserved_db_instances_offering_input(ReservedDBInstancesOfferingId = ReservedDBInstancesOfferingId, ReservedDBInstanceId = ReservedDBInstanceId, DBInstanceCount = DBInstanceCount, Tags = Tags)
   output <- .rds$purchase_reserved_db_instances_offering_output()
@@ -10970,7 +11218,8 @@ rds_reboot_db_cluster <- function(DBClusterIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$reboot_db_cluster_input(DBClusterIdentifier = DBClusterIdentifier)
   output <- .rds$reboot_db_cluster_output()
@@ -11010,7 +11259,8 @@ rds_reboot_db_instance <- function(DBInstanceIdentifier, ForceFailover = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$reboot_db_instance_input(DBInstanceIdentifier = DBInstanceIdentifier, ForceFailover = ForceFailover)
   output <- .rds$reboot_db_instance_output()
@@ -11041,7 +11291,8 @@ rds_reboot_db_shard_group <- function(DBShardGroupIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$reboot_db_shard_group_input(DBShardGroupIdentifier = DBShardGroupIdentifier)
   output <- .rds$reboot_db_shard_group_output()
@@ -11076,7 +11327,8 @@ rds_register_db_proxy_targets <- function(DBProxyName, TargetGroupName = NULL, D
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$register_db_proxy_targets_input(DBProxyName = DBProxyName, TargetGroupName = TargetGroupName, DBInstanceIdentifiers = DBInstanceIdentifiers, DBClusterIdentifiers = DBClusterIdentifiers)
   output <- .rds$register_db_proxy_targets_output()
@@ -11110,7 +11362,8 @@ rds_remove_from_global_cluster <- function(GlobalClusterIdentifier = NULL, DbClu
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$remove_from_global_cluster_input(GlobalClusterIdentifier = GlobalClusterIdentifier, DbClusterIdentifier = DbClusterIdentifier)
   output <- .rds$remove_from_global_cluster_output()
@@ -11147,7 +11400,8 @@ rds_remove_role_from_db_cluster <- function(DBClusterIdentifier, RoleArn, Featur
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$remove_role_from_db_cluster_input(DBClusterIdentifier = DBClusterIdentifier, RoleArn = RoleArn, FeatureName = FeatureName)
   output <- .rds$remove_role_from_db_cluster_output()
@@ -11183,7 +11437,8 @@ rds_remove_role_from_db_instance <- function(DBInstanceIdentifier, RoleArn, Feat
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$remove_role_from_db_instance_input(DBInstanceIdentifier = DBInstanceIdentifier, RoleArn = RoleArn, FeatureName = FeatureName)
   output <- .rds$remove_role_from_db_instance_output()
@@ -11218,7 +11473,8 @@ rds_remove_source_identifier_from_subscription <- function(SubscriptionName, Sou
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$remove_source_identifier_from_subscription_input(SubscriptionName = SubscriptionName, SourceIdentifier = SourceIdentifier)
   output <- .rds$remove_source_identifier_from_subscription_output()
@@ -11253,7 +11509,8 @@ rds_remove_tags_from_resource <- function(ResourceName, TagKeys) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$remove_tags_from_resource_input(ResourceName = ResourceName, TagKeys = TagKeys)
   output <- .rds$remove_tags_from_resource_output()
@@ -11290,7 +11547,8 @@ rds_reset_db_cluster_parameter_group <- function(DBClusterParameterGroupName, Re
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$reset_db_cluster_parameter_group_input(DBClusterParameterGroupName = DBClusterParameterGroupName, ResetAllParameters = ResetAllParameters, Parameters = Parameters)
   output <- .rds$reset_db_cluster_parameter_group_output()
@@ -11352,7 +11610,8 @@ rds_reset_db_parameter_group <- function(DBParameterGroupName, ResetAllParameter
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$reset_db_parameter_group_input(DBParameterGroupName = DBParameterGroupName, ResetAllParameters = ResetAllParameters, Parameters = Parameters)
   output <- .rds$reset_db_parameter_group_output()
@@ -11636,7 +11895,7 @@ rds_reset_db_parameter_group <- function(DBParameterGroupName, ResetAllParameter
 #' for that engine version. For more information, see the following
 #' sections:
 #' 
-#' -   Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+#' -   Amazon Aurora - [Using Amazon RDS Extended
 #'     Support](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html)
 #'     in the *Amazon Aurora User Guide*
 #' 
@@ -11660,7 +11919,8 @@ rds_restore_db_cluster_from_s3 <- function(AvailabilityZones = NULL, BackupReten
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$restore_db_cluster_from_s3_input(AvailabilityZones = AvailabilityZones, BackupRetentionPeriod = BackupRetentionPeriod, CharacterSetName = CharacterSetName, DatabaseName = DatabaseName, DBClusterIdentifier = DBClusterIdentifier, DBClusterParameterGroupName = DBClusterParameterGroupName, VpcSecurityGroupIds = VpcSecurityGroupIds, DBSubnetGroupName = DBSubnetGroupName, Engine = Engine, EngineVersion = EngineVersion, Port = Port, MasterUsername = MasterUsername, MasterUserPassword = MasterUserPassword, OptionGroupName = OptionGroupName, PreferredBackupWindow = PreferredBackupWindow, PreferredMaintenanceWindow = PreferredMaintenanceWindow, Tags = Tags, StorageEncrypted = StorageEncrypted, KmsKeyId = KmsKeyId, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, SourceEngine = SourceEngine, SourceEngineVersion = SourceEngineVersion, S3BucketName = S3BucketName, S3Prefix = S3Prefix, S3IngestionRoleArn = S3IngestionRoleArn, BacktrackWindow = BacktrackWindow, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, DeletionProtection = DeletionProtection, CopyTagsToSnapshot = CopyTagsToSnapshot, Domain = Domain, DomainIAMRoleName = DomainIAMRoleName, ServerlessV2ScalingConfiguration = ServerlessV2ScalingConfiguration, NetworkType = NetworkType, ManageMasterUserPassword = ManageMasterUserPassword, MasterUserSecretKmsKeyId = MasterUserSecretKmsKeyId, StorageType = StorageType, EngineLifecycleSupport = EngineLifecycleSupport)
   output <- .rds$restore_db_cluster_from_s3_output()
@@ -11817,9 +12077,12 @@ rds_restore_db_cluster_from_s3 <- function(AvailabilityZones = NULL, BackupReten
 #' 
 #' For more information, see [IAM Database
 #' Authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
-#' in the *Amazon Aurora User Guide*.
+#' in the *Amazon Aurora User Guide* or [IAM database authentication for
+#' MariaDB, MySQL, and
+#' PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
+#' in the *Amazon RDS User Guide*.
 #' 
-#' Valid for: Aurora DB clusters only
+#' Valid for: Aurora DB clusters and Multi-AZ DB clusters
 #' @param BacktrackWindow The target backtrack window, in seconds. To disable backtracking, set
 #' this value to 0.
 #' 
@@ -12002,6 +12265,49 @@ rds_restore_db_cluster_from_s3 <- function(AvailabilityZones = NULL, BackupReten
 #' 
 #' Valid for: Aurora DB clusters only
 #' @param RdsCustomClusterConfiguration Reserved for future use.
+#' @param MonitoringInterval The interval, in seconds, between points when Enhanced Monitoring
+#' metrics are collected for the DB cluster. To turn off collecting
+#' Enhanced Monitoring metrics, specify `0`.
+#' 
+#' If `MonitoringRoleArn` is specified, also set `MonitoringInterval` to a
+#' value other than `0`.
+#' 
+#' Valid Values: `0 | 1 | 5 | 10 | 15 | 30 | 60`
+#' 
+#' Default: `0`
+#' @param MonitoringRoleArn The Amazon Resource Name (ARN) for the IAM role that permits RDS to send
+#' Enhanced Monitoring metrics to Amazon CloudWatch Logs. An example is
+#' `arn:aws:iam:123456789012:role/emaccess`.
+#' 
+#' If `MonitoringInterval` is set to a value other than `0`, supply a
+#' `MonitoringRoleArn` value.
+#' @param EnablePerformanceInsights Specifies whether to turn on Performance Insights for the DB cluster.
+#' @param PerformanceInsightsKMSKeyId The Amazon Web Services KMS key identifier for encryption of Performance
+#' Insights data.
+#' 
+#' The Amazon Web Services KMS key identifier is the key ARN, key ID, alias
+#' ARN, or alias name for the KMS key.
+#' 
+#' If you don't specify a value for `PerformanceInsightsKMSKeyId`, then
+#' Amazon RDS uses your default KMS key. There is a default KMS key for
+#' your Amazon Web Services account. Your Amazon Web Services account has a
+#' different default KMS key for each Amazon Web Services Region.
+#' @param PerformanceInsightsRetentionPeriod The number of days to retain Performance Insights data.
+#' 
+#' Valid Values:
+#' 
+#' -   `7`
+#' 
+#' -   *month* * 31, where *month* is a number of months from 1-23.
+#'     Examples: `93` (3 months * 31), `341` (11 months * 31), `589` (19
+#'     months * 31)
+#' 
+#' -   `731`
+#' 
+#' Default: `7` days
+#' 
+#' If you specify a retention period that isn't valid, such as `94`, Amazon
+#' RDS issues an error.
 #' @param EngineLifecycleSupport The life cycle type for this DB cluster.
 #' 
 #' By default, this value is set to `open-source-rds-extended-support`,
@@ -12018,7 +12324,7 @@ rds_restore_db_cluster_from_s3 <- function(AvailabilityZones = NULL, BackupReten
 #' for that engine version. For more information, see the following
 #' sections:
 #' 
-#' -   Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+#' -   Amazon Aurora - [Using Amazon RDS Extended
 #'     Support](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html)
 #'     in the *Amazon Aurora User Guide*
 #' 
@@ -12036,15 +12342,16 @@ rds_restore_db_cluster_from_s3 <- function(AvailabilityZones = NULL, BackupReten
 #' @keywords internal
 #'
 #' @rdname rds_restore_db_cluster_from_snapshot
-rds_restore_db_cluster_from_snapshot <- function(AvailabilityZones = NULL, DBClusterIdentifier, SnapshotIdentifier, Engine, EngineVersion = NULL, Port = NULL, DBSubnetGroupName = NULL, DatabaseName = NULL, OptionGroupName = NULL, VpcSecurityGroupIds = NULL, Tags = NULL, KmsKeyId = NULL, EnableIAMDatabaseAuthentication = NULL, BacktrackWindow = NULL, EnableCloudwatchLogsExports = NULL, EngineMode = NULL, ScalingConfiguration = NULL, DBClusterParameterGroupName = NULL, DeletionProtection = NULL, CopyTagsToSnapshot = NULL, Domain = NULL, DomainIAMRoleName = NULL, DBClusterInstanceClass = NULL, StorageType = NULL, Iops = NULL, PubliclyAccessible = NULL, ServerlessV2ScalingConfiguration = NULL, NetworkType = NULL, RdsCustomClusterConfiguration = NULL, EngineLifecycleSupport = NULL) {
+rds_restore_db_cluster_from_snapshot <- function(AvailabilityZones = NULL, DBClusterIdentifier, SnapshotIdentifier, Engine, EngineVersion = NULL, Port = NULL, DBSubnetGroupName = NULL, DatabaseName = NULL, OptionGroupName = NULL, VpcSecurityGroupIds = NULL, Tags = NULL, KmsKeyId = NULL, EnableIAMDatabaseAuthentication = NULL, BacktrackWindow = NULL, EnableCloudwatchLogsExports = NULL, EngineMode = NULL, ScalingConfiguration = NULL, DBClusterParameterGroupName = NULL, DeletionProtection = NULL, CopyTagsToSnapshot = NULL, Domain = NULL, DomainIAMRoleName = NULL, DBClusterInstanceClass = NULL, StorageType = NULL, Iops = NULL, PubliclyAccessible = NULL, ServerlessV2ScalingConfiguration = NULL, NetworkType = NULL, RdsCustomClusterConfiguration = NULL, MonitoringInterval = NULL, MonitoringRoleArn = NULL, EnablePerformanceInsights = NULL, PerformanceInsightsKMSKeyId = NULL, PerformanceInsightsRetentionPeriod = NULL, EngineLifecycleSupport = NULL) {
   op <- new_operation(
     name = "RestoreDBClusterFromSnapshot",
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .rds$restore_db_cluster_from_snapshot_input(AvailabilityZones = AvailabilityZones, DBClusterIdentifier = DBClusterIdentifier, SnapshotIdentifier = SnapshotIdentifier, Engine = Engine, EngineVersion = EngineVersion, Port = Port, DBSubnetGroupName = DBSubnetGroupName, DatabaseName = DatabaseName, OptionGroupName = OptionGroupName, VpcSecurityGroupIds = VpcSecurityGroupIds, Tags = Tags, KmsKeyId = KmsKeyId, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, BacktrackWindow = BacktrackWindow, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, EngineMode = EngineMode, ScalingConfiguration = ScalingConfiguration, DBClusterParameterGroupName = DBClusterParameterGroupName, DeletionProtection = DeletionProtection, CopyTagsToSnapshot = CopyTagsToSnapshot, Domain = Domain, DomainIAMRoleName = DomainIAMRoleName, DBClusterInstanceClass = DBClusterInstanceClass, StorageType = StorageType, Iops = Iops, PubliclyAccessible = PubliclyAccessible, ServerlessV2ScalingConfiguration = ServerlessV2ScalingConfiguration, NetworkType = NetworkType, RdsCustomClusterConfiguration = RdsCustomClusterConfiguration, EngineLifecycleSupport = EngineLifecycleSupport)
+  input <- .rds$restore_db_cluster_from_snapshot_input(AvailabilityZones = AvailabilityZones, DBClusterIdentifier = DBClusterIdentifier, SnapshotIdentifier = SnapshotIdentifier, Engine = Engine, EngineVersion = EngineVersion, Port = Port, DBSubnetGroupName = DBSubnetGroupName, DatabaseName = DatabaseName, OptionGroupName = OptionGroupName, VpcSecurityGroupIds = VpcSecurityGroupIds, Tags = Tags, KmsKeyId = KmsKeyId, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, BacktrackWindow = BacktrackWindow, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, EngineMode = EngineMode, ScalingConfiguration = ScalingConfiguration, DBClusterParameterGroupName = DBClusterParameterGroupName, DeletionProtection = DeletionProtection, CopyTagsToSnapshot = CopyTagsToSnapshot, Domain = Domain, DomainIAMRoleName = DomainIAMRoleName, DBClusterInstanceClass = DBClusterInstanceClass, StorageType = StorageType, Iops = Iops, PubliclyAccessible = PubliclyAccessible, ServerlessV2ScalingConfiguration = ServerlessV2ScalingConfiguration, NetworkType = NetworkType, RdsCustomClusterConfiguration = RdsCustomClusterConfiguration, MonitoringInterval = MonitoringInterval, MonitoringRoleArn = MonitoringRoleArn, EnablePerformanceInsights = EnablePerformanceInsights, PerformanceInsightsKMSKeyId = PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod = PerformanceInsightsRetentionPeriod, EngineLifecycleSupport = EngineLifecycleSupport)
   output <- .rds$restore_db_cluster_from_snapshot_output()
   config <- get_config()
   svc <- .rds$service(config, op)
@@ -12175,9 +12482,12 @@ rds_restore_db_cluster_from_snapshot <- function(AvailabilityZones = NULL, DBClu
 #' 
 #' For more information, see [IAM Database
 #' Authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
-#' in the *Amazon Aurora User Guide*.
+#' in the *Amazon Aurora User Guide* or [IAM database authentication for
+#' MariaDB, MySQL, and
+#' PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
+#' in the *Amazon RDS User Guide*.
 #' 
-#' Valid for: Aurora DB clusters only
+#' Valid for: Aurora DB clusters and Multi-AZ DB clusters
 #' @param BacktrackWindow The target backtrack window, in seconds. To disable backtracking, set
 #' this value to 0.
 #' 
@@ -12270,6 +12580,8 @@ rds_restore_db_cluster_from_snapshot <- function(AvailabilityZones = NULL, DBClu
 #' a provisioned clone from an Aurora Serverless v1 cluster. To create a
 #' clone that is an Aurora Serverless v1 cluster, the original cluster must
 #' be an Aurora Serverless v1 cluster or an encrypted provisioned cluster.
+#' To create a full copy that is an Aurora Serverless v1 cluster, specify
+#' the engine mode `serverless`.
 #' 
 #' Valid for: Aurora DB clusters only
 #' @param DBClusterInstanceClass The compute and memory capacity of the each DB instance in the Multi-AZ
@@ -12361,6 +12673,49 @@ rds_restore_db_cluster_from_snapshot <- function(AvailabilityZones = NULL, DBClu
 #' Valid for: Aurora DB clusters only
 #' @param SourceDbClusterResourceId The resource ID of the source DB cluster from which to restore.
 #' @param RdsCustomClusterConfiguration Reserved for future use.
+#' @param MonitoringInterval The interval, in seconds, between points when Enhanced Monitoring
+#' metrics are collected for the DB cluster. To turn off collecting
+#' Enhanced Monitoring metrics, specify `0`.
+#' 
+#' If `MonitoringRoleArn` is specified, also set `MonitoringInterval` to a
+#' value other than `0`.
+#' 
+#' Valid Values: `0 | 1 | 5 | 10 | 15 | 30 | 60`
+#' 
+#' Default: `0`
+#' @param MonitoringRoleArn The Amazon Resource Name (ARN) for the IAM role that permits RDS to send
+#' Enhanced Monitoring metrics to Amazon CloudWatch Logs. An example is
+#' `arn:aws:iam:123456789012:role/emaccess`.
+#' 
+#' If `MonitoringInterval` is set to a value other than `0`, supply a
+#' `MonitoringRoleArn` value.
+#' @param EnablePerformanceInsights Specifies whether to turn on Performance Insights for the DB cluster.
+#' @param PerformanceInsightsKMSKeyId The Amazon Web Services KMS key identifier for encryption of Performance
+#' Insights data.
+#' 
+#' The Amazon Web Services KMS key identifier is the key ARN, key ID, alias
+#' ARN, or alias name for the KMS key.
+#' 
+#' If you don't specify a value for `PerformanceInsightsKMSKeyId`, then
+#' Amazon RDS uses your default KMS key. There is a default KMS key for
+#' your Amazon Web Services account. Your Amazon Web Services account has a
+#' different default KMS key for each Amazon Web Services Region.
+#' @param PerformanceInsightsRetentionPeriod The number of days to retain Performance Insights data.
+#' 
+#' Valid Values:
+#' 
+#' -   `7`
+#' 
+#' -   *month* * 31, where *month* is a number of months from 1-23.
+#'     Examples: `93` (3 months * 31), `341` (11 months * 31), `589` (19
+#'     months * 31)
+#' 
+#' -   `731`
+#' 
+#' Default: `7` days
+#' 
+#' If you specify a retention period that isn't valid, such as `94`, Amazon
+#' RDS issues an error.
 #' @param EngineLifecycleSupport The life cycle type for this DB cluster.
 #' 
 #' By default, this value is set to `open-source-rds-extended-support`,
@@ -12377,7 +12732,7 @@ rds_restore_db_cluster_from_snapshot <- function(AvailabilityZones = NULL, DBClu
 #' for that engine version. For more information, see the following
 #' sections:
 #' 
-#' -   Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+#' -   Amazon Aurora - [Using Amazon RDS Extended
 #'     Support](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html)
 #'     in the *Amazon Aurora User Guide*
 #' 
@@ -12395,15 +12750,16 @@ rds_restore_db_cluster_from_snapshot <- function(AvailabilityZones = NULL, DBClu
 #' @keywords internal
 #'
 #' @rdname rds_restore_db_cluster_to_point_in_time
-rds_restore_db_cluster_to_point_in_time <- function(DBClusterIdentifier, RestoreType = NULL, SourceDBClusterIdentifier = NULL, RestoreToTime = NULL, UseLatestRestorableTime = NULL, Port = NULL, DBSubnetGroupName = NULL, OptionGroupName = NULL, VpcSecurityGroupIds = NULL, Tags = NULL, KmsKeyId = NULL, EnableIAMDatabaseAuthentication = NULL, BacktrackWindow = NULL, EnableCloudwatchLogsExports = NULL, DBClusterParameterGroupName = NULL, DeletionProtection = NULL, CopyTagsToSnapshot = NULL, Domain = NULL, DomainIAMRoleName = NULL, ScalingConfiguration = NULL, EngineMode = NULL, DBClusterInstanceClass = NULL, StorageType = NULL, PubliclyAccessible = NULL, Iops = NULL, ServerlessV2ScalingConfiguration = NULL, NetworkType = NULL, SourceDbClusterResourceId = NULL, RdsCustomClusterConfiguration = NULL, EngineLifecycleSupport = NULL) {
+rds_restore_db_cluster_to_point_in_time <- function(DBClusterIdentifier, RestoreType = NULL, SourceDBClusterIdentifier = NULL, RestoreToTime = NULL, UseLatestRestorableTime = NULL, Port = NULL, DBSubnetGroupName = NULL, OptionGroupName = NULL, VpcSecurityGroupIds = NULL, Tags = NULL, KmsKeyId = NULL, EnableIAMDatabaseAuthentication = NULL, BacktrackWindow = NULL, EnableCloudwatchLogsExports = NULL, DBClusterParameterGroupName = NULL, DeletionProtection = NULL, CopyTagsToSnapshot = NULL, Domain = NULL, DomainIAMRoleName = NULL, ScalingConfiguration = NULL, EngineMode = NULL, DBClusterInstanceClass = NULL, StorageType = NULL, PubliclyAccessible = NULL, Iops = NULL, ServerlessV2ScalingConfiguration = NULL, NetworkType = NULL, SourceDbClusterResourceId = NULL, RdsCustomClusterConfiguration = NULL, MonitoringInterval = NULL, MonitoringRoleArn = NULL, EnablePerformanceInsights = NULL, PerformanceInsightsKMSKeyId = NULL, PerformanceInsightsRetentionPeriod = NULL, EngineLifecycleSupport = NULL) {
   op <- new_operation(
     name = "RestoreDBClusterToPointInTime",
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .rds$restore_db_cluster_to_point_in_time_input(DBClusterIdentifier = DBClusterIdentifier, RestoreType = RestoreType, SourceDBClusterIdentifier = SourceDBClusterIdentifier, RestoreToTime = RestoreToTime, UseLatestRestorableTime = UseLatestRestorableTime, Port = Port, DBSubnetGroupName = DBSubnetGroupName, OptionGroupName = OptionGroupName, VpcSecurityGroupIds = VpcSecurityGroupIds, Tags = Tags, KmsKeyId = KmsKeyId, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, BacktrackWindow = BacktrackWindow, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, DBClusterParameterGroupName = DBClusterParameterGroupName, DeletionProtection = DeletionProtection, CopyTagsToSnapshot = CopyTagsToSnapshot, Domain = Domain, DomainIAMRoleName = DomainIAMRoleName, ScalingConfiguration = ScalingConfiguration, EngineMode = EngineMode, DBClusterInstanceClass = DBClusterInstanceClass, StorageType = StorageType, PubliclyAccessible = PubliclyAccessible, Iops = Iops, ServerlessV2ScalingConfiguration = ServerlessV2ScalingConfiguration, NetworkType = NetworkType, SourceDbClusterResourceId = SourceDbClusterResourceId, RdsCustomClusterConfiguration = RdsCustomClusterConfiguration, EngineLifecycleSupport = EngineLifecycleSupport)
+  input <- .rds$restore_db_cluster_to_point_in_time_input(DBClusterIdentifier = DBClusterIdentifier, RestoreType = RestoreType, SourceDBClusterIdentifier = SourceDBClusterIdentifier, RestoreToTime = RestoreToTime, UseLatestRestorableTime = UseLatestRestorableTime, Port = Port, DBSubnetGroupName = DBSubnetGroupName, OptionGroupName = OptionGroupName, VpcSecurityGroupIds = VpcSecurityGroupIds, Tags = Tags, KmsKeyId = KmsKeyId, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, BacktrackWindow = BacktrackWindow, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, DBClusterParameterGroupName = DBClusterParameterGroupName, DeletionProtection = DeletionProtection, CopyTagsToSnapshot = CopyTagsToSnapshot, Domain = Domain, DomainIAMRoleName = DomainIAMRoleName, ScalingConfiguration = ScalingConfiguration, EngineMode = EngineMode, DBClusterInstanceClass = DBClusterInstanceClass, StorageType = StorageType, PubliclyAccessible = PubliclyAccessible, Iops = Iops, ServerlessV2ScalingConfiguration = ServerlessV2ScalingConfiguration, NetworkType = NetworkType, SourceDbClusterResourceId = SourceDbClusterResourceId, RdsCustomClusterConfiguration = RdsCustomClusterConfiguration, MonitoringInterval = MonitoringInterval, MonitoringRoleArn = MonitoringRoleArn, EnablePerformanceInsights = EnablePerformanceInsights, PerformanceInsightsKMSKeyId = PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod = PerformanceInsightsRetentionPeriod, EngineLifecycleSupport = EngineLifecycleSupport)
   output <- .rds$restore_db_cluster_to_point_in_time_output()
   config <- get_config()
   svc <- .rds$service(config, op)
@@ -12503,10 +12859,11 @@ rds_restore_db_cluster_to_point_in_time <- function(DBClusterIdentifier, Restore
 #' @param LicenseModel License model information for the restored DB instance.
 #' 
 #' License models for RDS for Db2 require additional configuration. The
-#' Bring Your Own License (BYOL) model requires a custom parameter group.
-#' The Db2 license through Amazon Web Services Marketplace model requires
-#' an Amazon Web Services Marketplace subscription. For more information,
-#' see [RDS for Db2 licensing
+#' Bring Your Own License (BYOL) model requires a custom parameter group
+#' and an Amazon Web Services License Manager self-managed license. The Db2
+#' license through Amazon Web Services Marketplace model requires an Amazon
+#' Web Services Marketplace subscription. For more information, see [Amazon
+#' RDS for Db2 licensing
 #' options](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html)
 #' in the *Amazon RDS User Guide*.
 #' 
@@ -12806,6 +13163,8 @@ rds_restore_db_cluster_to_point_in_time <- function(DBClusterIdentifier, Restore
 #' @param AllocatedStorage The amount of storage (in gibibytes) to allocate initially for the DB
 #' instance. Follow the allocation rules specified in CreateDBInstance.
 #' 
+#' This setting isn't valid for RDS for SQL Server.
+#' 
 #' Be sure to allocate enough storage for your new DB instance so that the
 #' restore operation can succeed. You can also allocate additional storage
 #' for future growth.
@@ -12858,7 +13217,8 @@ rds_restore_db_instance_from_db_snapshot <- function(DBInstanceIdentifier, DBSna
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$restore_db_instance_from_db_snapshot_input(DBInstanceIdentifier = DBInstanceIdentifier, DBSnapshotIdentifier = DBSnapshotIdentifier, DBInstanceClass = DBInstanceClass, Port = Port, AvailabilityZone = AvailabilityZone, DBSubnetGroupName = DBSubnetGroupName, MultiAZ = MultiAZ, PubliclyAccessible = PubliclyAccessible, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, LicenseModel = LicenseModel, DBName = DBName, Engine = Engine, Iops = Iops, OptionGroupName = OptionGroupName, Tags = Tags, StorageType = StorageType, TdeCredentialArn = TdeCredentialArn, TdeCredentialPassword = TdeCredentialPassword, VpcSecurityGroupIds = VpcSecurityGroupIds, Domain = Domain, DomainFqdn = DomainFqdn, DomainOu = DomainOu, DomainAuthSecretArn = DomainAuthSecretArn, DomainDnsIps = DomainDnsIps, CopyTagsToSnapshot = CopyTagsToSnapshot, DomainIAMRoleName = DomainIAMRoleName, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, ProcessorFeatures = ProcessorFeatures, UseDefaultProcessorFeatures = UseDefaultProcessorFeatures, DBParameterGroupName = DBParameterGroupName, DeletionProtection = DeletionProtection, EnableCustomerOwnedIp = EnableCustomerOwnedIp, CustomIamInstanceProfile = CustomIamInstanceProfile, BackupTarget = BackupTarget, NetworkType = NetworkType, StorageThroughput = StorageThroughput, DBClusterSnapshotIdentifier = DBClusterSnapshotIdentifier, AllocatedStorage = AllocatedStorage, DedicatedLogVolume = DedicatedLogVolume, CACertificateIdentifier = CACertificateIdentifier, EngineLifecycleSupport = EngineLifecycleSupport)
   output <- .rds$restore_db_instance_from_db_snapshot_output()
@@ -12896,6 +13256,8 @@ rds_restore_db_instance_from_db_snapshot <- function(DBInstanceIdentifier, DBSna
 #' @param AllocatedStorage The amount of storage (in gibibytes) to allocate initially for the DB
 #' instance. Follow the allocation rules specified in
 #' [`create_db_instance`][rds_create_db_instance].
+#' 
+#' This setting isn't valid for RDS for SQL Server.
 #' 
 #' Be sure to allocate enough storage for your new DB instance so that the
 #' restore operation can succeed. You can also allocate additional storage
@@ -13118,6 +13480,12 @@ rds_restore_db_instance_from_db_snapshot <- function(DBInstanceIdentifier, DBSna
 #' IAM role
 #' manually](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html#MySQL.Procedural.Importing.Enabling.IAM)
 #' in the *Amazon RDS User Guide.*
+#' @param DatabaseInsightsMode Specifies the mode of Database Insights to enable for the DB instance.
+#' 
+#' This setting only applies to Amazon Aurora DB instances.
+#' 
+#' Currently, this value is inherited from the DB cluster and can't be
+#' changed.
 #' @param EnablePerformanceInsights Specifies whether to enable Performance Insights for the DB instance.
 #' 
 #' For more information, see [Using Amazon Performance
@@ -13270,15 +13638,16 @@ rds_restore_db_instance_from_db_snapshot <- function(DBInstanceIdentifier, DBSna
 #' @keywords internal
 #'
 #' @rdname rds_restore_db_instance_from_s3
-rds_restore_db_instance_from_s3 <- function(DBName = NULL, DBInstanceIdentifier, AllocatedStorage = NULL, DBInstanceClass, Engine, MasterUsername = NULL, MasterUserPassword = NULL, DBSecurityGroups = NULL, VpcSecurityGroupIds = NULL, AvailabilityZone = NULL, DBSubnetGroupName = NULL, PreferredMaintenanceWindow = NULL, DBParameterGroupName = NULL, BackupRetentionPeriod = NULL, PreferredBackupWindow = NULL, Port = NULL, MultiAZ = NULL, EngineVersion = NULL, AutoMinorVersionUpgrade = NULL, LicenseModel = NULL, Iops = NULL, OptionGroupName = NULL, PubliclyAccessible = NULL, Tags = NULL, StorageType = NULL, StorageEncrypted = NULL, KmsKeyId = NULL, CopyTagsToSnapshot = NULL, MonitoringInterval = NULL, MonitoringRoleArn = NULL, EnableIAMDatabaseAuthentication = NULL, SourceEngine, SourceEngineVersion, S3BucketName, S3Prefix = NULL, S3IngestionRoleArn, EnablePerformanceInsights = NULL, PerformanceInsightsKMSKeyId = NULL, PerformanceInsightsRetentionPeriod = NULL, EnableCloudwatchLogsExports = NULL, ProcessorFeatures = NULL, UseDefaultProcessorFeatures = NULL, DeletionProtection = NULL, MaxAllocatedStorage = NULL, NetworkType = NULL, StorageThroughput = NULL, ManageMasterUserPassword = NULL, MasterUserSecretKmsKeyId = NULL, DedicatedLogVolume = NULL, CACertificateIdentifier = NULL, EngineLifecycleSupport = NULL) {
+rds_restore_db_instance_from_s3 <- function(DBName = NULL, DBInstanceIdentifier, AllocatedStorage = NULL, DBInstanceClass, Engine, MasterUsername = NULL, MasterUserPassword = NULL, DBSecurityGroups = NULL, VpcSecurityGroupIds = NULL, AvailabilityZone = NULL, DBSubnetGroupName = NULL, PreferredMaintenanceWindow = NULL, DBParameterGroupName = NULL, BackupRetentionPeriod = NULL, PreferredBackupWindow = NULL, Port = NULL, MultiAZ = NULL, EngineVersion = NULL, AutoMinorVersionUpgrade = NULL, LicenseModel = NULL, Iops = NULL, OptionGroupName = NULL, PubliclyAccessible = NULL, Tags = NULL, StorageType = NULL, StorageEncrypted = NULL, KmsKeyId = NULL, CopyTagsToSnapshot = NULL, MonitoringInterval = NULL, MonitoringRoleArn = NULL, EnableIAMDatabaseAuthentication = NULL, SourceEngine, SourceEngineVersion, S3BucketName, S3Prefix = NULL, S3IngestionRoleArn, DatabaseInsightsMode = NULL, EnablePerformanceInsights = NULL, PerformanceInsightsKMSKeyId = NULL, PerformanceInsightsRetentionPeriod = NULL, EnableCloudwatchLogsExports = NULL, ProcessorFeatures = NULL, UseDefaultProcessorFeatures = NULL, DeletionProtection = NULL, MaxAllocatedStorage = NULL, NetworkType = NULL, StorageThroughput = NULL, ManageMasterUserPassword = NULL, MasterUserSecretKmsKeyId = NULL, DedicatedLogVolume = NULL, CACertificateIdentifier = NULL, EngineLifecycleSupport = NULL) {
   op <- new_operation(
     name = "RestoreDBInstanceFromS3",
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .rds$restore_db_instance_from_s3_input(DBName = DBName, DBInstanceIdentifier = DBInstanceIdentifier, AllocatedStorage = AllocatedStorage, DBInstanceClass = DBInstanceClass, Engine = Engine, MasterUsername = MasterUsername, MasterUserPassword = MasterUserPassword, DBSecurityGroups = DBSecurityGroups, VpcSecurityGroupIds = VpcSecurityGroupIds, AvailabilityZone = AvailabilityZone, DBSubnetGroupName = DBSubnetGroupName, PreferredMaintenanceWindow = PreferredMaintenanceWindow, DBParameterGroupName = DBParameterGroupName, BackupRetentionPeriod = BackupRetentionPeriod, PreferredBackupWindow = PreferredBackupWindow, Port = Port, MultiAZ = MultiAZ, EngineVersion = EngineVersion, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, LicenseModel = LicenseModel, Iops = Iops, OptionGroupName = OptionGroupName, PubliclyAccessible = PubliclyAccessible, Tags = Tags, StorageType = StorageType, StorageEncrypted = StorageEncrypted, KmsKeyId = KmsKeyId, CopyTagsToSnapshot = CopyTagsToSnapshot, MonitoringInterval = MonitoringInterval, MonitoringRoleArn = MonitoringRoleArn, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, SourceEngine = SourceEngine, SourceEngineVersion = SourceEngineVersion, S3BucketName = S3BucketName, S3Prefix = S3Prefix, S3IngestionRoleArn = S3IngestionRoleArn, EnablePerformanceInsights = EnablePerformanceInsights, PerformanceInsightsKMSKeyId = PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod = PerformanceInsightsRetentionPeriod, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, ProcessorFeatures = ProcessorFeatures, UseDefaultProcessorFeatures = UseDefaultProcessorFeatures, DeletionProtection = DeletionProtection, MaxAllocatedStorage = MaxAllocatedStorage, NetworkType = NetworkType, StorageThroughput = StorageThroughput, ManageMasterUserPassword = ManageMasterUserPassword, MasterUserSecretKmsKeyId = MasterUserSecretKmsKeyId, DedicatedLogVolume = DedicatedLogVolume, CACertificateIdentifier = CACertificateIdentifier, EngineLifecycleSupport = EngineLifecycleSupport)
+  input <- .rds$restore_db_instance_from_s3_input(DBName = DBName, DBInstanceIdentifier = DBInstanceIdentifier, AllocatedStorage = AllocatedStorage, DBInstanceClass = DBInstanceClass, Engine = Engine, MasterUsername = MasterUsername, MasterUserPassword = MasterUserPassword, DBSecurityGroups = DBSecurityGroups, VpcSecurityGroupIds = VpcSecurityGroupIds, AvailabilityZone = AvailabilityZone, DBSubnetGroupName = DBSubnetGroupName, PreferredMaintenanceWindow = PreferredMaintenanceWindow, DBParameterGroupName = DBParameterGroupName, BackupRetentionPeriod = BackupRetentionPeriod, PreferredBackupWindow = PreferredBackupWindow, Port = Port, MultiAZ = MultiAZ, EngineVersion = EngineVersion, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, LicenseModel = LicenseModel, Iops = Iops, OptionGroupName = OptionGroupName, PubliclyAccessible = PubliclyAccessible, Tags = Tags, StorageType = StorageType, StorageEncrypted = StorageEncrypted, KmsKeyId = KmsKeyId, CopyTagsToSnapshot = CopyTagsToSnapshot, MonitoringInterval = MonitoringInterval, MonitoringRoleArn = MonitoringRoleArn, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, SourceEngine = SourceEngine, SourceEngineVersion = SourceEngineVersion, S3BucketName = S3BucketName, S3Prefix = S3Prefix, S3IngestionRoleArn = S3IngestionRoleArn, DatabaseInsightsMode = DatabaseInsightsMode, EnablePerformanceInsights = EnablePerformanceInsights, PerformanceInsightsKMSKeyId = PerformanceInsightsKMSKeyId, PerformanceInsightsRetentionPeriod = PerformanceInsightsRetentionPeriod, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, ProcessorFeatures = ProcessorFeatures, UseDefaultProcessorFeatures = UseDefaultProcessorFeatures, DeletionProtection = DeletionProtection, MaxAllocatedStorage = MaxAllocatedStorage, NetworkType = NetworkType, StorageThroughput = StorageThroughput, ManageMasterUserPassword = ManageMasterUserPassword, MasterUserSecretKmsKeyId = MasterUserSecretKmsKeyId, DedicatedLogVolume = DedicatedLogVolume, CACertificateIdentifier = CACertificateIdentifier, EngineLifecycleSupport = EngineLifecycleSupport)
   output <- .rds$restore_db_instance_from_s3_output()
   config <- get_config()
   svc <- .rds$service(config, op)
@@ -13391,10 +13760,11 @@ rds_restore_db_instance_from_s3 <- function(DBName = NULL, DBInstanceIdentifier,
 #' @param LicenseModel The license model information for the restored DB instance.
 #' 
 #' License models for RDS for Db2 require additional configuration. The
-#' Bring Your Own License (BYOL) model requires a custom parameter group.
-#' The Db2 license through Amazon Web Services Marketplace model requires
-#' an Amazon Web Services Marketplace subscription. For more information,
-#' see [RDS for Db2 licensing
+#' Bring Your Own License (BYOL) model requires a custom parameter group
+#' and an Amazon Web Services License Manager self-managed license. The Db2
+#' license through Amazon Web Services Marketplace model requires an Amazon
+#' Web Services Marketplace subscription. For more information, see [Amazon
+#' RDS for Db2 licensing
 #' options](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html)
 #' in the *Amazon RDS User Guide*.
 #' 
@@ -13689,6 +14059,8 @@ rds_restore_db_instance_from_s3 <- function(DBName = NULL, DBInstanceIdentifier,
 #' instance. Follow the allocation rules specified in
 #' [`create_db_instance`][rds_create_db_instance].
 #' 
+#' This setting isn't valid for RDS for SQL Server.
+#' 
 #' Be sure to allocate enough storage for your new DB instance so that the
 #' restore operation can succeed. You can also allocate additional storage
 #' for future growth.
@@ -13741,7 +14113,8 @@ rds_restore_db_instance_to_point_in_time <- function(SourceDBInstanceIdentifier 
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$restore_db_instance_to_point_in_time_input(SourceDBInstanceIdentifier = SourceDBInstanceIdentifier, TargetDBInstanceIdentifier = TargetDBInstanceIdentifier, RestoreTime = RestoreTime, UseLatestRestorableTime = UseLatestRestorableTime, DBInstanceClass = DBInstanceClass, Port = Port, AvailabilityZone = AvailabilityZone, DBSubnetGroupName = DBSubnetGroupName, MultiAZ = MultiAZ, PubliclyAccessible = PubliclyAccessible, AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, LicenseModel = LicenseModel, DBName = DBName, Engine = Engine, Iops = Iops, OptionGroupName = OptionGroupName, CopyTagsToSnapshot = CopyTagsToSnapshot, Tags = Tags, StorageType = StorageType, TdeCredentialArn = TdeCredentialArn, TdeCredentialPassword = TdeCredentialPassword, VpcSecurityGroupIds = VpcSecurityGroupIds, Domain = Domain, DomainIAMRoleName = DomainIAMRoleName, DomainFqdn = DomainFqdn, DomainOu = DomainOu, DomainAuthSecretArn = DomainAuthSecretArn, DomainDnsIps = DomainDnsIps, EnableIAMDatabaseAuthentication = EnableIAMDatabaseAuthentication, EnableCloudwatchLogsExports = EnableCloudwatchLogsExports, ProcessorFeatures = ProcessorFeatures, UseDefaultProcessorFeatures = UseDefaultProcessorFeatures, DBParameterGroupName = DBParameterGroupName, DeletionProtection = DeletionProtection, SourceDbiResourceId = SourceDbiResourceId, MaxAllocatedStorage = MaxAllocatedStorage, SourceDBInstanceAutomatedBackupsArn = SourceDBInstanceAutomatedBackupsArn, EnableCustomerOwnedIp = EnableCustomerOwnedIp, CustomIamInstanceProfile = CustomIamInstanceProfile, BackupTarget = BackupTarget, NetworkType = NetworkType, StorageThroughput = StorageThroughput, AllocatedStorage = AllocatedStorage, DedicatedLogVolume = DedicatedLogVolume, CACertificateIdentifier = CACertificateIdentifier, EngineLifecycleSupport = EngineLifecycleSupport)
   output <- .rds$restore_db_instance_to_point_in_time_output()
@@ -13789,7 +14162,8 @@ rds_revoke_db_security_group_ingress <- function(DBSecurityGroupName, CIDRIP = N
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$revoke_db_security_group_ingress_input(DBSecurityGroupName = DBSecurityGroupName, CIDRIP = CIDRIP, EC2SecurityGroupName = EC2SecurityGroupName, EC2SecurityGroupId = EC2SecurityGroupId, EC2SecurityGroupOwnerId = EC2SecurityGroupOwnerId)
   output <- .rds$revoke_db_security_group_ingress_output()
@@ -13831,7 +14205,8 @@ rds_start_activity_stream <- function(ResourceArn, Mode, KmsKeyId, ApplyImmediat
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$start_activity_stream_input(ResourceArn = ResourceArn, Mode = Mode, KmsKeyId = KmsKeyId, ApplyImmediately = ApplyImmediately, EngineNativeAuditFieldsIncluded = EngineNativeAuditFieldsIncluded)
   output <- .rds$start_activity_stream_output()
@@ -13864,7 +14239,8 @@ rds_start_db_cluster <- function(DBClusterIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$start_db_cluster_input(DBClusterIdentifier = DBClusterIdentifier)
   output <- .rds$start_db_cluster_output()
@@ -13896,7 +14272,8 @@ rds_start_db_instance <- function(DBInstanceIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$start_db_instance_input(DBInstanceIdentifier = DBInstanceIdentifier)
   output <- .rds$start_db_instance_output()
@@ -13942,7 +14319,7 @@ rds_start_db_instance <- function(DBInstanceIdentifier) {
 #' Signature Version
 #' 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
 #' and [Signature Version 4 Signing
-#' Process](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html).
+#' Process](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html).
 #' 
 #' If you are using an Amazon Web Services SDK tool or the CLI, you can
 #' specify `SourceRegion` (or `--source-region` for the CLI) instead of
@@ -13959,7 +14336,8 @@ rds_start_db_instance_automated_backups_replication <- function(SourceDBInstance
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$start_db_instance_automated_backups_replication_input(SourceDBInstanceArn = SourceDBInstanceArn, BackupRetentionPeriod = BackupRetentionPeriod, KmsKeyId = KmsKeyId, PreSignedUrl = PreSignedUrl)
   output <- .rds$start_db_instance_automated_backups_replication_output()
@@ -14061,7 +14439,8 @@ rds_start_export_task <- function(ExportTaskIdentifier, SourceArn, S3BucketName,
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$start_export_task_input(ExportTaskIdentifier = ExportTaskIdentifier, SourceArn = SourceArn, S3BucketName = S3BucketName, IamRoleArn = IamRoleArn, KmsKeyId = KmsKeyId, S3Prefix = S3Prefix, ExportOnly = ExportOnly)
   output <- .rds$start_export_task_output()
@@ -14097,7 +14476,8 @@ rds_stop_activity_stream <- function(ResourceArn, ApplyImmediately = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$stop_activity_stream_input(ResourceArn = ResourceArn, ApplyImmediately = ApplyImmediately)
   output <- .rds$stop_activity_stream_output()
@@ -14128,7 +14508,8 @@ rds_stop_db_cluster <- function(DBClusterIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$stop_db_cluster_input(DBClusterIdentifier = DBClusterIdentifier)
   output <- .rds$stop_db_cluster_output()
@@ -14160,7 +14541,8 @@ rds_stop_db_instance <- function(DBInstanceIdentifier, DBSnapshotIdentifier = NU
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$stop_db_instance_input(DBInstanceIdentifier = DBInstanceIdentifier, DBSnapshotIdentifier = DBSnapshotIdentifier)
   output <- .rds$stop_db_instance_output()
@@ -14192,7 +14574,8 @@ rds_stop_db_instance_automated_backups_replication <- function(SourceDBInstanceA
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$stop_db_instance_automated_backups_replication_input(SourceDBInstanceArn = SourceDBInstanceArn)
   output <- .rds$stop_db_instance_automated_backups_replication_output()
@@ -14211,11 +14594,11 @@ rds_stop_db_instance_automated_backups_replication <- function(SourceDBInstanceA
 #'
 #' See [https://www.paws-r-sdk.com/docs/rds_switchover_blue_green_deployment/](https://www.paws-r-sdk.com/docs/rds_switchover_blue_green_deployment/) for full documentation.
 #'
-#' @param BlueGreenDeploymentIdentifier &#91;required&#93; The unique identifier of the blue/green deployment.
+#' @param BlueGreenDeploymentIdentifier &#91;required&#93; The resource ID of the blue/green deployment.
 #' 
 #' Constraints:
 #' 
-#' -   Must match an existing blue/green deployment identifier.
+#' -   Must match an existing blue/green deployment resource ID.
 #' @param SwitchoverTimeout The amount of time, in seconds, for the switchover to complete.
 #' 
 #' Default: 300
@@ -14232,7 +14615,8 @@ rds_switchover_blue_green_deployment <- function(BlueGreenDeploymentIdentifier, 
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$switchover_blue_green_deployment_input(BlueGreenDeploymentIdentifier = BlueGreenDeploymentIdentifier, SwitchoverTimeout = SwitchoverTimeout)
   output <- .rds$switchover_blue_green_deployment_output()
@@ -14273,7 +14657,8 @@ rds_switchover_global_cluster <- function(GlobalClusterIdentifier, TargetDbClust
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$switchover_global_cluster_input(GlobalClusterIdentifier = GlobalClusterIdentifier, TargetDbClusterIdentifier = TargetDbClusterIdentifier)
   output <- .rds$switchover_global_cluster_output()
@@ -14310,7 +14695,8 @@ rds_switchover_read_replica <- function(DBInstanceIdentifier) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .rds$switchover_read_replica_input(DBInstanceIdentifier = DBInstanceIdentifier)
   output <- .rds$switchover_read_replica_output()

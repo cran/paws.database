@@ -132,8 +132,11 @@ NULL
 #' @examples
 #' \dontrun{
 #' svc <- rds()
-#' svc$add_role_to_db_cluster(
-#'   Foo = 123
+#' # This example add a source identifier to an event notification
+#' # subscription.
+#' svc$add_source_identifier_to_subscription(
+#'   SourceIdentifier = "mymysqlinstance",
+#'   SubscriptionName = "mymysqleventsubscription"
 #' )
 #' }
 #'
@@ -147,6 +150,7 @@ NULL
 #'  \link[=rds_authorize_db_security_group_ingress]{authorize_db_security_group_ingress} \tab Enables ingress to a DBSecurityGroup using one of two forms of authorization\cr
 #'  \link[=rds_backtrack_db_cluster]{backtrack_db_cluster} \tab Backtracks a DB cluster to a specific time, without creating a new DB cluster\cr
 #'  \link[=rds_build_auth_token]{build_auth_token} \tab Return an authentication token for a database connection\cr
+#'  \link[=rds_build_auth_token_v2]{build_auth_token_v2} \tab Generates an auth token used to connect to a db with IAM credentials\cr
 #'  \link[=rds_cancel_export_task]{cancel_export_task} \tab Cancels an export task in progress that is exporting a snapshot or cluster to Amazon S3\cr
 #'  \link[=rds_copy_db_cluster_parameter_group]{copy_db_cluster_parameter_group} \tab Copies the specified DB cluster parameter group\cr
 #'  \link[=rds_copy_db_cluster_snapshot]{copy_db_cluster_snapshot} \tab Copies a snapshot of a DB cluster\cr
@@ -333,7 +337,7 @@ rds <- function(config = list(), credentials = list(), endpoint = NULL, region =
 
 .rds$metadata <- list(
   service_name = "rds",
-  endpoints = list("*" = list(endpoint = "rds.{region}.amazonaws.com", global = FALSE), "cn-*" = list(endpoint = "rds.{region}.amazonaws.com.cn", global = FALSE), "eu-isoe-*" = list(endpoint = "rds.{region}.cloud.adc-e.uk", global = FALSE), "us-iso-*" = list(endpoint = "rds.{region}.c2s.ic.gov", global = FALSE), "us-isob-*" = list(endpoint = "rds.{region}.sc2s.sgov.gov", global = FALSE), "us-isof-*" = list(endpoint = "rds.{region}.csp.hci.ic.gov", global = FALSE)),
+  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "rds.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "rds.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "rds.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "rds.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "rds.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "rds.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "rds.{region}.csp.hci.ic.gov", global = FALSE)),
   service_id = "RDS",
   api_version = "2014-10-31",
   signing_name = "rds",

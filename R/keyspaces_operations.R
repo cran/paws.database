@@ -36,7 +36,8 @@ keyspaces_create_keyspace <- function(keyspaceName, tags = NULL, replicationSpec
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .keyspaces$create_keyspace_input(keyspaceName = keyspaceName, tags = tags, replicationSpecification = replicationSpecification)
   output <- .keyspaces$create_keyspace_output()
@@ -149,7 +150,7 @@ keyspaces_create_keyspace <- function(keyspaceName, tags = NULL, replicationSpec
 #' @param defaultTimeToLive The default Time to Live setting in seconds for the table.
 #' 
 #' For more information, see [Setting the default TTL value for a
-#' table](https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL-how-it-works.html#ttl-howitworks_default_ttl)
+#' table](https://docs.aws.amazon.com/keyspaces/latest/devguide/#ttl-howitworks_default_ttl)
 #' in the *Amazon Keyspaces Developer Guide*.
 #' @param tags A list of key-value pair tags to be attached to the resource.
 #' 
@@ -204,7 +205,8 @@ keyspaces_create_table <- function(keyspaceName, tableName, schemaDefinition, co
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .keyspaces$create_table_input(keyspaceName = keyspaceName, tableName = tableName, schemaDefinition = schemaDefinition, comment = comment, capacitySpecification = capacitySpecification, encryptionSpecification = encryptionSpecification, pointInTimeRecovery = pointInTimeRecovery, ttl = ttl, defaultTimeToLive = defaultTimeToLive, tags = tags, clientSideTimestamps = clientSideTimestamps, autoScalingSpecification = autoScalingSpecification, replicaSpecifications = replicaSpecifications)
   output <- .keyspaces$create_table_output()
@@ -215,6 +217,54 @@ keyspaces_create_table <- function(keyspaceName, tableName, schemaDefinition, co
   return(response)
 }
 .keyspaces$operations$create_table <- keyspaces_create_table
+
+#' The CreateType operation creates a new user-defined type in the
+#' specified keyspace
+#'
+#' @description
+#' The [`create_type`][keyspaces_create_type] operation creates a new user-defined type in the specified keyspace.
+#'
+#' See [https://www.paws-r-sdk.com/docs/keyspaces_create_type/](https://www.paws-r-sdk.com/docs/keyspaces_create_type/) for full documentation.
+#'
+#' @param keyspaceName &#91;required&#93; The name of the keyspace.
+#' @param typeName &#91;required&#93; The name of the user-defined type.
+#' 
+#' UDT names must contain 48 characters or less, must begin with an
+#' alphabetic character, and can only contain alpha-numeric characters and
+#' underscores. Amazon Keyspaces converts upper case characters
+#' automatically into lower case characters.
+#' 
+#' Alternatively, you can declare a UDT name in double quotes. When
+#' declaring a UDT name inside double quotes, Amazon Keyspaces preserves
+#' upper casing and allows special characters.
+#' 
+#' You can also use double quotes as part of the name when you create the
+#' UDT, but you must escape each double quote character with an additional
+#' double quote character.
+#' @param fieldDefinitions &#91;required&#93; The field definitions, consisting of names and types, that define this
+#' type.
+#'
+#' @keywords internal
+#'
+#' @rdname keyspaces_create_type
+keyspaces_create_type <- function(keyspaceName, typeName, fieldDefinitions) {
+  op <- new_operation(
+    name = "CreateType",
+    http_method = "POST",
+    http_path = "/",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE
+  )
+  input <- .keyspaces$create_type_input(keyspaceName = keyspaceName, typeName = typeName, fieldDefinitions = fieldDefinitions)
+  output <- .keyspaces$create_type_output()
+  config <- get_config()
+  svc <- .keyspaces$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.keyspaces$operations$create_type <- keyspaces_create_type
 
 #' The DeleteKeyspace operation deletes a keyspace and all of its tables
 #'
@@ -234,7 +284,8 @@ keyspaces_delete_keyspace <- function(keyspaceName) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .keyspaces$delete_keyspace_input(keyspaceName = keyspaceName)
   output <- .keyspaces$delete_keyspace_output()
@@ -265,7 +316,8 @@ keyspaces_delete_table <- function(keyspaceName, tableName) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .keyspaces$delete_table_input(keyspaceName = keyspaceName, tableName = tableName)
   output <- .keyspaces$delete_table_output()
@@ -277,11 +329,45 @@ keyspaces_delete_table <- function(keyspaceName, tableName) {
 }
 .keyspaces$operations$delete_table <- keyspaces_delete_table
 
-#' Returns the name and the Amazon Resource Name (ARN) of the specified
-#' table
+#' The DeleteType operation deletes a user-defined type (UDT)
 #'
 #' @description
-#' Returns the name and the Amazon Resource Name (ARN) of the specified table.
+#' The [`delete_type`][keyspaces_delete_type] operation deletes a user-defined type (UDT). You can only delete a type that is not used in a table or another UDT.
+#'
+#' See [https://www.paws-r-sdk.com/docs/keyspaces_delete_type/](https://www.paws-r-sdk.com/docs/keyspaces_delete_type/) for full documentation.
+#'
+#' @param keyspaceName &#91;required&#93; The name of the keyspace of the to be deleted type.
+#' @param typeName &#91;required&#93; The name of the type to be deleted.
+#'
+#' @keywords internal
+#'
+#' @rdname keyspaces_delete_type
+keyspaces_delete_type <- function(keyspaceName, typeName) {
+  op <- new_operation(
+    name = "DeleteType",
+    http_method = "POST",
+    http_path = "/",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE
+  )
+  input <- .keyspaces$delete_type_input(keyspaceName = keyspaceName, typeName = typeName)
+  output <- .keyspaces$delete_type_output()
+  config <- get_config()
+  svc <- .keyspaces$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.keyspaces$operations$delete_type <- keyspaces_delete_type
+
+#' Returns the name of the specified keyspace, the Amazon Resource Name
+#' (ARN), the replication strategy, the Amazon Web Services Regions of a
+#' multi-Region keyspace, and the status of newly added Regions after an
+#' UpdateKeyspace operation
+#'
+#' @description
+#' Returns the name of the specified keyspace, the Amazon Resource Name (ARN), the replication strategy, the Amazon Web Services Regions of a multi-Region keyspace, and the status of newly added Regions after an [`update_keyspace`][keyspaces_update_keyspace] operation.
 #'
 #' See [https://www.paws-r-sdk.com/docs/keyspaces_get_keyspace/](https://www.paws-r-sdk.com/docs/keyspaces_get_keyspace/) for full documentation.
 #'
@@ -296,7 +382,8 @@ keyspaces_get_keyspace <- function(keyspaceName) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .keyspaces$get_keyspace_input(keyspaceName = keyspaceName)
   output <- .keyspaces$get_keyspace_output()
@@ -328,7 +415,8 @@ keyspaces_get_table <- function(keyspaceName, tableName) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .keyspaces$get_table_input(keyspaceName = keyspaceName, tableName = tableName)
   output <- .keyspaces$get_table_output()
@@ -360,7 +448,8 @@ keyspaces_get_table_auto_scaling_settings <- function(keyspaceName, tableName) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .keyspaces$get_table_auto_scaling_settings_input(keyspaceName = keyspaceName, tableName = tableName)
   output <- .keyspaces$get_table_auto_scaling_settings_output()
@@ -372,10 +461,48 @@ keyspaces_get_table_auto_scaling_settings <- function(keyspaceName, tableName) {
 }
 .keyspaces$operations$get_table_auto_scaling_settings <- keyspaces_get_table_auto_scaling_settings
 
-#' Returns a list of keyspaces
+#' The GetType operation returns information about the type, for example
+#' the field definitions, the timestamp when the type was last modified,
+#' the level of nesting, the status, and details about if the type is used
+#' in other types and tables
 #'
 #' @description
-#' Returns a list of keyspaces.
+#' The [`get_type`][keyspaces_get_type] operation returns information about the type, for example the field definitions, the timestamp when the type was last modified, the level of nesting, the status, and details about if the type is used in other types and tables.
+#'
+#' See [https://www.paws-r-sdk.com/docs/keyspaces_get_type/](https://www.paws-r-sdk.com/docs/keyspaces_get_type/) for full documentation.
+#'
+#' @param keyspaceName &#91;required&#93; The name of the keyspace that contains this type.
+#' @param typeName &#91;required&#93; The formatted name of the type. For example, if the name of the type was
+#' created without double quotes, Amazon Keyspaces saved the name in
+#' lower-case characters. If the name was created in double quotes, you
+#' must use double quotes to specify the type name.
+#'
+#' @keywords internal
+#'
+#' @rdname keyspaces_get_type
+keyspaces_get_type <- function(keyspaceName, typeName) {
+  op <- new_operation(
+    name = "GetType",
+    http_method = "POST",
+    http_path = "/",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE
+  )
+  input <- .keyspaces$get_type_input(keyspaceName = keyspaceName, typeName = typeName)
+  output <- .keyspaces$get_type_output()
+  config <- get_config()
+  svc <- .keyspaces$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.keyspaces$operations$get_type <- keyspaces_get_type
+
+#' The ListKeyspaces operation returns a list of keyspaces
+#'
+#' @description
+#' The [`list_keyspaces`][keyspaces_list_keyspaces] operation returns a list of keyspaces.
 #'
 #' See [https://www.paws-r-sdk.com/docs/keyspaces_list_keyspaces/](https://www.paws-r-sdk.com/docs/keyspaces_list_keyspaces/) for full documentation.
 #'
@@ -395,7 +522,8 @@ keyspaces_list_keyspaces <- function(nextToken = NULL, maxResults = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "keyspaces")
+    paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "keyspaces"),
+    stream_api = FALSE
   )
   input <- .keyspaces$list_keyspaces_input(nextToken = nextToken, maxResults = maxResults)
   output <- .keyspaces$list_keyspaces_output()
@@ -407,10 +535,11 @@ keyspaces_list_keyspaces <- function(nextToken = NULL, maxResults = NULL) {
 }
 .keyspaces$operations$list_keyspaces <- keyspaces_list_keyspaces
 
-#' Returns a list of tables for a specified keyspace
+#' The ListTables operation returns a list of tables for a specified
+#' keyspace
 #'
 #' @description
-#' Returns a list of tables for a specified keyspace.
+#' The [`list_tables`][keyspaces_list_tables] operation returns a list of tables for a specified keyspace.
 #'
 #' See [https://www.paws-r-sdk.com/docs/keyspaces_list_tables/](https://www.paws-r-sdk.com/docs/keyspaces_list_tables/) for full documentation.
 #'
@@ -431,7 +560,8 @@ keyspaces_list_tables <- function(nextToken = NULL, maxResults = NULL, keyspaceN
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "tables")
+    paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "tables"),
+    stream_api = FALSE
   )
   input <- .keyspaces$list_tables_input(nextToken = nextToken, maxResults = maxResults, keyspaceName = keyspaceName)
   output <- .keyspaces$list_tables_output()
@@ -468,7 +598,8 @@ keyspaces_list_tags_for_resource <- function(resourceArn, nextToken = NULL, maxR
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "tags")
+    paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "tags"),
+    stream_api = FALSE
   )
   input <- .keyspaces$list_tags_for_resource_input(resourceArn = resourceArn, nextToken = nextToken, maxResults = maxResults)
   output <- .keyspaces$list_tags_for_resource_output()
@@ -479,6 +610,43 @@ keyspaces_list_tags_for_resource <- function(resourceArn, nextToken = NULL, maxR
   return(response)
 }
 .keyspaces$operations$list_tags_for_resource <- keyspaces_list_tags_for_resource
+
+#' The ListTypes operation returns a list of types for a specified keyspace
+#'
+#' @description
+#' The [`list_types`][keyspaces_list_types] operation returns a list of types for a specified keyspace.
+#'
+#' See [https://www.paws-r-sdk.com/docs/keyspaces_list_types/](https://www.paws-r-sdk.com/docs/keyspaces_list_types/) for full documentation.
+#'
+#' @param nextToken The pagination token. To resume pagination, provide the `NextToken`
+#' value as an argument of a subsequent API invocation.
+#' @param maxResults The total number of types to return in the output. If the total number
+#' of types available is more than the value specified, a `NextToken` is
+#' provided in the output. To resume pagination, provide the `NextToken`
+#' value as an argument of a subsequent API invocation.
+#' @param keyspaceName &#91;required&#93; The name of the keyspace that contains the listed types.
+#'
+#' @keywords internal
+#'
+#' @rdname keyspaces_list_types
+keyspaces_list_types <- function(nextToken = NULL, maxResults = NULL, keyspaceName) {
+  op <- new_operation(
+    name = "ListTypes",
+    http_method = "POST",
+    http_path = "/",
+    host_prefix = "",
+    paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "types"),
+    stream_api = FALSE
+  )
+  input <- .keyspaces$list_types_input(nextToken = nextToken, maxResults = maxResults, keyspaceName = keyspaceName)
+  output <- .keyspaces$list_types_output()
+  config <- get_config()
+  svc <- .keyspaces$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.keyspaces$operations$list_types <- keyspaces_list_types
 
 #' Restores the table to the specified point in time within the
 #' earliest_restorable_timestamp and the current time
@@ -560,7 +728,8 @@ keyspaces_restore_table <- function(sourceKeyspaceName, sourceTableName, targetK
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .keyspaces$restore_table_input(sourceKeyspaceName = sourceKeyspaceName, sourceTableName = sourceTableName, targetKeyspaceName = targetKeyspaceName, targetTableName = targetTableName, restoreTimestamp = restoreTimestamp, capacitySpecificationOverride = capacitySpecificationOverride, encryptionSpecificationOverride = encryptionSpecificationOverride, pointInTimeRecoveryOverride = pointInTimeRecoveryOverride, tagsOverride = tagsOverride, autoScalingSpecification = autoScalingSpecification, replicaSpecifications = replicaSpecifications)
   output <- .keyspaces$restore_table_output()
@@ -592,7 +761,8 @@ keyspaces_tag_resource <- function(resourceArn, tags) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .keyspaces$tag_resource_input(resourceArn = resourceArn, tags = tags)
   output <- .keyspaces$tag_resource_output()
@@ -625,7 +795,8 @@ keyspaces_untag_resource <- function(resourceArn, tags) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .keyspaces$untag_resource_input(resourceArn = resourceArn, tags = tags)
   output <- .keyspaces$untag_resource_output()
@@ -636,6 +807,39 @@ keyspaces_untag_resource <- function(resourceArn, tags) {
   return(response)
 }
 .keyspaces$operations$untag_resource <- keyspaces_untag_resource
+
+#' Adds a new Amazon Web Services Region to the keyspace
+#'
+#' @description
+#' Adds a new Amazon Web Services Region to the keyspace. You can add a new Region to a keyspace that is either a single or a multi-Region keyspace. Amazon Keyspaces is going to replicate all tables in the keyspace to the new Region. To successfully replicate all tables to the new Region, they must use client-side timestamps for conflict resolution. To enable client-side timestamps, specify `clientSideTimestamps.status = enabled` when invoking the API. For more information about client-side timestamps, see [Client-side timestamps in Amazon Keyspaces](https://docs.aws.amazon.com/keyspaces/latest/devguide/client-side-timestamps.html) in the *Amazon Keyspaces Developer Guide*.
+#'
+#' See [https://www.paws-r-sdk.com/docs/keyspaces_update_keyspace/](https://www.paws-r-sdk.com/docs/keyspaces_update_keyspace/) for full documentation.
+#'
+#' @param keyspaceName &#91;required&#93; The name of the keyspace.
+#' @param replicationSpecification &#91;required&#93; 
+#' @param clientSideTimestamps 
+#'
+#' @keywords internal
+#'
+#' @rdname keyspaces_update_keyspace
+keyspaces_update_keyspace <- function(keyspaceName, replicationSpecification, clientSideTimestamps = NULL) {
+  op <- new_operation(
+    name = "UpdateKeyspace",
+    http_method = "POST",
+    http_path = "/",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE
+  )
+  input <- .keyspaces$update_keyspace_input(keyspaceName = keyspaceName, replicationSpecification = replicationSpecification, clientSideTimestamps = clientSideTimestamps)
+  output <- .keyspaces$update_keyspace_output()
+  config <- get_config()
+  svc <- .keyspaces$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.keyspaces$operations$update_keyspace <- keyspaces_update_keyspace
 
 #' Adds new columns to the table or updates one of the table's settings,
 #' for example capacity mode, auto scaling, encryption, point-in-time
@@ -712,7 +916,7 @@ keyspaces_untag_resource <- function(resourceArn, tags) {
 #' @param defaultTimeToLive The default Time to Live setting in seconds for the table.
 #' 
 #' For more information, see [Setting the default TTL value for a
-#' table](https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL-how-it-works.html#ttl-howitworks_default_ttl)
+#' table](https://docs.aws.amazon.com/keyspaces/latest/devguide/#ttl-howitworks_default_ttl)
 #' in the *Amazon Keyspaces Developer Guide*.
 #' @param clientSideTimestamps Enables client-side timestamps for the table. By default, the setting is
 #' disabled. You can enable client-side timestamps with the following
@@ -748,7 +952,8 @@ keyspaces_update_table <- function(keyspaceName, tableName, addColumns = NULL, c
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .keyspaces$update_table_input(keyspaceName = keyspaceName, tableName = tableName, addColumns = addColumns, capacitySpecification = capacitySpecification, encryptionSpecification = encryptionSpecification, pointInTimeRecovery = pointInTimeRecovery, ttl = ttl, defaultTimeToLive = defaultTimeToLive, clientSideTimestamps = clientSideTimestamps, autoScalingSpecification = autoScalingSpecification, replicaSpecifications = replicaSpecifications)
   output <- .keyspaces$update_table_output()

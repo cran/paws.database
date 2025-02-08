@@ -138,10 +138,10 @@ parameter.}
 \item{LicenseModel}{License model information for the restored DB instance.
 
 License models for RDS for Db2 require additional configuration. The
-Bring Your Own License (BYOL) model requires a custom parameter group.
-The Db2 license through Amazon Web Services Marketplace model requires
-an Amazon Web Services Marketplace subscription. For more information,
-see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html}{RDS for Db2 licensing options}
+Bring Your Own License (BYOL) model requires a custom parameter group
+and an Amazon Web Services License Manager self-managed license. The Db2
+license through Amazon Web Services Marketplace model requires an Amazon
+Web Services Marketplace subscription. For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html}{Amazon RDS for Db2 licensing options}
 in the \emph{Amazon RDS User Guide}.
 
 This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.
@@ -434,6 +434,8 @@ shared snapshot.
 
 \item{AllocatedStorage}{The amount of storage (in gibibytes) to allocate initially for the DB
 instance. Follow the allocation rules specified in CreateDBInstance.
+
+This setting isn't valid for RDS for SQL Server.
 
 Be sure to allocate enough storage for your new DB instance so that the
 restore operation can succeed. You can also allocate additional storage

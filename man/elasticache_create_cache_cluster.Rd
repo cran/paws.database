@@ -97,8 +97,8 @@ Default: System chosen Availability Zones.}
 
 \item{NumCacheNodes}{The initial number of cache nodes that the cluster has.
 
-For clusters running Redis OSS, this value must be 1. For clusters
-running Memcached, this value must be between 1 and 40.
+For clusters running Valkey or Redis OSS, this value must be 1. For
+clusters running Memcached, this value must be between 1 and 40.
 
 If you need more than 40 nodes for your Memcached cluster, please fill
 out the ElastiCache Limit Increase Request form at
@@ -119,7 +119,7 @@ previous generation counterparts.
 \code{cache.m7g.2xlarge}, \code{cache.m7g.4xlarge}, \code{cache.m7g.8xlarge},
 \code{cache.m7g.12xlarge}, \code{cache.m7g.16xlarge}
 
-For region availability, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion}{Supported Node Types}
+For region availability, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion}{Supported Node Types}
 
 \strong{M6g node types} (available only for Redis OSS engine version
 5.0.6 onward and for Memcached engine version 1.5.16 onward):
@@ -171,7 +171,7 @@ for these types.)
 \code{cache.r7g.2xlarge}, \code{cache.r7g.4xlarge}, \code{cache.r7g.8xlarge},
 \code{cache.r7g.12xlarge}, \code{cache.r7g.16xlarge}
 
-For region availability, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion}{Supported Node Types}
+For region availability, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion}{Supported Node Types}
 
 \strong{R6g node types} (available only for Redis OSS engine version
 5.0.6 onward and for Memcached engine version 1.5.16 onward):
@@ -202,12 +202,12 @@ for these types.)
 \itemize{
 \item All current generation instance types are created in Amazon VPC by
 default.
-\item Redis OSS append-only files (AOF) are not supported for T1 or T2
-instances.
-\item Redis OSS Multi-AZ with automatic failover is not supported on T1
-instances.
-\item Redis OSS configuration variables \code{appendonly} and \code{appendfsync} are
-not supported on Redis OSS version 2.8.22 and later.
+\item Valkey or Redis OSS append-only files (AOF) are not supported for T1
+or T2 instances.
+\item Valkey or Redis OSS Multi-AZ with automatic failover is not
+supported on T1 instances.
+\item The configuration variables \code{appendonly} and \code{appendfsync} are not
+supported on Valkey, or on Redis OSS version 2.8.22 and later.
 }}
 
 \item{Engine}{The name of the cache engine to be used for this cluster.
@@ -218,7 +218,7 @@ Valid values for this parameter are: \code{memcached} | \code{redis}}
 view the supported cache engine versions, use the
 DescribeCacheEngineVersions operation.
 
-\strong{Important:} You can upgrade to a newer engine version (see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement}{Selecting a Cache Engine and Version}),
+\strong{Important:} You can upgrade to a newer engine version (see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/SelectEngine.html#VersionManagement}{Selecting a Cache Engine and Version}),
 but you cannot downgrade to an earlier engine version. If you want to
 use an earlier engine version, you must delete the existing cluster or
 replication group and create it anew with the earlier engine version.}
@@ -235,7 +235,7 @@ Virtual Private Cloud (Amazon VPC).
 
 If you're going to launch your cluster in an Amazon VPC, you need to
 create a subnet group before you start creating a cluster. For more
-information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html}{Subnets and Subnet Groups}.}
+information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/SubnetGroups.html}{Subnets and Subnet Groups}.}
 
 \item{CacheSecurityGroupNames}{A list of security group names to associate with this cluster.
 
@@ -250,17 +250,17 @@ Virtual Private Cloud (Amazon VPC).}
 \item{Tags}{A list of tags to be added to this resource.}
 
 \item{SnapshotArns}{A single-element string list containing an Amazon Resource Name (ARN)
-that uniquely identifies a Redis OSS RDB snapshot file stored in Amazon
-S3. The snapshot file is used to populate the node group (shard). The
-Amazon S3 object name in the ARN cannot contain any commas.
+that uniquely identifies a Valkey or Redis OSS RDB snapshot file stored
+in Amazon S3. The snapshot file is used to populate the node group
+(shard). The Amazon S3 object name in the ARN cannot contain any commas.
 
 This parameter is only valid if the \code{Engine} parameter is \code{redis}.
 
 Example of an Amazon S3 ARN: \code{arn:aws:s3:::my_bucket/snapshot1.rdb}}
 
-\item{SnapshotName}{The name of a Redis OSS snapshot from which to restore data into the new
-node group (shard). The snapshot status changes to \code{restoring} while the
-new node group (shard) is being created.
+\item{SnapshotName}{The name of a Valkey or Redis OSS snapshot from which to restore data
+into the new node group (shard). The snapshot status changes to
+\code{restoring} while the new node group (shard) is being created.
 
 This parameter is only valid if the \code{Engine} parameter is \code{redis}.}
 
@@ -276,9 +276,10 @@ is a 60 minute period.}
 
 The Amazon SNS topic owner must be the same as the cluster owner.}
 
-\item{AutoMinorVersionUpgrade}{If you are running Redis OSS engine version 6.0 or later, set this
-parameter to yes if you want to opt-in to the next auto minor version
-upgrade campaign. This parameter is disabled for previous versions.}
+\item{AutoMinorVersionUpgrade}{If you are running Valkey 7.2 and above or Redis OSS engine version 6.0
+and above, set this parameter to yes to opt-in to the next auto minor
+version upgrade campaign. This parameter is disabled for previous
+versions.}
 
 \item{SnapshotRetentionLimit}{The number of days for which ElastiCache retains automatic snapshots
 before deleting them. For example, if you set \code{SnapshotRetentionLimit}
@@ -313,7 +314,7 @@ length.
 the AUTH token.
 }
 
-For more information, see AUTH password at
+For more information, see \href{https://redis.io/docs/latest/commands/auth/}{AUTH password} at
 http://redis.io/commands/AUTH.}
 
 \item{OutpostMode}{Specifies whether the nodes in the cluster are created in a single
@@ -328,16 +329,17 @@ outpost or across multiple outposts.}
 \item{TransitEncryptionEnabled}{A flag that enables in-transit encryption when set to true.}
 
 \item{NetworkType}{Must be either \code{ipv4} | \code{ipv6} | \code{dual_stack}. IPv6 is supported for
-workloads using Redis OSS engine version 6.2 onward or Memcached engine
-version 1.6.6 on all instances built on the \href{https://aws.amazon.com/ec2/nitro/}{Nitro system}.}
+workloads using Valkey 7.2 and above, Redis OSS engine version 6.2 and
+above or Memcached engine version 1.6.6 and above on all instances built
+on the \href{https://aws.amazon.com/ec2/nitro/}{Nitro system}.}
 
 \item{IpDiscovery}{The network type you choose when modifying a cluster, either \code{ipv4} |
-\code{ipv6}. IPv6 is supported for workloads using Redis OSS engine version
-6.2 onward or Memcached engine version 1.6.6 on all instances built on
-the \href{https://aws.amazon.com/ec2/nitro/}{Nitro system}.}
+\code{ipv6}. IPv6 is supported for workloads using Valkey 7.2 and above,
+Redis OSS engine version 6.2 and above or Memcached engine version 1.6.6
+and above on all instances built on the \href{https://aws.amazon.com/ec2/nitro/}{Nitro system}.}
 }
 \description{
-Creates a cluster. All nodes in the cluster run the same protocol-compliant cache engine software, either Memcached or Redis OSS.
+Creates a cluster. All nodes in the cluster run the same protocol-compliant cache engine software, either Memcached, Valkey or Redis OSS.
 
 See \url{https://www.paws-r-sdk.com/docs/elasticache_create_cache_cluster/} for full documentation.
 }

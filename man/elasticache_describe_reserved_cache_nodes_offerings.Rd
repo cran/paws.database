@@ -37,7 +37,7 @@ previous generation counterparts.
 \code{cache.m7g.2xlarge}, \code{cache.m7g.4xlarge}, \code{cache.m7g.8xlarge},
 \code{cache.m7g.12xlarge}, \code{cache.m7g.16xlarge}
 
-For region availability, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion}{Supported Node Types}
+For region availability, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion}{Supported Node Types}
 
 \strong{M6g node types} (available only for Redis OSS engine version
 5.0.6 onward and for Memcached engine version 1.5.16 onward):
@@ -89,7 +89,7 @@ for these types.)
 \code{cache.r7g.2xlarge}, \code{cache.r7g.4xlarge}, \code{cache.r7g.8xlarge},
 \code{cache.r7g.12xlarge}, \code{cache.r7g.16xlarge}
 
-For region availability, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion}{Supported Node Types}
+For region availability, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion}{Supported Node Types}
 
 \strong{R6g node types} (available only for Redis OSS engine version
 5.0.6 onward and for Memcached engine version 1.5.16 onward):
@@ -120,12 +120,12 @@ for these types.)
 \itemize{
 \item All current generation instance types are created in Amazon VPC by
 default.
-\item Redis OSS append-only files (AOF) are not supported for T1 or T2
-instances.
-\item Redis OSS Multi-AZ with automatic failover is not supported on T1
-instances.
-\item Redis OSS configuration variables \code{appendonly} and \code{appendfsync} are
-not supported on Redis OSS version 2.8.22 and later.
+\item Valkey or Redis OSS append-only files (AOF) are not supported for T1
+or T2 instances.
+\item Valkey or Redis OSS Multi-AZ with automatic failover is not
+supported on T1 instances.
+\item The configuration variables \code{appendonly} and \code{appendfsync} are not
+supported on Valkey, or on Redis OSS version 2.8.22 and later.
 }}
 
 \item{Duration}{Duration filter value, specified in years or seconds. Use this parameter

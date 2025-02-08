@@ -47,19 +47,20 @@ rds_create_db_cluster(
   AutoMinorVersionUpgrade = NULL,
   MonitoringInterval = NULL,
   MonitoringRoleArn = NULL,
+  DatabaseInsightsMode = NULL,
   EnablePerformanceInsights = NULL,
   PerformanceInsightsKMSKeyId = NULL,
   PerformanceInsightsRetentionPeriod = NULL,
   EnableLimitlessDatabase = NULL,
   ServerlessV2ScalingConfiguration = NULL,
   NetworkType = NULL,
+  ClusterScalabilityType = NULL,
   DBSystemId = NULL,
   ManageMasterUserPassword = NULL,
   MasterUserSecretKmsKeyId = NULL,
   EnableLocalWriteForwarding = NULL,
   CACertificateIdentifier = NULL,
-  EngineLifecycleSupport = NULL,
-  SourceRegion = NULL
+  EngineLifecycleSupport = NULL
 )
 }
 \arguments{
@@ -348,7 +349,7 @@ the us-west-2 Amazon Web Services Region, then your
 
 To learn how to generate a Signature Version 4 signed request, see
 \href{https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html}{Authenticating Requests: Using Query Parameters (Amazon Web Services Signature Version 4)}
-and \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html}{Signature Version 4 Signing Process}.
+and \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html}{Signature Version 4 Signing Process}.
 
 If you are using an Amazon Web Services SDK tool or the CLI, you can
 specify \code{SourceRegion} (or \code{--source-region} for the CLI) instead of
@@ -356,19 +357,17 @@ specifying \code{PreSignedUrl} manually. Specifying \code{SourceRegion}
 autogenerates a presigned URL that is a valid request for the operation
 that can run in the source Amazon Web Services Region.
 
-Valid for Cluster Type: Aurora DB clusters only
-
-If you supply a value for this operation's \code{SourceRegion} parameter, a
-pre-signed URL will be calculated on your behalf.}
+Valid for Cluster Type: Aurora DB clusters only}
 
 \item{EnableIAMDatabaseAuthentication}{Specifies whether to enable mapping of Amazon Web Services Identity and
 Access Management (IAM) accounts to database accounts. By default,
 mapping isn't enabled.
 
 For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html}{IAM Database Authentication}
-in the \emph{Amazon Aurora User Guide}.
+in the \emph{Amazon Aurora User Guide} or \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html}{IAM database authentication for MariaDB, MySQL, and PostgreSQL}
+in the \emph{Amazon RDS User Guide}.
 
-Valid for Cluster Type: Aurora DB clusters only}
+Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters}
 
 \item{BacktrackWindow}{The target backtrack window, in seconds. To disable backtracking, set
 this value to \code{0}.
@@ -445,12 +444,6 @@ When enabled, the HTTP endpoint provides a connectionless web service
 API (RDS Data API) for running SQL queries on the DB cluster. You can
 also query your database from inside the RDS console with the RDS query
 editor.
-
-RDS Data API is supported with the following DB clusters:
-\itemize{
-\item Aurora PostgreSQL Serverless v2 and provisioned
-\item Aurora PostgreSQL and Aurora MySQL Serverless v1
-}
 
 For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html}{Using RDS Data API}
 in the \emph{Amazon Aurora User Guide}.
@@ -596,7 +589,7 @@ attached to it, the DB cluster is public.
 DB cluster during the maintenance window. By default, minor engine
 upgrades are applied automatically.
 
-Valid for Cluster Type: Multi-AZ DB clusters only}
+Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster}
 
 \item{MonitoringInterval}{The interval, in seconds, between points when Enhanced Monitoring
 metrics are collected for the DB cluster. To turn off collecting
@@ -605,7 +598,7 @@ Enhanced Monitoring metrics, specify \code{0}.
 If \code{MonitoringRoleArn} is specified, also set \code{MonitoringInterval} to a
 value other than \code{0}.
 
-Valid for Cluster Type: Multi-AZ DB clusters only
+Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 
 Valid Values: \code{0 | 1 | 5 | 10 | 15 | 30 | 60}
 
@@ -620,14 +613,22 @@ in the \emph{Amazon RDS User Guide}.
 If \code{MonitoringInterval} is set to a value other than \code{0}, supply a
 \code{MonitoringRoleArn} value.
 
-Valid for Cluster Type: Multi-AZ DB clusters only}
+Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters}
+
+\item{DatabaseInsightsMode}{The mode of Database Insights to enable for the DB cluster.
+
+If you set this value to \code{advanced}, you must also set the
+\code{PerformanceInsightsEnabled} parameter to \code{true} and the
+\code{PerformanceInsightsRetentionPeriod} parameter to 465.
+
+Valid for Cluster Type: Aurora DB clusters only}
 
 \item{EnablePerformanceInsights}{Specifies whether to turn on Performance Insights for the DB cluster.
 
 For more information, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html}{Using Amazon Performance Insights}
 in the \emph{Amazon RDS User Guide}.
 
-Valid for Cluster Type: Multi-AZ DB clusters only}
+Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters}
 
 \item{PerformanceInsightsKMSKeyId}{The Amazon Web Services KMS key identifier for encryption of Performance
 Insights data.
@@ -640,11 +641,11 @@ Amazon RDS uses your default KMS key. There is a default KMS key for
 your Amazon Web Services account. Your Amazon Web Services account has a
 different default KMS key for each Amazon Web Services Region.
 
-Valid for Cluster Type: Multi-AZ DB clusters only}
+Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters}
 
 \item{PerformanceInsightsRetentionPeriod}{The number of days to retain Performance Insights data.
 
-Valid for Cluster Type: Multi-AZ DB clusters only
+Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 
 Valid Values:
 \itemize{
@@ -663,7 +664,10 @@ RDS issues an error.}
 \item{EnableLimitlessDatabase}{Specifies whether to enable Aurora Limitless Database. You must enable
 Aurora Limitless Database to create a DB shard group.
 
-Valid for: Aurora DB clusters only}
+Valid for: Aurora DB clusters only
+
+This setting is no longer used. Instead use the \code{ClusterScalabilityType}
+setting.}
 
 \item{ServerlessV2ScalingConfiguration}{}
 
@@ -679,6 +683,15 @@ in the \emph{Amazon Aurora User Guide.}
 Valid for Cluster Type: Aurora DB clusters only
 
 Valid Values: \code{IPV4 | DUAL}}
+
+\item{ClusterScalabilityType}{Specifies the scalability mode of the Aurora DB cluster. When set to
+\code{limitless}, the cluster operates as an Aurora Limitless Database. When
+set to \code{standard} (the default), the cluster uses normal DB instance
+creation.
+
+Valid for: Aurora DB clusters only
+
+You can't modify this setting after you create the DB cluster.}
 
 \item{DBSystemId}{Reserved for future use.}
 
@@ -749,7 +762,7 @@ major engine version on your DB cluster past the end of standard support
 for that engine version. For more information, see the following
 sections:
 \itemize{
-\item Amazon Aurora (PostgreSQL only) - \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html}{Using Amazon RDS Extended Support}
+\item Amazon Aurora - \href{https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html}{Using Amazon RDS Extended Support}
 in the \emph{Amazon Aurora User Guide}
 \item Amazon RDS - \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html}{Using Amazon RDS Extended Support}
 in the \emph{Amazon RDS User Guide}
@@ -761,8 +774,6 @@ Valid Values:
 \code{open-source-rds-extended-support | open-source-rds-extended-support-disabled}
 
 Default: \code{open-source-rds-extended-support}}
-
-\item{SourceRegion}{The ID of the region that contains the source for the read replica.}
 }
 \description{
 Creates a new Amazon Aurora DB cluster or Multi-AZ DB cluster.

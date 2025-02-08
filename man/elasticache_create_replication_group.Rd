@@ -2,8 +2,8 @@
 % Please edit documentation in R/elasticache_operations.R
 \name{elasticache_create_replication_group}
 \alias{elasticache_create_replication_group}
-\title{Creates a Redis OSS (cluster mode disabled) or a Redis OSS (cluster mode
-enabled) replication group}
+\title{Creates a Valkey or Redis OSS (cluster mode disabled) or a Valkey or
+Redis OSS (cluster mode enabled) replication group}
 \usage{
 elasticache_create_replication_group(
   ReplicationGroupId,
@@ -72,13 +72,13 @@ or \code{ReplicasPerNodeGroup} is specified.}
 \item{AutomaticFailoverEnabled}{Specifies whether a read-only replica is automatically promoted to
 read/write primary if the existing primary fails.
 
-\code{AutomaticFailoverEnabled} must be enabled for Redis OSS (cluster mode
-enabled) replication groups.
+\code{AutomaticFailoverEnabled} must be enabled for Valkey or Redis OSS
+(cluster mode enabled) replication groups.
 
 Default: false}
 
 \item{MultiAZEnabled}{A flag indicating if you have Multi-AZ enabled to enhance fault
-tolerance. For more information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html}{Minimizing Downtime: Multi-AZ}.}
+tolerance. For more information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/AutoFailover.html}{Minimizing Downtime: Multi-AZ}.}
 
 \item{NumCacheClusters}{The number of clusters this replication group initially has.
 
@@ -111,8 +111,9 @@ The number of Availability Zones listed must equal the value of
 Default: system chosen Availability Zones.}
 
 \item{NumNodeGroups}{An optional parameter that specifies the number of node groups (shards)
-for this Redis OSS (cluster mode enabled) replication group. For Redis
-OSS (cluster mode disabled) either omit this parameter or set it to 1.
+for this Valkey or Redis OSS (cluster mode enabled) replication group.
+For Valkey or Redis OSS (cluster mode disabled) either omit this
+parameter or set it to 1.
 
 Default: 1}
 
@@ -124,13 +125,13 @@ node group (shard). Valid values are 0 to 5.}
 \code{PrimaryAvailabilityZone}, \code{ReplicaAvailabilityZones}, \code{ReplicaCount},
 and \code{Slots}.
 
-If you're creating a Redis OSS (cluster mode disabled) or a Redis OSS
-(cluster mode enabled) replication group, you can use this parameter to
-individually configure each node group (shard), or you can omit this
-parameter. However, it is required when seeding a Redis OSS (cluster
-mode enabled) cluster from a S3 rdb file. You must configure each node
-group (shard) using this parameter because you must specify the slots
-for each node group.}
+If you're creating a Valkey or Redis OSS (cluster mode disabled) or a
+Valkey or Redis OSS (cluster mode enabled) replication group, you can
+use this parameter to individually configure each node group (shard), or
+you can omit this parameter. However, it is required when seeding a
+Valkey or Redis OSS (cluster mode enabled) cluster from a S3 rdb file.
+You must configure each node group (shard) using this parameter because
+you must specify the slots for each node group.}
 
 \item{CacheNodeType}{The compute and memory capacity of the nodes in the node group (shard).
 
@@ -147,7 +148,7 @@ previous generation counterparts.
 \code{cache.m7g.2xlarge}, \code{cache.m7g.4xlarge}, \code{cache.m7g.8xlarge},
 \code{cache.m7g.12xlarge}, \code{cache.m7g.16xlarge}
 
-For region availability, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion}{Supported Node Types}
+For region availability, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion}{Supported Node Types}
 
 \strong{M6g node types} (available only for Redis OSS engine version
 5.0.6 onward and for Memcached engine version 1.5.16 onward):
@@ -199,7 +200,7 @@ for these types.)
 \code{cache.r7g.2xlarge}, \code{cache.r7g.4xlarge}, \code{cache.r7g.8xlarge},
 \code{cache.r7g.12xlarge}, \code{cache.r7g.16xlarge}
 
-For region availability, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion}{Supported Node Types}
+For region availability, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion}{Supported Node Types}
 
 \strong{R6g node types} (available only for Redis OSS engine version
 5.0.6 onward and for Memcached engine version 1.5.16 onward):
@@ -230,12 +231,12 @@ for these types.)
 \itemize{
 \item All current generation instance types are created in Amazon VPC by
 default.
-\item Redis OSS append-only files (AOF) are not supported for T1 or T2
-instances.
-\item Redis OSS Multi-AZ with automatic failover is not supported on T1
-instances.
-\item Redis OSS configuration variables \code{appendonly} and \code{appendfsync} are
-not supported on Redis OSS version 2.8.22 and later.
+\item Valkey or Redis OSS append-only files (AOF) are not supported for T1
+or T2 instances.
+\item Valkey or Redis OSS Multi-AZ with automatic failover is not
+supported on T1 instances.
+\item The configuration variables \code{appendonly} and \code{appendfsync} are not
+supported on Valkey, or on Redis OSS version 2.8.22 and later.
 }}
 
 \item{Engine}{The name of the cache engine to be used for the clusters in this
@@ -247,7 +248,7 @@ the
 \code{\link[=elasticache_describe_cache_engine_versions]{describe_cache_engine_versions}}
 operation.
 
-\strong{Important:} You can upgrade to a newer engine version (see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement}{Selecting a Cache Engine and Version})
+\strong{Important:} You can upgrade to a newer engine version (see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/SelectEngine.html#VersionManagement}{Selecting a Cache Engine and Version})
 in the \emph{ElastiCache User Guide}, but you cannot downgrade to an earlier
 engine version. If you want to use an earlier engine version, you must
 delete the existing cluster or replication group and create it anew with
@@ -257,21 +258,21 @@ the earlier engine version.}
 group. If this argument is omitted, the default cache parameter group
 for the specified engine is used.
 
-If you are running Redis OSS version 3.2.4 or later, only one node group
-(shard), and want to use a default parameter group, we recommend that
-you specify the parameter group by name.
+If you are running Valkey or Redis OSS version 3.2.4 or later, only one
+node group (shard), and want to use a default parameter group, we
+recommend that you specify the parameter group by name.
 \itemize{
-\item To create a Redis OSS (cluster mode disabled) replication group, use
-\code{CacheParameterGroupName=default.redis3.2}.
-\item To create a Redis OSS (cluster mode enabled) replication group, use
-\code{CacheParameterGroupName=default.redis3.2.cluster.on}.
+\item To create a Valkey or Redis OSS (cluster mode disabled) replication
+group, use \code{CacheParameterGroupName=default.redis3.2}.
+\item To create a Valkey or Redis OSS (cluster mode enabled) replication
+group, use \code{CacheParameterGroupName=default.redis3.2.cluster.on}.
 }}
 
 \item{CacheSubnetGroupName}{The name of the cache subnet group to be used for the replication group.
 
 If you're going to launch your cluster in an Amazon VPC, you need to
 create a subnet group before you start creating a cluster. For more
-information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html}{Subnets and Subnet Groups}.}
+information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/SubnetGroups.html}{Subnets and Subnet Groups}.}
 
 \item{CacheSecurityGroupNames}{A list of cache security group names to associate with this replication
 group.}
@@ -288,12 +289,12 @@ multiple tags as shown following: Key=\code{myKey}, Value=\code{myKeyValue}
 Key=\code{mySecondKey}, Value=\code{mySecondKeyValue}. Tags on replication groups
 will be replicated to all nodes.}
 
-\item{SnapshotArns}{A list of Amazon Resource Names (ARN) that uniquely identify the Redis
-OSS RDB snapshot files stored in Amazon S3. The snapshot files are used
-to populate the new replication group. The Amazon S3 object name in the
-ARN cannot contain any commas. The new replication group will have the
-number of node groups (console: shards) specified by the parameter
-\emph{NumNodeGroups} or the number of node groups configured by
+\item{SnapshotArns}{A list of Amazon Resource Names (ARN) that uniquely identify the Valkey
+or Redis OSS RDB snapshot files stored in Amazon S3. The snapshot files
+are used to populate the new replication group. The Amazon S3 object
+name in the ARN cannot contain any commas. The new replication group
+will have the number of node groups (console: shards) specified by the
+parameter \emph{NumNodeGroups} or the number of node groups configured by
 \emph{NodeGroupConfiguration} regardless of the number of ARNs specified
 here.
 
@@ -329,9 +330,10 @@ connections.}
 
 The Amazon SNS topic owner must be the same as the cluster owner.}
 
-\item{AutoMinorVersionUpgrade}{If you are running Redis OSS engine version 6.0 or later, set this
-parameter to yes if you want to opt-in to the next auto minor version
-upgrade campaign. This parameter is disabled for previous versions.}
+\item{AutoMinorVersionUpgrade}{If you are running Valkey 7.2 and above or Redis OSS engine version 6.0
+and above, set this parameter to yes to opt-in to the next auto minor
+version upgrade campaign. This parameter is disabled for previous
+versions.}
 
 \item{SnapshotRetentionLimit}{The number of days for which ElastiCache retains automatic snapshots
 before deleting them. For example, if you set \code{SnapshotRetentionLimit}
@@ -407,16 +409,17 @@ Default: \code{false}}
 
 \item{DataTieringEnabled}{Enables data tiering. Data tiering is only supported for replication
 groups using the r6gd node type. This parameter must be set to true when
-using r6gd nodes. For more information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html}{Data tiering}.}
+using r6gd nodes. For more information, see \href{https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/data-tiering.html}{Data tiering}.}
 
 \item{NetworkType}{Must be either \code{ipv4} | \code{ipv6} | \code{dual_stack}. IPv6 is supported for
-workloads using Redis OSS engine version 6.2 onward or Memcached engine
-version 1.6.6 on all instances built on the \href{https://aws.amazon.com/ec2/nitro/}{Nitro system}.}
+workloads using Valkey 7.2 and above, Redis OSS engine version 6.2 and
+above or Memcached engine version 1.6.6 and above on all instances built
+on the \href{https://aws.amazon.com/ec2/nitro/}{Nitro system}.}
 
 \item{IpDiscovery}{The network type you choose when creating a replication group, either
-\code{ipv4} | \code{ipv6}. IPv6 is supported for workloads using Redis OSS engine
-version 6.2 onward or Memcached engine version 1.6.6 on all instances
-built on the \href{https://aws.amazon.com/ec2/nitro/}{Nitro system}.}
+\code{ipv4} | \code{ipv6}. IPv6 is supported for workloads using Valkey 7.2 and
+above, Redis OSS engine version 6.2 and above or Memcached engine
+version 1.6.6 and above on all instances built on the \href{https://aws.amazon.com/ec2/nitro/}{Nitro system}.}
 
 \item{TransitEncryptionMode}{A setting that allows you to migrate your clients to use in-transit
 encryption, with no downtime.
@@ -424,8 +427,9 @@ encryption, with no downtime.
 When setting \code{TransitEncryptionEnabled} to \code{true}, you can set your
 \code{TransitEncryptionMode} to \code{preferred} in the same request, to allow
 both encrypted and unencrypted connections at the same time. Once you
-migrate all your Redis OSS clients to use encrypted connections you can
-modify the value to \code{required} to allow encrypted connections only.
+migrate all your Valkey or Redis OSS clients to use encrypted
+connections you can modify the value to \code{required} to allow encrypted
+connections only.
 
 Setting \code{TransitEncryptionMode} to \code{required} is a two-step process that
 requires you to first set the \code{TransitEncryptionMode} to \code{preferred},
@@ -435,16 +439,16 @@ This process will not trigger the replacement of the replication group.}
 
 \item{ClusterMode}{Enabled or Disabled. To modify cluster mode from Disabled to Enabled,
 you must first set the cluster mode to Compatible. Compatible mode
-allows your Redis OSS clients to connect using both cluster mode enabled
-and cluster mode disabled. After you migrate all Redis OSS clients to
-use cluster mode enabled, you can then complete cluster mode
-configuration and set the cluster mode to Enabled.}
+allows your Valkey or Redis OSS clients to connect using both cluster
+mode enabled and cluster mode disabled. After you migrate all Valkey or
+Redis OSS clients to use cluster mode enabled, you can then complete
+cluster mode configuration and set the cluster mode to Enabled.}
 
 \item{ServerlessCacheSnapshotName}{The name of the snapshot used to create a replication group. Available
-for Redis OSS only.}
+for Valkey, Redis OSS only.}
 }
 \description{
-Creates a Redis OSS (cluster mode disabled) or a Redis OSS (cluster mode enabled) replication group.
+Creates a Valkey or Redis OSS (cluster mode disabled) or a Valkey or Redis OSS (cluster mode enabled) replication group.
 
 See \url{https://www.paws-r-sdk.com/docs/elasticache_create_replication_group/} for full documentation.
 }

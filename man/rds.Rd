@@ -137,6 +137,7 @@ the user guide.
 \link[=rds_authorize_db_security_group_ingress]{authorize_db_security_group_ingress} \tab Enables ingress to a DBSecurityGroup using one of two forms of authorization\cr
 \link[=rds_backtrack_db_cluster]{backtrack_db_cluster} \tab Backtracks a DB cluster to a specific time, without creating a new DB cluster\cr
 \link[=rds_build_auth_token]{build_auth_token} \tab Return an authentication token for a database connection\cr
+\link[=rds_build_auth_token_v2]{build_auth_token_v2} \tab Generates an auth token used to connect to a db with IAM credentials\cr
 \link[=rds_cancel_export_task]{cancel_export_task} \tab Cancels an export task in progress that is exporting a snapshot or cluster to Amazon S3\cr
 \link[=rds_copy_db_cluster_parameter_group]{copy_db_cluster_parameter_group} \tab Copies the specified DB cluster parameter group\cr
 \link[=rds_copy_db_cluster_snapshot]{copy_db_cluster_snapshot} \tab Copies a snapshot of a DB cluster\cr
@@ -298,8 +299,11 @@ the user guide.
 \examples{
 \dontrun{
 svc <- rds()
-svc$add_role_to_db_cluster(
-  Foo = 123
+# This example add a source identifier to an event notification
+# subscription.
+svc$add_source_identifier_to_subscription(
+  SourceIdentifier = "mymysqlinstance",
+  SubscriptionName = "mymysqleventsubscription"
 )
 }
 

@@ -55,16 +55,16 @@ Valid Values: \code{multi-node | single-node}}
 \item{NodeType}{The new node type of the cluster. If you specify a new node type, you
 must also specify the number of nodes parameter.
 
-For more information about resizing clusters, go to \href{https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html}{Resizing Clusters in Amazon Redshift}
+For more information about resizing clusters, go to \href{https://docs.aws.amazon.com/redshift/latest/mgmt/}{Resizing Clusters in Amazon Redshift}
 in the \emph{Amazon Redshift Cluster Management Guide}.
 
-Valid Values: \code{dc2.large} | \code{dc2.8xlarge} | \code{ra3.xlplus} | \code{ra3.4xlarge}
-| \code{ra3.16xlarge}}
+Valid Values: \code{dc2.large} | \code{dc2.8xlarge} | \code{ra3.large} | \code{ra3.xlplus} |
+\code{ra3.4xlarge} | \code{ra3.16xlarge}}
 
 \item{NumberOfNodes}{The new number of nodes of the cluster. If you specify a new number of
 nodes, you must also specify the node type parameter.
 
-For more information about resizing clusters, go to \href{https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html}{Resizing Clusters in Amazon Redshift}
+For more information about resizing clusters, go to \href{https://docs.aws.amazon.com/redshift/latest/mgmt/}{Resizing Clusters in Amazon Redshift}
 in the \emph{Amazon Redshift Cluster Management Guide}.
 
 Valid Values: Integer greater than \code{0}.}
@@ -200,7 +200,9 @@ account.
 Example: \code{examplecluster}}
 
 \item{PubliclyAccessible}{If \code{true}, the cluster can be accessed from a public network. Only
-clusters in VPCs can be set to be publicly available.}
+clusters in VPCs can be set to be publicly available.
+
+Default: false}
 
 \item{ElasticIp}{The Elastic IP (EIP) address for the cluster.
 

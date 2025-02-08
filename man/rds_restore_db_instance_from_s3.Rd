@@ -42,6 +42,7 @@ rds_restore_db_instance_from_s3(
   S3BucketName,
   S3Prefix = NULL,
   S3IngestionRoleArn,
+  DatabaseInsightsMode = NULL,
   EnablePerformanceInsights = NULL,
   PerformanceInsightsKMSKeyId = NULL,
   PerformanceInsightsRetentionPeriod = NULL,
@@ -79,6 +80,8 @@ Example: \code{mydbinstance}}
 \item{AllocatedStorage}{The amount of storage (in gibibytes) to allocate initially for the DB
 instance. Follow the allocation rules specified in
 \code{\link[=rds_create_db_instance]{create_db_instance}}.
+
+This setting isn't valid for RDS for SQL Server.
 
 Be sure to allocate enough storage for your new DB instance so that the
 restore operation can succeed. You can also allocate additional storage
@@ -312,6 +315,13 @@ file.}
 trust policy and a permissions policy that allows Amazon RDS to access
 your Amazon S3 bucket. For information about this role, see \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html#MySQL.Procedural.Importing.Enabling.IAM}{Creating an IAM role manually}
 in the \emph{Amazon RDS User Guide.}}
+
+\item{DatabaseInsightsMode}{Specifies the mode of Database Insights to enable for the DB instance.
+
+This setting only applies to Amazon Aurora DB instances.
+
+Currently, this value is inherited from the DB cluster and can't be
+changed.}
 
 \item{EnablePerformanceInsights}{Specifies whether to enable Performance Insights for the DB instance.
 
